@@ -17,9 +17,22 @@
 		
 	</resultMap>
 	
+	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
+		<id property="id" column="id" />
+		<result property="mac" column="mac" />
+		<result property="msg" column="msg" />
+	</resultMap>
+	
+	
 	<insert id="saveDeviceImage" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
 	   insert into device_image(mac,name,image_url) values ( #{mac},#{name}, #{imageUrl})
 	</insert>
+	
+	
+	<insert id="uploadLog" parameterType="com.gochinatv.accelarator.api.bean.UploadLog" keyProperty="id" useGeneratedKeys="true">
+	   insert into device_log(mac,msg) values ( #{mac},#{msg})
+	</insert>
+	
 	
 		
 	<select id="queryDeviceByMac" resultMap="Device" >
