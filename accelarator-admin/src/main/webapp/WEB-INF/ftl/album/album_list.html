@@ -1,0 +1,144 @@
+<#assign base=request.contextPath/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/icon.css" />
+<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${base}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+   
+   <div id="tb" style="padding:2px 5px;">
+                        专辑名称：<input class="easyui-textbox" id="name" name="name" type="text" style="width:110px"/>
+		频道：<select id="channel" name="channel" class="easyui-combobox">
+				<option value="0">全部</option>
+				<option value="200">综艺</option>
+				<option value="201">电视剧</option>
+				<option value="202">资讯</option>
+				<option value="203">电影</option>
+				<option value="204">动漫</option>
+				<option value="205">纪录片</option>
+				<option value="206">旅游</option>
+				<option value="207">微电影</option>
+				<option value="208">音乐</option>
+				<option value="209">体育</option>
+				<option value="210">手机</option>
+				<option value="211">教育</option>
+				<option value="212">少儿</option>
+				<option value="213">欧美</option>
+				<option value="214">test</option>
+				<option value="215">YT频道</option>
+			</select>
+		上线状态：<select id="status" name="status" class="easyui-combobox">
+				<option value="0">上线</option>
+				<option value="200">下线</option>
+			</select>
+		年代：<select id="age" name="age" class="easyui-combobox"> 
+					<option value="0">全部</option>
+					<option value="2016">2016</option> 
+					<option value="2015">2015</option> 
+					<option value="2014">2014</option> 
+					<option value="2013">2013</option> 
+					<option value="2012">2012</option> 
+					<option value="2011">2011</option> 
+					<option value="2010">2010</option> 
+					<option value="2009">2009</option> 
+					<option value="2008">2008</option> 
+					<option value="2007">2007</option> 
+					<option value="2006">2006</option> 
+					<option value="2005">2005</option> 
+					<option value="2004">2004</option> 
+					<option value="2003">2003</option> 
+					<option value="2002">2002</option> 
+					<option value="2001">2001</option> 
+					<option value="2000">2000</option> 
+					<option value="1990">90年代</option> 
+					<option value="1980">80年代</option> 
+					<option value="1970">70年代</option> 
+					<option value="1960">60年代</option> 
+					<option value="1950">50年代</option> 
+					<option value="1940">更早</option> 
+			</select>
+		剧集状态：<select id="isend" name="isend" class="easyui-combobox">
+				<option value="0">跟播</option>
+				<option value="200">完结</option>
+				<option value="200">停播</option>
+			</select>
+		<a href="javascript:void(0);" onclick="dg_search();" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+		<a href="${base}/album/to_add" class="easyui-linkbutton" data-options="iconCls:'icon-add'" id="btn_to_save">添加</a>
+		<a href="javascript:void(0);" onclick="dg_remove_row();" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cut'">修改</a>
+		
+	</div>
+	
+   <table id="_dg_001" class="easyui-datagrid" data-options="rownumbers:true,singleSelect:true,url:'${base}/album/list',method:'get',toolbar:'#tb',pagination:true,fitColumns:true,fit:true">
+		<thead>
+			<tr>
+				<th data-options="field:'albumId',width:80">ID</th>
+				<th data-options="field:'name',width:100">名称</th>
+				<th data-options="field:'picX',width:80">配图</th>
+				<th data-options="field:'status',width:80">状态</th>
+				<th data-options="field:'terminal',width:80">终端</th>
+				<th data-options="field:'onlineTime',width:80">上线时间</th>
+				<th data-options="field:'year',width:80">年代</th>
+			</tr>
+		</thead>
+	</table>
+	
+</body>
+</html>
+<script>
+	$(function() {
+
+	});
+
+
+	function dg_search() {
+		var name = $('#name').val();
+		var channel = $('#channel').val();
+		var status = $('#status').val();
+		var age = $('#age').val();
+		var isend = $('#isend').val();
+
+		$('#_dg_001').datagrid({
+			url : '${base}/album/list',
+			method : 'post',
+			pageNumber : 1,
+			queryParams : {
+				'name' : name,
+				'channel' : channel,
+				'status' : status,
+				'age' : age,
+				'isend' : isend
+			}
+		});
+	}
+
+	function dg_remove_row() {
+		var record = $('#_dg_001').datagrid('getSelected');
+		if (null == record) {
+			$.messager.alert('消息提示', '请选择删除记录行！', 'info');
+		} else {
+			$.ajax({
+				type : "POST",
+				url : "${base}/album/delete",
+				data : {
+					id : record.albumId,
+					status : 2
+				},
+				success : function(msg) {
+					if (msg.code == '200') {
+						$.messager.show({
+							title : '操作结果',
+							msg : '操作成功！',
+							timeout : 2000,
+							showType : 'slide'
+						});
+					}
+				}
+			})
+		}
+	}
+</script>
