@@ -11,11 +11,11 @@
     <!-- Begin of toolbar -->
     <div id="vrs-toolbar-2">
         <div class="vrs-toolbar-search">
-            <label>ÓÃ»§Ãû£º</label><input class="vrs-text" style="width:100px"/>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-search">²éÑ¯</a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">Ìí¼Ó</a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">ĞŞ¸Ä</a>
-            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">É¾³ı</a>
+            <label>ç”¨æˆ·åï¼š</label><input class="vrs-text" style="width:100px"/>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search">æŸ¥è¯¢</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="openAdd()" plain="true">æ·»åŠ </a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="openEdit()" plain="true">ä¿®æ”¹</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="remove()" plain="true">åˆ é™¤</a>
         </div>
     </div>
     
@@ -29,19 +29,19 @@
 	<form id="vrs-form-2" method="post">
         <table>
             <tr>
-                <td width="60" align="right">ĞÕ Ãû:</td>
+                <td width="60" align="right">å§“ å:</td>
                 <td><input type="text" name="name" class="vrs-text" /></td>
             </tr>
             <tr>
-                <td align="right">ÓÊ Ïä:</td>
+                <td align="right">é‚® ç®±:</td>
                 <td><input type="text" name="email" class="vrs-text" /></td>
             </tr>
             <tr>
-                <td align="right">Ö÷ Ìâ:</td>
+                <td align="right">ä¸» é¢˜:</td>
                 <td><input type="text" name="subject" class="vrs-text" /></td>
             </tr>
             <tr>
-                <td valign="top" align="right">ÄÚ Èİ:</td>
+                <td valign="top" align="right">å†… å®¹:</td>
                 <td><textarea name="content" rows="6" class="vrs-textarea" style="width:260px"></textarea></td>
             </tr>
         </table>
@@ -56,41 +56,41 @@
 			url:'',
 			success:function(data){
 				if(data){
-					$.messager.alert('ĞÅÏ¢ÌáÊ¾','Ìá½»³É¹¦£¡','info');
+					$.messager.alert('ä¿¡æ¯æç¤º','æäº¤æˆåŠŸï¼','info');
 					$('#vrs-dialog-2').dialog('close');
 				}
 				else
 				{
-					$.messager.alert('ĞÅÏ¢ÌáÊ¾','Ìá½»Ê§°Ü£¡','info');
+					$.messager.alert('ä¿¡æ¯æç¤º','æäº¤å¤±è´¥ï¼','info');
 				}
 			}
 		});
 	}
 	
 	/**
-	* Name ĞŞ¸Ä¼ÇÂ¼
+	* Name ä¿®æ”¹è®°å½•
 	*/
 	function edit(){
 		$('#vrs-form-2').form('submit', {
 			url:'',
 			success:function(data){
 				if(data){
-					$.messager.alert('ĞÅÏ¢ÌáÊ¾','Ìá½»³É¹¦£¡','info');
+					$.messager.alert('ä¿¡æ¯æç¤º','æäº¤æˆåŠŸï¼','info');
 					$('#vrs-dialog-2').dialog('close');
 				}
 				else
 				{
-					$.messager.alert('ĞÅÏ¢ÌáÊ¾','Ìá½»Ê§°Ü£¡','info');
+					$.messager.alert('ä¿¡æ¯æç¤º','æäº¤å¤±è´¥ï¼','info');
 				}
 			}
 		});
 	}
 	
 	/**
-	* Name É¾³ı¼ÇÂ¼
+	* Name åˆ é™¤è®°å½•
 	*/
 	function remove(){
-		$.messager.confirm('ĞÅÏ¢ÌáÊ¾','È·¶¨ÒªÉ¾³ı¸Ã¼ÇÂ¼£¿', function(result){
+		$.messager.confirm('ä¿¡æ¯æç¤º','ç¡®å®šè¦åˆ é™¤è¯¥è®°å½•ï¼Ÿ', function(result){
 			if(result){
 				var items = $('#vrs-datagrid-2').datagrid('getSelections');
 				var ids = [];
@@ -103,11 +103,11 @@
 					data:'',
 					success:function(data){
 						if(data){
-							$.messager.alert('ĞÅÏ¢ÌáÊ¾','É¾³ı³É¹¦£¡','info');		
+							$.messager.alert('ä¿¡æ¯æç¤º','åˆ é™¤æˆåŠŸï¼','info');		
 						}
 						else
 						{
-							$.messager.alert('ĞÅÏ¢ÌáÊ¾','É¾³ıÊ§°Ü£¡','info');		
+							$.messager.alert('ä¿¡æ¯æç¤º','åˆ é™¤å¤±è´¥ï¼','info');		
 						}
 					}	
 				});
@@ -116,20 +116,20 @@
 	}
 	
 	/**
-	* Name ´ò¿ªÌí¼Ó´°¿Ú
+	* Name æ‰“å¼€æ·»åŠ çª—å£
 	*/
 	function openAdd(){
 		$('#vrs-form-2').form('clear');
 		$('#vrs-dialog-2').dialog({
 			closed: false,
 			modal:true,
-            title: "Ìí¼ÓĞÅÏ¢",
+            title: "æ·»åŠ ä¿¡æ¯",
             buttons: [{
-                text: 'È·¶¨',
+                text: 'ç¡®å®š',
                 iconCls: 'icon-ok',
                 handler: add
             }, {
-                text: 'È¡Ïû',
+                text: 'å–æ¶ˆ',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#vrs-dialog-2').dialog('close');                    
@@ -139,7 +139,7 @@
 	}
 	
 	/**
-	* Name ´ò¿ªĞŞ¸Ä´°¿Ú
+	* Name æ‰“å¼€ä¿®æ”¹çª—å£
 	*/
 	function openEdit(){
 		$('#vrs-form-2').form('clear');
@@ -152,7 +152,7 @@
 					$('#vrs-dialog-2').dialog('close');	
 				}
 				else{
-					//°ó¶¨Öµ
+					//ç»‘å®šå€¼
 					$('#vrs-form-2').form('load', data)
 				}
 			}	
@@ -160,13 +160,13 @@
 		$('#vrs-dialog-2').dialog({
 			closed: false,
 			modal:true,
-            title: "ĞŞ¸ÄĞÅÏ¢",
+            title: "ä¿®æ”¹ä¿¡æ¯",
             buttons: [{
-                text: 'È·¶¨',
+                text: 'ç¡®å®š',
                 iconCls: 'icon-ok',
                 handler: edit
             }, {
-                text: 'È¡Ïû',
+                text: 'å–æ¶ˆ',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#vrs-dialog-2').dialog('close');                    
@@ -176,7 +176,7 @@
 	}	
 	
 	/**
-	* Name ·ÖÒ³¹ıÂËÆ÷
+	* Name åˆ†é¡µè¿‡æ»¤å™¨
 	*/
 	function pagerFilter(data){       
 		if (typeof data.length == 'number' && typeof data.splice == 'function'){// is array                
@@ -207,7 +207,7 @@
 	
 	
 	/**
-	* Name ÔØÈëÊı¾İ
+	* Name è½½å…¥æ•°æ®
 	*/
 	$('#vrs-datagrid-2').datagrid({
 		url:'user/list.do',
@@ -221,9 +221,9 @@
 		fit:true,
 		columns:[[
 			{ checkbox:true},
-			{ field:'userName',title:'ÓÃ»§Ãû',width:100,sortable:true},
+			{ field:'userName',title:'ç”¨æˆ·å',width:100,sortable:true},
 			{ field:'email',title:'Email',width:180,sortable:true},
-			{ field:'mobile',title:'ÊÖ»ú',width:100}
+			{ field:'mobile',title:'æ‰‹æœº',width:100}
 		]]
 	});
 </script>
