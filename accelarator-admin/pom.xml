@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.gochinatv.accelarator</groupId>
-			<artifactId>accelarator-service</artifactId>
+			<artifactId>accelarator-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

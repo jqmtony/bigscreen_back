@@ -101,7 +101,7 @@
   <modules>
   	<module>accelarator-framework</module>
   	<module>accelarator-admin</module>
-    <module>accelarator-service</module>
     <module>accelarator-dao</module>
+    <module>accelarator-app-api</module>
   </modules>
 </project>

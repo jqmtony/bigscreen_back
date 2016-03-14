@@ -9,20 +9,22 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>accelarator-service</artifactId>
-	<name>accelarator-service</name>
+	<artifactId>accelarator-app-api</artifactId>
+	<packaging>war</packaging>
+	<name>accelarator-app-api Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	
 	<dependencies>
 		<dependency>
-			<groupId>com.gochinatv.accelarator</groupId>
-			<artifactId>accelarator-dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
+	<build>
+		<finalName>accelarator-app-api</finalName>
+	</build>
+
 </project>
