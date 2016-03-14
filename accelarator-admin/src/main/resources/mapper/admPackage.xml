@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.AdmPackageDao">
+
+	<resultMap type="AdmPackage" id="AdmPackage">
+		<id property="id" column="id" />
+		<result property="admId" column="adm_id" />
+		<result property="playStarttime" column="play_starttime" />
+		<result property="playEndtime" column="play_endtime" />
+		<result property="duration" column="duration" />
+		<result property="packageId" column="package_id" />
+	</resultMap>
+	
+	<select id="getList" resultMap="AdmPackage">
+		select * from adm_package
+	</select>
+
+</mapper>

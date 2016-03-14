@@ -25,7 +25,7 @@
 	</settings>
 
 	<plugins>
-		<plugin interceptor="com.gochinatv.nvrs.framework.web.base.pagination.PageInterceptor">
+		<plugin interceptor="com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor">
 			<property name="dialect" value="mysql" />
 			<property name="pageSizeZero" value="true" />
 			<property name="reasonable" value="true" />

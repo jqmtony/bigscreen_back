@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.DeviceDao">
+
+	<resultMap type="Device" id="Device">
+		<id property="id" column="id" />
+		<result property="code" column="code" />
+		<result property="brand" column="brand" />
+		<result property="model" column="model" />
+		<result property="mac" column="mac" />
+		<result property="storeId" column="store_id" />
+		<result property="businessId" column="business_id" />
+		<result property="screenNum" column="screen_num" />
+		<result property="createTime" column="create_time" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<select id="getList" resultMap="Device">
+		select * from device
+	</select>
+
+</mapper>

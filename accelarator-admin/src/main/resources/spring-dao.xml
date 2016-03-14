@@ -12,7 +12,7 @@
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/nvrs" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/accelarator" />
 		<property name="username" value="upenv" />
 		<property name="password" value="upenv" />
 	</bean>
@@ -21,12 +21,12 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
 		<property name="mapperLocations" value="classpath:mapper/*.xml" />
-		<property name="typeAliasesPackage" value="com.gochinatv.nvrs.dao.entity" />
+		<property name="typeAliasesPackage" value="com.gochinatv.accelarator.dao.entity" />
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.gochinatv.nvrs.dao" />
-		<property name="markerInterface" value="com.gochinatv.nvrs.framework.web.base.dao.BaseDao"></property>
+		<property name="basePackage" value="com.gochinatv.accelarator.dao" />
+		<property name="markerInterface" value="com.gochinatv.accelarator.framework.web.base.dao.BaseDao"></property>
 	</bean>
 
 	<!-- 配置事务管理器 -->
