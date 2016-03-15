@@ -27,7 +27,7 @@ public class BusinessController extends BaseController{
 
 	@RequestMapping("/to_list")
 	public String to_list(Model model) throws Exception{
-		return "user/user_list";
+		return "business/business_list";
 	}
 	
 	
