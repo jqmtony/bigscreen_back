@@ -19,8 +19,28 @@
 		<result property="status" column="status" />
 	</resultMap>
 	
-	<select id="getList" resultMap="Business">
-		select * from business
+	<select id="getListByEntity" resultMap="Business" parameterType="Business">
+		select * from business 
+		<where>
+			1=1
+			<if test="userName!=null">
+				and user_name like CONCAT(CONCAT('%',#{userName}),'%')
+			</if>
+			<if test="realName!=null">
+				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
+			</if>
+			<if test="country!=0">
+				and country = #{country}
+			</if>
+			<if test="area!=0">
+				and area = #{area}
+			</if>
+			order by create_time desc
+		</where>
 	</select>
+	
+	<delete id="deleteByEntity" parameterType="Business">
+	  delete from business where id = #{id}
+	</delete>
 
 </mapper>

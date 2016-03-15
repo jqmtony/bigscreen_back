@@ -3,11 +3,11 @@ package com.gochinatv.accelarator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gochinatv.accelarator.dao.RegionDao;
-import com.gochinatv.accelarator.dao.entity.Region;
+import com.gochinatv.accelarator.dao.DictDao;
+import com.gochinatv.accelarator.dao.entity.Dict;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
-import com.gochinatv.accelarator.service.RegionService;
+import com.gochinatv.accelarator.service.DictService;
 
 /**
  * 
@@ -17,14 +17,14 @@ import com.gochinatv.accelarator.service.RegionService;
  * @修改时间
  */
 @Service
-public class RegionServiceImpl extends BaseServiceImpl<Region> implements RegionService {
+public class DictServiceImpl extends BaseServiceImpl<Dict> implements DictService {
 
 	@Autowired
-	private RegionDao regionDao;
+	private DictDao dictDao;
 	
 	@Override
-	protected BaseDao<Region> getDao() {
-		return regionDao;
+	protected BaseDao<Dict> getDao() {
+		return dictDao;
 	}
 	
 	

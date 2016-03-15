@@ -19,23 +19,42 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
     
 	/**
-	 * 删除实体
-	 * @param entity
-	 * @throws Exception
-	 */
-	public void deleteByEntity(T entity) throws Exception{
-		getDao().deleteByEntity(entity);
-	}
-
-	/**
-	 * 删除 实体
+	 * 根据 id 查询  实体
 	 * @param id
 	 * @throws Exception
 	 */
-	public void deleteById(String id) throws Exception{
-		getDao().deleteById(id);
+	public T get(int id) throws Exception{
+		return getDao().get(id);
 	}
 
+    
+    /**
+     * 查询 list 集合
+     * @return
+     * @throws Exception
+     */
+	public List<T> getList() throws Exception{
+		return getDao().getList();
+	}
+	
+	/**
+     * 根据传入的entity 查询返回 entity实体集合
+     * @return
+     * @throws Exception
+     */
+	public List<T> getListByEntity(T entity) throws Exception{
+		return getDao().getListByEntity(entity);
+	}
+	
+	/**
+	 * 根据 sql 查询  记录条数 
+	 * @param sql
+	 * @param params
+	 */
+	public int getCountBySql(String sql,List<Object> params){
+		return getDao().getCountBySql(sql, params);
+	}
+	
 	/**
 	 * 保存 实体
 	 * @param entity
@@ -81,35 +100,25 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 		getDao().saveOrUpdate(entity);
 	}
     
+	
 	/**
-	 * 根据 id 查询  实体
+	 * 删除实体
+	 * @param entity
+	 * @throws Exception
+	 */
+	public void deleteByEntity(T entity) throws Exception{
+		getDao().deleteByEntity(entity);
+	}
+
+	/**
+	 * 删除 实体
 	 * @param id
 	 * @throws Exception
 	 */
-	public T get(String id) throws Exception{
-		return getDao().get(id);
+	public void deleteById(int id) throws Exception{
+		getDao().deleteById(id);
 	}
 
-    
-    /**
-     * 查询 list 集合
-     * @return
-     * @throws Exception
-     */
-	public List<T> getList() throws Exception{
-		return getDao().getList();
-	}
-	
-	
-	/**
-	 * 根据 sql 查询  记录条数 
-	 * @param sql
-	 * @param params
-	 */
-	public int getCountBySql(String sql,List<Object> params){
-		return getDao().getCountBySql(sql, params);
-	}
-	
 }
 
 

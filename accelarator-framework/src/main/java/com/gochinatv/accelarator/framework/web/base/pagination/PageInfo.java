@@ -274,6 +274,10 @@ public class PageInfo<T> implements Serializable {
     public List<T> getList() {
         return list;
     }
+    
+    public List<T> getRows() {
+        return list;
+    }
 
     public void setList(List<T> list) {
         this.list = list;

@@ -1,13 +1,17 @@
 package com.gochinatv.accelarator.controller;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Business;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.BusinessService;
 
 /**
@@ -33,9 +37,13 @@ public class BusinessController extends BaseController{
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public List<Business> list(Model model) throws Exception{
-		List<Business> list = businessService.getList();
-		return list;
+	public PageInfo<Business> list(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
+							   @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
+							   Business business) throws Exception{
+		PageInterceptor.startPage(pageNum, pageSize);
+		List<Business> list = businessService.getListByEntity(business);
+		PageInfo<Business> pageInfo = new PageInfo<Business>(list);
+		return pageInfo;
 	}
 	
 	
@@ -43,6 +51,19 @@ public class BusinessController extends BaseController{
 	@ResponseBody
 	public String add(Model model){
 		return "";
+	}
+	
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String,Object> delete(Business business){
+		Map<String,Object> result = this.success(null);
+		try{
+			businessService.deleteByEntity(business);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
 }
