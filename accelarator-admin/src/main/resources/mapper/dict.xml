@@ -12,8 +12,15 @@
 		<result property="descs" column="descs" />
 	</resultMap>
 	
-	<select id="getList" resultMap="Dict">
-		select * from dict
+	<select id="getListByEntity" resultMap="Dict" parameterType="Dict">
+		select * from dict 
+		<where>
+			status=1 
+			<if test="type!=null">
+				and type = #{type}
+			</if>
+		</where>
+		order by sort
 	</select>
 
 </mapper>

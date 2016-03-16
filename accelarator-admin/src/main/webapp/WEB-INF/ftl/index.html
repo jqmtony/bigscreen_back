@@ -66,9 +66,9 @@
     <!-- begin of main -->
     <div class="vrs-main" data-options="region:'center'">
         <div id="vrs-tabs" class="easyui-tabs" data-options="border:false,fit:true">  
-            <div title="用户列表" data-options="closable:false" style="overflow:hidden">
+            <!--  <div title="用户列表" data-options="closable:false" style="overflow:hidden">
                <iframe marginheight="0" marginwidth="0" frameborder="0" src="${base}/user/to_list" height="100%" width="100%"></iframe>
-            </div>
+            </div>-->
         </div>
     </div>
     <!-- end of main --> 
@@ -88,6 +88,9 @@
 				var iframe = $(this).attr('iframe')==1?true:false;
 				addTab(title,url,iconCls,iframe);
 			});	
+			
+			//init 
+			addTab('用户列表','${base}/user/to_list','',true);
 		})
 		
 		/**

@@ -22,7 +22,7 @@ public class Dict extends BaseVo implements Serializable {
 	private String value;// 名称值
 	private int status; // 状态 是否可用，1可用，2不可用
 	private int sort; // 排序
-	private String type;// 类型
+	private String type;// 类型 [行政区划：XZQH]
 	private String descs;// 描述
 
 	public String getKey() {

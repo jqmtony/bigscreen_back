@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,16 @@ public class BusinessController extends BaseController{
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public String add(Model model){
-		return "";
+	public Map<String,Object> add(Business business){
+		Map<String,Object> result = this.success(null);
+		try{
+			business.setCreateTime(new Date());
+			business.setStatus(1);
+			businessService.save(business);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
 	

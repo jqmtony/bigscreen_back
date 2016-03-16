@@ -39,8 +39,40 @@
 		</where>
 	</select>
 	
+	<insert id="save" parameterType="Business">
+	   insert into business(
+	            user_name,
+	            password,
+	            real_name,
+	            country,
+	            area,
+	            mobile,
+	            email,
+	            facebook,
+	            weixin,
+	            remark,
+	            birthday,
+	            create_time,
+	            status
+	            ) values (
+	            #{userName},
+	            #{password},
+	            #{realName},
+	            #{country},
+	            #{area},
+	            #{mobile},
+	            #{email},
+	            #{facebook},
+	            #{weixin},
+	            #{remark},
+	            #{birthday},
+	            #{createTime},
+	            #{status}
+	            )
+	</insert>
+	
 	<delete id="deleteByEntity" parameterType="Business">
 	  delete from business where id = #{id}
 	</delete>
-
+	
 </mapper>

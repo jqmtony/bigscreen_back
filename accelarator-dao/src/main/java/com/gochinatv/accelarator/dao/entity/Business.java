@@ -31,7 +31,7 @@ public class Business extends BaseVo implements Serializable {
 	private String remark;// 备注
 	private String birthday;// 生日
 	private Date createTime; // 创建日期
-	private int status;// 是否启用
+	private int status;// 是否启用   (1：启用 2：禁用)
 
 	public String getUserName() {
 		return userName;
