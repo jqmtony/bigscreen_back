@@ -1,0 +1,23 @@
+<div id="modify-window" title="修改信息" class="datagrid-body" style="width: 400px; height: 250px;">
+<form id = "modifyForm" method="post" enctype="multipart/form-data">
+<input type="hidden" id="id" name="id" >
+<input type="hidden" id="updateimage" name="image" size=20 />
+<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+	<tr class="datagrid-row-alt" style="height: 21px;">
+			<td colspan="4">输入信息</td>
+	</tr>
+	
+	<tr class="datagrid-row-alt">
+		<td>用户名：</td>
+		<td colspan="3"><input type="text" id="updateuserName" name="userName" class="easyui-validatebox"
+			 required="true" missingMessage="必填" size=40 invalidMessage="请输入" /><font color="red">数字大的排在最前面</font></td>
+	</tr>
+	<tr class="datagrid-row-alt">
+		<td colspan="4" align="center">
+			<input type="button" name="sub" value="提交" onclick="modifySave('update.jsn');"/>
+			<input type="button" name="resetButton" value="取消" onclick="winClose();"/>
+		</td>
+	</tr>
+</table>
+</form>
+</div>

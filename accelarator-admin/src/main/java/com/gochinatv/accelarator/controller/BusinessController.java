@@ -62,9 +62,9 @@ public class BusinessController extends BaseController{
 	}
 	
 
-	@RequestMapping("/toUpdate")
+	@RequestMapping("/gotoUpdate")
 	@ResponseBody
-	public Business toUpdate(@RequestParam(value = "id") int id) throws Exception{
+	public Business gotoUpdate(@RequestParam(value = "id") int id) throws Exception{
 		Business business = businessService.getEntityById(id);
 		return business;
 	}
@@ -82,6 +82,7 @@ public class BusinessController extends BaseController{
 		return result;
 	}
 	
+	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String,Object> delete(Business business){
@@ -93,4 +94,5 @@ public class BusinessController extends BaseController{
 		}
 		return result;
 	}
+	
 }

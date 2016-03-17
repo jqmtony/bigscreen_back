@@ -25,15 +25,15 @@ public class DeviceController extends BaseController{
 	private DeviceService deviceService;
 	
 
-	@RequestMapping("/to_list")
-	public String to_list(Model model) throws Exception{
+	@RequestMapping("/gotoList")
+	public String gotoList(Model model) throws Exception{
 		return "user/user_list";
 	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<Device> list(Model model) throws Exception{
+	public List<Device> queryList(Model model) throws Exception{
 		List<Device> list = deviceService.getList();
 		return list;
 	}

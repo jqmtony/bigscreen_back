@@ -25,15 +25,15 @@ public class AdvertiserController extends BaseController{
 	private AdvertiserService advertiserService;
 	
 
-	@RequestMapping("/to_list")
-	public String to_list(Model model) throws Exception{
+	@RequestMapping("/gotoList")
+	public String gotoList(Model model) throws Exception{
 		return "user/user_list";
 	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<Advertiser> list(Model model) throws Exception{
+	public List<Advertiser> queryList(Model model) throws Exception{
 		List<Advertiser> list = advertiserService.getList();
 		return list;
 	}

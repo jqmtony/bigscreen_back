@@ -30,15 +30,15 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 
-	@RequestMapping("/to_list")
-	public String to_list(Model model) throws Exception{
+	@RequestMapping("/gotoList")
+	public String gotoList(Model model) throws Exception{
 		return "user/user_list";
 	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/queryList")
 	@ResponseBody
-	public Map<String,Object> list(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
+	public Map<String,Object> queryList(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
 								   @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
 								   Model model) throws Exception{
 		Map<String,Object> data = new HashMap<String,Object>();

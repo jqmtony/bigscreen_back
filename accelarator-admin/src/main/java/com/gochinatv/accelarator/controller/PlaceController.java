@@ -28,15 +28,15 @@ public class PlaceController extends BaseController{
 	private PlaceService placeService;
 	
 
-	@RequestMapping("/to_list")
-	public String to_list(Model model) throws Exception{
+	@RequestMapping("/gotoList")
+	public String gotoList(Model model) throws Exception{
 		return "place/place_list";
 	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/queryList")
 	@ResponseBody
-	public PageInfo<Place> list(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
+	public PageInfo<Place> queryList(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
 			                @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
 			                Place place) throws Exception{
 		PageInterceptor.startPage(pageNum, pageSize);
