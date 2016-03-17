@@ -32,7 +32,7 @@ public class UserController extends BaseController{
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "user/user_list";
+		return "user/list";
 	}
 	
 	

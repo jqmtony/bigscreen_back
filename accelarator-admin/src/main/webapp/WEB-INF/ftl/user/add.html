@@ -1,19 +1,20 @@
-<div id="add-window" title="添加信息" class="datagrid-body" style="width: 400px; height: 250px;">
-<form id = "addForm" method="post" enctype="multipart/form-data" >
-<input type="hidden" id="addimage" name="image" size=20 />
-<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+<div id="add-window" title="添加信息" class="datagrid-body"
+	style="width: 400px; height: 250px;">
+	<form id="addForm" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="addimage" name="image" size=20 />
+		<table width="100%" border="0" cellspacing="0" cellpadding="1">
 
-	<tr class="datagrid-row-alt">
-		<td>用户名：</td>
-		<td colspan="3"><input type="text" id="adduserName" name="userName" class="easyui-validatebox"
-			 required="true" missingMessage="必填" size=40 invalidMessage="请输入" /><font color="red">数字大的排在最前面</font></td>
-	</tr>
-	<tr class="datagrid-row-alt">
-	<td colspan="4" align="center">
-		<input type="button" name="sub" value="提交" onclick="addSave('save.jsn');"/>
-			<input type="button" name="resetButton" value="取消" onclick="cancel();"/>
+			<tr class="datagrid-row-alt">
+				<td>用户名：</td>
+				<td colspan="3">
+				  <input type="text" id="adduserName" name="userName" class="easyui-validatebox" required="true" missingMessage="必填" size=40 invalidMessage="请输入" />
+				  <font color="red">数字大的排在最前面</font>
 				</td>
-	</tr>
-</table>
-</form>
+			</tr>
+			<tr class="datagrid-row-alt">
+				<td colspan="4" align="center"><input type="button" name="sub" value="提交" onclick="addSave('save.jsn');" /> 
+				<input type="button" name="resetButton" value="取消" onclick="cancel();" /></td>
+			</tr>
+		</table>
+	</form>
 </div>
