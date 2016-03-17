@@ -65,7 +65,7 @@ function removeModule(){
 	if (row){
 		$.messager.confirm('系统提示', '确定要删除这条记录吗？', function(r){
 			if (r){
-				$.post('delete/'+row.id+'.jsn','',callback,'json');
+				$.post('delete?id='+row.id,'',callback,'json');
 			}
 		});
 	} else {

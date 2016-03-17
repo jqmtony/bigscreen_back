@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
@@ -38,12 +38,10 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public Map<String,Object> queryList(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
-								   @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
-								   Model model) throws Exception{
+	public Map<String,Object> queryList(int page,int rows,User user) throws Exception{
 		Map<String,Object> data = new HashMap<String,Object>();
-		PageInterceptor.startPage(pageNum, pageSize);
-		List<User> list = userService.getList();
+		PageInterceptor.startPage(page, rows);
+		List<User> list = userService.getListByEntity(user);
 		PageInfo<User> pageInfo = new PageInfo<User>(list);
 		data.put("rows", pageInfo.getList());
 		data.put("pageSize", pageInfo.getPageSize());
@@ -51,11 +49,43 @@ public class UserController extends BaseController{
 		return data;
 	}
 	
-	
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
-	public String add(Model model){
-		return "";
+	public Map<String,Object> save(User user){
+		Map<String,Object> result = this.success(null);
+		try{
+			user.setCreateTime(new Date());
+			user.setStatus(1);
+			userService.save(user);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public Map<String,Object> update(User user){
+		Map<String,Object> result = this.success(null);
+		try{
+			userService.update(user);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String,Object> delete(User user){
+		Map<String,Object> result = this.success(null);
+		try{
+			userService.deleteByEntity(user);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
 }
