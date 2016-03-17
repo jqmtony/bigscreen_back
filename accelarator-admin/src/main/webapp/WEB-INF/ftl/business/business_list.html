@@ -34,7 +34,7 @@
 		<a href="javascript:void(0);" onclick="search_()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		<a href="javascript:void(0);" id="btn_add_user" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
 		<a href="javascript:void(0);" class="easyui-linkbutton" onclick="dg_remove_row();" data-options="iconCls:'icon-remove',toggle:true">删除</a>
-		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cut',toggle:true">修改</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" onclick="dg_update();" data-options="iconCls:'icon-cut',toggle:true">修改</a>
 	</div>
 	
 	<div id="win_add_user" class="easyui-window" title="新增商家账号" data-options="collapsible:false,minimizable:false,closed:true" style="width:600px;height:450px;padding:10px;">
@@ -42,41 +42,42 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>用户名：</td>
-	    			<td><input class="easyui-textbox" type="text" name="userName" data-options="required:true"></input></td>
+	    			<td><input type="hidden" name="id"></input>
+	    			    <input id="_userName_" class="easyui-textbox" type="text" name="userName" data-options="required:true"></input></td>
 	    			<td>真实姓名：</td>
-	    			<td><input class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    			<td><input id="_realName_" class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>密码：</td>
-	    			<td><input class="easyui-textbox" type="password" name="password" data-options="required:true"></input></td>
+	    			<td><input id="_password_" class="easyui-textbox" type="password" name="password" data-options="required:true"></input></td>
 	    			<td>确认密码：</td>
-	    			<td><input class="easyui-textbox" type="password" name="password_two" data-options="required:true"></input></td>
+	    			<td><input id="_ret_password_" class="easyui-textbox" type="password" name="ret_password" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>国家：</td>
-	    			<td><select id="s_country" name="country" class="easyui-combobox" style="width:110px;"></select></td>
+	    			<td><select id="_country_" name="country" class="easyui-combobox" style="width:110px;"></select></td>
 	    			<td>地区：</td>
-	    			<td><select id="s_area" name="area" class="easyui-combobox" style="width:110px;"></select></td>
+	    			<td><select id="_area_" name="area" class="easyui-combobox" style="width:110px;"></select></td>
 	    		</tr>
 	    		<tr>
 	    			<td>手机：</td>
-	    			<td><input class="easyui-textbox" type="text" name="mobile" data-options="required:true"></input></td>
+	    			<td><input id="_mobile_" class="easyui-textbox" type="text" name="mobile" data-options="required:true"></input></td>
 	    			<td>电子邮箱：</td>
-	    			<td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><input id="_email_" class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>微信号：</td>
-	    			<td><input class="easyui-textbox" type="text" name="weixin"></input></td>
+	    			<td><input id="_weixin_" class="easyui-textbox" type="text" name="weixin"></input></td>
 	    			<td>FaceBook：</td>
-	    			<td><input class="easyui-textbox" type="text" name="facebook"></input></td>
+	    			<td><input id="_facebook_" class="easyui-textbox" type="text" name="facebook"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>出生年月：</td>
-	    			<td colspan="3"><input class="easyui-textbox" type="text" name="birthday"></input></td>
+	    			<td colspan="3"><input id="_birthday_" class="easyui-textbox" type="text" name="birthday"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td><input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td><input id="_remark_" class="easyui-textbox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
                </table>
             </form>
@@ -141,15 +142,6 @@ $(function(){
 });
 
 function submitForm(){
-	/*saveForm = $('#save_form').form();
-	if(saveForm.form('validate')){
-		$.post('${base}/business/add',
-			   $("#save_form").serializeObject(),
-			   function(data){
-			      console.log(data.code);
-		       },
-		       'json');		
-	}*/
 	$('#save_form').form('submit',{
 		url:'${base}/business/add',
 		onSubmit:function(){
@@ -169,7 +161,6 @@ function submitForm(){
 			}
 	    }
 	});
-	
 }
 
 
@@ -213,6 +204,34 @@ function dg_remove_row() {
 						showType : 'slide'
 					});
 				}
+			}
+		})
+	}
+}
+
+function dg_update(){
+	var record = $('#dg_search_0').datagrid('getSelected');
+	if (null == record) {
+		$.messager.alert('消息提示', '请选择删除记录行！', 'info');
+	} else {
+		$.ajax({
+			type : "POST",
+			url : "${base}/business/toUpdate",
+			data : {
+				id : record.id,
+			},
+			success : function(data) {
+				$(":input[name='id']").val(data.id);
+				$("#_userName_").textbox('setValue',data.userName);
+				$("#_realName_").textbox('setValue',data.userName);
+				$("#_password_,#_ret_password_").textbox('setValue',data.password);
+				$("#_mobile_").textbox('setValue',data.mobile);
+				$("#_email_").textbox('setValue',data.email);
+				$("#_weixin_").textbox('setValue',data.weixin);
+				$("#_facebook_").textbox('setValue',data.facebook);
+				$("#_brithday_").textbox('setValue',data.brithday);
+				$("#_remark_").textbox('setValue',data.remark);
+				$("#win_add_user").window('open');
 			}
 		})
 	}

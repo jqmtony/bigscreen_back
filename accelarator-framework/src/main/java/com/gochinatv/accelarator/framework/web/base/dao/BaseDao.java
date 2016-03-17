@@ -10,7 +10,7 @@ public interface BaseDao<T> {
 	 * @param id
 	 * @throws Exception
 	 */
-	public T get(int id) throws Exception;
+	public T getEntityById(int id) throws Exception;
 
     
     /**

@@ -8,7 +8,7 @@
 		<result property="videoPath" column="video_path" />
 		<result property="picPath" column="pic_path" />
 		<result property="content" column="content" />
-		<result property="storeId" column="store_id" />
+		<result property="placeId" column="place_id" />
 		<result property="deviceId" column="device_id" />
 		<result property="sort" column="sort" />
 		<result property="remrak" column="remrak" />

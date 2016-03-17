@@ -23,7 +23,7 @@ public class Device extends BaseVo implements Serializable {
 	private String brand;// 设备品牌
 	private String model;// 设备型号
 	private String mac;// 设备mac
-	private String storeId;// 店铺id
+	private String placeId;// 区域id
 	private String businessId;// 商家id
 	private String screenNum;// 分屏数量
 	private Date createTime; // 创建时间
@@ -61,12 +61,12 @@ public class Device extends BaseVo implements Serializable {
 		this.mac = mac;
 	}
 
-	public String getStoreId() {
-		return storeId;
+	public String getPlaceId() {
+		return placeId;
 	}
 
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 
 	public String getBusinessId() {

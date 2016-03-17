@@ -23,7 +23,7 @@ public class SystemAdvertiserMessage extends BaseVo implements Serializable {
 	private String videoPath;// 视频地址
 	private String picPath;// 图片地址
 	private String content;// 文字内容
-	private int storeId;// 商铺id
+	private int placeId;// 区域id
 	private int deviceId;// 设备id
 	private int sort;// 排序
 	private String remrak;// 描述
@@ -63,12 +63,12 @@ public class SystemAdvertiserMessage extends BaseVo implements Serializable {
 		this.content = content;
 	}
 
-	public int getStoreId() {
-		return storeId;
+	public int getPlaceId() {
+		return placeId;
 	}
 
-	public void setStoreId(int storeId) {
-		this.storeId = storeId;
+	public void setPlaceId(int placeId) {
+		this.placeId = placeId;
 	}
 
 	public int getDeviceId() {

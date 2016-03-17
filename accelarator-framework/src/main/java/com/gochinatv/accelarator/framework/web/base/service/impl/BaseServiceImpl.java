@@ -23,8 +23,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 	 * @param id
 	 * @throws Exception
 	 */
-	public T get(int id) throws Exception{
-		return getDao().get(id);
+	public T getEntityById(int id) throws Exception{
+		return getDao().getEntityById(id);
 	}
 
     

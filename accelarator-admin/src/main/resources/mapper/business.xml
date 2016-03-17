@@ -39,6 +39,10 @@
 		</where>
 	</select>
 	
+	<select id="getEntityById" resultMap="Business" parameterType="int">
+		select * from business where id=#{id}
+	</select>
+	
 	<insert id="save" parameterType="Business">
 	   insert into business(
 	            user_name,
@@ -70,6 +74,25 @@
 	            #{status}
 	            )
 	</insert>
+	
+	<update id="update" parameterType="Business">
+		update business
+		<set>
+			user_name=#{userName},
+            password=#{password},
+            real_name=#{realName},
+            country=#{country},
+            area=#{area},
+            mobile=#{mobile},
+            email=#{email},
+            facebook=#{facebook},
+            weixin=#{weixin},
+            remark=#{remark},
+            birthday=#{birthday},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
 	
 	<delete id="deleteByEntity" parameterType="Business">
 	  delete from business where id = #{id}

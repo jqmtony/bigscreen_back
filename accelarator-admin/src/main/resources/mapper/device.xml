@@ -8,7 +8,7 @@
 		<result property="brand" column="brand" />
 		<result property="model" column="model" />
 		<result property="mac" column="mac" />
-		<result property="storeId" column="store_id" />
+		<result property="placeId" column="place_id" />
 		<result property="businessId" column="business_id" />
 		<result property="screenNum" column="screen_num" />
 		<result property="createTime" column="create_time" />

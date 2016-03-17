@@ -31,7 +31,7 @@ public class BusinessController extends BaseController{
 	
 
 	@RequestMapping("/to_list")
-	public String to_list(Model model) throws Exception{
+	public String to_list(Model model){
 		return "business/business_list";
 	}
 	
@@ -62,6 +62,26 @@ public class BusinessController extends BaseController{
 		return result;
 	}
 	
+
+	@RequestMapping("/toUpdate")
+	@ResponseBody
+	public Business toUpdate(@RequestParam(value = "id") int id) throws Exception{
+		Business business = businessService.getEntityById(id);
+		return business;
+	}
+	
+	
+	@RequestMapping("/doUpdate")
+	@ResponseBody
+	public Map<String,Object> doUpdate(Business business){
+		Map<String,Object> result = this.success(null);
+		try{
+			businessService.update(business);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody

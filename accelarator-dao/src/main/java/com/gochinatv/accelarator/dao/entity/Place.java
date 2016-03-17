@@ -7,11 +7,11 @@ import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
 /**
  * 
  * @作者 zhuhh
- * @描述 店铺管理表
+ * @描述    投放区域表
  * @创建时间 2016年3月14日 上午11:26:55
  * @修改时间
  */
-public class Store extends BaseVo implements Serializable {
+public class Place extends BaseVo implements Serializable {
 
 	/**
 	 * 
