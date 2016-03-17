@@ -9,6 +9,7 @@
 		<result property="realName" column="real_name" />
 		<result property="country" column="country" />
 		<result property="area" column="area" />
+		<result property="city" column="city" />
 		<result property="email" column="email" />
 		<result property="mobile" column="mobile" />
 		<result property="facebook" column="facebook" />

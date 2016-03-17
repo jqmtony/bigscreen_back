@@ -11,6 +11,7 @@
 		<result property="averageDailyFlow" column="average_daily_flow" />
 		<result property="country" column="country" />
 		<result property="area" column="area" />
+		<result property="city" column="city" />
 		<result property="address" column="address" />
 		<result property="zipCode" column="zip_code" />
 		<result property="businessId" column="business_id" />

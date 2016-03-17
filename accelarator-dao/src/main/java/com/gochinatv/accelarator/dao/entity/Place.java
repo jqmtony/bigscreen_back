@@ -25,6 +25,7 @@ public class Place extends BaseVo implements Serializable {
 	private String averageDailyFlow;// 日均人流量
 	private int country;// 国家
 	private int area;// 地区
+	private int city;// 城市
 	private String address;// 地址
 	private String zipCode;// 邮编
 	private int businessId;// 商家id
@@ -84,6 +85,14 @@ public class Place extends BaseVo implements Serializable {
 
 	public void setArea(int area) {
 		this.area = area;
+	}
+
+	public int getCity() {
+		return city;
+	}
+
+	public void setCity(int city) {
+		this.city = city;
 	}
 
 	public String getAddress() {
