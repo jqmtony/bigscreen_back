@@ -30,27 +30,26 @@ public class BusinessController extends BaseController{
 	private BusinessService businessService;
 	
 
-	@RequestMapping("/to_list")
-	public String to_list(Model model){
+	@RequestMapping("/gotoList")
+	public String gotoList(){
 		return "business/business_list";
 	}
 	
 	
-	@RequestMapping("/list")
+	@RequestMapping("/queryList")
 	@ResponseBody
-	public PageInfo<Business> list(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
-							   @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
+	public PageInfo<Business> queryList( int page, int rows,
 							   Business business) throws Exception{
-		PageInterceptor.startPage(pageNum, pageSize);
+		PageInterceptor.startPage(page, rows);
 		List<Business> list = businessService.getListByEntity(business);
 		PageInfo<Business> pageInfo = new PageInfo<Business>(list);
 		return pageInfo;
 	}
 	
 	
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
-	public Map<String,Object> add(Business business){
+	public Map<String,Object> save(Business business){
 		Map<String,Object> result = this.success(null);
 		try{
 			business.setCreateTime(new Date());
@@ -71,9 +70,9 @@ public class BusinessController extends BaseController{
 	}
 	
 	
-	@RequestMapping("/doUpdate")
+	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String,Object> doUpdate(Business business){
+	public Map<String,Object> update(Business business){
 		Map<String,Object> result = this.success(null);
 		try{
 			businessService.update(business);
@@ -94,5 +93,4 @@ public class BusinessController extends BaseController{
 		}
 		return result;
 	}
-	
 }

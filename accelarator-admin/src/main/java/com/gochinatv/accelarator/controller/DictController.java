@@ -28,13 +28,6 @@ public class DictController extends BaseController{
     
 	@Autowired
 	private DictService dictService;
-
-	@RequestMapping("/create")
-	@ResponseBody
-	public List<Dict> create() throws Exception{
-		List<Dict> list = dictService.getList();
-		return list;
-	}
 	
 	@RequestMapping("/create_region")
 	@ResponseBody
@@ -53,7 +46,7 @@ public class DictController extends BaseController{
 				region.put("text", d.getValue());
 				region.put("children",new JSONArray());
 				array.add(region);
-			}else{
+			}else if(key.length()==6){
 				for (Object object : array) {
 					JSONObject obj = (JSONObject) object;
 					String jsonKey = obj.getString("key");
@@ -62,13 +55,32 @@ public class DictController extends BaseController{
 						region.put("id", d.getId());
 						region.put("key", key);
 						region.put("text", d.getValue());
+						region.put("children",new JSONArray());
 						children.add(region);
+						break;
+					}
+				}
+			}else if(key.length()==9){
+				for (Object object : array) {
+					JSONObject obj = (JSONObject) object;
+					String jsonKey = obj.getString("key");
+					JSONArray children = obj.getJSONArray("children");
+					if(key.startsWith(jsonKey)){
+						for (Object sub : children) {
+							JSONObject city = (JSONObject) sub;
+							JSONArray city_children = city.getJSONArray("children");
+							if(key.startsWith(city.getString("key"))){
+								region.put("id", d.getId());
+								region.put("key", key);
+								region.put("text", d.getValue());
+								city_children.add(region);
+							}
+						}
+						break;
 					}
 				}
 			}
 		}
-		//array.addAll(dictList);
-		
 		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/region.js"));
 		out = new OutputStreamWriter(fos, "UTF-8");
 		out.write("var xzqh=" + array.toJSONString());
@@ -78,4 +90,72 @@ public class DictController extends BaseController{
 		return array;
 	}
 	
+	
+	@RequestMapping("/create")
+	@ResponseBody
+	public JSONArray create(Dict dict) throws Exception{
+		HttpServletRequest request = this.getRequest();
+		JSONArray array = new JSONArray();
+		FileOutputStream fos = null;
+		Writer out = null;
+		List<Dict> dictList = dictService.getListByEntity(dict);
+		for (Dict d : dictList) {
+			JSONObject region = new JSONObject();
+			String key = d.getKey();
+			if(key.length()==3){
+				region.put("id", d.getId());
+				region.put("key", key);
+				region.put("text", d.getValue());
+				region.put("children",new JSONArray());
+				array.add(region);
+			}else if(key.length()==6){
+				for (Object object : array) {
+					JSONObject obj = (JSONObject) object;
+					String jsonKey = obj.getString("key");
+					JSONArray children = obj.getJSONArray("children");
+					if(key.startsWith(jsonKey)){
+						region.put("id", d.getId());
+						region.put("key", key);
+						region.put("text", d.getValue());
+						region.put("children",new JSONArray());
+						children.add(region);
+						break;
+					}
+				}
+			}else if(key.length()==9){
+				for (Object object : array) {
+					JSONObject obj = (JSONObject) object;
+					String jsonKey = obj.getString("key");
+					JSONArray children = obj.getJSONArray("children");
+					if(key.startsWith(jsonKey)){
+						for (Object sub : children) {
+							JSONObject city = (JSONObject) sub;
+							JSONArray city_children = city.getJSONArray("children");
+							if(key.startsWith(city.getString("key"))){
+								region.put("id", d.getId());
+								region.put("key", key);
+								region.put("text", d.getValue());
+								city_children.add(region);
+							}
+						}
+						break;
+					}
+				}
+			}
+		}
+		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/region.js"));
+		out = new OutputStreamWriter(fos, "UTF-8");
+		
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject top = (JSONObject)array.get(i);
+			
+			
+		}
+		
+		out.write("var xzqh=" + array.toJSONString());
+		out.flush();
+		out.close();
+		fos.close();
+		return array;
+	}
 }

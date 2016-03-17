@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.PlaceService;
 
 /**
@@ -27,15 +30,19 @@ public class PlaceController extends BaseController{
 
 	@RequestMapping("/to_list")
 	public String to_list(Model model) throws Exception{
-		return "user/user_list";
+		return "place/place_list";
 	}
 	
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public List<Place> list(Model model) throws Exception{
-		List<Place> list = placeService.getList();
-		return list;
+	public PageInfo<Place> list(@RequestParam(value = "page", defaultValue = ("1")) int pageNum,
+			                @RequestParam(value = "rows", defaultValue = ("20")) int pageSize,
+			                Place place) throws Exception{
+		PageInterceptor.startPage(pageNum, pageSize);
+		List<Place> list = placeService.getListByEntity(place);
+		PageInfo<Place> pageInfo = new PageInfo<Place>(list);
+		return pageInfo;
 	}
 	
 	

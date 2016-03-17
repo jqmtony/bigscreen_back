@@ -18,7 +18,7 @@
 		<result property="createTime" column="create_time" />
 	</resultMap>
 	
-	<select id="getList" resultMap="Place">
+	<select id="getListByEntity" resultMap="Place" parameterType="Place">
 		select * from place
 	</select>
 

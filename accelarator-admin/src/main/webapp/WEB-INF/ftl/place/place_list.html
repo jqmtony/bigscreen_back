@@ -11,17 +11,18 @@
 <script type="text/javascript" src="${base}/js/extend.js"></script>
 </head>
 <body>
-   <table id="dg_search_0" class="easyui-datagrid" data-options="rownumbers:true,singleSelect:true,url:'${base}/business/list',method:'post',toolbar:'#tb',pagination:true,pageSize:20,pageNumber:1,fitColumns:true,fit:true">
+   <table id="dg_search_0" class="easyui-datagrid" data-options="rownumbers:true,singleSelect:true,url:'${base}/place/list',method:'post',toolbar:'#tb',pagination:true,pageSize:20,pageNumber:1,fitColumns:true,fit:true">
 		<thead>
 			<tr>
-				<th data-options="field:'userName',width:80">用户名</th>
-				<th data-options="field:'realName',width:100">真实姓名</th>
-				<th data-options="field:'mobile',width:80">手机</th>
-				<th data-options="field:'email',width:100">邮箱</th>
-				<th data-options="field:'country',width:80,formatter:formatCountry">国家</th>
-				<th data-options="field:'area',width:80,formatter:formatArea">地区</th>
-				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
-				<th data-options="field:'status',width:60,formatter:formatStatus">是否启用</th>
+				<th data-options="field:'cname',width:80">中文名称</th>
+				<th data-options="field:'ename',width:100">英文名称</th>
+				<th data-options="field:'businessId',width:100">负责人</th>
+				<th data-options="field:'type',width:80">类型</th>
+				<th data-options="field:'country',width:80">国家</th>
+				<th data-options="field:'area',width:80">地区</th>
+				<th data-options="field:'city',width:80">城市</th>
+				<th data-options="field:'address',width:60">详细地址</th>
+				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD"">创建日期</th>
 			</tr>
 		</thead>
 	</table>
@@ -30,8 +31,17 @@
 	            国家： <select id="country" class="easyui-combobox" style="width:90px;"></select>
 	            地区：  <select id="area" class="easyui-combobox" style="width:90px;"></select>
 	            城市：  <select id="city" class="easyui-combobox" style="width:90px;"></select>
-		用户名： <input class="easyui-textbox" type="text" id="userName" style="width:110px">
-		真实姓名： <input class="easyui-textbox" type="text" id="realName" style="width:110px">
+	            中文名称： <input class="easyui-textbox" type="text" id="cname" style="width:110px">
+	            负责人： <input class="easyui-textbox" type="text" id="businessId" style="width:110px">
+		类型：
+		<select id="type" class="easyui-combobox" style="width:90px;">
+		  <option value="0">全部</option>
+		  <option value="1">餐厅</option>
+		  <option value="2">大使馆</option>
+		  <option value="3">商场</option>
+		  <option value="4">美甲区</option>
+		  <option value="5">其它</option>
+		</select>
 		<a href="javascript:void(0);" onclick="search_()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		<a href="javascript:void(0);" id="btn_add_user" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
 		<a href="javascript:void(0);" class="easyui-linkbutton" onclick="dg_remove_row();" data-options="iconCls:'icon-remove',toggle:true">删除</a>
@@ -43,7 +53,7 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>用户名：</td>
-	    			<td><!-- <input type="hidden" name="id"></input> -->
+	    			<td><input type="hidden" name="id"></input>
 	    			    <input id="_userName_" class="easyui-textbox" type="text" name="userName" data-options="required:true"></input></td>
 	    			<td>真实姓名：</td>
 	    			<td><input id="_realName_" class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
@@ -57,7 +67,7 @@
 	    		<tr>
 	    			<td>国家：</td>
 	    			<td><select id="_country_" name="country" class="easyui-combobox" style="width:110px;">
-	    			 <option value="1">美国</option>
+	    			   <option value="1">美国</option>
 	    			   <option value="1">美国</option>
 	    			   <option value="1">美国</option>
 	    			</select></td>
@@ -65,6 +75,7 @@
 	    			<td><select id="_area_" name="area" class="easyui-combobox" style="width:110px;">
 	    			<option value="10">华盛顿</option>
 	    			<option value="10">华盛顿</option>
+	    			
 	    			</select></td>
 	    		</tr>
 	    		<tr>
@@ -113,20 +124,20 @@ $(function(){
 		country_json.push(country);
 	}
 	
-	$('#country,#s_country').combobox({
+	$('#country,#s1_country').combobox({
 	    valueField:'id',
 	    textField:'text',
 	    data:country_json
 	});
 	
 	var area_json=[{'id':0,'text':'全部'}];
-	$('#area,#s_area').combobox({
+	$('#area,#s1_area').combobox({
 	    valueField:'id',
 	    textField:'text',
 	    data:area_json
 	});
 	
-	$('#country,#s_country').combobox({
+	$('#country,#s1_country').combobox({
 	   onChange: function(newValue,oldValue){
 		  area_json = [{'id':0,'text':'全部'}];
 		  for(i=0;i<xzqh.length;i++){
@@ -140,7 +151,7 @@ $(function(){
 					}
 				}
 		  }
-		  $('#area,#s_area').combobox({
+		  $('#area,#s1_area').combobox({
 			    valueField:'id',
 			    textField:'text',
 			    data:area_json
@@ -222,9 +233,7 @@ function dg_update(){
 	if (null == record) {
 		$.messager.alert('消息提示', '请选择删除记录行！', 'info');
 	} else {
-		$('#save_form').form('load','${base}/business/toUpdate?id='+record.id);
-		$("#win_add_user").window('open');
-		/* $.ajax({
+		$.ajax({
 			type : "POST",
 			url : "${base}/business/toUpdate",
 			data : {
@@ -243,7 +252,7 @@ function dg_update(){
 				$("#_remark_").textbox('setValue',data.remark);
 				$("#win_add_user").window('open');
 			}
-		}) */
+		})
 	}
 }
 

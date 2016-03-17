@@ -20,7 +20,7 @@ public class Place extends BaseVo implements Serializable {
 
 	private String cname;// 中文名称
 	private String ename;// 英文名称
-	private int type; // 类型
+	private int type; // 类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private String scale;// 规模大小
 	private String averageDailyFlow;// 日均人流量
 	private int country;// 国家
