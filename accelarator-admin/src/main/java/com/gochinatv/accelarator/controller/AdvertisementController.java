@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.gochinatv.accelarator.dao.entity.AdvertiserMessage;
+import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
-import com.gochinatv.accelarator.service.AdvertiserMessageService;
+import com.gochinatv.accelarator.service.AdvertisementService;
 
 /**
  * 
  * @作者 zhuhh
- * @描述   广告内容控制层  
+ * @描述  广告控制层  
  * @创建时间 2016年3月14日 下午1:24:13
  * @修改时间
  */
 @Controller
-@RequestMapping("/advertiser_message")
-public class AdvertiserMessageController extends BaseController{
+@RequestMapping("/advertiser")
+public class AdvertisementController extends BaseController{
     
 	@Autowired
-	private AdvertiserMessageService advertiserMessageService;
+	private AdvertisementService advertisementService;
 	
 
 	@RequestMapping("/gotoList")
@@ -33,8 +33,8 @@ public class AdvertiserMessageController extends BaseController{
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<AdvertiserMessage> queryList(Model model) throws Exception{
-		List<AdvertiserMessage> list = advertiserMessageService.getList();
+	public List<Advertisement> queryList(Model model) throws Exception{
+		List<Advertisement> list = advertisementService.getList();
 		return list;
 	}
 	

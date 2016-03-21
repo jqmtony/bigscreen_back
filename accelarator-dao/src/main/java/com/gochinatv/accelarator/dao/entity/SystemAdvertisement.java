@@ -1,33 +1,35 @@
 package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
 
 /**
  * 
  * @作者 zhuhh
- * @描述 广告内容表
+ * @描述 系统广告表
  * @创建时间 2016年3月14日 上午11:26:55
  * @修改时间
  */
-public class AdvertiserMessage extends BaseVo implements Serializable {
+public class SystemAdvertisement extends BaseVo implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int type;// 广告类型
+	private int type; // 广告类型
 	private String videoPath;// 视频地址
 	private String picPath;// 图片地址
 	private String content;// 文字内容
-	private int advertiserId;// 广告商id
-	private int startTime;// 生效时间
-	private int endTime;// 失效时间
-	private int duration;// 广告时长
-	private int remark;// 描述
+	private int placeId;// 区域id
+	private int deviceId;// 设备id
+	private int sort;// 排序
+	private String remrak;// 描述
 	private int status;// 状态
+	private int adIndex;// 广告位置
+	private Date createTime;// 创建日期
 
 	public int getType() {
 		return type;
@@ -61,44 +63,36 @@ public class AdvertiserMessage extends BaseVo implements Serializable {
 		this.content = content;
 	}
 
-	public int getAdvertiserId() {
-		return advertiserId;
+	public int getPlaceId() {
+		return placeId;
 	}
 
-	public void setAdvertiserId(int advertiserId) {
-		this.advertiserId = advertiserId;
+	public void setPlaceId(int placeId) {
+		this.placeId = placeId;
 	}
 
-	public int getStartTime() {
-		return startTime;
+	public int getDeviceId() {
+		return deviceId;
 	}
 
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
+	public void setDeviceId(int deviceId) {
+		this.deviceId = deviceId;
 	}
 
-	public int getEndTime() {
-		return endTime;
+	public int getSort() {
+		return sort;
 	}
 
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 
-	public int getDuration() {
-		return duration;
+	public String getRemrak() {
+		return remrak;
 	}
 
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-
-	public int getRemark() {
-		return remark;
-	}
-
-	public void setRemark(int remark) {
-		this.remark = remark;
+	public void setRemrak(String remrak) {
+		this.remrak = remrak;
 	}
 
 	public int getStatus() {
@@ -107,6 +101,22 @@ public class AdvertiserMessage extends BaseVo implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getAdIndex() {
+		return adIndex;
+	}
+
+	public void setAdIndex(int adIndex) {
+		this.adIndex = adIndex;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

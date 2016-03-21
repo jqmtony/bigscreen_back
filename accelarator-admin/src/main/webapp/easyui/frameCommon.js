@@ -59,6 +59,8 @@ function modifyRow(row){
 function modifyDefaultCheck(row){
 	
 }
+
+
 //模块名称
 function removeModule(){
 	var row = grid.datagrid('getSelected');

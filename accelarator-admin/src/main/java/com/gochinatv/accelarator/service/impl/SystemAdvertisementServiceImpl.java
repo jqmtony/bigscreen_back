@@ -3,11 +3,11 @@ package com.gochinatv.accelarator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gochinatv.accelarator.dao.SystemAdvertiserMessageDao;
-import com.gochinatv.accelarator.dao.entity.SystemAdvertiserMessage;
+import com.gochinatv.accelarator.dao.SystemAdvertisementDao;
+import com.gochinatv.accelarator.dao.entity.SystemAdvertisement;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
-import com.gochinatv.accelarator.service.SystemAdvertiserMessageService;
+import com.gochinatv.accelarator.service.SystemAdvertisementService;
 
 /**
  * 
@@ -17,14 +17,14 @@ import com.gochinatv.accelarator.service.SystemAdvertiserMessageService;
  * @修改时间
  */
 @Service
-public class SystemAdvertiserMessageServiceImpl extends BaseServiceImpl<SystemAdvertiserMessage> implements SystemAdvertiserMessageService {
+public class SystemAdvertisementServiceImpl extends BaseServiceImpl<SystemAdvertisement> implements SystemAdvertisementService{
 
 	@Autowired
-	private SystemAdvertiserMessageDao systemAdvertiserMessageDao;
+	private SystemAdvertisementDao systemAdvertisementDao;
 	
 	@Override
-	protected BaseDao<SystemAdvertiserMessage> getDao() {
-		return systemAdvertiserMessageDao;
+	protected BaseDao<SystemAdvertisement> getDao() {
+		return systemAdvertisementDao;
 	}
 	
 	
