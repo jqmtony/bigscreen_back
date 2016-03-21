@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.SystemAdvertisement;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.SystemAdvertisementService;
 
 /**
@@ -18,7 +20,7 @@ import com.gochinatv.accelarator.service.SystemAdvertisementService;
  * @修改时间
  */
 @Controller
-@RequestMapping("/advertiser")
+@RequestMapping("/system_advertisement")
 public class SystemAdvertisementController extends BaseController{
     
 	@Autowired
@@ -26,15 +28,17 @@ public class SystemAdvertisementController extends BaseController{
 	
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "user/user_list";
+		return "system_advertisement/list";
 	}
 	
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<SystemAdvertisement> queryList(Model model) throws Exception{
-		List<SystemAdvertisement> list = systemAdvertisementService.getList();
-		return list;
+	public PageInfo<SystemAdvertisement> queryList(int page,int rows,SystemAdvertisement sa) throws Exception{
+		PageInterceptor.startPage(page, rows);
+		List<SystemAdvertisement> list = systemAdvertisementService.getListByEntity(sa);
+		PageInfo<SystemAdvertisement> pageInfo = new PageInfo<SystemAdvertisement>(list);
+		return pageInfo;
 	}
 	
 	

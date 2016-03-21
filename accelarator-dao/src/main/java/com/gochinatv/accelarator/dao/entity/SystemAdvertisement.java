@@ -19,14 +19,14 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int type; // 广告类型
+	private int type; // 广告类型   (1:视频   2：图片   3：文字内容)
 	private String videoPath;// 视频地址
 	private String picPath;// 图片地址
 	private String content;// 文字内容
 	private int placeId;// 区域id
 	private int deviceId;// 设备id
 	private int sort;// 排序
-	private String remrak;// 描述
+	private String remark;// 描述
 	private int status;// 状态
 	private int adIndex;// 广告位置
 	private Date createTime;// 创建日期
@@ -87,12 +87,12 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 		this.sort = sort;
 	}
 
-	public String getRemrak() {
-		return remrak;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setRemrak(String remrak) {
-		this.remrak = remrak;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public int getStatus() {
