@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gochinatv.accelarator.dao.SystemAdvertiserMessageDao">
+<mapper namespace="com.gochinatv.accelarator.dao.SystemAdvertisementDao">
 
-	<resultMap type="SystemAdvertiserMessage" id="SystemAdvertiserMessage">
+	<resultMap type="SystemAdvertisement" id="SystemAdvertisement">
 		<id property="id" column="id" />
 		<result property="type" column="type" />
 		<result property="videoPath" column="video_path" />
@@ -11,14 +11,14 @@
 		<result property="placeId" column="place_id" />
 		<result property="deviceId" column="device_id" />
 		<result property="sort" column="sort" />
-		<result property="remrak" column="remrak" />
+		<result property="remark" column="remark" />
 		<result property="status" column="status" />
 		<result property="adIndex" column="ad_index" />
 		<result property="createTime" column="create_time" />
 	</resultMap>
 
-	<select id="getList" resultMap="SystemAdvertiserMessage">
-		select * from system_advertiser_message
+	<select id="getListByEntity" resultMap="SystemAdvertisement" parameterType="SystemAdvertisement">
+		select * from system_advertisement
 	</select>
 
 </mapper>

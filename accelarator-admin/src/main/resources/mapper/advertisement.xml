@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gochinatv.accelarator.dao.AdvertiserMessageDao">
+<mapper namespace="com.gochinatv.accelarator.dao.AdvertisementDao">
 
-	<resultMap type="AdvertiserMessage" id="AdvertiserMessage">
+	<resultMap type="Advertisement" id="Advertisement">
 		<id property="id" column="id" />
 		<result property="type" column="type" />
 		<result property="videoPath" column="video_path" />
@@ -16,8 +16,8 @@
 		<result property="status" column="status" />
 	</resultMap>
 	
-	<select id="getList" resultMap="AdvertiserMessage">
-		select * from advertiser_message
+	<select id="getListByEntity" resultMap="Advertisement" parameterType="Advertisement">
+		select * from advertisement
 	</select>
 
 </mapper>
