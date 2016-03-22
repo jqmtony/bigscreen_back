@@ -1,13 +1,21 @@
 package com.gochinatv.accelarator.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.Device;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.DeviceService;
 
 /**
@@ -27,22 +35,68 @@ public class DeviceController extends BaseController{
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "user/user_list";
+		return "device/list";
 	}
 	
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<Device> queryList(Model model) throws Exception{
-		List<Device> list = deviceService.getList();
-		return list;
+	public Map<String,Object> queryList( int page, int rows,
+			   Device device) throws Exception{
+		Map<String,Object> data = new HashMap<String,Object>();
+		PageInterceptor.startPage(page, rows);
+		List<Device> list = deviceService.getListByEntity(device);
+		PageInfo<Device> pageInfo = new PageInfo<Device>(list);
+		data.put("rows", pageInfo.getList());
+		data.put("pageSize", pageInfo.getPageSize());
+		data.put("total", pageInfo.getTotal());
+		return data;
 	}
-	
-	
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
-	public String add(Model model){
-		return "";
+	public Map<String,Object> save(Device device){
+		Map<String,Object> result = this.success(null);
+		try{
+			device.setCreateTime(new Date());
+			device.setStatus(1);
+			deviceService.save(device);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
+
+	@RequestMapping("/gotoUpdate")
+	@ResponseBody
+	public Device gotoUpdate(@RequestParam(value = "id") int id) throws Exception{
+		Device device = deviceService.getEntityById(id);
+		return device;
+	}
+	
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public Map<String,Object> update(Device device){
+		Map<String,Object> result = this.success(null);
+		try{
+			deviceService.update(device);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String,Object> delete(Device device){
+		Map<String,Object> result = this.success(null);
+		try{
+			deviceService.deleteByEntity(device);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
 }

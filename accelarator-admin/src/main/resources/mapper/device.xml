@@ -14,9 +14,60 @@
 		<result property="createTime" column="create_time" />
 		<result property="status" column="status" />
 	</resultMap>
-	
-	<select id="getList" resultMap="Device">
+	<select id="getListByEntity" resultMap="Device" parameterType="Device">
 		select * from device
+		<where>
+			1=1
+			<if test="code!=null">
+				and code like CONCAT(CONCAT('%',#{code}),'%')
+			</if>
+			<if test="brand!=null">
+				and brand like CONCAT(CONCAT('%',#{brand}),'%')
+			</if>
+		</where>
+		order by create_time desc
 	</select>
-
+	
+	<insert id="save" parameterType="Device">
+	   insert into device(
+	            code,
+	            brand,
+	            model,
+	            mac,
+	            place_id,
+	            business_id,
+	            screen_num,
+	            create_time,
+	            status
+	            ) values (
+	            #{code},
+	            #{brand},
+	            #{model},
+	            #{mac},
+	            #{placeId},
+	            #{businessId},
+	            #{screenNum},
+	            #{createTime},
+	            #{status}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Device">
+		update device
+		<set>
+			code=#{code},
+            brand=#{brand},
+            model=#{model},
+            mac=#{mac},
+            place_id=#{placeId},
+            business_id=#{businessId},
+            screen_num=#{screenNum},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Device">
+	  delete from device where id = #{id}
+	</delete>
 </mapper>

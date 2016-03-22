@@ -1,0 +1,35 @@
+<div id="modify-window" title="修改商铺信息" class="easyui-window" style="width: 800px; height: 450px;">
+	     <form id="modifyForm" method="post" >
+	    	<table cellpadding="5">
+	    		<table cellpadding="5">
+	    		<tr>
+	    			<td>设备编码：</td>
+	    			<td><input type="hidden" name="id"></input>
+	    			    <input id="code" class="easyui-validatebox" type="text" name="code" data-options="required:true"></input></td>
+	    			<td>设备品牌：</td>
+	    			<td><input id="brand" class="easyui-validatebox" type="text" name="brand"></input></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>设备型号：</td>
+	    			<td><input id="model" class="easyui-validatebox" type="text" name="model"></input></td>
+	    			<td>设备mac：</td>
+	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>区域id：</td>
+	    			<td><input id="placeId" class="easyui-validatebox" type="text" name="placeId" data-options="required:true"></input></td>
+	    			<td>商家id：</td>
+	    			<td><input id="businessId" class="easyui-validatebox" data-options="required:true" type="text" name="businessId"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>分屏数量：</td>
+	    			<td><input id="screenNum" class="easyui-validatebox" type="text" name="screenNum" data-options="required:true"></input></td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+		    </div>
+    </div>

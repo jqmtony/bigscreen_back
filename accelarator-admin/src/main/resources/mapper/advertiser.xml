@@ -93,6 +93,4 @@
 	  delete from advertiser where id = #{id}
 	</delete>
 
-
-
 </mapper>
