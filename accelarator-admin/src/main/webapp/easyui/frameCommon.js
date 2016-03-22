@@ -17,7 +17,7 @@ var addForm;
  * 回调查询
  */
 function callback(data){
-	if(data.success)
+	if(data.status)
 		grid.datagrid('reload',$("#queryForm").serializeObject());
 	else
 		$.messager.alert('系统提示',data.msg,'warning');	
@@ -59,8 +59,6 @@ function modifyRow(row){
 function modifyDefaultCheck(row){
 	
 }
-
-
 //模块名称
 function removeModule(){
 	var row = grid.datagrid('getSelected');
@@ -89,7 +87,7 @@ function query(){
 
 
 function addCallback(data){
-	if(!data.success){
+	if(!data.status){
 		$.messager.alert('系统提示',data.msg,'warning');
 	}else{
 		addWin.window('close');
@@ -118,7 +116,7 @@ function modifySave(url){
 }
 	
 function modifyCallback(data){
-	if(!data.success){
+	if(!data.status){
 		$.messager.alert('系统提示',data.msg,'warning');
 	}else{
 		modifyWin.window('close');
@@ -172,5 +170,39 @@ function showPic(picId){
 function pressEnter(event,functionname){
 	if(event.keyCode==13){
 		functionname();
+	}
+}
+
+function formatCountry(val, row) {
+//	alert("val==="+val+",row="+row.country);
+	var text='暂无';
+//	for(var i=0;i<xzqh.length;i++){
+//		if(xzqh[i].id==val){
+//			text = xzqh[i].text;
+//			break;
+//		}
+//	}
+	return text;
+}
+
+function formatArea(val, row) {
+	var text='暂无';
+//	for(var i=0;i<xzqh.length;i++){
+//		var children = xzqh[i].children;
+//		for(var j=0;j<children.length;j++){
+//			if(children[j].id==val){
+//				text = children[j].text;
+//				break;
+//			}
+//		}
+//	}
+	return text;
+}
+
+function formatStatus(val, row) {
+	if (val == 1) {
+		return '已启用';
+	} else {
+		return '已禁用';
 	}
 }

@@ -16,9 +16,9 @@ import com.gochinatv.accelarator.service.BusinessService;
 
 /**
  * 
- * @作者 zhuhh
+ * @作者 limr
  * @描述    商家账号控制层  
- * @创建时间 2016年3月14日 下午1:24:13
+ * @创建时间 2016年3月22日 上午10:28:13
  * @修改时间
  */
 @Controller
@@ -31,7 +31,7 @@ public class BusinessController extends BaseController{
 
 	@RequestMapping("/gotoList")
 	public String gotoList(){
-		return "business/business_list";
+		return "business/list";
 	}
 	
 	

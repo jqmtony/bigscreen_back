@@ -18,7 +18,7 @@ import com.gochinatv.accelarator.service.AdvertisementService;
  * @修改时间
  */
 @Controller
-@RequestMapping("/advertiser")
+@RequestMapping("/advertisement")
 public class AdvertisementController extends BaseController{
     
 	@Autowired

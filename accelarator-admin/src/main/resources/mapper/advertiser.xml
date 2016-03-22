@@ -18,8 +18,81 @@
 		<result property="status" column="status" />
 	</resultMap>
 	
-	<select id="getList" resultMap="Advertiser">
+	<select id="getListByEntity" resultMap="Advertiser" parameterType="Advertiser">
 		select * from advertiser
+		<where>
+			1=1
+			<if test="userName!=null">
+				and user_name like CONCAT(CONCAT('%',#{userName}),'%')
+			</if>
+			<if test="realName!=null">
+				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
+			</if>
+			<if test="country!=0">
+				and country=#{country}
+			</if>
+			<if test="area!=0">
+				and area=#{area}
+			</if>
+			<if test="city!=0">
+				and city=#{city}
+			</if>
+		</where>
+		order by create_time desc
 	</select>
+	
+		<insert id="save" parameterType="Advertiser">
+	   insert into advertiser(
+	            user_name,
+	            password,
+	            real_name,
+	            mobile,
+	            email,
+	            country,
+	            area,
+	            city,
+	            birthday,
+	            remark,
+	            create_time,
+	            status
+	            ) values (
+	            #{userName},
+	            #{password},
+	            #{realName},
+	            #{mobile},
+	            #{email},
+	            #{country},
+	            #{area},
+	            #{city},
+	            #{birthday},
+	            #{remark},
+	            #{createTime},
+	            #{status}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Advertiser">
+		update advertiser
+		<set>
+			user_name=#{userName},
+            password=#{password},
+            real_name=#{realName},
+            mobile=#{mobile},
+            email=#{email},
+            country=#{country},
+            area=#{area},
+            city=#{city},
+            birthday=#{birthday},
+            remark=#{remark},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Advertiser">
+	  delete from advertiser where id = #{id}
+	</delete>
+
+
 
 </mapper>
