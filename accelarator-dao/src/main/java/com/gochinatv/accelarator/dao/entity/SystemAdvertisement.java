@@ -27,7 +27,8 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 	private int deviceId;// 设备id
 	private int sort;// 排序
 	private String remark;// 描述
-	private int status;// 状态
+	private int status;// 状态  (1：上线    2：下线)
+	private int source;// 广告来源   (1：自有   2：商家)
 	private int adIndex;// 广告位置
 	private Date createTime;// 创建日期
 
@@ -101,6 +102,14 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getSource() {
+		return source;
+	}
+
+	public void setSource(int source) {
+		this.source = source;
 	}
 
 	public int getAdIndex() {
