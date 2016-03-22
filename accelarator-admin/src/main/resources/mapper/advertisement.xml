@@ -14,10 +14,27 @@
 		<result property="duration" column="duration" />
 		<result property="remark" column="remark" />
 		<result property="status" column="status" />
+		
+		<result property="userName" column="user_name" />
+		<result property="realName" column="real_name" />
 	</resultMap>
 	
 	<select id="getListByEntity" resultMap="Advertisement" parameterType="Advertisement">
-		select * from advertisement
+		select atm.id,at.user_name,at.real_name,atm.source,atm.start_time,atm.end_time,atm.duration,atm.status,atm.remark 
+		       from advertisement atm left join advertiser at on atm.advertiser_id=at.id 
+	   <where>
+			1=1
+			<if test="source!=0">
+				and atm.source=#{source}
+			</if>
+			<if test="status!=0">
+				and atm.status=#{status} 
+			</if>
+			<if test="realName!=null">
+				and at.real_name like CONCAT(CONCAT('%',#{realName}),'%')
+			</if>
+		</where>
+		order by id desc
 	</select>
 
 </mapper>

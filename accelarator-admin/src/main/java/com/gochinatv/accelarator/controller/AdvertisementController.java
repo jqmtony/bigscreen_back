@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.AdvertisementService;
+
 
 /**
  * 
@@ -27,15 +30,17 @@ public class AdvertisementController extends BaseController{
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "user/user_list";
+		return "advertisement/list";
 	}
 	
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public List<Advertisement> queryList(Model model) throws Exception{
-		List<Advertisement> list = advertisementService.getList();
-		return list;
+	public PageInfo<Advertisement> queryList(int page,int rows,Advertisement advertisement) throws Exception{
+		PageInterceptor.startPage(page, rows);
+		List<Advertisement> list = advertisementService.getListByEntity(advertisement);
+		PageInfo<Advertisement> pageInfo = new PageInfo<Advertisement>(list);
+		return pageInfo;
 	}
 	
 	

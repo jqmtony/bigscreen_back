@@ -1,0 +1,42 @@
+<div id="add-window" title="添加信息" class="easyui-window" style="width: 600px; height: 450px;">
+	     <form id="addForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>视频地址：</td>
+	    			<td><!-- <input type="hidden" name="id"></input> -->
+	    			    <input id="videoPath" class="easyui-textbox" type="text" name="videoPath" data-options="required:true"></input></td>
+	    			<td>商家：</td>
+	    			<td><input id="realName" class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>生效时间：</td>
+	    			<td><input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="required:true"></input></td>
+	    			<td>失效时间：</td>
+	    			<td><input id="add_endTime" class="easyui-datebox" type="text" name="endTime" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>广告时长：</td>
+	    			<td><input id="duration" class="easyui-textbox" type="text" name="duration" data-options="required:true"></input></td>
+	    			<td>广告来源：</td>
+	    			<td>
+	    			    <select name="source" class="easyui-combobox" style="width:90px;">
+				            <option value="2">商家</option>
+				            <option value="1">自有</option>
+				        </select>
+			         </td>
+	    		</tr>
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td>
+	    			   <input id="type" type="hidden" name="type" value="1"></input>
+	    			   <input id="status" type="hidden" name="status" value="1"></input>
+	    			   <input id="_remark_" class="easyui-textbox" name="remark" data-options="multiline:true" style="height:60px"></input>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+		    </div>
+    </div>

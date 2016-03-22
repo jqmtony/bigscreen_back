@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "/frame/pageInclude.html">
+<script type="text/javascript">
+	$(document).ready(function() {
+		grid = $('#tab').datagrid( {
+			//title : '用户列表',			
+			url :'${base}/advertisement/queryList',
+			queryParams:$("#queryForm").serializeObject(),
+			pagination : true,
+			rownumbers : true,
+			singleSelect : true,
+			striped:true,
+			fit:true,
+			toolbar:'#toolbar',
+			fitColumns:true,
+			onDblClickRow:function(index,row){
+				modifyRow(row);
+			} 
+		});
+	});
+</script>
+</head>
+<body>
+   <table class="easyui-datagrid" id="tab">
+		<thead>
+			<tr>
+			    <th data-options="field:'userName',width:100">广告商账号</th>
+			    <th data-options="field:'realName',width:100">广告商昵称</th>
+				<th data-options="field:'source',width:80,formatter:formatSource">广告来源</th>
+				<th data-options="field:'startTime',width:100,formatter:formatYYYYMMDD">生效时间</th>
+				<th data-options="field:'endTime',width:100,formatter:formatYYYYMMDD">失效时间</th>
+				<th data-options="field:'duration',width:100">广告时长（秒）</th>
+				<th data-options="field:'status',width:100,formatter:formatStatus">广告状态</th>
+				<th data-options="field:'remark',width:150">备注</th>
+			</tr>
+		</thead>
+	</table>
+	
+	<div id="toolbar" style="padding:2px 5px;">
+	  <form id="queryForm">
+	            广告来源： <select name="source" class="easyui-combobox" style="width:90px;">
+	            <option value="0">--请选择--</option>
+	            <option value="1">自有</option>
+	            <option value="2">商家</option>
+	           </select>
+	            广告状态： <select name="status" class="easyui-combobox" style="width:90px;">
+	            <option value="0">--请选择--</option>
+	            <option value="1">上线</option>
+	            <option value="2">下线</option> 
+	           </select>
+	            广告商昵称： <input class="easyui-textbox" type="text" name="realName" style="width:110px">
+		<a href="javascript:void(0);" onclick="query();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
+	  </form>
+	</div>
+   <#include "./add.html">
+   <#include "./update.html">
+</body>
+</html>
+
+<script>
+function formatSource(val, row) {
+	if (val == 1) {
+		return '自有';
+	} else if(val == 2){
+		return '商家广告';
+	}
+}
+
+function formatStatus(val, row) {
+	if (val == 1) {
+		return '上线';
+	} else if(val == 2){
+		return '下线';
+	}
+}
+
+$(function(){
+	$('#dd').datebox().datebox('calendar').calendar({
+		validator: function(date){
+			var now = new Date();
+			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+10);
+			return d1<=date && date<=d2;
+		}
+	});
+});
+
+</script>
