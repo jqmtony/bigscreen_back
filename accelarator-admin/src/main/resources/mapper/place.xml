@@ -19,7 +19,87 @@
 	</resultMap>
 	
 	<select id="getListByEntity" resultMap="Place" parameterType="Place">
-		select * from place
+		select * from place 
+		<where>
+			1=1
+			<if test="cname!=null">
+				and cname like CONCAT(CONCAT('%',#{cname}),'%')
+			</if>
+			<if test="ename!=null">
+				and ename like CONCAT(CONCAT('%',#{ename}),'%')
+			</if>
+			<if test="type!=null and type!=0">
+				and type = #{type}
+			</if>
+			<if test="country!=null and country!=0">
+				and country = #{country}
+			</if>
+			<if test="area!=null and area!=0">
+				and area = #{area}
+			</if>
+			<if test="city!=null and city!=0">
+				and city = #{city}
+			</if>
+			order by create_time desc
+		</where>
 	</select>
+	
+	<select id="getEntityById" resultMap="Place" parameterType="int">
+		select * from place where id=#{id}
+	</select>
+	
+	<insert id="save" parameterType="Place">
+	   insert into place(
+	            cname,
+	            ename,
+	            type,
+	            scale,
+	            average_daily_flow,
+	            country,
+	            area,
+	            city,
+	            address,
+	            zip_code,
+	            business_id,
+	            create_time
+	            ) values (
+	            #{cname},
+	            #{ename},
+	            #{type},
+	            #{scale},
+	            #{averageDailyFlow},
+	            #{country},
+	            #{area},
+	            #{city},
+	            #{address},
+	            #{zipCode},
+	            #{businessId},
+	            #{createTime}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Place">
+		update place
+		<set>
+			cname=#{cname},
+            ename=#{ename},
+            type=#{type},
+            scale=#{scale},
+            average_daily_flow=#{averageDailyFlow},
+            country=#{country},
+            area=#{area},
+            city=#{city},
+            address=#{address},
+            zip_code=#{zipCode},
+            business_id=#{businessId}            
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Place">
+	  delete from place where id = #{id}
+	</delete>
+	
+	
 
 </mapper>

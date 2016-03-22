@@ -36,6 +36,9 @@
 			<if test="area!=0">
 				and area = #{area}
 			</if>
+			<if test="city!=0">
+				and city = #{city}
+			</if>
 			order by create_time desc
 		</where>
 	</select>
@@ -51,6 +54,7 @@
 	            real_name,
 	            country,
 	            area,
+	            city,
 	            mobile,
 	            email,
 	            facebook,
@@ -65,6 +69,7 @@
 	            #{realName},
 	            #{country},
 	            #{area},
+	            #{city},
 	            #{mobile},
 	            #{email},
 	            #{facebook},
@@ -84,6 +89,7 @@
             real_name=#{realName},
             country=#{country},
             area=#{area},
+            city=#{city},
             mobile=#{mobile},
             email=#{email},
             facebook=#{facebook},
