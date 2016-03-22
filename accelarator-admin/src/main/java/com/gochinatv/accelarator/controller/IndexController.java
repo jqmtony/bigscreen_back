@@ -21,4 +21,11 @@ public class IndexController {
 	public String index(Model model){
 		return "index";
 	}
+	
+	
+	@RequestMapping("logout")
+	public String logout(Model model){
+		
+		return "redirect:login";
+	}
 }
