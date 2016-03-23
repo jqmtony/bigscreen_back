@@ -56,7 +56,7 @@ public class AdvertiserController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			advertiser.setCreateTime(new Date());
-			advertiser.setStatus(1);
+//			advertiser.setStatus(1);
 			advertiserService.save(advertiser);
 		}catch(Exception e){
 			result = this.error(e.getMessage());

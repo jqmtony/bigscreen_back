@@ -53,7 +53,7 @@ public class BusinessController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			business.setCreateTime(new Date());
-			business.setStatus(1);
+//			business.setStatus(1);
 			businessService.save(business);
 		}catch(Exception e){
 			result = this.error(e.getMessage());

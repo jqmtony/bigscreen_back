@@ -29,6 +29,25 @@ public class Device extends BaseVo implements Serializable {
 	private Date createTime; // 创建时间
 	private int status;// 状态
 
+	private String cname;
+	private String userName;
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
 	public String getCode() {
 		return code;
 	}

@@ -23,9 +23,9 @@ public class Place extends BaseVo implements Serializable {
 	private int type; // 类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private String scale;// 规模大小
 	private String averageDailyFlow;// 日均人流量
-	private int country;// 国家
-	private int area;// 地区
-	private int city;// 城市
+	private String countryCode;// 国家
+	private String areaCode;// 地区
+	private String cityCode;// 城市
 	private String address;// 地址
 	private String zipCode;// 邮编
 	private int businessId;// 商家id
@@ -71,28 +71,28 @@ public class Place extends BaseVo implements Serializable {
 		this.averageDailyFlow = averageDailyFlow;
 	}
 
-	public int getCountry() {
-		return country;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCountry(int country) {
-		this.country = country;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public int getArea() {
-		return area;
+	public String getAreaCode() {
+		return areaCode;
 	}
 
-	public void setArea(int area) {
-		this.area = area;
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
 	}
 
-	public int getCity() {
-		return city;
+	public String getCityCode() {
+		return cityCode;
 	}
 
-	public void setCity(int city) {
-		this.city = city;
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
 	}
 
 	public String getAddress() {

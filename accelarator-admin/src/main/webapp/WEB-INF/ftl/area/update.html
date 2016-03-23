@@ -8,6 +8,15 @@
                $("#updatestatus").val(row.status);
           }
       }   
+	
+	function modifyRow(row){
+		  var row = getChecked();
+          if(row){
+        	  modifyWin.window('open');
+               XFrameUtils.fillForm('modifyForm',row); 
+               $("#updatestatus").val(row.status);
+          }
+	}
 
 		//修改回调
 	function modifyCallback(data){
@@ -27,9 +36,18 @@
     <input type="hidden" id="areaCode" name="areaCode"  />
     <input type="hidden" id="updatelevel" name="level"  />
 <table width="100%" border="0" cellspacing="0" cellpadding="1" >
+<!-- 
 	<tr class="datagrid-row-alt">
 		<td>区号：</td>
-		<td ><input type="text" id="updateareaCode" name="areaCode" disabled="disabled" maxLength="4"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /></td>
+		<td >
+		<select id="cc" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'" multiple style="width:200px;"></select>
+	</td>
+	<td></td>
+	</tr> -->
+	
+	<tr class="datagrid-row-alt">
+		<td>区号：</td>
+		<td ><input type="text" id="updateareaCode" name="areaCode" disabled="disabled" maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />(命名规范4-6-8)</td>
 		<td>名称：</td>
 		<td >
 		   <input id="updatename" name="name"  class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /> 
@@ -39,7 +57,7 @@
 		<td>状态：</td>
 		<td>
 			<input type="radio" id="updatestatus" name="status" value="1" >无效
-			<input type="radio" id="updatestatus" name="status" value="2" >有效
+			<input type="radio" id="updatestatus" name="status" value="2"  >有效
 		</td>
 		<td>排序</td>
 		<td >

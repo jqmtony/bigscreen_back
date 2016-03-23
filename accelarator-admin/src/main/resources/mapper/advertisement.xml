@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<select id="getListByEntity" resultMap="Advertisement" parameterType="Advertisement">
-		select atm.id,at.user_name,at.real_name,atm.source,atm.start_time,atm.end_time,atm.duration,atm.status,atm.remark 
+		select atm.id,at.user_name,at.real_name,atm.start_time,atm.end_time,atm.duration,atm.status,atm.remark 
 		       from advertisement atm left join advertiser at on atm.advertiser_id=at.id 
 	   <where>
 			1=1
@@ -30,11 +30,57 @@
 			<if test="status!=0">
 				and atm.status=#{status} 
 			</if>
-			<if test="realName!=null">
+			<if test="realName!=null and realName!=''">
 				and at.real_name like CONCAT(CONCAT('%',#{realName}),'%')
 			</if>
 		</where>
 		order by id desc
 	</select>
 
+	<insert id="save" parameterType="Advertisement">
+	   insert into advertisement(
+	            type,
+	            video_path,
+	            pic_path,
+	            content,
+	            advertiser_id,
+	            start_time,
+	            end_time,
+	            duration,
+	            remark,
+	            status
+	            ) values (
+	            #{type},
+	            #{videoPath},
+	            #{picPath},
+	            #{content},
+	            #{advertiserId},
+	            #{startTime},
+	            #{endTime},
+	            #{duration},
+	            #{remark},
+	            #{status}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Advertisement">
+		update advertisement
+		<set>
+			type=#{type},
+            video_path=#{videoPath},
+            pic_path=#{picPath},
+            content=#{content},
+            advertiser_id=#{advertiserId},
+            start_time=#{startTime},
+            end_time=#{endTime},
+            duration=#{duration},
+            remark=#{remark},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Advertisement">
+	  delete from advertisement where id = #{id}
+	</delete>
 </mapper>

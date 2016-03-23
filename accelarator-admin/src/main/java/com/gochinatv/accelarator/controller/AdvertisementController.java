@@ -1,11 +1,14 @@
 package com.gochinatv.accelarator.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -43,11 +46,42 @@ public class AdvertisementController extends BaseController{
 		return pageInfo;
 	}
 	
-	
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
-	public String add(Model model){
-		return "";
+	public Map<String,Object> save(Advertisement advertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+//			advertisement.setStatus(1);
+			advertisementService.save(advertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public Map<String,Object> update(Advertisement advertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+			advertisementService.update(advertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String,Object> delete(Advertisement advertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+			advertisementService.deleteByEntity(advertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
 }

@@ -1,12 +1,23 @@
 <div id="add-window" title="添加信息" class="easyui-window" style="width: 600px; height: 450px;">
 	     <form id="addForm" method="post" >
 	    	<table cellpadding="5">
+				<tr>
+	    			<td>广告商：</td>
+	    			<td><input id="advertiserId" class="easyui-validatebox" type="text" name="advertiserId" data-options="required:true"></input></td>
+	    			<td>广告类型：</td>
+	    			<td><select id="type" name="type" class="easyui-combobox" style="width:90px;" data-options="required:true,editable:false">
+			           		<option value="1">视频</option>
+		    				<option value="2">图片</option>
+		    				<option value="3">文字内容</option>
+		           		</select>
+		           </td>
+	    		</tr>
+	    		
 	    		<tr>
 	    			<td>视频地址：</td>
-	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="videoPath" class="easyui-textbox" type="text" name="videoPath" data-options="required:true"></input></td>
-	    			<td>商家：</td>
-	    			<td><input id="realName" class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    			<td><input id="videoPath" class="easyui-validatebox" type="text" name="videoPath" data-options="required:true"></input></td>
+	    			<td>图片地址：</td>
+	    			<td><input id="picPath" class="easyui-validatebox" type="text" name="picPath"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>生效时间：</td>
@@ -16,21 +27,22 @@
 	    		</tr>
 	    		<tr>
 	    			<td>广告时长：</td>
-	    			<td><input id="duration" class="easyui-textbox" type="text" name="duration" data-options="required:true"></input></td>
-	    			<td>广告来源：</td>
-	    			<td>
-	    			    <select name="source" class="easyui-combobox" style="width:90px;">
-				            <option value="2">商家</option>
-				            <option value="1">自有</option>
-				        </select>
-			         </td>
+	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input></td>
+	    			<td>状态：</td>
+	    			<td><select id="status" name="status" data-options="required:true,editable:false" class="easyui-combobox" style="width:90px;">
+			           		<option value="1" selected="selected">上线</option>
+		    				<option value="2">下线</option>
+		    			</select>
+		    		</td>
+	    		</tr>
+		    	<tr>
+	    			<td>广告内容：</td>
+	    			<td><input id="content" class="easyui-validatebox" data-options="required:true" name="content" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td>
-	    			   <input id="type" type="hidden" name="type" value="1"></input>
-	    			   <input id="status" type="hidden" name="status" value="1"></input>
-	    			   <input id="_remark_" class="easyui-textbox" name="remark" data-options="multiline:true" style="height:60px"></input>
+	    			   <input id="_remark_" class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input>
 	    			</td>
 	    		</tr>
                </table>

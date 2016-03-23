@@ -28,7 +28,7 @@
 			<tr>
 			    <th data-options="field:'userName',width:100">广告商账号</th>
 			    <th data-options="field:'realName',width:100">广告商昵称</th>
-				<th data-options="field:'source',width:80,formatter:formatSource">广告来源</th>
+				
 				<th data-options="field:'startTime',width:100,formatter:formatYYYYMMDD">生效时间</th>
 				<th data-options="field:'endTime',width:100,formatter:formatYYYYMMDD">失效时间</th>
 				<th data-options="field:'duration',width:100">广告时长（秒）</th>
@@ -39,21 +39,23 @@
 	</table>
 	
 	<div id="toolbar" style="padding:2px 5px;">
-	  <form id="queryForm">
-	            广告来源： <select name="source" class="easyui-combobox" style="width:90px;">
-	            <option value="0">--请选择--</option>
-	            <option value="1">自有</option>
-	            <option value="2">商家</option>
-	           </select>
-	            广告状态： <select name="status" class="easyui-combobox" style="width:90px;">
-	            <option value="0">--请选择--</option>
-	            <option value="1">上线</option>
-	            <option value="2">下线</option> 
-	           </select>
-	            广告商昵称： <input class="easyui-textbox" type="text" name="realName" style="width:110px">
-		<a href="javascript:void(0);" onclick="query();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		<form id="queryForm">
+			广告来源： <select name="source" class="easyui-combobox" style="width:90px;">
+			            <option value="0" selected="selected">--请选择--</option>
+			            <option value="1">自有</option>
+			            <option value="2">商家</option>
+		           	</select>
+			广告状态： <select name="status" class="easyui-combobox" style="width:90px;">
+			            <option value="0" selected="selected">--请选择--</option>
+			            <option value="1">上线</option>
+		            	<option value="2">下线</option> 
+		           	</select>
+			广告商昵称： <input class="easyui-textbox" type="text" name="realName" style="width:110px"></input>
+			<a href="javascript:void(0);" onclick="query();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		</form>
 		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
-	  </form>
+		<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">修改</a>
+		<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
 	</div>
    <#include "./add.html">
    <#include "./update.html">
@@ -61,13 +63,6 @@
 </html>
 
 <script>
-function formatSource(val, row) {
-	if (val == 1) {
-		return '自有';
-	} else if(val == 2){
-		return '商家广告';
-	}
-}
 
 function formatStatus(val, row) {
 	if (val == 1) {

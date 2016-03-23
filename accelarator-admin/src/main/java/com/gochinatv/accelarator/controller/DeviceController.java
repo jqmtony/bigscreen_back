@@ -58,7 +58,7 @@ public class DeviceController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			device.setCreateTime(new Date());
-			device.setStatus(1);
+//			device.setStatus(1);
 			deviceService.save(device);
 		}catch(Exception e){
 			result = this.error(e.getMessage());

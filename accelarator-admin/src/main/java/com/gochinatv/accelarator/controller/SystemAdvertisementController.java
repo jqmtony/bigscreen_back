@@ -1,11 +1,15 @@
 package com.gochinatv.accelarator.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.SystemAdvertisement;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -42,10 +46,52 @@ public class SystemAdvertisementController extends BaseController{
 	}
 	
 	
-	@RequestMapping("/add")
+	@RequestMapping("/save")
 	@ResponseBody
-	public String add(Model model){
-		return "";
+	public Map<String,Object> save(SystemAdvertisement systemAdvertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+			systemAdvertisement.setCreateTime(new Date());
+//			systemAdvertisement.setStatus(1);
+			systemAdvertisementService.save(systemAdvertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+//
+//	@RequestMapping("/gotoUpdate")
+//	@ResponseBody
+//	public SystemAdvertisement gotoUpdate(@RequestParam(value = "id") int id) throws Exception{
+//		SystemAdvertisement systemAdvertisement = systemAdvertisementService.getEntityById(id);
+//		return systemAdvertisement;
+//	}
+	
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public Map<String,Object> update(SystemAdvertisement systemAdvertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+			systemAdvertisementService.update(systemAdvertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String,Object> delete(SystemAdvertisement systemAdvertisement){
+		Map<String,Object> result = this.success(null);
+		try{
+			systemAdvertisementService.deleteByEntity(systemAdvertisement);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	
 }

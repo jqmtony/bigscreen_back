@@ -16,10 +16,76 @@
 		<result property="source" column="source" />
 		<result property="adIndex" column="ad_index" />
 		<result property="createTime" column="create_time" />
+		
+		<result property="cname" column="cname" />
+		<result property="code" column="code" />
 	</resultMap>
 
 	<select id="getListByEntity" resultMap="SystemAdvertisement" parameterType="SystemAdvertisement">
-		select * from system_advertisement
+		select sa.*, p.cname, d.code from system_advertisement sa
+		left join place p on sa.place_id=p.id
+		left join device d on sa.device_id=d.id
+		<where>
+			1=1
+			<if test="type!=0">
+				and sa.type=#{type}
+			</if>
+			<if test="source!=0">
+				and sa.source=#{source}
+			</if>
+		</where>
+		order by create_time desc
 	</select>
-
+	
+	<insert id="save" parameterType="SystemAdvertisement">
+	   insert into system_advertisement(
+	            type,
+	            video_path,
+	            pic_path,
+	            place_id,
+	            content,
+	            device_id,
+	            sort,
+	            remark,
+	            source,
+	            ad_index,
+	            create_time,
+	            status
+	            ) values (
+	            #{type},
+	            #{videoPath},
+	            #{picPath},
+	            #{placeId},
+	            #{content},
+	            #{deviceId},
+	            #{sort},
+	            #{remark},
+	            #{source},
+	            #{adIndex},
+	            #{createTime},
+	            #{status}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="SystemAdvertisement">
+		update system_advertisement
+		<set>
+            type=#{type},
+            video_path=#{videoPath},
+            pic_path=#{picPath},
+            place_id=#{placeId},
+            content=#{content},
+            device_id=#{deviceId},
+            sort=#{sort},
+	        remark=#{remark},
+	        source=#{source},
+	        ad_index=#{adIndex},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="SystemAdvertisement">
+	  delete from system_advertisement where id = #{id}
+	</delete>
 </mapper>

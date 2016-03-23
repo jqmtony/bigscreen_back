@@ -47,6 +47,17 @@ public class AreaController extends BaseController{
 			return areaService.queryChildrenAreaList(id);
 	}
 	/**
+	* @author 冯志文
+	* @Description:静态树
+	* @return Map<String,Object>    
+	* @date 2010-7-23 上午09:59:41
+	 */
+	@RequestMapping(value = "/areaStaticTree")
+	@ResponseBody
+	public List<Map<String,Object>> menuStaticTree() throws Exception  {
+		return areaService.queryAllArea();
+	}
+	/**
 	* @Description: 跳转到地区页面
 	 */
 	@RequestMapping(value = "/gotoAreaLookUp")

@@ -32,6 +32,25 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 	private int adIndex;// 广告位置
 	private Date createTime;// 创建日期
 
+	private String cname;
+	private String code;
+	
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public int getType() {
 		return type;
 	}

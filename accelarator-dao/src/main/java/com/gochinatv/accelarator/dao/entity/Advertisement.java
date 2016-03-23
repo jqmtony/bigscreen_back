@@ -23,8 +23,8 @@ public class Advertisement extends BaseVo implements Serializable {
 	private String picPath;// 图片地址
 	private String content;// 文字内容
 	private int advertiserId;// 广告商id
-	private Date startTime;// 生效时间
-	private Date endTime;// 失效时间
+	private String startTime;// 生效时间
+	private String endTime;// 失效时间
 	private int duration;// 广告时长
 	private String remark;// 描述
 	private int status;// 状态   (1：上线      2：下线)
@@ -74,19 +74,20 @@ public class Advertisement extends BaseVo implements Serializable {
 		this.advertiserId = advertiserId;
 	}
 
-	public Date getStartTime() {
+
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

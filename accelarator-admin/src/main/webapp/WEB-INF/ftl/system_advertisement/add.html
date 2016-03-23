@@ -2,27 +2,54 @@
 	     <form id="addForm" method="post" >
 	    	<table cellpadding="5">
 	    		<tr>
-	    			<td>用户名：</td>
-	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="_userName_" class="easyui-textbox" type="text" name="userName" data-options="required:true"></input></td>
-	    			<td>真实姓名：</td>
-	    			<td><input id="_realName_" class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    			<td>广告来源：</td>
+	    			<td>
+	    			    <select id="source" name="source" class="easyui-combobox" style="width:90px;" data-options="required:true,editable:false ">
+		           		<option value="1">自有</option>
+	    				<option value="2">商家</option>
+		           	</select>
+	    			<td>广告类型：</td>
+	    			<td><select id="type" name="type" class="easyui-combobox" style="width:90px;" data-options="required:true,editable:false">
+			           		<option value="1">视频</option>
+		    				<option value="2">图片</option>
+		    				<option value="3">文字内容</option>
+		           		</select>
+		           </td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>视频地址：</td>
+	    			<td><input id="videoPath" class="easyui-validatebox" type="text" name="videoPath" data-options="required:true"></input></td>
+	    			<td>图片地址：</td>
+	    			<td><input id="picPath" class="easyui-validatebox" type="text" name="picPath"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>密码：</td>
-	    			<td><input id="_password_" class="easyui-textbox" type="password" name="password" data-options="required:true"></input></td>
-	    			<td>确认密码：</td>
-	    			<td><input id="_ret_password_" class="easyui-textbox" type="password" name="ret_password" data-options="required:true"></input></td>
+	    			<td>区域id：</td>
+	    			<td><input id="placeId" class="easyui-validatebox" type="text" name="placeId" data-options="required:true"></input></td>
+	    			<td>设备id：</td>
+	    			<td><input id="deviceId" class="easyui-validatebox" data-options="required:true" type="text" name="deviceId"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>手机：</td>
-	    			<td><input id="_mobile_" class="easyui-textbox" type="text" name="mobile" data-options="required:true"></input></td>
-	    			<td>电子邮箱：</td>
-	    			<td><input id="_email_" class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td>排序：</td>
+	    			<td><input id="sort" class="easyui-validatebox" type="text" name="sort" data-options="required:true"></input></td>
+	    			<td>广告位置：</td>
+	    			<td><input id="adIndex" class="easyui-validatebox" type="text" name="adIndex" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>状态：</td>
+	    			<td><select id="status" name="status" data-options="editable:false" class="easyui-combobox" style="width:90px;">
+			           		<option value="1" selected>上线</option>
+		    				<option value="2">下线</option>
+		    			</select>
+		    		</td>
+		    	</tr>
+		    	<tr>
+	    			<td>广告内容：</td>
+	    			<td><input id="content" class="easyui-validatebox" data-options="required:true" name="content" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td><input id="_remark_" class="easyui-textbox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td><input id="remark" class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
                </table>
             </form>

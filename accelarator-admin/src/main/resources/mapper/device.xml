@@ -13,9 +13,14 @@
 		<result property="screenNum" column="screen_num" />
 		<result property="createTime" column="create_time" />
 		<result property="status" column="status" />
+		
+		<result property="cname" column="cname" />
+		<result property="userName" column="user_name" />
 	</resultMap>
 	<select id="getListByEntity" resultMap="Device" parameterType="Device">
-		select * from device
+		select d.*, p.cname, b.user_name from device d 
+		left join place p on d.place_id=p.id
+		left join business b on d.business_id=b.id
 		<where>
 			1=1
 			<if test="code!=null">

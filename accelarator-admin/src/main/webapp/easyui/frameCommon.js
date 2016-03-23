@@ -206,3 +206,10 @@ function formatStatus(val, row) {
 		return '已禁用';
 	}
 }
+function formatSource(val, row) {
+	if (val == 1) {
+		return '自有';
+	} else if(val == 2){
+		return '商家广告';
+	}
+}

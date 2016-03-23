@@ -9,9 +9,9 @@
 		<result property="type" column="type" />
 		<result property="scale" column="scale" />
 		<result property="averageDailyFlow" column="average_daily_flow" />
-		<result property="country" column="country" />
-		<result property="area" column="area" />
-		<result property="city" column="city" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
 		<result property="address" column="address" />
 		<result property="zipCode" column="zip_code" />
 		<result property="businessId" column="business_id" />
@@ -31,14 +31,14 @@
 			<if test="type!=null and type!=0">
 				and type = #{type}
 			</if>
-			<if test="country!=null and country!=0">
-				and country = #{country}
+			<if test="countryCode!=null">
+				and country_code = #{countryCode}
 			</if>
-			<if test="area!=null and area!=0">
-				and area = #{area}
+			<if test="areaCode!=null">
+				and area_code = #{areaCode}
 			</if>
-			<if test="city!=null and city!=0">
-				and city = #{city}
+			<if test="cityCode!=null">
+				and city_code = #{cityCode}
 			</if>
 			order by create_time desc
 		</where>
@@ -55,9 +55,9 @@
 	            type,
 	            scale,
 	            average_daily_flow,
-	            country,
-	            area,
-	            city,
+	            country_code,
+	            area_code,
+	            city_code,
 	            address,
 	            zip_code,
 	            business_id,
@@ -68,9 +68,9 @@
 	            #{type},
 	            #{scale},
 	            #{averageDailyFlow},
-	            #{country},
-	            #{area},
-	            #{city},
+	            #{countryCode},
+	            #{areaCode},
+	            #{cityCode},
 	            #{address},
 	            #{zipCode},
 	            #{businessId},
@@ -86,9 +86,9 @@
             type=#{type},
             scale=#{scale},
             average_daily_flow=#{averageDailyFlow},
-            country=#{country},
-            area=#{area},
-            city=#{city},
+            country_code=#{countryCode},
+            area_code=#{areaCode},
+            city_code=#{cityCode},
             address=#{address},
             zip_code=#{zipCode},
             business_id=#{businessId}            

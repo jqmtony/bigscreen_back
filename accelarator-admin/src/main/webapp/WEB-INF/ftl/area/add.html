@@ -9,6 +9,7 @@
 				$("#addsort").val(1);
 				$("#parentCode").val(row.areaCode);
 				$("#addlevel").val(row.level+1);
+				$("#addstatus").val(2);
 				$('#addstatus').attr("checked",true);
 		}else{
 			$.messager.show({
@@ -21,7 +22,7 @@
 
 	function addCallback(data){
 		if(data.status=='failure'){
-			$.messager.alert('系统提示',data.msg,'warning');
+			$.messager.alert('系统提示',data.data,'warning');
 		}else{
 			addWin.window('close');
 			 grid.treegrid('reload',$("#queryForm").serializeObject());	
@@ -47,13 +48,14 @@
 		   <input id="name" name="name"   class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /> 
 		</td>
 		<td>区号：</td>
-		<td ><input type="text" id="areaCode" name="areaCode"  maxLength="4"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /></td>
+		<td ><input type="text" id="areaCode" name="areaCode"  maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />
+		(命名规范4-6-8)</td>
 	</tr>
 	<tr class="datagrid-row-alt">
 		<td>是否：</td>
 		<td>
 				<input type="radio" id="addstatus" name="status" value="1" >无效
-				<input type="radio" id="addstatus" name="status" value="2" >有效
+				<input type="radio" id="addstatus" name="status" value="2" checked>有效
 				
 		</td>
 		<td>排序</td>

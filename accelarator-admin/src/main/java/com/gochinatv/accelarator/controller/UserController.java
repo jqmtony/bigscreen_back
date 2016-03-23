@@ -55,7 +55,7 @@ public class UserController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			user.setCreateTime(new Date());
-			user.setStatus(1);
+//			user.setStatus(1);
 			userService.save(user);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
