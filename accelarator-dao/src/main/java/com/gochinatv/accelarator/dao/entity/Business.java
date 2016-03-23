@@ -22,9 +22,9 @@ public class Business extends BaseVo implements Serializable {
 	private String userName;// 账号
 	private String password;// 密码
 	private String realName;// 真实姓名
-	private int country;// 国家
-	private int area;// 地区
-	private int city;// 城市
+	private String countryCode;// 国家
+	private String areaCode;// 地区
+	private String cityCode;// 城市
 	private String mobile;// 手机
 	private String email;// 电子邮箱
 	private String facebook;// FaceBook
@@ -58,28 +58,28 @@ public class Business extends BaseVo implements Serializable {
 		this.realName = realName;
 	}
 
-	public int getCountry() {
-		return country;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCountry(int country) {
-		this.country = country;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public int getArea() {
-		return area;
+	public String getAreaCode() {
+		return areaCode;
 	}
 
-	public void setArea(int area) {
-		this.area = area;
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
 	}
 
-	public int getCity() {
-		return city;
+	public String getCityCode() {
+		return cityCode;
 	}
 
-	public void setCity(int city) {
-		this.city = city;
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
 	}
 
 	public String getMobile() {

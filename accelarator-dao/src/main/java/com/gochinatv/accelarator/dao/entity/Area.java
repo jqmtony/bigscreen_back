@@ -1,7 +1,6 @@
 package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 import com.gochinatv.accelarator.dao.constants.AreaConstants;
 import com.gochinatv.accelarator.dao.constants.AreaConstants.Status;

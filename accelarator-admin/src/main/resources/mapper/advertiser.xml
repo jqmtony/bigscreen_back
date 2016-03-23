@@ -7,9 +7,9 @@
 		<result property="userName" column="user_name" />
 		<result property="password" column="password" />
 		<result property="realName" column="real_name" />
-		<result property="country" column="country" />
-		<result property="area" column="area" />
-		<result property="city" column="city" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
 		<result property="email" column="email" />
 		<result property="mobile" column="mobile" />
 		<result property="remark" column="remark" />
@@ -28,14 +28,14 @@
 			<if test="realName!=null">
 				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
 			</if>
-			<if test="country!=0">
-				and country=#{country}
+			<if test="countryCode!=null">
+				and country_code = #{countryCode}
 			</if>
-			<if test="area!=0">
-				and area=#{area}
+			<if test="areaCode!=null">
+				and area_code = #{areaCode}
 			</if>
-			<if test="city!=0">
-				and city=#{city}
+			<if test="cityCode!=null">
+				and city_code = #{cityCode}
 			</if>
 		</where>
 		order by create_time desc
@@ -48,9 +48,9 @@
 	            real_name,
 	            mobile,
 	            email,
-	            country,
-	            area,
-	            city,
+	            country_code,
+	            area_code,
+	            city_code,
 	            birthday,
 	            remark,
 	            create_time,
@@ -61,9 +61,9 @@
 	            #{realName},
 	            #{mobile},
 	            #{email},
-	            #{country},
-	            #{area},
-	            #{city},
+	            #{countryCode},
+	            #{areaCode},
+	            #{cityCode},
 	            #{birthday},
 	            #{remark},
 	            #{createTime},
@@ -79,9 +79,9 @@
             real_name=#{realName},
             mobile=#{mobile},
             email=#{email},
-            country=#{country},
-            area=#{area},
-            city=#{city},
+            country_code=#{countryCode},
+            area_code=#{areaCode},
+            city_code=#{cityCode},
             birthday=#{birthday},
             remark=#{remark},
             status=#{status}
