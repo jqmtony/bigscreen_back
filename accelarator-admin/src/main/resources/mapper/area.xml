@@ -62,6 +62,16 @@
 		<if test="name != null and name !='' ">
 			and name like  '%${name}%'
 		</if>
-	</sql>  
+	</sql> 
+	
+		<!-- 生成json用 -->
+	<select id="queryByLevel" resultMap="AreaResultMap" parameterType="int">
+		select * from area where level=#{level} and status=1
+	</select>
+	
+	<!-- 生成json用 -->
+	<select id="queryByParentCode" resultMap="AreaResultMap" parameterType="string">
+		select * from area where status=1 and parent_code=#{parentCode}
+	</select> 
 	
 </mapper>

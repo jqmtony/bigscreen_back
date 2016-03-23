@@ -3,22 +3,21 @@ package com.gochinatv.accelarator.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.gochinatv.accelarator.dao.AreaDao;
 import com.gochinatv.accelarator.dao.entity.Area;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.service.AreaService;
 import com.gochinatv.accelarator.util.AreaConvertUtil;
+
+
 @Service
 public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaService {
 
-	private static  Logger logger = Logger.getLogger(AreaServiceImpl.class);
-	  
 	@Autowired
 	private AreaDao areaDao;
 	
@@ -118,5 +117,35 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		 return areaDao.queryBycq(areaId);
 	}
 	
-
+    
+	/**
+	 * 查询所有可用的列表集合
+	 * @return
+	 */
+	public List<Area> queryByLevel(int level){
+		return areaDao.queryByLevel(level);
+	}
+	
+	/**
+	 * 根据parentCode 查询地区的集合
+	 * @param parentCode
+	 * @return
+	 */
+	public JSONArray queryByParentCode(String parentCode){
+		JSONArray array = new JSONArray();
+		List<Area> areaList = areaDao.queryByParentCode(parentCode);
+		if(areaList.size()>0){
+			for (Area area : areaList) {
+				JSONObject object = new JSONObject();
+				object.put("code", area.getAreaCode());
+				object.put("value", area.getName());
+				//JSONArray sub = queryByParentCode(new JSONArray(),area.getAreaCode());
+				//if(sub.size()>0){
+					//object.put("children", sub);
+				//}
+				array.add(object);
+			}
+		}
+		return array;
+	}
 }

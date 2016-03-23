@@ -3,17 +3,13 @@ package com.gochinatv.accelarator.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gochinatv.accelarator.dao.entity.Area;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -24,8 +20,6 @@ import com.gochinatv.accelarator.service.AreaService;
 @Controller
 @RequestMapping("/area")
 public class AreaController extends BaseController{
-	
-	private Logger logger = Logger.getLogger(AreaController.class);
 	
 	@Autowired
 	private AreaService areaService;

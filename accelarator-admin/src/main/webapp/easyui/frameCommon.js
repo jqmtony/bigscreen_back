@@ -173,29 +173,45 @@ function pressEnter(event,functionname){
 	}
 }
 
+/************************************************************************************************************/
 function formatCountry(val, row) {
-//	alert("val==="+val+",row="+row.country);
 	var text='暂无';
-//	for(var i=0;i<xzqh.length;i++){
-//		if(xzqh[i].id==val){
-//			text = xzqh[i].text;
-//			break;
-//		}
-//	}
+	for(var i=0;i<_country.length;i++){
+		if(_country[i].code==val){
+			text = _country[i].value;
+			break;
+		}
+	}
 	return text;
 }
 
 function formatArea(val, row) {
 	var text='暂无';
-//	for(var i=0;i<xzqh.length;i++){
-//		var children = xzqh[i].children;
-//		for(var j=0;j<children.length;j++){
-//			if(children[j].id==val){
-//				text = children[j].text;
-//				break;
-//			}
-//		}
-//	}
+	if(val!=null){
+	   var country_code = val.substring(0,4);
+	   var _json = eval("_"+country_code);
+	   for(i=0;i<_json.length;i++){
+		  if(_json[i].code=val){
+			  text = _json[i].value;
+			  break;
+		  }   
+	   }
+	}
+	return text;
+}
+
+function formatCity(val, row) {
+	var text='暂无';
+	if(val!=null){
+	   var area_code = val.substring(0,6);
+	   var _json = eval("_"+area_code);
+	   for(i=0;i<_json.length;i++){
+		  if(_json[i].code=val){
+			  text = _json[i].value;
+			  break;
+		  }   
+	   }
+	}
 	return text;
 }
 
@@ -213,3 +229,65 @@ function formatSource(val, row) {
 		return '商家广告';
 	}
 }
+
+
+function createCountryOptions(combobox_id) {
+	var country_json = [ { 'code' : '', 'value' : '--请选择--' } ]; 
+	for (i = 0; i < _country.length; i++) {
+		var country = {};
+		country.code = _country[i].code;
+		country.value = _country[i].value;
+		country_json.push(country);
+	}
+	createOption(combobox_id,country_json);
+}
+
+function createAreaOptions(combobox_id) {
+	var default_option = [ { 'code' : '', 'value' : '--请选择--' } ];
+	createOption(combobox_id,default_option);
+}
+
+function createCityOptions(combobox_id) {
+	var default_option = [ { 'code' : '', 'value' : '--请选择--' } ];
+	createOption(combobox_id,default_option);
+}
+
+function createOption(combobox_id,json_data){
+	$('#'+combobox_id).combobox({
+	    valueField:'code',
+	    textField:'value',
+	    data:json_data
+	});
+}
+
+$(function(){
+	$('#countryCode').combobox({
+		onChange : function(newValue, oldValue) {
+			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
+			var _json = eval("_"+newValue);
+			for (i = 0; i < _json.length; i++) {
+				var area = {};
+				area.code = _json[i].id;
+				area.value = _json[i].value;
+				area_json.push(area);
+			}
+			createOption("areaCode", area_json);
+		}
+	});
+	
+	$('#areaCode').combobox({
+		onChange : function(newValue, oldValue) {
+			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
+			var _json = eval("_"+newValue);
+			for (i = 0; i < _json.length; i++) {
+				var area = {};
+				area.code = _json[i].id;
+				area.value = _json[i].value;
+				area_json.push(area);
+			}
+			createOption("cityCode", area_json);
+		}
+	});
+});
+
+/**************************************************************************************************************/

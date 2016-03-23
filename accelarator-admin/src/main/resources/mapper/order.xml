@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.OrderDao">
+
+	<resultMap type="Order" id="Order">
+		<id property="id" column="id" />
+		<result property="orderNo" column="order_no" />
+		<result property="creater" column="creater" />
+		<result property="createTime" column="create_time" />
+		<result property="auditor" column="auditor" />
+		<result property="auditTime" column="audit_time" />
+		<result property="advertisementId" column="advertisement_id" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+	</resultMap>
+	
+	
+</mapper>

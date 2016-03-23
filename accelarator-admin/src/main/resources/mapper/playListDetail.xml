@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.PlayListDetailDao">
+
+	<resultMap type="PlayListDetail" id="PlayListDetail">
+		<id property="id" column="id" />
+		<result property="playListId" column="playList_id" />
+		<result property="advertisementId" column="advertisement_id" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="duration" column="duration" />
+		<result property="sort" column="sort" />
+	</resultMap>
+	
+	
+</mapper>
