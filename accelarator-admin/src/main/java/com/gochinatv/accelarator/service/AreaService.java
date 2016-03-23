@@ -15,6 +15,7 @@ public interface AreaService  extends BaseService<Area>{
 	
 	public Area queryBycq(long areaId);
 	
+	public List<Map<String,Object>> queryAllArea()throws Exception ;
 	/**
 	* @author 冯志文
 	* @Description:异步树  查询areaId对应的子地域

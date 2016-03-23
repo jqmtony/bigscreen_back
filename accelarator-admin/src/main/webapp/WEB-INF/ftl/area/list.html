@@ -104,11 +104,11 @@
 	<thead>
 		<tr>
 		    <th field="areaNameH" width="200" >名称</th>
-		    <th field="areaCode" width="60" >编号</th>
-		    <th field="statusDesc" width="60">是否有比赛</th>
+		    <th field="areaCode" width="80" >编号</th>
+		    <th field="statusDesc" width="60">状态</th>
 		    <th field="level" width="30">级别</th>
 			<th field="sort" width="30">排序</th>
-			<th field="createTime" width="80">更新时间</th>
+			<th field="createTime" width="180">更新时间</th>
 		</tr>
 		
 	</thead>
@@ -119,7 +119,7 @@
    <#include "./update.html">
 <div id="rightMenu" class="easyui-menu" style="width:120px;">
 		<div iconCls="icon-add"  onclick="add();">新建</div>
-		<div iconCls="icon-cut" onclick="update();">修改</div>
+		<div iconCls="icon-cut" onclick="modify();">修改</div>
 		<div iconCls="icon-remove" onclick="deleteArea();">删除</div>
 	</div>
 </body>

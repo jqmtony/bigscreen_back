@@ -26,6 +26,17 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	protected BaseDao<Area> getDao() {
 		return areaDao;
 	}
+	
+	@Override
+	public void save(Area area) throws Exception{
+		if(area.getAreaCode().startsWith(area.getParentCode())
+				&& area.getAreaCode().length()==area.getParentCode().length()+2){
+				super.save(area);
+		}else{
+			throw new Exception("地域区号不合法");
+		}
+	}
+	
 	public void delete(String areaCode) {
 		areaDao.delete(areaCode);
 	}
@@ -40,6 +51,51 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		return areaDao.queryById(areaId);
 	}
 	
+	public List<Map<String,Object>> queryAllArea()throws Exception {
+		List<Area> areaAList = queryAAreaList();
+        return  getAllMenuList(areaAList,"tree");
+	}
+	/**
+	* @author 冯志文
+	* @Description:查询所有的一级菜单
+	* @date 2010-7-23 上午09:59:41
+	 */
+	private List<Area> queryAAreaList() throws Exception{
+		
+		List<Area> areaList = new ArrayList<Area>();	
+		String areaCODE = "0";//根地域（全国）的parentCode
+		areaList = areaDao.queryChildrenAreaList(areaCODE);
+		for(Area area: areaList){   
+			area.setHasChildren(areaDao.isHasChildren(area)>0);
+			area.setChildrenList(areaDao.queryChildrenAreaList(area.getAreaCode()));
+		}   
+		return areaList;
+	}
+	/**
+	* @author 冯志文
+	* @Description:  通过一级菜单 查询所有的菜单
+	* @date 2010-7-23 上午09:59:41
+	 */
+	private List<Map<String,Object>> getAllMenuList(List<Area> menuList,String treeType){
+		List<Map<String,Object>> items = new ArrayList<Map<String,Object>>();   
+        for(Area menu: menuList){   
+        	 Map<String,Object> item  = null;
+        		item = AreaConvertUtil.convertAreaToTree(menu);
+        		 item.put("text",menu.getName());
+            if (menu.isHasChildren()){  //如果有子菜单 则递归得到该菜单下的所有菜单
+            	List<Map<String,Object>> items2 = new ArrayList<Map<String,Object>>();   
+                 items2 = getAllMenuList(menu.getChildrenList(),treeType);
+                 item.put("children", items2);
+                 item.put("state","open");
+            }else{
+            }
+            items.add(item);   
+        }   
+         return items;
+	}
+	/**
+	 * 一级一级树
+	 */
 	@Override
 	public List<Map<String,Object>> queryChildrenAreaList(String areaCode) throws Exception {
 		List<Area> areaList = new ArrayList<Area>();	
