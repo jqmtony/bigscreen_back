@@ -222,6 +222,7 @@ function formatStatus(val, row) {
 		return '已禁用';
 	}
 }
+
 function formatSource(val, row) {
 	if (val == 1) {
 		return '自有';
@@ -260,34 +261,63 @@ function createOption(combobox_id,json_data){
 	});
 }
 
+function dateFormat(now) {
+	var result=[];
+	var year = now.getFullYear();
+	var month = now.getMonth() + 1;
+	var date = now.getDate();
+	var hour = now.getHours();
+	var minute = now.getMinutes();
+	var second = now.getSeconds();
+	result.push(year);
+	result.push(month);
+	result.push(date);
+	result.push(hour);
+	result.push(minute);
+	result.push(second);
+	return result;
+} 
+
+/**
+ * 格式化时间YYYY-MM-DD
+ * @param val
+ * @param row
+ * @returns {String}
+ */
+function formatYYYYMMDD(val, row){
+	var result = dateFormat(new Date(val));
+	return result[0]+ "-" + result[1] + "-" + result[2];
+}
+
+/**
+ * 格式化时间YYYY-MM-DD HH:MM:SS
+ * @param val
+ * @param row
+ * @returns {String}
+ */
+function formatYYYYMMDDHHMMSS(val, row){
+	var result = dateFormat(new Date(val));
+	return result[0]+ "-" + result[1] + "-" + result[2]+ " " + result[3] + ":" + result[4] + ":" + result[5];
+}
+
+
 $(function(){
-	$('#countryCode').combobox({
+	
+	$('#countryCode,#areaCode').combobox({
 		onChange : function(newValue, oldValue) {
 			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
 			var _json = eval("_"+newValue);
 			for (i = 0; i < _json.length; i++) {
 				var area = {};
-				area.code = _json[i].id;
+				area.code = _json[i].code;
 				area.value = _json[i].value;
 				area_json.push(area);
 			}
-			createOption("areaCode", area_json);
+			var target = $($(this)).attr("target");
+			createOption(target, area_json);
 		}
 	});
 	
-	$('#areaCode').combobox({
-		onChange : function(newValue, oldValue) {
-			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
-			var _json = eval("_"+newValue);
-			for (i = 0; i < _json.length; i++) {
-				var area = {};
-				area.code = _json[i].id;
-				area.value = _json[i].value;
-				area_json.push(area);
-			}
-			createOption("cityCode", area_json);
-		}
-	});
 });
 
 /**************************************************************************************************************/

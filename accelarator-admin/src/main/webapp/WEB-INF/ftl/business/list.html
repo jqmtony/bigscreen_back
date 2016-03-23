@@ -2,6 +2,7 @@
 <html>
 <head>
 <#include "/frame/pageInclude.html">
+<script type="text/javascript" src="${base}/js/region.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		grid = $('#tab').datagrid( {
@@ -41,8 +42,8 @@
 	</table>
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		            国家： <select id="countryCode" name="countryCode" class="easyui-combobox" style="width:90px;"></select>
-		            地区：  <select id="areaCode" name="areaCode" class="easyui-combobox" style="width:90px;"></select>
+		            国家： <select id="countryCode" target="areaCode" name="countryCode" class="easyui-combobox" style="width:90px;"></select>
+		            地区：  <select id="areaCode" target="cityCode" name="areaCode" class="easyui-combobox" style="width:90px;"></select>
 		            城市：  <select id="cityCode" name="cityCode" class="easyui-combobox" style="width:90px;"></select>
 			用户名： <input type="text" class="easyui-validatebox" name="userName" id="userName" style="width:110px"></input>
 			真实姓名： <input type="text" class="easyui-validatebox" name="realName" id="realName" style="width:110px"></input>
