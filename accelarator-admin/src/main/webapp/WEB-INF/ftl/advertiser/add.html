@@ -16,22 +16,14 @@
 	    		</tr>
 	    		<tr>
 	    			<td>国家：</td>
-	    			<td><select id="_country_" name="country" class="easyui-combobox" style="width:110px;">
-	    			 		<option value="1">美国</option>
-			    			<option value="1">美国</option>
-			    			<option value="1">美国</option>
-	    				</select>
+	    			<td>
+	    				<select id="add_countryCode" target="add_areaCode" name="countryCode"  style="width:90px;"></select>
 	    			</td>
-	    			<td>地区：</td>
-	    			<td><select id="_area_" name="area" class="easyui-combobox" style="width:110px;">
-			    			<option value="10">华盛顿</option>
-			    			<option value="10">华盛顿</option>
-		    			</select>
+	    			<td>
+	    				<select id="add_areaCode" target="add_cityCode" name="areaCode" style="width:90px;"></select>
 		    		</td>
-	    			<td><select id="_city_" name="city" class="easyui-combobox" style="width:110px;">
-			    			<option value="10">华盛顿</option>
-			    			<option value="10">华盛顿</option>
-		    			</select>
+	    			<td>
+	    				<select id="add_cityCode" name="cityCode"  style="width:90px;"></select>
 		    		</td>
 	    		</tr>
 	    		<tr>
@@ -48,7 +40,7 @@
 	    		</tr> -->
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" data-options="editable:false" class="easyui-combobox" style="width:90px;">
+	    			<td><select id="status" name="status" style="width:90px;">
 			           		<option value="1" selected="selected">上线</option>
 		    				<option value="2">下线</option>
 		    			</select>

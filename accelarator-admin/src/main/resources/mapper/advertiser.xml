@@ -28,13 +28,13 @@
 			<if test="realName!=null">
 				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
 			</if>
-			<if test="countryCode!=null">
+			<if test="countryCode!=null and countryCode!=''">
 				and country_code = #{countryCode}
 			</if>
-			<if test="areaCode!=null">
+			<if test="areaCode!=null and areaCode!=''" >
 				and area_code = #{areaCode}
 			</if>
-			<if test="cityCode!=null">
+			<if test="cityCode!=null and cityCode!=''">
 				and city_code = #{cityCode}
 			</if>
 		</where>

@@ -192,7 +192,7 @@ function formatArea(val, row) {
 	   var country_code = val.substring(0,4);
 	   var _json = eval("_"+country_code);
 	   for(var i=0;i<_json.length;i++){
-		  if(_json[i].code=val){
+		  if(_json[i].code==val){
 			  text = _json[i].value;
 			  break;
 		  }   
@@ -207,7 +207,7 @@ function formatCity(val, row) {
 	   var area_code = val.substring(0,6);
 	   var _json = eval("_"+area_code);
 	   for(var i=0;i<_json.length;i++){
-		  if(_json[i].code=val){
+		  if(_json[i].code==val){
 			  text = _json[i].value;
 			  break;
 		  }   

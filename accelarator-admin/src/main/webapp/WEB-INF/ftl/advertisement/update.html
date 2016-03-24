@@ -6,7 +6,7 @@
 	    			<td><input type="hidden" name="id"></input>
 	    				<input id="advertiserId" class="easyui-validatebox" type="text" name="advertiserId" data-options="required:true"></input></td>
 	    			<td>广告类型：</td>
-	    			<td><select id="type" name="type" class="easyui-combobox" style="width:90px;" data-options="required:true,editable:false">
+	    			<td><select id="type" name="type" style="width:90px;">
 			           		<option value="1">视频</option>
 		    				<option value="2">图片</option>
 		    				<option value="3">文字内容</option>
@@ -22,7 +22,7 @@
 	    		</tr>
 	    		<tr>
 	    			<td>生效时间：</td>
-	    			<td><input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="required:true"></input></td>
+	    			<td><input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="required:true,editable:false"></input></td>
 	    			<td>失效时间：</td>
 	    			<td><input id="add_endTime" class="easyui-datebox" type="text" name="endTime" data-options="required:true"></input></td>
 	    		</tr>
@@ -30,7 +30,7 @@
 	    			<td>广告时长：</td>
 	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input></td>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" data-options="required:true,editable:false" class="easyui-combobox" style="width:90px;">
+	    			<td><select id="status" name="status" style="width:90px;">
 			           		<option value="1">上线</option>
 		    				<option value="2">下线</option>
 		    			</select>

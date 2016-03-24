@@ -31,9 +31,9 @@
 				<th data-options="field:'ename',width:100">英文名称</th>
 				<th data-options="field:'businessId',width:100">负责人</th>
 				<th data-options="field:'type',width:80,formatter:formatType">类型</th>
-				<th data-options="field:'country',width:80">国家</th>
-				<th data-options="field:'area',width:80">地区</th>
-				<th data-options="field:'city',width:80">城市</th>
+				<th data-options="field:'countryCode',width:80,formatter:formatCountry">国家</th>
+				<th data-options="field:'areaCode',width:80,formatter:formatArea">地区</th>
+				<th data-options="field:'cityCode',width:80,formatter:formatCity">城市</th>
 				<th data-options="field:'address',width:60">详细地址</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD"">创建日期</th>
 			</tr>
@@ -41,13 +41,13 @@
 	</table>
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		             国家： <select id="country" name="country" class="easyui-combobox" style="width:90px;"> <option value="0" selected></option></select>
-		            地区：  <select id="area"  name="area" class="easyui-combobox" style="width:90px;"><option value="0" selected></option></select>
-		            城市：  <select id="city" name="city" class="easyui-combobox" style="width:90px;"><option value="0" selected></option></select>
+		            国家： <select id="countryCode" target="areaCode" name="countryCode" style="width:90px;"></select>
+		            地区：  <select id="areaCode" target="cityCode" name="areaCode" style="width:90px;"></select>
+		            城市：  <select id="cityCode" name="cityCode" style="width:90px;"></select>
 		            中文名称： <input class="easyui-textbox" type="text" id="cname" name="cname" style="width:110px"></input>
 		            英文名称： <input class="easyui-textbox" type="text" id="ename" name="ename" style="width:110px"></input>
 			类型：
-			<select id="type" name="type" class="easyui-combobox" style="width:90px;">
+			<select id="type" name="type" style="width:90px;">
 			  <option value="0" selected="selected">全部</option>
 			  <option value="1">餐厅</option>
 			  <option value="2">大使馆</option>
