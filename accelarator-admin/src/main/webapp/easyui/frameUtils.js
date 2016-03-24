@@ -400,7 +400,6 @@ XFrameUtils.fillForm = function(formId,data){
 	var objForm = document.forms[formId];
 	if(objForm == null || objForm == undefined) return false;
  	var elements = objForm.elements;
- 	console.log("------------------------------------------");
  	for(var i=0; i<elements.length; i++)
  	{
  		var name = elements[i].name;
@@ -455,7 +454,7 @@ XFrameUtils.fillForm = function(formId,data){
  			elements[i].value = "";
  		}
  		//当对象为下拉列表时，清除时置为第一个值
- 		else if(tag=="select" && !elements[i].disabled){   
+ 		else if(tag=="select" && !elements[i].disabled){ 
  			elements[i].options[0].selected=true;	
  		}
  		else if((type == "checkbox" || type == "radio") && !elements[i].disabled ){

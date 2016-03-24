@@ -52,6 +52,7 @@ function modify(){
 function modifyRow(row){
 		modifyWin.window('open');
 		XFrameUtils.clearForm('modifyForm'); 
+//		$('#modifyForm').form('clear');
 		XFrameUtils.fillForm('modifyForm',row);
 		modifyDefaultCheck(row);
 }
@@ -187,10 +188,10 @@ function formatCountry(val, row) {
 
 function formatArea(val, row) {
 	var text='暂无';
-	if(val!=null){
+	if(val!=null && val!=""){
 	   var country_code = val.substring(0,4);
 	   var _json = eval("_"+country_code);
-	   for(i=0;i<_json.length;i++){
+	   for(var i=0;i<_json.length;i++){
 		  if(_json[i].code=val){
 			  text = _json[i].value;
 			  break;
@@ -202,10 +203,10 @@ function formatArea(val, row) {
 
 function formatCity(val, row) {
 	var text='暂无';
-	if(val!=null){
+	if(val!=null && val!=""){
 	   var area_code = val.substring(0,6);
 	   var _json = eval("_"+area_code);
-	   for(i=0;i<_json.length;i++){
+	   for(var i=0;i<_json.length;i++){
 		  if(_json[i].code=val){
 			  text = _json[i].value;
 			  break;
@@ -231,7 +232,7 @@ function formatSource(val, row) {
 	}
 }
 
-
+/*
 function createCountryOptions(combobox_id) {
 	var country_json = [ { 'code' : '', 'value' : '--请选择--' } ]; 
 	for (i = 0; i < _country.length; i++) {
@@ -259,7 +260,7 @@ function createOption(combobox_id,json_data){
 	    textField:'value',
 	    data:json_data
 	});
-}
+}*/
 
 function dateFormat(now) {
 	var result=[];
@@ -303,7 +304,27 @@ function formatYYYYMMDDHHMMSS(val, row){
 
 $(function(){
 	
-	$('#countryCode,#areaCode').combobox({
+	var default_option = "<option value=''>--请选择--</option>";
+	var country = $("select[id$='countryCode']");
+	country.html("");
+	country.append(default_option);
+	for (i = 0; i < _country.length; i++) {
+		country.append("<option value="+_country[i].code+">"+_country[i].value+"</option>");
+	}
+	
+	$("select[id$='areaCode'],select[id$='cityCode']").html(default_option);
+	
+	$("select[id$='countryCode'],select[id$='areaCode']").change(function(){
+		   var value = $(this).val();
+		   var targetId = $(this).attr("target");
+		   var data = eval("_"+value);
+		   $("#"+targetId).html(default_option);
+		   for (i = 0; i < data.length; i++) {
+				$("#"+targetId).append("<option value="+data[i].code+">"+data[i].value+"</option>");
+			}
+	});
+	
+	/*$('#countryCode,#areaCode').combobox({
 		onChange : function(newValue, oldValue) {
 			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
 			var _json = eval("_"+newValue);
@@ -316,7 +337,7 @@ $(function(){
 			var target = $($(this)).attr("target");
 			createOption(target, area_json);
 		}
-	});
+	});*/
 	
 });
 
