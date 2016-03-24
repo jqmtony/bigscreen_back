@@ -84,4 +84,32 @@ public class AdvertisementController extends BaseController{
 		return result;
 	}
 	
+	
+	/******************************************************************************************/
+	/**
+	 * 到在播广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoPlayList")
+	public String gotoPlayList(Model model) throws Exception{
+		return "advertisement/play_list";
+	}
+	
+	
+	/**
+	 * 查询在播广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryPlayList")
+	@ResponseBody
+	public PageInfo<Advertisement> queryPlayList(int page,int rows,Advertisement advertisement) throws Exception{
+		PageInterceptor.startPage(page, rows);
+		List<Advertisement> list = advertisementService.getListByEntity(advertisement);
+		PageInfo<Advertisement> pageInfo = new PageInfo<Advertisement>(list);
+		return pageInfo;
+	}
 }

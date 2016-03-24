@@ -10,7 +10,7 @@ import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
  * @创建时间 2016年3月14日 上午11:26:55
  * @修改时间
  */
-public class OrderDetail extends BaseVo implements Serializable {
+public class OrdersDetail extends BaseVo implements Serializable {
 
 	/**
 	 * 
@@ -21,7 +21,7 @@ public class OrderDetail extends BaseVo implements Serializable {
 	private String countryCode;// 国家
 	private String areaCode;// 地区
 	private String cityCode;// 城市
-	private int orderId;// 订单id
+	private int ordersId;// 订单id
 
 	public int getType() {
 		return type;
@@ -55,11 +55,11 @@ public class OrderDetail extends BaseVo implements Serializable {
 		this.cityCode = cityCode;
 	}
 
-	public int getOrderId() {
-		return orderId;
+	public int getOrdersId() {
+		return ordersId;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrdersId(int ordersId) {
+		this.ordersId = ordersId;
 	}
 }

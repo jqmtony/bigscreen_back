@@ -12,7 +12,7 @@ import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
  * @创建时间 2016年3月14日 上午11:26:55
  * @修改时间
  */
-public class Order extends BaseVo implements Serializable {
+public class Orders extends BaseVo implements Serializable {
 
 	/**
 	 * 
@@ -27,6 +27,7 @@ public class Order extends BaseVo implements Serializable {
 	private int advertisementId;// 视频广告id
 	private Date startTime;// 开始时间
 	private Date endTime;// 结束时间
+	private int status;//订单状态   （1：待审核, 2：已审核，3：等待上线, 4：在线播放中, 5：等待下线, 6：已下线）
 
 	public String getOrderNo() {
 		return orderNo;
@@ -90,6 +91,14 @@ public class Order extends BaseVo implements Serializable {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

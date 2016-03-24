@@ -12,7 +12,11 @@
 		<result property="advertisementId" column="advertisement_id" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
+		<result property="status" column="status" />
 	</resultMap>
 	
+	<select id="">
+        select * from 
+	</select>
 	
 </mapper>

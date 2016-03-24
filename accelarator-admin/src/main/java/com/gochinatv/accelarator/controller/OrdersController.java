@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.gochinatv.accelarator.dao.entity.Order;
+import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
-import com.gochinatv.accelarator.service.OrderService;
+import com.gochinatv.accelarator.service.OrdersService;
 
 
 /**
@@ -22,10 +22,10 @@ import com.gochinatv.accelarator.service.OrderService;
  */
 @Controller
 @RequestMapping("/order")
-public class OrderController extends BaseController{
+public class OrdersController extends BaseController{
     
 	@Autowired
-	private OrderService orderService;
+	private OrdersService ordersService;
 	
 
 	@RequestMapping("/gotoList")
@@ -36,10 +36,10 @@ public class OrderController extends BaseController{
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public PageInfo<Order> queryList(int page,int rows,Order order) throws Exception{
+	public PageInfo<Orders> queryList(int page,int rows,Orders orders) throws Exception{
 		PageInterceptor.startPage(page, rows);
-		List<Order> list = orderService.getListByEntity(order);
-		PageInfo<Order> pageInfo = new PageInfo<Order>(list);
+		List<Orders> list = ordersService.getListByEntity(orders);
+		PageInfo<Orders> pageInfo = new PageInfo<Orders>(list);
 		return pageInfo;
 	}
 	

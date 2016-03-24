@@ -3,11 +3,11 @@ package com.gochinatv.accelarator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gochinatv.accelarator.dao.OrderDetailDao;
-import com.gochinatv.accelarator.dao.entity.OrderDetail;
+import com.gochinatv.accelarator.dao.OrdersDetailDao;
+import com.gochinatv.accelarator.dao.entity.OrdersDetail;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
-import com.gochinatv.accelarator.service.OrderDetailService;
+import com.gochinatv.accelarator.service.OrdersDetailService;
 
 
 /**
@@ -18,14 +18,14 @@ import com.gochinatv.accelarator.service.OrderDetailService;
  * @修改时间
  */
 @Service
-public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail> implements OrderDetailService {
+public class OrdersDetailServiceImpl extends BaseServiceImpl<OrdersDetail> implements OrdersDetailService {
 
 	@Autowired
-	private OrderDetailDao orderDetailDao;
+	private OrdersDetailDao ordersDetailDao;
 	
 	@Override
-	protected BaseDao<OrderDetail> getDao() {
-		return orderDetailDao;
+	protected BaseDao<OrdersDetail> getDao() {
+		return ordersDetailDao;
 	}
 	
 	
