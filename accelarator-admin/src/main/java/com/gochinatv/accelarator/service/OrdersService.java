@@ -1,9 +1,9 @@
 package com.gochinatv.accelarator.service;
 
 
+import java.util.List;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
-
 
 /**
  * 
@@ -14,5 +14,12 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  */
 public interface OrdersService  extends BaseService<Orders>{
    
-
+	/**
+	 * 在播广告列表
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> queryPlayList(Orders orders);
+	
+	
 }

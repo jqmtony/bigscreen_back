@@ -21,7 +21,7 @@ import com.gochinatv.accelarator.service.OrdersService;
  * @修改时间
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrdersController extends BaseController{
     
 	@Autowired
@@ -30,7 +30,7 @@ public class OrdersController extends BaseController{
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "order/list";
+		return "orders/list";
 	}
 	
 	

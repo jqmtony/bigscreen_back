@@ -13,16 +13,52 @@
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
 		<result property="status" column="status" />
+		
+		
+		<result property="realName" column="real_name" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
+		<result property="createrName" column="createrName" />
+		<result property="auditorName" column="auditorName" />
 	</resultMap>
 	
 	<!-- 在播广告列表 -->
-	<select id="queryPlayList">
-        SELECT o.* FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
+	<select id="queryPlayList" parameterType="Orders" resultType="Orders">
+        SELECT a.advertisement_id ,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
+        o.end_time,o.status FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
         LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
         ON a.id=am.advertiser_id 
+        <where>
+			1=1
+			<if test="countryCode!=null and countryCode!=''">
+				and od.country_code = #{countryCode}
+			</if>
+			<if test="areaCode!=null and areaCode!=''">
+				and od.area_code = #{areaCode}
+			</if>
+			<if test="cityCode!=null and cityCode!=''">
+				and od.city_code = #{cityCode}
+			</if>
+		</where>
 	</select>
 	
 	
+	<select id="getListByEntity" resultType="Orders" parameterType="Orders">
+		SELECT o.order_no,uc.real_name as createrName,o.create_time,o.status,a.real_name,oa.real_name as auditorName,o.audit_time FROM orders o  
+        LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
+        ON a.id=am.advertiser_id LEFT JOIN USER uc ON o.creater=uc.id LEFT JOIN USER oa 
+        ON oa.id=o.auditor 
+        <where>
+			1=1
+			<if test="orderNo!=null and orderNo!=''">
+				and o.order_no = #{countryCode}
+			</if>
+			<if test="realName!=null and realName!=''">
+				and uc.real_name like '%#{realName}%'
+			</if>
+		</where>
+	</select>
 	
 	
 </mapper>

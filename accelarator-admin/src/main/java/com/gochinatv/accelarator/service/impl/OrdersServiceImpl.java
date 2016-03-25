@@ -1,15 +1,14 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gochinatv.accelarator.dao.OrdersDao;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.service.OrdersService;
-
 
 /**
  * 
@@ -27,6 +26,16 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	@Override
 	protected BaseDao<Orders> getDao() {
 		return ordersDao;
+	}
+	
+	
+	/**
+	 * 在播广告列表
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> queryPlayList(Orders orders){
+		return ordersDao.queryPlayList(orders);
 	}
 	
 	

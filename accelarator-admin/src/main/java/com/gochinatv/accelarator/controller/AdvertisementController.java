@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.Advertisement;
+import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.AdvertisementService;
+import com.gochinatv.accelarator.service.OrdersService;
 
 
 /**
@@ -30,6 +32,8 @@ public class AdvertisementController extends BaseController{
 	@Autowired
 	private AdvertisementService advertisementService;
 	
+	@Autowired
+	private OrdersService ordersService;
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
@@ -106,10 +110,10 @@ public class AdvertisementController extends BaseController{
 	 */
 	@RequestMapping("/queryPlayList")
 	@ResponseBody
-	public PageInfo<Advertisement> queryPlayList(int page,int rows,Advertisement advertisement) throws Exception{
+	public PageInfo<Orders> queryPlayList(int page,int rows,Orders orders) throws Exception{
 		PageInterceptor.startPage(page, rows);
-		List<Advertisement> list = advertisementService.getListByEntity(advertisement);
-		PageInfo<Advertisement> pageInfo = new PageInfo<Advertisement>(list);
+		List<Orders> list = ordersService.queryPlayList(orders);
+		PageInfo<Orders> pageInfo = new PageInfo<Orders>(list);
 		return pageInfo;
 	}
 }

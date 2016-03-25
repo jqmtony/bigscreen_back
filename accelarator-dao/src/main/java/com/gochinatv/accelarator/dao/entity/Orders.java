@@ -28,6 +28,14 @@ public class Orders extends BaseVo implements Serializable {
 	private Date startTime;// 开始时间
 	private Date endTime;// 结束时间
 	private int status;//订单状态   （1：待审核, 2：已审核，3：等待上线, 4：在线播放中, 5：等待下线, 6：已下线）
+	
+	
+	private String realName;//临时，真实姓名
+	private String countryCode;//临时，国家code
+	private String areaCode;//临时，地区code
+	private String cityCode;//临时，城市code
+	private String createrName;//临时，创建人名称
+	private String auditorName;//临时，审核人名称
 
 	public String getOrderNo() {
 		return orderNo;
@@ -99,6 +107,56 @@ public class Orders extends BaseVo implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	
+	
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+
+	public String getCreaterName() {
+		return createrName;
+	}
+
+	public void setCreaterName(String createrName) {
+		this.createrName = createrName;
+	}
+
+	public String getAuditorName() {
+		return auditorName;
+	}
+
+	public void setAuditorName(String auditorName) {
+		this.auditorName = auditorName;
 	}
 
 }
