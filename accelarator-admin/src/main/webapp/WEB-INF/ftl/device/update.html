@@ -1,7 +1,6 @@
-<div id="modify-window" title="修改商铺信息" class="easyui-window" style="width: 800px; height: 450px;">
+<div id="modify-window" title="修改设备信息" class="easyui-window" style="width: 800px; height: 450px;">
 	     <form id="modifyForm" method="post" >
-	    	<table cellpadding="5">
-	    		<table cellpadding="5">
+	    	<table>
 	    		<tr>
 	    			<td>设备编码：</td>
 	    			<td><input type="hidden" name="id"></input>
@@ -13,12 +12,12 @@
 	    		<tr>
 	    			<td>设备型号：</td>
 	    			<td><input id="model" class="easyui-validatebox" type="text" name="model"></input></td>
-	    			<td>设备mac：</td>
+	    			<td>设备MAC：</td>
 	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>区域id：</td>
-	    			<td><input id="edit_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+	    			<td>商铺：</td>
+	    			<td colspan="3"><input id="edit_lookUpCname"  class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
 	    			data-options="required:true" type="text" name="cname"></input>
 	    			<input type="hidden" id="edit_lookUpId" name="placeId"></input>
 	    		</tr>

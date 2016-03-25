@@ -87,6 +87,9 @@ public class DeviceController extends BaseController{
 	public Map<String,Object> update(Device device){
 		Map<String,Object> result = this.success(null);
 		try{
+			Integer placeId = device.getPlaceId();
+			Integer businessId = placeService.getBusinessIdById(placeId);
+			device.setBusinessId(businessId);
 			deviceService.update(device);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
