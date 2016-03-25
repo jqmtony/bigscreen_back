@@ -14,7 +14,6 @@ var modifyWin;
 var modifyForm;	
 var addWin;
 var addForm;
-
 var lookUpWin;
 /**
  * 回调查询
