@@ -2,20 +2,17 @@ package com.gochinatv.accelarator.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.AdvertisementService;
-import com.gochinatv.accelarator.service.OrdersService;
 
 
 /**
@@ -32,14 +29,10 @@ public class AdvertisementController extends BaseController{
 	@Autowired
 	private AdvertisementService advertisementService;
 	
-	@Autowired
-	private OrdersService ordersService;
-
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
 		return "advertisement/list";
 	}
-	
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
@@ -91,29 +84,27 @@ public class AdvertisementController extends BaseController{
 	
 	/******************************************************************************************/
 	/**
-	 * 到在播广告列表
+	 * 到可用广告列表
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/gotoPlayList")
-	public String gotoPlayList(Model model) throws Exception{
-		return "advertisement/play_list";
+	@RequestMapping("/gotoAvailableList")
+	public String gotoAvailableList(Model model) throws Exception{
+		return "advertisement/available_list";
 	}
-	
 	
 	/**
-	 * 查询在播广告列表
+	 * 查询可用广告列表
 	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/queryPlayList")
+	@RequestMapping("/queryAvailableList")
 	@ResponseBody
-	public PageInfo<Orders> queryPlayList(int page,int rows,Orders orders) throws Exception{
-		PageInterceptor.startPage(page, rows);
-		List<Orders> list = ordersService.queryPlayList(orders);
-		PageInfo<Orders> pageInfo = new PageInfo<Orders>(list);
-		return pageInfo;
+	public PageInfo<Orders> queryAvailableList(int page,int rows,Orders orders) throws Exception{
+		return null;
 	}
+	/*********************************************************************************************/
+	
 }

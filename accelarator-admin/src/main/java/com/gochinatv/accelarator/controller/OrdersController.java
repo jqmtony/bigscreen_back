@@ -50,4 +50,33 @@ public class OrdersController extends BaseController{
 		return "";
 	}
 	
+	
+
+	/******************************************************************************************/
+	/**
+	 * 到在播广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoPlayList")
+	public String gotoPlayList(Model model) throws Exception{
+		return "orders/play_list";
+	}
+	
+	/**
+	 * 查询在播广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryPlayList")
+	@ResponseBody
+	public PageInfo<Orders> queryPlayList(int page,int rows,Orders orders) throws Exception{
+		PageInterceptor.startPage(page, rows);
+		List<Orders> list = ordersService.queryPlayList(orders);
+		PageInfo<Orders> pageInfo = new PageInfo<Orders>(list);
+		return pageInfo;
+	}
+	/*********************************************************************************************/
 }
