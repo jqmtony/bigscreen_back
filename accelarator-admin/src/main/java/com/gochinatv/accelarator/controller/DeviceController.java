@@ -17,6 +17,7 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.DeviceService;
+import com.gochinatv.accelarator.service.PlaceService;
 
 /**
  * 
@@ -31,6 +32,9 @@ public class DeviceController extends BaseController{
     
 	@Autowired
 	private DeviceService deviceService;
+	
+	@Autowired
+	private PlaceService placeService;
 	
 
 	@RequestMapping("/gotoList")
@@ -59,6 +63,9 @@ public class DeviceController extends BaseController{
 		try{
 			device.setCreateTime(new Date());
 //			device.setStatus(1);
+			Integer placeId = device.getPlaceId();
+			Integer businessId = placeService.getBusinessIdById(placeId);
+			device.setBusinessId(businessId);
 			deviceService.save(device);
 		}catch(Exception e){
 			result = this.error(e.getMessage());

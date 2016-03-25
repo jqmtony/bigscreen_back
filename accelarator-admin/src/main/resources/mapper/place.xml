@@ -16,10 +16,16 @@
 		<result property="zipCode" column="zip_code" />
 		<result property="businessId" column="business_id" />
 		<result property="createTime" column="create_time" />
+		
+		<result property="userName" column="user_name" />
 	</resultMap>
 	
+	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
+		select business_id from place where id=#{id}
+	</select>
+	
 	<select id="getListByEntity" resultMap="Place" parameterType="Place">
-		select * from place 
+		select p.*, b.user_name from place p left join business b on p.business_id=b.id
 		<where>
 			1=1
 			<if test="cname!=null">

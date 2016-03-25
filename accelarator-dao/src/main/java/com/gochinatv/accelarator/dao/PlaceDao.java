@@ -12,6 +12,8 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  * @修改时间
  */
 public interface PlaceDao extends BaseDao<Place>{
+
+	int getBusinessIdById(Integer id);
 	   
 
 }

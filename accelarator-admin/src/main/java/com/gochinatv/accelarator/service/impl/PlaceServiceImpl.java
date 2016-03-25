@@ -27,6 +27,10 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 	protected BaseDao<Place> getDao() {
 		return placeDao;
 	}
+
+	public int getBusinessIdById(Integer id) {
+		return placeDao.getBusinessIdById(id);
+	}
 	
 	
 }

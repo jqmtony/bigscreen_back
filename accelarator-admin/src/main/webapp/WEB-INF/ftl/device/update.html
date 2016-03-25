@@ -18,9 +18,9 @@
 	    		</tr>
 	    		<tr>
 	    			<td>区域id：</td>
-	    			<td><input id="placeId" class="easyui-validatebox" type="text" name="placeId" data-options="required:true"></input></td>
-	    			<td>商家id：</td>
-	    			<td><input id="businessId" class="easyui-validatebox" data-options="required:true" type="text" name="businessId"></input></td>
+	    			<td><input id="edit_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="cname"></input>
+	    			<input type="hidden" id="edit_lookUpId" name="placeId"></input>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>

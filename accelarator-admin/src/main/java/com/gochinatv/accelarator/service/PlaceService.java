@@ -12,6 +12,8 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface PlaceService extends BaseService<Place>{
+
+	int getBusinessIdById(Integer placeId);
 	   
 
 }

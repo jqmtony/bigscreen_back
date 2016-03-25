@@ -1,5 +1,7 @@
+
 <div id="add-window" title="添加商铺信息" class="easyui-window" style="width: 800px; height: 450px;">
 	     <form id="addForm" method="post" >
+	     <input type="hidden" id="addbusinessId" name="businessId"/>
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>中文名称：</td>
@@ -42,8 +44,11 @@
 	    		<tr>
 	    			<td>日均人流量：</td>
 	    			<td><input id="_averageDailyFlow_" class="easyui-validatebox" type="text" name="averageDailyFlow"></input></td>
-	    			<td>商家id：</td>
-	    			<td><input id="_businessId_" class="easyui-validatebox" data-options="required:true" type="text" name="businessId"></input></td>
+	    			<td>商家：</td>
+	    			<td><input id="add_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="userName"></input>
+	    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
+	    			</td>
 	    		</tr>
 	    		
                </table>

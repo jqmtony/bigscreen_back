@@ -30,6 +30,18 @@ public class Place extends BaseVo implements Serializable {
 	private String zipCode;// 邮编
 	private int businessId;// 商家id
 	private Date createTime;// 创建日期
+	
+	private String UserName;
+	
+	
+
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
 
 	public String getCname() {
 		return cname;

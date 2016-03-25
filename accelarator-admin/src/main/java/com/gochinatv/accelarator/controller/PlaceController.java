@@ -37,6 +37,11 @@ public class PlaceController extends BaseController{
 		return "place/list";
 	}
 	
+	@RequestMapping(value = "/gotoPlaceLookUp")
+    public String gotoPlaceLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+		model.addAttribute("parentMethod", parentMethod);
+		return "place/lookUpForDevice";
+    }
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
