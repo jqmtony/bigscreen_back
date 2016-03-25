@@ -15,8 +15,14 @@
 		<result property="status" column="status" />
 	</resultMap>
 	
-	<select id="">
-        select * from 
+	<!-- 在播广告列表 -->
+	<select id="queryPlayList">
+        SELECT o.* FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
+        LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
+        ON a.id=am.advertiser_id 
 	</select>
+	
+	
+	
 	
 </mapper>

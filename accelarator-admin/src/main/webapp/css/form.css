@@ -1,0 +1,32 @@
+input,select,textarea {
+  position: relative;
+  border: 1px solid #95B8E7;
+  background-color: #fff;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  height:22px;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.table-bordered {
+	width:100%;
+    border-bottom:1px solid #95B8E7;
+    border-collapse: separate;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border-spacing: 0;
+}
+
+.table-bordered td {
+    border-left: 1px solid #95B8E7;
+    border-top: 1px solid #95B8E7;
+    padding: 2px 3px;
+    line-height: 20px;
+}

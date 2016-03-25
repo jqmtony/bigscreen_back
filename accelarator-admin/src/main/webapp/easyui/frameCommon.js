@@ -324,20 +324,13 @@ $(function(){
 			}
 	});
 	
-	/*$('#countryCode,#areaCode').combobox({
-		onChange : function(newValue, oldValue) {
-			var area_json = [ { 'code' : '', 'value' : '--请选择--' } ];
-			var _json = eval("_"+newValue);
-			for (i = 0; i < _json.length; i++) {
-				var area = {};
-				area.code = _json[i].code;
-				area.value = _json[i].value;
-				area_json.push(area);
-			}
-			var target = $($(this)).attr("target");
-			createOption(target, area_json);
-		}
-	});*/
+	
+	$("table","#addForm,#modifyForm").attr("class","table-bordered");
+	var table = "table[class='table-bordered']";
+	$("tr:eq(0) > td",table).attr("style","border-top:0px");
+	$("tr > td:even",table).attr("bgcolor","#E0ECFF");
+	$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
+	$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
 	
 });
 
