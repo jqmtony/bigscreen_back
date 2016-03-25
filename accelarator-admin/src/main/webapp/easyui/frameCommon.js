@@ -7,12 +7,15 @@ $(document).ready(function() {
 	addForm = $('#addForm').form();
 	modifyWin = $('#modify-window').dialogFrameWindow();
 	modifyForm = $('#modifyForm').form();
+	lookUpWin = $("#lookUpSelect-window").dialogFrameWindow();
 });
 
 var modifyWin;
 var modifyForm;	
 var addWin;
 var addForm;
+
+var lookUpWin;
 /**
  * 回调查询
  */
@@ -301,6 +304,19 @@ function formatYYYYMMDDHHMMSS(val, row){
 	return result[0]+ "-" + result[1] + "-" + result[2]+ " " + result[3] + ":" + result[4] + ":" + result[5];
 }
 
+function formatType(val, row) {
+	if (val == 1) {
+		return '餐厅';
+	} else if(val == 2){
+		return '大使馆';
+	}else if(val == 3){
+		return '商场';
+	}else if(val == 4){
+		return '美甲区';
+	}else if(val == 5){
+		return '其他';
+	}
+}
 
 $(function(){
 	
@@ -335,3 +351,16 @@ $(function(){
 });
 
 /**************************************************************************************************************/
+//lookup
+function openLookUp(url) {
+	//var url ='${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack';
+	lookUpWin.dialogFrameHtml(url);
+}
+
+function openLookUpCallBack(row){
+	$('#add_lookUpId,#edit_lookUpId').val(row.id);
+	$('#add_lookUpName,#edit_lookUpName').val(row.userName);
+	$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
+	lookUpWin.window('close');
+
+}
