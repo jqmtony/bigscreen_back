@@ -15,6 +15,12 @@
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
+	<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.7</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.gochinatv.accelarator</groupId>
 			<artifactId>accelarator-dao</artifactId>
