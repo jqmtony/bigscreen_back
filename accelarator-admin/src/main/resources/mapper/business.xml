@@ -85,7 +85,6 @@
 		update business
 		<set>
 			user_name=#{userName},
-            password=#{password},
             real_name=#{realName},
             country_code=#{countryCode},
             area_code=#{areaCode},

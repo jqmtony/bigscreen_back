@@ -1,8 +1,10 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.gochinatv.accelarator.dao.BusinessDao;
 import com.gochinatv.accelarator.dao.entity.Business;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
@@ -27,6 +29,15 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
 	protected BaseDao<Business> getDao() {
 		return businessDao;
 	}
+
+	public void save(Business entity) throws Exception {
+		if(StringUtils.isNotBlank(entity.getCityCode()) && entity.getCityCode().equals(8)){
+			entity.setAreaCode(entity.getCityCode().substring(0, 6));
+			entity.setCountryCode(entity.getCityCode().substring(0, 4));
+			businessDao.save(entity);
+		}else{
+			throw new Exception("添加商铺失败");
+		}
 	
-	
+	}
 }
