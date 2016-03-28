@@ -180,8 +180,8 @@ function pressEnter(event,functionname){
 function formatCountry(val, row) {
 	var text='暂无';
 	for(var i=0;i<_country.length;i++){
-		if(_country[i].code==val){
-			text = _country[i].value;
+		if(_country[i].id==val){
+			text = _country[i].text;
 			break;
 		}
 	}
@@ -194,8 +194,8 @@ function formatArea(val, row) {
 	   var country_code = val.substring(0,4);
 	   var _json = eval("_"+country_code);
 	   for(var i=0;i<_json.length;i++){
-		  if(_json[i].code==val){
-			  text = _json[i].value;
+		  if(_json[i].id==val){
+			  text = _json[i].text;
 			  break;
 		  }   
 	   }
@@ -209,8 +209,8 @@ function formatCity(val, row) {
 	   var area_code = val.substring(0,6);
 	   var _json = eval("_"+area_code);
 	   for(var i=0;i<_json.length;i++){
-		  if(_json[i].code==val){
-			  text = _json[i].value;
+		  if(_json[i].id==val){
+			  text = _json[i].text;
 			  break;
 		  }   
 	   }

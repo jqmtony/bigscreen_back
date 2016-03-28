@@ -31,17 +31,12 @@ public class Place extends BaseVo implements Serializable {
 	private int businessId;// 商家id
 	private Date createTime;// 创建日期
 	
-	private String UserName;
 	
+	private String userName;//临时，商家用户名称
+	private String code;//临时，设备编号
+	private String startTime;//临时，查看可用广告的开始时间
+	private String endTime;//临时，查看可用广告的结束时间
 	
-
-	public String getUserName() {
-		return UserName;
-	}
-
-	public void setUserName(String userName) {
-		UserName = userName;
-	}
 
 	public String getCname() {
 		return cname;
@@ -139,4 +134,36 @@ public class Place extends BaseVo implements Serializable {
 		this.createTime = createTime;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	
 }

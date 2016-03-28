@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Advertisement;
-import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
@@ -80,31 +79,5 @@ public class AdvertisementController extends BaseController{
 		}
 		return result;
 	}
-	
-	
-	/******************************************************************************************/
-	/**
-	 * 到可用广告列表
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/gotoAvailableList")
-	public String gotoAvailableList(Model model) throws Exception{
-		return "advertisement/available_list";
-	}
-	
-	/**
-	 * 查询可用广告列表
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/queryAvailableList")
-	@ResponseBody
-	public PageInfo<Orders> queryAvailableList(int page,int rows,Orders orders) throws Exception{
-		return null;
-	}
-	/*********************************************************************************************/
-	
+
 }

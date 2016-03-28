@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.dao;
 
+import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -14,6 +16,13 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 public interface PlaceDao extends BaseDao<Place>{
 
 	int getBusinessIdById(Integer id);
-	   
+	
+	
+	/**
+	 * 查看可用广告位
+	 * @param place
+	 * @return
+	 */
+	public List<Place> getAvailableList(Place place);
 
 }

@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.service;
 
+import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -15,5 +17,10 @@ public interface PlaceService extends BaseService<Place>{
 
 	int getBusinessIdById(Integer placeId);
 	   
-
+	/**
+	 * 查看可用广告位
+	 * @param place
+	 * @return
+	 */
+	public List<Place> getAvailableList(Place place);
 }

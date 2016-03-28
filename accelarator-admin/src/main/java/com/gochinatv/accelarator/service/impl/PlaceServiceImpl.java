@@ -1,6 +1,9 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +35,22 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 		return placeDao.getBusinessIdById(id);
 	}
 	
+	
+	/**
+	 * 查看可用广告位
+	 * @param place
+	 * @return
+	 */
+	public List<Place> getAvailableList(Place place){
+		String cityCode = place.getCityCode();
+		StringBuffer buffer = new StringBuffer("'");
+		if(!StringUtils.isEmpty(cityCode)){
+		   cityCode = cityCode.replaceAll(",","','");
+		   buffer.append(cityCode);
+		}
+		buffer.append("'");
+		place.setCityCode(buffer.toString());
+		return placeDao.getAvailableList(place);
+	}
 	
 }

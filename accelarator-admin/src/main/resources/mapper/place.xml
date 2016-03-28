@@ -18,6 +18,7 @@
 		<result property="createTime" column="create_time" />
 		
 		<result property="userName" column="user_name" />
+		<result property="code" column="code" />
 	</resultMap>
 	
 	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
@@ -106,6 +107,16 @@
 	  delete from place where id = #{id}
 	</delete>
 	
-	
+	<select id="getAvailableList" resultMap="Place" resultType="Place">
+	    SELECT DISTINCT d.id,d.code,p.cname,p.type,p.country_code,p.area_code,p.city_code FROM device d LEFT JOIN place p ON d.place_id=p.id 
+	    LEFT JOIN orders_detail od ON p.country_code=od.country_code AND p.area_code=od.area_code AND p.city_code=od.city_code 
+        LEFT JOIN orders o ON od.orders_id=o.id 
+        <where>
+			1=1
+			<if test="type!=null">
+				and p.type = #{type}
+			</if>
+		</where>
+	</select>
 
 </mapper>

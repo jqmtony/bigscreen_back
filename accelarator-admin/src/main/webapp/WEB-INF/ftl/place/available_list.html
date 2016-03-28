@@ -7,27 +7,13 @@
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${base}/easyui/frameCommon.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
 <script type="text/javascript" src="${base}/js/region.js"></script>
 <script type="text/javascript">
    $(function() {
-		grid = $('#tab').datagrid( {
-			//title : '用户列表',			
-			url :'${base}/advertisement/queryList',
-			queryParams:$("#queryForm").serializeObject(),
-			pagination : true,
-			rownumbers : true,
-			singleSelect : false,
-			striped:true,
-			fit:true,
-			toolbar:'#toolbar',
-			fitColumns:true,
-			onDblClickRow:function(index,row){
-				modifyRow(row);
-			} 
-		});
 		
-		$('#cityCode').combotree('loadData',_xzqh);
+		$('#codes').combotree('loadData',_xzqh);
 		
 		$('#startTime').datebox().datebox('calendar').calendar({
             validator: function(date){
@@ -51,14 +37,22 @@
    
    //必须精确到城市最底层
    function available_search(){
-	   var tree = $('#cityCode').combotree('tree');
+	   var tree = $('#codes').combotree('tree');
 	   var nodes = tree.tree('getChecked');
 	   if(nodes.length>0){
+		   var val = "";
 		   for(i=0;i<nodes.length;i++){
 			   var code = nodes[i].id;
 			   if(code.length==8){
-				   
+				   val+=","+code;
 			   }
+		   }
+		   if(val.length>0){
+			   $("#cityCode").val(val.replace(",",""));
+			   $('#tab').datagrid( {
+					url :'${base}/place/queryAvailableList',
+					queryParams:$("#queryForm").serializeObject()
+			   });
 		   }
 	   }else{
 		   alert("请选择国家、地区、城市！");
@@ -67,23 +61,24 @@
 </script>
 </head>
 <body>
-   <table class="easyui-datagrid" id="tab">
+   <table class="easyui-datagrid" id="tab" data-options="toolbar:'#toolbar',pagination:true,rownumbers:true,fit:true,fitColumns:true">
 		<thead>
 			<tr>
 			    <th data-options="field:'id',checkbox:true"></th>
                 <th data-options="field:'code',width:100">设备编码</th>
                 <th data-options="field:'cname',width:100">店铺名称</th>
 			    <th data-options="field:'type',width:100">店铺类型</th>
-			    <th data-options="field:'countryCode',width:100">国家</th>
-				<th data-options="field:'areaCode',width:100">地区</th>
-				<th data-options="field:'cityCode',width:100">城市</th>
+			    <th data-options="field:'countryCode',width:100,formatter:formatCountry">国家</th>
+				<th data-options="field:'areaCode',width:100,formatter:formatArea">地区</th>
+				<th data-options="field:'cityCode',width:100,formatter:formatCity">城市</th>
 			</tr>
 		</thead>
 	</table>
 	
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		          地区： <select id="cityCode" class="easyui-combotree" data-options="checkbox:true,cascadeCheck:true,multiple:true" name="cityCode" style="width:120px;"></select>
+		          地区： <select id="codes" class="easyui-combotree" data-options="checkbox:true,cascadeCheck:true,multiple:true" name="codes" style="width:120px;"></select>
+		        <input id="cityCode" name="cityCode" type="hidden"/>
 		          店铺类型： <select class="easyui-combobox" name="type" style="width:90px;">
 		             <option value="1">餐厅</option>
 		             <option value="2">大使馆</option>
