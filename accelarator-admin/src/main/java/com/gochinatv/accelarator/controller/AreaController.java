@@ -23,7 +23,9 @@ public class AreaController extends BaseController{
 	
 	@Autowired
 	private AreaService areaService;
+	//test git
 	
+	//zhuhh
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
 		return "/area/list";
@@ -35,6 +37,7 @@ public class AreaController extends BaseController{
 	* id 为jsp页面中idField:'*'的*, 选择的地域areaCode的值
 	* @return List<Map<String,Object>>   
 	 */
+	//zhuhh
 	@RequestMapping(value = "/querySynAreaList")
 	@ResponseBody
 	public List<Map<String,Object>> querySynAreaList(String id) throws Exception  {
@@ -86,6 +89,7 @@ public class AreaController extends BaseController{
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		modelMap.put("total",list.size());
 		modelMap.put("rows", list);
+		//genn
 		return modelMap;
 	}
 	
