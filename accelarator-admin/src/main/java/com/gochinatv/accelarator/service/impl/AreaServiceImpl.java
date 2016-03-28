@@ -64,10 +64,6 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		List<Area> areaList = new ArrayList<Area>();	
 		String areaCODE = "0";//根地域（全国）的parentCode
 		areaList = areaDao.queryChildrenAreaList(areaCODE);
-		for(Area area: areaList){   
-			area.setHasChildren(areaDao.isHasChildren(area)>0);
-			area.setChildrenList(areaDao.queryChildrenAreaList(area.getAreaCode()));
-		}   
 		return areaList;
 	}
 	/**
@@ -78,6 +74,8 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	private List<Map<String,Object>> getAllMenuList(List<Area> menuList,String treeType){
 		List<Map<String,Object>> items = new ArrayList<Map<String,Object>>();   
         for(Area menu: menuList){   
+        	   menu.setHasChildren(areaDao.isHasChildren(menu)>0);
+               menu.setChildrenList(areaDao.queryChildrenAreaList(menu.getAreaCode()));
         	 Map<String,Object> item  = null;
         		item = AreaConvertUtil.convertAreaToTree(menu);
         		 item.put("text",menu.getName());
