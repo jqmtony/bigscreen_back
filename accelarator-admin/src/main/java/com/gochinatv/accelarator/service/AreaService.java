@@ -36,4 +36,12 @@ public interface AreaService  extends BaseService<Area>{
 	 * @return
 	 */
 	public JSONArray queryByParentCode(String parentCode);
+	
+	
+	/**
+	 * 根据parentCode 递归查询地区的集合
+	 * @param parentCode
+	 * @return
+	 */
+	public JSONArray queryByParentCode(JSONArray array,String parentCode);
 }

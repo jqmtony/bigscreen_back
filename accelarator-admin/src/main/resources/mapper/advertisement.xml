@@ -83,4 +83,6 @@
 	<delete id="deleteByEntity" parameterType="Advertisement">
 	  delete from advertisement where id = #{id}
 	</delete>
+	
+	<select id=""></select>
 </mapper>

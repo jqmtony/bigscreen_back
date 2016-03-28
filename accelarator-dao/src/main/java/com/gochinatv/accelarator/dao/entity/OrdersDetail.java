@@ -17,7 +17,7 @@ public class OrdersDetail extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int type;// 店铺类型
+	private int type;// 店铺类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private String countryCode;// 国家
 	private String areaCode;// 地区
 	private String cityCode;// 城市

@@ -137,12 +137,31 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		if(areaList.size()>0){
 			for (Area area : areaList) {
 				JSONObject object = new JSONObject();
-				object.put("code", area.getAreaCode());
-				object.put("value", area.getName());
-				//JSONArray sub = queryByParentCode(new JSONArray(),area.getAreaCode());
-				//if(sub.size()>0){
-					//object.put("children", sub);
-				//}
+				object.put("id", area.getAreaCode());
+				object.put("text", area.getName());
+				array.add(object);
+			}
+		}
+		return array;
+	}
+	
+	
+	/**
+	 * 根据parentCode 递归查询地区的集合
+	 * @param parentCode
+	 * @return
+	 */
+	public JSONArray queryByParentCode(JSONArray array,String parentCode){
+		List<Area> areaList = areaDao.queryByParentCode(parentCode);
+		if(areaList.size()>0){
+			for (Area area : areaList) {
+				JSONObject object = new JSONObject();
+				object.put("id", area.getAreaCode());
+				object.put("text", area.getName());
+				JSONArray sub = queryByParentCode(new JSONArray(),area.getAreaCode());
+				if(sub.size()>0){
+					object.put("children", sub);
+				}
 				array.add(object);
 			}
 		}

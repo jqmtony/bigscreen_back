@@ -101,30 +101,46 @@ public class DictController extends BaseController{
 	public JSONArray create_area() throws Exception{
 		StringBuffer buffer = new StringBuffer();
 		HttpServletRequest request = this.getRequest();
-		List<Area> countryList = areaService.queryByLevel(1);//查询country列表集合
-		JSONArray array = new JSONArray();
+		
+		//查询country列表集合
+		List<Area> countryList = areaService.queryByLevel(1);
+		JSONArray country = new JSONArray();
+		
+		JSONArray xzqh = new JSONArray();
+		
 		FileOutputStream fos = null;
 		Writer out = null;
 		
 		for (Area area : countryList) {
 			JSONObject object = new JSONObject();
 			String areaCode = area.getAreaCode();
-			object.put("code", areaCode);
-			object.put("value", area.getName());
-			//JSONArray sub = areaService.queryByParentCode(new JSONArray(),areaCode);
+			object.put("id", areaCode);
+			object.put("text", area.getName());
 			JSONArray sub = areaService.queryByParentCode(areaCode);
 			buffer.append("var _"+areaCode+"=" + sub.toJSONString() +"\n");
-			array.add(object);
+			country.add(object);
+			
+			JSONObject object1 = new JSONObject();
+			object1.put("id", areaCode);
+			object1.put("text", area.getName());
+			JSONArray children = areaService.queryByParentCode(new JSONArray(),areaCode);
+			if(children.size()>0){
+				object1.put("children",children);
+			}
+			xzqh.add(object1);
 		}
 		
-		List<Area> cityList = areaService.queryByLevel(2);//查询city列表集合
+		//查询city列表集合
+		List<Area> cityList = areaService.queryByLevel(2);
 		for (Area area : cityList) {
 			String areaCode = area.getAreaCode();
 			JSONArray sub = areaService.queryByParentCode(areaCode);
 			buffer.append("var _"+areaCode+"=" + sub.toJSONString() +"\n");
 		}
 		
-		buffer.append("var _country=" + array.toJSONString()+"\n");
+		buffer.append("var _country=" + country.toJSONString()+"\n");
+		
+		buffer.append("var _xzqh=" + xzqh.toJSONString()+"\n");
 		
 		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/region.js"));
 		out = new OutputStreamWriter(fos, "UTF-8");

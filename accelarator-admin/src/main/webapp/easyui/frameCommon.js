@@ -236,30 +236,30 @@ function formatSource(val, row) {
 
 /*
 function createCountryOptions(combobox_id) {
-	var country_json = [ { 'code' : '', 'value' : '--请选择--' } ]; 
+	var country_json = [ { 'id' : '', 'text' : '--请选择--' } ]; 
 	for (i = 0; i < _country.length; i++) {
 		var country = {};
-		country.code = _country[i].code;
-		country.value = _country[i].value;
+		country.id = _country[i].id;
+		country.text = _country[i].text;
 		country_json.push(country);
 	}
 	createOption(combobox_id,country_json);
 }
 
 function createAreaOptions(combobox_id) {
-	var default_option = [ { 'code' : '', 'value' : '--请选择--' } ];
+	var default_option = [ { 'id' : '', 'text' : '--请选择--' } ];
 	createOption(combobox_id,default_option);
 }
 
 function createCityOptions(combobox_id) {
-	var default_option = [ { 'code' : '', 'value' : '--请选择--' } ];
+	var default_option = [ { 'id' : '', 'text' : '--请选择--' } ];
 	createOption(combobox_id,default_option);
 }
 
 function createOption(combobox_id,json_data){
 	$('#'+combobox_id).combobox({
-	    valueField:'code',
-	    textField:'value',
+	    valueField:'id',
+	    textField:'text',
 	    data:json_data
 	});
 }*/
@@ -324,7 +324,7 @@ $(function(){
 	country.html("");
 	country.append(default_option);
 	for (i = 0; i < _country.length; i++) {
-		country.append("<option value="+_country[i].code+">"+_country[i].value+"</option>");
+		country.append("<option value="+_country[i].id+">"+_country[i].text+"</option>");
 	}
 	
 	$("select[id$='areaCode'],select[id$='cityCode']").html(default_option);
@@ -335,7 +335,7 @@ $(function(){
 		   var data = eval("_"+value);
 		   $("#"+targetId).html(default_option);
 		   for (i = 0; i < data.length; i++) {
-				$("#"+targetId).append("<option value="+data[i].code+">"+data[i].value+"</option>");
+				$("#"+targetId).append("<option value="+data[i].id+">"+data[i].text+"</option>");
 			}
 	});
 	

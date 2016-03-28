@@ -5,6 +5,7 @@
 	<resultMap type="Orders" id="Orders">
 		<id property="id" column="id" />
 		<result property="orderNo" column="order_no" />
+		<result property="type" column="type" />
 		<result property="creater" column="creater" />
 		<result property="createTime" column="create_time" />
 		<result property="auditor" column="auditor" />

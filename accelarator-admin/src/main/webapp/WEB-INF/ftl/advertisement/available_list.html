@@ -26,10 +26,43 @@
 				modifyRow(row);
 			} 
 		});
+		
+		$('#cityCode').combotree('loadData',_xzqh);
+		
+		$('#startTime').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                return d1<=date;
+            }
+        });
+		$('#endTime').datebox().datebox('calendar').calendar({
+            validator: function(date){
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                return d1<=date;
+            }
+        });
    });
    
    function createOrderTab(){
 	   parent.addTab('订单预览','${base}/user/gotoList','',true);
+   }
+   
+   //必须精确到城市最底层
+   function available_search(){
+	   var tree = $('#cityCode').combotree('tree');
+	   var nodes = tree.tree('getChecked');
+	   if(nodes.length>0){
+		   for(i=0;i<nodes.length;i++){
+			   var code = nodes[i].id;
+			   if(code.length==8){
+				   
+			   }
+		   }
+	   }else{
+		   alert("请选择国家、地区、城市！");
+	   }
    }
 </script>
 </head>
@@ -50,19 +83,17 @@
 	
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		          国家： <select id="countryCode" class="easyui-combotree" multiple name="countryCode" style="width:90px;"></select>
-		          地区：  <select id="areaCode" name="areaCode" style="width:90px;"></select>
-		          城市：  <select id="cityCode" name="cityCode" style="width:90px;"></select>
-		          店铺类型：  <select id="type" name="type" style="width:90px;">
+		          地区： <select id="cityCode" class="easyui-combotree" data-options="checkbox:true,cascadeCheck:true,multiple:true" name="cityCode" style="width:120px;"></select>
+		          店铺类型： <select class="easyui-combobox" name="type" style="width:90px;">
 		             <option value="1">餐厅</option>
 		             <option value="2">大使馆</option>
 		             <option value="3">商场</option>
 		             <option value="4">美甲区</option>
 		             <option value="5">其它</option>
-		           </select>
-		          开始时间：  <input class="easyui-datebox" type="text" name="startTime" style="width:110px;"/>
-		          结束时间：  <input class="easyui-datebox" type="text" name="endTime" style="width:110px;"/>
-			<a href="javascript:void(0);" onclick="query();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		          </select>
+		          开始时间：  <input class="easyui-datebox" type="text" id="startTime" name="startTime" style="width:110px;"/>
+		          结束时间：  <input class="easyui-datebox" type="text" id="endTime" name="endTime" style="width:110px;"/>
+			<a href="javascript:void(0);" onclick="available_search();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 			<a href="javascript:void(0);" onclick="createOrderTab();" class="easyui-linkbutton" iconCls="icon-order">生成订单</a>
 		</form>
 	</div>
