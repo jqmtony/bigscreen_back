@@ -26,6 +26,7 @@ public class AreaController extends BaseController{
 	
 	//test git
 	//test 
+	//fengze
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
 		return "/area/list";
