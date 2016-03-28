@@ -23,6 +23,7 @@ public class AreaController extends BaseController{
 	
 	@Autowired
 	private AreaService areaService;
+	//test git
 	
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
@@ -86,6 +87,7 @@ public class AreaController extends BaseController{
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		modelMap.put("total",list.size());
 		modelMap.put("rows", list);
+		//genn
 		return modelMap;
 	}
 	
