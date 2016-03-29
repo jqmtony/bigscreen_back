@@ -2,13 +2,10 @@ package com.gochinatv.accelarator.service.impl;
 
 
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gochinatv.accelarator.dao.PlaceDao;
-import com.gochinatv.accelarator.dao.entity.Business;
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;

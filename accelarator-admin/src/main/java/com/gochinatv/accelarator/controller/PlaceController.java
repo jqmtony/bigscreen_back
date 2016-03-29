@@ -3,6 +3,8 @@ package com.gochinatv.accelarator.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
+import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.PlaceService;
 
 /**
@@ -107,7 +110,7 @@ public class PlaceController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping("/gotoAvailableList")
-	public String gotoAvailableList(Model model) throws Exception{
+	public String gotoAvailableList() throws Exception{
 		return "place/available_list";
 	}
 	
@@ -124,6 +127,33 @@ public class PlaceController extends BaseController{
 		List<Place> list = placeService.getAvailableList(place);
 		PageInfo<Place> pageInfo = new PageInfo<Place>(list);
 		return pageInfo;
+	}
+	
+	
+	/**
+	 * 生成订单
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/createOrder")
+	public String createOrder(Model model) throws Exception{
+		model.addAttribute("order_no",DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
+		return "place/order_preview";
+	}
+	
+	
+	/**
+	 * 订单详情
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/orderDetail")
+	@ResponseBody
+	public List<Place> orderDetail(Place place) throws Exception{
+		List<Place> list = placeService.getAvailableList(place);
+		return list;
 	}
 	/*********************************************************************************************/
 	

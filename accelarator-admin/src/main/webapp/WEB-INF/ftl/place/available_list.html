@@ -9,6 +9,7 @@
 <script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${base}/easyui/frameCommon.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
+<script type="text/javascript" src="${base}/js/format.js"></script>
 <script type="text/javascript" src="${base}/js/region.js"></script>
 <script type="text/javascript">
    $(function() {
@@ -32,7 +33,17 @@
    });
    
    function createOrderTab(){
-	   parent.addTab('订单预览','${base}/user/gotoList','',true);
+	   var rows = $('#tab').datagrid('getRows');
+	   var checked = $('#tab').datagrid('getChecked');
+	   if(rows.length==0){
+		   alert("没有可选记录！");
+		   return false;
+	   }
+	   if(checked.length==0){
+		   alert("请选择操作记录！");
+		   return false;
+	   }
+	   parent.addTab('订单预览','${base}/place/createOrder','',true);
    }
    
    //必须精确到城市最底层
@@ -75,9 +86,8 @@
 		<thead>
 			<tr>
 			    <th data-options="field:'id',checkbox:true"></th>
-                <th data-options="field:'code',width:100">设备编码</th>
                 <th data-options="field:'cname',width:100">店铺名称</th>
-			    <th data-options="field:'type',width:100">店铺类型</th>
+			    <th data-options="field:'type',width:100,formatter:formatPlaceType">店铺类型</th>
 			    <th data-options="field:'countryCode',width:100,formatter:formatCountry">国家</th>
 				<th data-options="field:'areaCode',width:100,formatter:formatArea">地区</th>
 				<th data-options="field:'cityCode',width:100,formatter:formatCity">城市</th>
