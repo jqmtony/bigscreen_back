@@ -39,23 +39,33 @@
    function available_search(){
 	   var tree = $('#codes').combotree('tree');
 	   var nodes = tree.tree('getChecked');
-	   if(nodes.length>0){
-		   var val = "";
-		   for(i=0;i<nodes.length;i++){
-			   var code = nodes[i].id;
-			   if(code.length==8){
-				   val+=","+code;
-			   }
-		   }
-		   if(val.length>0){
-			   $("#cityCode").val(val.replace(",",""));
-			   $('#tab').datagrid( {
-					url :'${base}/place/queryAvailableList',
-					queryParams:$("#queryForm").serializeObject()
-			   });
-		   }
-	   }else{
+	   var startTime = $('#startTime').datebox('getValue');
+	   var endTime = $('#endTime').datebox('getValue');
+	   if(nodes.length==0){
 		   alert("请选择国家、地区、城市！");
+		   return false;
+	   }
+	   if(startTime==""){
+		   alert("请选择开始时间！");
+		   return false;
+	   }
+	   if(endTime==""){
+		   alert("请选择结束时间！");
+		   return false;
+	   }
+	   var val = "";
+	   for(i=0;i<nodes.length;i++){
+		   var code = nodes[i].id;
+		   if(code.length==8){
+			   val+=","+code;
+		   }
+	   }
+	   if(val.length>0){
+		   $("#cityCode").val(val.replace(",",""));
+		   $('#tab').datagrid( {
+				url :'${base}/place/queryAvailableList',
+				queryParams:$("#queryForm").serializeObject()
+		   });
 	   }
    }
 </script>

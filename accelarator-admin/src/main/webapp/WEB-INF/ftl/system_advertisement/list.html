@@ -19,26 +19,11 @@
 			} 
 		});
 	});
-	function formatStatus(val, row) {
-		if (val == 1) {
-			return '上线';
-		} else {
-			return '下线';
-		}
-	}
-	function formatType(val, row) {
-		if (val == 1) {
-			return '视频类型';
-		} else if(val == 2){
-			return '图片类型';
-		}else if(val == 3){
-			return '文字类型';
-		}
-	}
 	
 	function openCheckBoxLookUp(url) {
 		$("#device-lookUpSelect-window").dialogFrameWindow().dialogFrameHtml(url);
 	}
+	
 	function openCheckBoxLookUpCallBack(row){
 		$('#add_lookUpId,#edit_lookUpId').val(row.id);
 		$('#add_lookUpCode,#edit_lookUpCode').val(row.code);
@@ -53,13 +38,13 @@
 			    <th data-options="field:'source',width:80,formatter:formatSource">广告来源</th>
 			    <th data-options="field:'cname',width:80">商铺名称</th>
 			    <th data-options="field:'code',width:80">设备编码</th>
-				<th data-options="field:'type',width:80,formatter:formatType">广告类型</th>
+				<th data-options="field:'type',width:80,formatter:formatAdvertisementType">广告类型</th>
 				<th data-options="field:'picPath',width:100">图片</th>
 				<th data-options="field:'content',width:80">内容</th>
 				<th data-options="field:'adIndex',width:100">广告位置</th>
 				<th data-options="field:'remark',width:100">备注</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
-				<th data-options="field:'status',formatter:formatStatus">状态</th>
+				<th data-options="field:'status',formatter:formatOnlineStatus">状态</th>
 			</tr>
 		</thead>
 	</table>

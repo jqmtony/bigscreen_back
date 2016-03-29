@@ -33,7 +33,6 @@ public class Place extends BaseVo implements Serializable {
 	
 	
 	private String userName;//临时，商家用户名称
-	private String code;//临时，设备编号
 	private String startTime;//临时，查看可用广告的开始时间
 	private String endTime;//临时，查看可用广告的结束时间
 	
@@ -140,14 +139,6 @@ public class Place extends BaseVo implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getStartTime() {
