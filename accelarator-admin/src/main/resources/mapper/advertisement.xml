@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<select id="getListByEntity" resultMap="Advertisement" parameterType="Advertisement">
-		select atm.id,at.user_name,at.real_name,atm.start_time,atm.end_time,atm.duration,atm.status,atm.remark 
+		select atm.*,at.user_name,at.real_name 
 		       from advertisement atm left join advertiser at on atm.advertiser_id=at.id 
 	   <where>
 			1=1
@@ -84,4 +84,5 @@
 	  delete from advertisement where id = #{id}
 	</delete>
 	
+	<select id=""></select>
 </mapper>

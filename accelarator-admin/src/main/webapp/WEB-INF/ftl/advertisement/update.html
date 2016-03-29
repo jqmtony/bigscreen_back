@@ -1,12 +1,43 @@
-<div id="modify-window" title="修改信息" class="easyui-window" style="width: 600px; height: 450px;">
+<script>
+$(function(){
+    $('#edit_endTime').datebox().datebox('calendar').calendar({
+        validator: function(date){
+        	var startTimeStr = $("#edit_startTime").datebox('getValue');
+            var startTime = new Date(startTimeStr);
+            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+            return date>=startDate;
+        }
+    });
+});
+/* function modifySave(url){
+	var startTime = $("#edit_startTime").datebox('getValue');
+	var endTime = $('#edit_endTime').datebox('getValue');
+	
+	if(startTime != null && endTime != null){
+		if(endTime < startTime){
+			alert("失效时间不能小于生效时间！");
+			$("#edit_endTime").datebox("setValue","");
+			return;
+		}
+	}
+	if(modifyForm.form('validate')){
+		$.post(url,$("#modifyForm").serializeObject(),modifyCallback,'json');		
+	}
+} */
+</script>
+
+<div id="modify-window" title="修改广告信息" class="easyui-window" style="width: 600px; height: 450px;">
 	     <form id="modifyForm" method="post" >
 	    	<table cellpadding="5">
 				<tr>
 	    			<td>广告商：</td>
 	    			<td><input type="hidden" name="id"></input>
-	    				<input id="advertiserId" class="easyui-validatebox" type="text" name="advertiserId" data-options="required:true"></input></td>
+	    				<input id="edit_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="userName"></input>
+	    			<input type="hidden" id="edit_lookUpId" name="advertiserId"></input>
+	    			</td>
 	    			<td>广告类型：</td>
-	    			<td><select id="type" name="type" style="width:90px;">
+	    			<td><select id="type" name="type" style="width:171px;">
 			           		<option value="1">视频</option>
 		    				<option value="2">图片</option>
 		    				<option value="3">文字内容</option>
@@ -15,36 +46,38 @@
 	    		</tr>
 	    		
 	    		<tr>
-	    			<td>视频地址：</td>
-	    			<td><input id="videoPath" class="easyui-validatebox" type="text" name="videoPath" data-options="required:true"></input></td>
-	    			<td>图片地址：</td>
-	    			<td><input id="picPath" class="easyui-validatebox" type="text" name="picPath"></input></td>
-	    		</tr>
-	    		<tr>
 	    			<td>生效时间：</td>
-	    			<td><input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="required:true,editable:false"></input></td>
+	    			<td><input id="edit_startTime" class="easyui-datebox" name="startTime" data-options="required:true,editable:false"></input></td>
 	    			<td>失效时间：</td>
-	    			<td><input id="add_endTime" class="easyui-datebox" type="text" name="endTime" data-options="required:true"></input></td>
+	    			<td><input id="edit_endTime"  style="width:171px;" class="easyui-datebox" name="endTime" data-options="required:true,editable:false"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>广告时长：</td>
 	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input></td>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" style="width:90px;">
+	    			<td><select id="status" name="status" style="width:171px;">
 			           		<option value="1">上线</option>
 		    				<option value="2">下线</option>
 		    			</select>
 		    		</td>
 	    		</tr>
+	    		<tr>
+	    			<td>视频地址：</td>
+	    			<td colspan="3"><textarea style="height:60px" cols="30" name="videoPath"></textarea></td>
+	    		</tr>
+	    		<tr>
+	    			<td>图片地址：</td>
+	    			<td colspan="3"><textarea style="height:60px" cols="30" name="picPath"></textarea></td>
+	    		</tr>
 		    	<tr>
 	    			<td>广告内容：</td>
-	    			<td>
+	    			<td colspan="3">
 	    			    <textarea style="height:60px" cols="30" name="content"></textarea>
 	    		    </td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td>
+	    			<td colspan="3">
 	    			   <textarea style="height:60px" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>

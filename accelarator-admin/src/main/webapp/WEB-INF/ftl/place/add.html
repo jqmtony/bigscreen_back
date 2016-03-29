@@ -4,15 +4,13 @@
 	     <input type="hidden" id="addbusinessId" name="businessId"/>
 	    	<table cellpadding="5">
 	    		<tr>
-	    			<td>中文名称：</td>
-	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="_cname_" class="easyui-validatebox" type="text" name="cname" data-options="required:true"></input></td>
-	    			<td>英文名称：</td>
-	    			<td><input id="_ename_" class="easyui-validatebox" type="text" name="ename"></input></td>
-	    		</tr>
-	    		<tr>
+	    			<td>商家：</td>
+	    			<td><input id="add_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="userName"></input>
+	    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
+	    			</td>
 	    			<td>类型：</td>
-	    			<td><select id="_type_" name="type" style="width:110px;">
+	    			<td><select id="_type_" name="type" style="width:171px;">
 		    				<option value="1">餐厅</option>
 		    				<option value="2">大使馆</option>
 		    				<option value="3">商场</option>
@@ -20,37 +18,34 @@
 		    				<option value="5">其他</option>
 		    			</select>
 		    		</td>
-	    			<td>规模大小：</td>
-	    			<td><input id="_scale_" class="easyui-validatebox" type="text" name="scale"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>中文名称：</td>
+	    			<td><!-- <input type="hidden" name="id"></input> -->
+	    			    <input id="_cname_" class="easyui-validatebox" type="text" name="cname" data-options="required:true"></input></td>
+	    			<td>英文名称：</td>
+	    			<td><input id="_ename_" class="easyui-validatebox" type="text" name="ename"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>国家：</td>
 	    			<td>
 	    				<select id="add_countryCode" target="add_areaCode" name="countryCode"  style="width:90px;"></select>
 	    			</td>
-	    			<td>
-	    				<select id="add_areaCode" target="add_cityCode" name="areaCode" style="width:90px;"></select>
-		    		</td>
-	    			<td>
-	    				<select id="add_cityCode" name="cityCode"  style="width:90px;"></select>
-		    		</td>
-	    		</tr>
-	    		<tr>
-	    			<td>地址：</td>
-	    			<td><input id="_address_" class="easyui-validatebox" type="text" name="address"></input></td>
 	    			<td>邮编：</td>
 	    			<td><input id="_zipCode_" class="easyui-validatebox" type="text" name="zipCode" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
+	    			<td>规模大小：</td>
+	    			<td><input id="_scale_" class="easyui-validatebox" type="text" name="scale"></input></td>
 	    			<td>日均人流量：</td>
 	    			<td><input id="_averageDailyFlow_" class="easyui-validatebox" type="text" name="averageDailyFlow"></input></td>
-	    			<td>商家：</td>
-	    			<td><input id="add_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="userName"></input>
-	    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
+	    		</tr>
+	    		<tr>
+	    			<td>详细地址：</td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="address"></textarea>
 	    			</td>
 	    		</tr>
-	    		
                </table>
             </form>
             <div style="text-align:center;padding:5px">

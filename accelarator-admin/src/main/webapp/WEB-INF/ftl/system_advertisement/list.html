@@ -19,6 +19,31 @@
 			} 
 		});
 	});
+	function formatStatus(val, row) {
+		if (val == 1) {
+			return '上线';
+		} else {
+			return '下线';
+		}
+	}
+	function formatType(val, row) {
+		if (val == 1) {
+			return '视频类型';
+		} else if(val == 2){
+			return '图片类型';
+		}else if(val == 3){
+			return '文字类型';
+		}
+	}
+	
+	function openCheckBoxLookUp(url) {
+		$("#device-lookUpSelect-window").dialogFrameWindow().dialogFrameHtml(url);
+	}
+	function openCheckBoxLookUpCallBack(row){
+		$('#add_lookUpId,#edit_lookUpId').val(row.id);
+		$('#add_lookUpCode,#edit_lookUpCode').val(row.code);
+		$("#device-lookUpSelect-window").dialogFrameWindow().window('close');
+	}
 </script>
 </head>
 <body>
@@ -60,17 +85,8 @@
 	</div>
    <#include "./add.html">
    <#include "./update.html">
+   <div id="lookUpSelect-window" title="选择商铺"></div>
+   <div id="device-lookUpSelect-window" title="选择设备"></div>
 </body>
 </html>
 
-<script>
-function formatType(val, row) {
-	if (val == 1) {
-		return '视频类型';
-	} else if(val == 2){
-		return '图片类型';
-	}else if(val == 3){
-		return '文字类型';
-	}
-}
-</script>

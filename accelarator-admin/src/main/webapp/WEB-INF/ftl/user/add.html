@@ -4,7 +4,7 @@
 	    		<tr>
 	    			<td width="12%">用户名：</td>
 	    			<td width="38%">
-	    			    <input class="easyui-validatebox" type="text" name="userName" data-options="required:true"/></td>
+	    			    <input class="easyui-validatebox" type="text" id="add_userName" name="userName" onblur="checkUserName(this.id,this.value);" data-options="required:true"/></td>
 	    			<td width="12%">真实姓名：</td>
 	    			<td width="38%"><input class="easyui-validatebox" type="text" name="realName"/></td>
 	    		</tr>
@@ -22,7 +22,7 @@
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td colspan="3"><select id="status" name="status" style="width:90px;">
+	    			<td colspan="3"><select id="status" name="status" style="width:171px;">
 			           		<option value="1" selected="selected">启用</option>
 		    				<option value="2">禁用</option>
 		    			</select>
@@ -30,7 +30,9 @@
 		    	</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td colspan="3"><input class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    			</td>
 	    		</tr>
                </table>
             </form>

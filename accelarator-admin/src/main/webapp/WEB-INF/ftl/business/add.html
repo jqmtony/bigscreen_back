@@ -14,10 +14,10 @@
 	    			<td>确认密码：</td>
 	    			<td><input id="_ret_password_" class="easyui-validatebox" type="password" name="ret_password" data-options="required:true"></input></td>
 	    		</tr>
-	    			<tr>
-	    			<td>国家：</td>
+	    		<tr>
+	    			<td>地区：</td>
 	    			<td>
-	    			<select id="add_cityCode" name="cityCode" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
+	    				<select id="add_cityCode" name="cityCode" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:171px;"></select>
 	    			</td>
 	    			<td>
 		    		</td>
@@ -50,7 +50,7 @@
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" data-options="editable:false"  style="width:90px;">
+	    			<td><select id="status" name="status" data-options="editable:false"  style="width:171px;">
 			           		<option value="1" selected="selected">有效</option>
 		    				<option value="2">无效</option>
 		    			</select>
@@ -60,7 +60,9 @@
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td><input id="_remark_" class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    			</td>
 	    		</tr>
                </table>
             </form>

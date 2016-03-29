@@ -1,11 +1,27 @@
-<div id="add-window" title="添加信息" class="easyui-window" style="width: 600px; height: 450px;">
+<script>
+$(function(){
+    $('#add_endTime').datebox().datebox('calendar').calendar({
+        validator: function(date){
+        	var startTimeStr = $("#add_startTime").datebox('getValue');
+            var startTime = new Date(startTimeStr);
+            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+            return date>=startDate;
+        }
+    });
+});
+</script>
+
+<div id="add-window" title="添加广告信息" class="easyui-window" style="width: 600px; height: 450px;">
 	     <form id="addForm" method="post" >
 	    	<table cellpadding="5">
 				<tr>
 	    			<td>广告商：</td>
-	    			<td><input id="advertiserId" class="easyui-validatebox" type="text" name="advertiserId" data-options="required:true"></input></td>
+	    			<td><input id="add_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="userName"></input>
+	    			<input type="hidden" id="add_lookUpId" name="advertiserId"></input>
+	    			</td>
 	    			<td>广告类型：</td>
-	    			<td><select id="type" name="type" style="width:90px;">
+	    			<td><select id="type" name="type" style="width:171px;">
 			           		<option value="1">视频</option>
 		    				<option value="2">图片</option>
 		    				<option value="3">文字内容</option>
@@ -14,36 +30,38 @@
 	    		</tr>
 	    		
 	    		<tr>
-	    			<td>视频地址：</td>
-	    			<td><input id="videoPath" class="easyui-validatebox" type="text" name="videoPath" data-options="required:true"></input></td>
-	    			<td>图片地址：</td>
-	    			<td><input id="picPath" class="easyui-validatebox" type="text" name="picPath"></input></td>
-	    		</tr>
-	    		<tr>
 	    			<td>生效时间：</td>
-	    			<td><input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="required:true,editable:false"></input></td>
+	    			<td><input id="add_startTime"  class="easyui-datebox" type="text" name="startTime" data-options="required:true,editable:false"></input></td>
 	    			<td>失效时间：</td>
-	    			<td><input id="add_endTime" class="easyui-datebox" type="text" name="endTime" data-options="required:true,editable:false"></input></td>
+	    			<td><input id="add_endTime"  style="width:171px;" class="easyui-datebox" type="text" name="endTime" data-options="required:true,editable:false"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>广告时长：</td>
 	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input></td>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status"  style="width:90px;">
-			           		<option value="1" selected="selected">上线</option>
+	    			<td><select id="status" name="status" style="width:171px;">
+			           		<option value="1">上线</option>
 		    				<option value="2">下线</option>
 		    			</select>
 		    		</td>
 	    		</tr>
+	    		<tr>
+	    			<td>视频地址：</td>
+	    			<td colspan="3"><textarea style="height:60px" cols="30" name="videoPath"></textarea></td>
+	    		</tr>
+	    		<tr>
+	    			<td>图片地址：</td>
+	    			<td colspan="3"><textarea style="height:60px" cols="30" name="picPath"></textarea></td>
+	    		</tr>
 		    	<tr>
 	    			<td>广告内容：</td>
-	    			<td>
-	    			   <textarea style="height:60px" cols="30" name="content"></textarea>
-	    			</td>
+	    			<td colspan="3">
+	    			    <textarea style="height:60px" cols="30" name="content"></textarea>
+	    		    </td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td>
+	    			<td colspan="3">
 	    			   <textarea style="height:60px" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>

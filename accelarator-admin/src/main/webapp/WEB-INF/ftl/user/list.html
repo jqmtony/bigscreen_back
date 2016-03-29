@@ -20,6 +20,26 @@
 			} 
 		});
 	});
+	function checkUserName(id,userName){
+		$.ajax({  
+			    url:'${base}/user/checkUserName',//   
+			    data:{  
+			    	userName : userName
+			    },  
+			    type:'post',  
+			    dataType:'json',  
+			    success:function(data) { 
+			        if(data == false ){
+			        	alert("用户名已存在，请重新输入！");
+			            $("#"+id).val(''); 
+			            $("#"+id).focus();
+			        } 
+			     },  
+			     error : function() {  
+			          alert("异常！");  
+			     }  
+			});
+	}
 </script>
 </head>
 <body>

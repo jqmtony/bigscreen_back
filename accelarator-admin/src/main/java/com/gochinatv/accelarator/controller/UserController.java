@@ -35,7 +35,16 @@ public class UserController extends BaseController{
 		return "user/list";
 	}
 	
-	
+	@RequestMapping("/checkUserName")
+	@ResponseBody
+	public String checkUserName(String userName) throws Exception{
+		String data = "false";
+		User user = userService.getUserByUserName(userName);
+		if(user == null){
+			data = "true";
+		}
+		return data;
+	}
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList(int page,int rows,User user) throws Exception{

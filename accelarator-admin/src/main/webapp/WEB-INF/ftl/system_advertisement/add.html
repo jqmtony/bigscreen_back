@@ -1,33 +1,34 @@
-<div id="add-window" title="添加信息" class="easyui-window" style="width: 600px; height: 450px;">
+<div id="add-window" title="添加商家广告信息" class="easyui-window" style="width: 600px; height: 450px;">
 	     <form id="addForm" method="post" >
 	    	<table cellpadding="5">
 	    		<tr>
+	    			<td>商铺：</td>
+	    			<td>
+		    			<input id="add_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+		    			data-options="required:true" type="text" name="cname"></input>
+		    			<input type="hidden" id="add_lookUpId" name="placeId"></input>
+	    			</td>
+	    			<td>设备：</td>
+	    			<td>
+	    				<input id="add_lookUpCode" class="easyui-validatebox" onFocus="openLookUp('${base}/device/gotoDeviceLookUp?parentMethod=openCheckBoxLookUpCallBack');" 
+		    			type="text" name="code"></input>
+		    			<input type="hidden" id="add_lookUpId" name="deviceId"></input>
+		    		</td>
+	    		</tr>
+	    		<tr>
 	    			<td>广告来源：</td>
 	    			<td>
-	    			    <select id="source" name="source" style="width:90px;">
+	    			    <select id="source" name="source" style="width:171px;">
 		           		<option value="1">自有</option>
 	    				<option value="2">商家</option>
 		           	</select>
 	    			<td>广告类型：</td>
-	    			<td><select id="type" name="type" style="width:90px;">
+	    			<td><select id="type" name="type" style="width:171px;">
 			           		<option value="1">视频</option>
 		    				<option value="2">图片</option>
 		    				<option value="3">文字内容</option>
 		           		</select>
 		           </td>
-	    		</tr>
-	    		
-	    		<tr>
-	    			<td>视频地址：</td>
-	    			<td><input id="videoPath" class="easyui-validatebox" type="text" name="videoPath" data-options="required:true"></input></td>
-	    			<td>图片地址：</td>
-	    			<td><input id="picPath" class="easyui-validatebox" type="text" name="picPath"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>区域id：</td>
-	    			<td><input id="placeId" class="easyui-validatebox" type="text" name="placeId" data-options="required:true"></input></td>
-	    			<td>设备id：</td>
-	    			<td><input id="deviceId" class="easyui-validatebox" data-options="required:true" type="text" name="deviceId"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>排序：</td>
@@ -37,19 +38,37 @@
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" style="width:90px;">
+	    			<td colspan="3"><select id="status" name="status" style="width:171px;">
 			           		<option value="1" selected>上线</option>
 		    				<option value="2">下线</option>
 		    			</select>
 		    		</td>
 		    	</tr>
+	    		<tr>
+	    			<td>视频地址：</td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="videoPath"></textarea>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>图片地址：</td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="picPath"></textarea>
+	    			</td>
+	    		</tr>
+	    		
+	    		
 		    	<tr>
 	    			<td>广告内容：</td>
-	    			<td><input id="content" class="easyui-validatebox" data-options="required:true" name="content" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="content"></textarea>
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td><input id="remark" class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    			</td>
 	    		</tr>
                </table>
             </form>

@@ -1,4 +1,4 @@
-<div id="modify-window" title="修改广告主信息" class="easyui-window" style="width: 600px; height: 450px;">
+<div id="modify-window" title="修改广告商信息" class="easyui-window" style="width: 600px; height: 450px;">
 	     <form id="modifyForm" method="post" >
 	    	<table cellpadding="5">
 	    		<tr>
@@ -9,21 +9,15 @@
 	    			<td><input id="_realName_" class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>密码：</td>
-	    			<td><input id="_password_" class="easyui-validatebox" type="password" name="password" data-options="required:true"></input></td>
-	    			<td>确认密码：</td>
-	    			<td><input id="_ret_password_" class="easyui-validatebox" type="password" name="ret_password" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
 	    			<td>国家：</td>
 	    			<td>
-	    				<select id="edit_countryCode" target="edit_areaCode" name="countryCode"  style="width:90px;"></select>
+	    				<select id="edit_countryCode" target="edit_areaCode" name="countryCode"  style="width:171px;"></select>
 	    			</td>
 	    			<td>
 	    				<select id="edit_areaCode" target="edit_cityCode" name="areaCode"  style="width:90px;"></select>
 		    		</td>
 	    			<td>
-	    				<select id="edit_cityCode" name="cityCode"  style="width:90px;"></select>
+	    				<select id="edit_cityCode" name="cityCode"  style="width:171px;"></select>
 		    		</td>
 	    		</tr>
 	    		<tr>
@@ -40,7 +34,7 @@
 	    		</tr> -->
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" style="width:90px;">
+	    			<td><select id="status" name="status" style="width:171px;">
 			           		<option value="1">上线</option>
 		    				<option value="2">下线</option>
 		    			</select>
@@ -50,7 +44,9 @@
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
-	    			<td><input id="_remark_" class="easyui-validatebox" name="remark" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td colspan="3">
+	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    			</td>
 	    		</tr>
                </table>
             </form>

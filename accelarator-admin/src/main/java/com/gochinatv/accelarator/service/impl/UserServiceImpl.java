@@ -3,6 +3,7 @@ package com.gochinatv.accelarator.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.gochinatv.accelarator.dao.UserDao;
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
@@ -25,6 +26,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Override
 	protected BaseDao<User> getDao() {
 		return userDao;
+	}
+
+	public User getUserByUserName(String userName) {
+		return userDao.getUserByUserName(userName);
 	}
 	
 	

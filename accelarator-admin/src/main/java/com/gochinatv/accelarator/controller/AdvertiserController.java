@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.Advertiser;
@@ -36,7 +37,16 @@ public class AdvertiserController extends BaseController{
 	public String gotoList(Model model) throws Exception{
 		return "advertiser/list";
 	}
-	
+	/**
+	 * 
+	 * @param parentMethod
+	 * @return
+	 */
+	@RequestMapping(value = "/gotoAdvertiserLookUp")
+    public String gotoAdvertiserLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+		model.addAttribute("parentMethod", parentMethod);
+		return "advertiser/lookUpForAdvertisement";
+    }
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList(int page,int rows,Advertiser advertiser) throws Exception{

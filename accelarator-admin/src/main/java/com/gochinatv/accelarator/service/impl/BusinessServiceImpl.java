@@ -31,12 +31,12 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
 	}
 
 	public void save(Business entity) throws Exception {
-		if(StringUtils.isNotBlank(entity.getCityCode()) && entity.getCityCode().equals(8)){
+		if(StringUtils.isNotBlank(entity.getCityCode()) && entity.getCityCode().length() == 8){
 			entity.setAreaCode(entity.getCityCode().substring(0, 6));
 			entity.setCountryCode(entity.getCityCode().substring(0, 4));
 			businessDao.save(entity);
 		}else{
-			throw new Exception("添加商铺失败");
+			throw new Exception("地区输入错误，添加商铺失败");
 		}
 	
 	}

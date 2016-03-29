@@ -17,16 +17,17 @@
 	    		</tr>
 	    		<tr>
 	    			<td>商铺：</td>
-	    			<td colspan="3"><input id="add_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="cname"></input>
-	    			<input type="hidden" id="add_lookUpId" name="placeId"></input>
+	    			<td colspan="3">
+		    			<input id="add_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+		    			data-options="required:true" type="text" name="cname"></input>
+		    			<input type="hidden" id="add_lookUpId" name="placeId"></input>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" style="width:90px;">
-			           		<option value="1" selected="selected">上线</option>
-		    				<option value="2">下线</option>
+	    			<td><select id="status" name="status" style="width:171px;">
+			           		<option value="1" selected="selected">启用</option>
+		    				<option value="2">禁用</option>
 		    			</select>
 		    		</td>
 	    			<td>分屏数量：</td>

@@ -42,7 +42,16 @@ public class DeviceController extends BaseController{
 		return "device/list";
 	}
 	
-	
+	/**
+	 * 
+	 * @param parentMethod
+	 * @return
+	 */
+	@RequestMapping(value = "/gotoDeviceLookUp")
+    public String gotoDeviceLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+		model.addAttribute("parentMethod", parentMethod);
+		return "device/lookUpForSysAdvertisement";
+    }
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList( int page, int rows,

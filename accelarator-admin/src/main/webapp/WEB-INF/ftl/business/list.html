@@ -20,7 +20,13 @@
 			} 
 		});
 	});
-	
+	function formatStatus(val, row) {
+		if (val == 1) {
+			return '有效';
+		} else {
+			return '无效';
+		}
+	}
 	function query(){
 		//获取code 根据code位数判断8位代表城市，6位地区，4位国家，分别给国家 地区 赋值
 		/* var code= 
@@ -52,7 +58,7 @@
 	</table>
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		  地区<select id="query_code" name="code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
+		  地区：<select id="query_code" name="code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
 	    			<input type="hidden" id="querycountryCode" name="countryCode"></input> 
 	    			<input type="hidden" id="querycityCode" name="cityCode"></input> 
 	    			<input type="hidden" id="queryareaCode" name="areaCode"></input> 

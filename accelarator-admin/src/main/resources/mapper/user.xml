@@ -14,6 +14,10 @@
 		<result property="status" column="status" />
 	</resultMap>
 
+	<select id="getUserByUserName" resultMap="User" parameterType="string">
+		select * from user where user_name = #{userName}
+	</select>
+
 	<select id="getListByEntity" resultMap="User" parameterType="User">
 		select * from user
 		<where>
