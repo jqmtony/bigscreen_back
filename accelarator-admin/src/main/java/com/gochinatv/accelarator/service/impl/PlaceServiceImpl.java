@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gochinatv.accelarator.dao.PlaceDao;
+import com.gochinatv.accelarator.dao.entity.Business;
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
@@ -51,6 +52,17 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 		buffer.append("'");
 		place.setCityCode(buffer.toString());
 		return placeDao.getAvailableList(place);
+	}
+	
+	public void save(Place entity) throws Exception {
+		if(StringUtils.isNotBlank(entity.getCityCode()) && entity.getCityCode().length() == 8){
+			entity.setAreaCode(entity.getCityCode().substring(0, 6));
+			entity.setCountryCode(entity.getCityCode().substring(0, 4));
+			placeDao.save(entity);
+		}else{
+			throw new Exception("地区输入错误，添加商铺失败");
+		}
+	
 	}
 	
 }

@@ -18,6 +18,7 @@
 		<result property="createTime" column="create_time" />
 		
 		<result property="userName" column="user_name" />
+		<result property="code" column="code" />
 	</resultMap>
 	
 	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
@@ -29,24 +30,24 @@
 		<where>
 			1=1
 			<if test="cname!=null">
-				and cname like CONCAT(CONCAT('%',#{cname}),'%')
+				and p.cname like CONCAT(CONCAT('%',#{cname}),'%')
 			</if>
 			<if test="ename!=null">
-				and ename like CONCAT(CONCAT('%',#{ename}),'%')
+				and p.ename like CONCAT(CONCAT('%',#{ename}),'%')
 			</if>
 			<if test="type!=null and type!=0">
-				and type = #{type}
+				and p.type = #{type}
 			</if>
 			<if test="countryCode!=null and countryCode!=''">
-				and country_code = #{countryCode}
+				and p.country_code = #{countryCode}
 			</if>
-			<if test="areaCode!=null and areaCode!=''" >
-				and area_code = #{areaCode}
+			<if test="areaCode!=null and areaCode!=''">
+				and p.area_code = #{areaCode}
 			</if>
 			<if test="cityCode!=null and cityCode!=''">
-				and city_code = #{cityCode}
+				and p.city_code = #{cityCode}
 			</if>
-			order by create_time desc
+			order by p.create_time desc
 		</where>
 	</select>
 	

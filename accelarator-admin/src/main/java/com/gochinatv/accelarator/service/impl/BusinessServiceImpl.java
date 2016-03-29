@@ -36,7 +36,7 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
 			entity.setCountryCode(entity.getCityCode().substring(0, 4));
 			businessDao.save(entity);
 		}else{
-			throw new Exception("地区输入错误，添加商铺失败");
+			throw new Exception("地区输入错误，添加商家失败");
 		}
 	
 	}

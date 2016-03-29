@@ -41,9 +41,10 @@
 	</table>
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		            国家： <select id="countryCode" target="areaCode" name="countryCode" style="width:90px;"></select>
-		            地区：  <select id="areaCode" target="cityCode" name="areaCode" style="width:90px;"></select>
-		            城市：  <select id="cityCode" name="cityCode" style="width:90px;"></select>
+		           地区：	 <select id="query_code" name="code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
+    			 	 <input type="hidden" id="queryCountryCode" name="countryCode"></input> 
+    			 	 <input type="hidden" id="queryAreaCode" name="areaCode"></input> 
+    			 	 <input type="hidden" id="queryCityCode" name="cityCode"></input> 
 		            中文名称： <input type="text" id="cname" name="cname" style="width:110px"></input>
 		            英文名称： <input type="text" id="ename" name="ename" style="width:110px"></input>
 			类型：
@@ -55,7 +56,7 @@
 			  <option value="4">美甲区</option>
 			  <option value="5">其它</option>
 			</select>
-			<a href="javascript:void(0);" onclick="query()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			<a href="javascript:void(0);" onclick="queryWithCode()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</form>	
 		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
 		<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">修改</a>
