@@ -190,6 +190,13 @@ function formatAdvertisementType(val, row) {
 }
 
 
+function formatValid(val, row) {
+	if (val == 1) {
+		return '有效';
+	} else {
+		return '无效';
+	}
+}
 function formatOnlineStatus(val, row) {
 	if (val == 1) {
 		return '上线';
