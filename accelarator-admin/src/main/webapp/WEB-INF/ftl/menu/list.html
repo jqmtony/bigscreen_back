@@ -18,6 +18,10 @@
 				modifyRow(row);
 			} 
 		});
+		$("#add-window, #modify-window").window({ 
+	        width:420,
+	        height:360
+		});
 	});
 	function uploadPic(form,id,idFileId,urlTmp){
 		var reg = /(jpg|gif|bmp|png)/i;
