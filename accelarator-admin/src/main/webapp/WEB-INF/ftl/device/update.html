@@ -1,25 +1,35 @@
-<div id="modify-window" title="修改设备信息" class="easyui-window" style="width: 800px; height: 450px;">
+<div id="modify-window" title="修改设备信息" class="easyui-window">
 	     <form id="modifyForm" method="post" >
 	    	<table>
+	    		<tr>
+	    			<td>商铺：</td>
+	    			<td><input id="edit_lookUpCname"  class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true" type="text" name="cname"></input>
+	    			<input type="hidden" id="edit_lookUpId" name="placeId"></input>
+	    		</tr>
 	    		<tr>
 	    			<td>设备编码：</td>
 	    			<td><input type="hidden" name="id"></input>
 	    			    <input id="code" class="easyui-validatebox" type="text" name="code" data-options="required:true"></input></td>
-	    			<td>设备品牌：</td>
-	    			<td><input id="brand" class="easyui-validatebox" type="text" name="brand"></input></td>
+	    			
 	    		</tr>
 	    		
 	    		<tr>
+	    			<td>设备品牌：</td>
+	    			<td><input id="brand" class="easyui-validatebox" type="text" name="brand"></input></td>
+	    		</tr>
+	    		<tr>
 	    			<td>设备型号：</td>
 	    			<td><input id="model" class="easyui-validatebox" type="text" name="model"></input></td>
+	    			
+	    		</tr>
+	    		<tr>
 	    			<td>设备MAC：</td>
 	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>商铺：</td>
-	    			<td colspan="3"><input id="edit_lookUpCname"  class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="cname"></input>
-	    			<input type="hidden" id="edit_lookUpId" name="placeId"></input>
+	    			<td>分屏数量：</td>
+	    			<td><input id="screenNum" class="easyui-validatebox" type="text" name="screenNum" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
@@ -28,8 +38,6 @@
 		    				<option value="2">禁用</option>
 		    			</select>
 		    		</td>
-	    			<td>分屏数量：</td>
-	    			<td><input id="screenNum" class="easyui-validatebox" type="text" name="screenNum" data-options="required:true"></input></td>
 	    		</tr>
                </table>
             </form>

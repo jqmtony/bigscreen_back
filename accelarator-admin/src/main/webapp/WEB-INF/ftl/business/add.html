@@ -19,9 +19,11 @@
 	    			<td>
 	    				<select id="add_cityCode" name="cityCode" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:171px;"></select>
 	    			</td>
-	    			<td>
-		    		</td>
-	    			<td>
+	    			<td>状态：</td>
+	    			<td><select id="status" name="status" data-options="editable:false"  style="width:171px;">
+			           		<option value="1" selected="selected">有效</option>
+		    				<option value="2">无效</option>
+		    			</select>
 		    		</td>
 	    		</tr>
 	    	<!-- 	<tr>
@@ -49,19 +51,13 @@
 	    			<td><input id="_facebook_" class="easyui-validatebox" type="text" name="facebook"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>状态：</td>
-	    			<td><select id="status" name="status" data-options="editable:false"  style="width:171px;">
-			           		<option value="1" selected="selected">有效</option>
-		    				<option value="2">无效</option>
-		    			</select>
-		    		</td>
 	    			<td>出生年月：</td>
 	    			<td colspan="3"><input id="_birthday_" class="easyui-validatebox" type="text" name="birthday"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    				<textarea style="height:60px;width:472px;" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>
                </table>
