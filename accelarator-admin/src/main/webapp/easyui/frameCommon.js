@@ -8,6 +8,13 @@ $(document).ready(function() {
 	modifyWin = $('#modify-window').dialogFrameWindow();
 	modifyForm = $('#modifyForm').form();
 	lookUpWin = $("#lookUpSelect-window").dialogFrameWindow();
+	$("#add-window, #modify-window").window({ 
+		top:60,   
+        left:300,
+        width:600,
+        height:360,
+		resizable: false
+	});
 });
 
 var modifyWin;
@@ -372,7 +379,6 @@ $(function(){
 /**************************************************************************************************************/
 //lookup
 function openLookUp(url) {
-	//var url ='${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack';
 	lookUpWin.dialogFrameHtml(url);
 }
 
@@ -381,5 +387,4 @@ function openLookUpCallBack(row){
 	$('#add_lookUpName,#edit_lookUpName').val(row.userName);
 	$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
 	lookUpWin.window('close');
-
 }

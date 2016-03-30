@@ -19,6 +19,11 @@
 				modifyRow(row);
 			} 
 		});
+		$("#add-window, #modify-window").window({ 
+	        width:600,
+	        height:450
+		});
+		
 	});
 	function modifyDefaultCheck(row){
 		$("#edit_startTime").datebox('setValue','');
@@ -68,26 +73,3 @@
    <div id="lookUpSelect-window" title="选择广告商"></div>
 </body>
 </html>
-
-<script>
-
-function formatStatus(val, row) {
-	if (val == 1) {
-		return '上线';
-	} else if(val == 2){
-		return '下线';
-	}
-}
-
-$(function(){
-	$('#dd').datebox().datebox('calendar').calendar({
-		validator: function(date){
-			var now = new Date();
-			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+10);
-			return d1<=date && date<=d2;
-		}
-	});
-});
-
-</script>

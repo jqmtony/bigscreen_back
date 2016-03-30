@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -122,11 +124,11 @@ public class PlaceController extends BaseController{
 	 */
 	@RequestMapping("/queryAvailableList")
 	@ResponseBody
-	public PageInfo<Place> queryAvailableList(int page,int rows,Place place) throws Exception{
-		PageInterceptor.startPage(page, rows);
+	public List<Place> queryAvailableList(Place place) throws Exception{
+		//PageInterceptor.startPage(page, rows);
 		List<Place> list = placeService.getAvailableList(place);
-		PageInfo<Place> pageInfo = new PageInfo<Place>(list);
-		return pageInfo;
+		//PageInfo<Place> pageInfo = new PageInfo<Place>(list);
+		return list;
 	}
 	
 	
@@ -137,8 +139,9 @@ public class PlaceController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping("/createOrder")
-	public String createOrder(Model model) throws Exception{
+	public String createOrder(Place place,Model model) throws Exception{
 		model.addAttribute("order_no",DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
+		model.addAttribute("place",place);
 		return "place/order_preview";
 	}
 	
@@ -154,6 +157,24 @@ public class PlaceController extends BaseController{
 	public List<Place> orderDetail(Place place) throws Exception{
 		List<Place> list = placeService.getAvailableList(place);
 		return list;
+	}
+	
+	/**
+	 * 保存订单
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/saveOrder")
+	@ResponseBody
+	public Map<String,Object> saveOrder(Orders order){
+		Map<String,Object> result = this.success(null);
+		try{
+			//placeService.deleteByEntity(place);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 	/*********************************************************************************************/
 	

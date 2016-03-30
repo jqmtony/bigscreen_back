@@ -25,6 +25,7 @@ public class Orders extends BaseVo implements Serializable {
 	private Date createTime;// 创建时间
 	private int auditor;// 审核人
 	private Date auditTime;// 审核时间
+	private int advertiserId;// 广告商id
 	private int advertisementId;// 视频广告id
 	private Date startTime;// 开始时间
 	private Date endTime;// 结束时间
@@ -84,6 +85,14 @@ public class Orders extends BaseVo implements Serializable {
 
 	public void setAuditTime(Date auditTime) {
 		this.auditTime = auditTime;
+	}
+
+	public int getAdvertiserId() {
+		return advertiserId;
+	}
+
+	public void setAdvertiserId(int advertiserId) {
+		this.advertiserId = advertiserId;
 	}
 
 	public int getAdvertisementId() {
