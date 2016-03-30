@@ -10,6 +10,7 @@
 		<result property="createTime" column="create_time" />
 		<result property="auditor" column="auditor" />
 		<result property="auditTime" column="audit_time" />
+		<result property="advertiserId" column="advertiser_id" />
 		<result property="advertisementId" column="advertisement_id" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
@@ -44,7 +45,6 @@
 		</where>
 	</select>
 	
-	
 	<select id="getListByEntity" resultType="Orders" parameterType="Orders">
 		SELECT o.order_no,uc.real_name as createrName,o.create_time,o.status,a.real_name,oa.real_name as auditorName,o.audit_time FROM orders o  
         LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
@@ -61,5 +61,28 @@
 		</where>
 	</select>
 	
+	<insert id="save" parameterType="Orders">
+	   insert into orders (
+	                    id,
+						order_no,
+						type,
+						creater,
+						create_time,
+						advertiser_id,
+						start_time,
+						end_time,
+						status
+						) values (
+	            #{id},
+	            #{orderNo},
+	            #{type},
+	            #{creater},
+	            #{createTime},
+	            #{advertiser_id},
+	            #{start_time},
+	            #{end_time},
+	            #{status}
+	            )
+	</insert>
 	
 </mapper>

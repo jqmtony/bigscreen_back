@@ -51,6 +51,7 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 		return placeDao.getAvailableList(place);
 	}
 	
+	
 	public void save(Place entity) throws Exception {
 		if(StringUtils.isNotBlank(entity.getCityCode()) && entity.getCityCode().length() == 8){
 			entity.setAreaCode(entity.getCityCode().substring(0, 6));

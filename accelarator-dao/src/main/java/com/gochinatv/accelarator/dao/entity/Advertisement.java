@@ -17,21 +17,28 @@ public class Advertisement extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String title;//广告标题
 	private int type;// 广告类型    (1：视频类型    2：图片类型    3：文字类型)
 	private String videoPath;// 视频地址
 	private String picPath;// 图片地址
 	private String content;// 文字内容
 	private int advertiserId;// 广告商id
-	private String startTime;// 生效时间
-	private String endTime;// 失效时间
 	private int duration;// 广告时长
 	private String remark;// 描述
-	private int status;// 状态   (1：上线      2：下线)
 	private int source;// 广告来源   (1：自有   2：商家)
 	
 	
 	private String userName;//临时变量，广告商用户名
 	private String realName;//临时变量，广告商昵称
+
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public int getType() {
 		return type;
@@ -73,23 +80,6 @@ public class Advertisement extends BaseVo implements Serializable {
 		this.advertiserId = advertiserId;
 	}
 
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
 	public int getDuration() {
 		return duration;
 	}
@@ -104,14 +94,6 @@ public class Advertisement extends BaseVo implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 	public int getSource() {

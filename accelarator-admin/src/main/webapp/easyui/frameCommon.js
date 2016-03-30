@@ -379,7 +379,6 @@ $(function(){
 /**************************************************************************************************************/
 //lookup
 function openLookUp(url) {
-	//var url ='${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack';
 	lookUpWin.dialogFrameHtml(url);
 }
 
@@ -388,5 +387,4 @@ function openLookUpCallBack(row){
 	$('#add_lookUpName,#edit_lookUpName').val(row.userName);
 	$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
 	lookUpWin.window('close');
-
 }

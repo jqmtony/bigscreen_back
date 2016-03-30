@@ -7,7 +7,7 @@
    $(function() {
 		grid = $('#tab').datagrid( {
 			url :'${base}/place/orderDetail',
-			queryParams:$("#queryForm").serializeObject(),
+			queryParams:$("#addForm").serializeObject(),
 			fit:true,
 			rownumbers:true,
 			fitColumns:true
@@ -19,6 +19,16 @@
 			height:height-35
 		});
    });
+   
+   function openCallBack(row){
+	   $("#add_lookUpId").val(row.id);
+	   $("#add_lookUpName").val(row.realName);
+	   var country = formatCountry(row.countryCode);
+	   var area = formatArea(row.areaCode)
+	   var city = formatCity(row.cityCode)
+	   $("#area").text(country+"  "+area+"  "+city);
+	   lookUpWin.window('close');
+   }
 </script>
 </head>
 <body>
@@ -37,29 +47,41 @@
 		</div>
 		<div data-options="region:'center'" style="border:0px 0px 1px 0px;">
 			 <div id="n" class="easyui-panel" title="订单有效期" style="width:100%;height:90px;">
-				<p style="font-size:14px">
-				  2016/01/01    至      2016/01/31  视频将在1月1日 0点-1月31日23:59:59播放
+				<p style="font-size:18px;color:red;">
+				  该订单视频将于 ${place.startTime}日0点   至    ${place.endTime}日23:59:59播放
 				</p>
 			 </div><br/>
-             <div id="s" class="easyui-panel" title="广告主信息" style="width:100%;height:200px;">
-				<p style="font-size:14px"></p>
-			 </div>
+             <div id="s" class="easyui-panel" title="广告商信息" style="width:100%;height:85px;border-bottom:0px;">
+				<form id="addForm" method="post">
+					<table>
+						<tr>
+							<td>广告商：
+							    <input name="ids" type="hidden" value="${place.ids}"/>
+							    <input name="order_no" type="hidden" value="${order_no}"/>
+							    <input name="cityCode" type="hidden" value="${place.cityCode}"/>
+						        <input name="type" type="hidden" value="${place.type}"/>
+						        <input name="startTime" type="hidden" value="${place.startTime}"/>
+						        <input name="endTime" type="hidden" value="${place.endTime}"/>
+							</td>
+							<td>
+							  <input id="add_lookUpName" class="easyui-validatebox" 
+							  onFocus="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');" 
+	    			          data-options="required:true" type="text" name="advertiserName"/>
+	    			          <input type="hidden" id="add_lookUpId" name="advertiserId"/>
+							</td>
+						</tr>
+						<tr>
+							<td>所在地区：</td>
+							<td id="area"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton">提交订单</a>
-		    	<a href="javascript:void(0)" class="easyui-linkbutton">取消订单</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">提交订单</a>
 		    </div>
 		</div>
 	</div>
-	
-	
-	<div style="padding:2px 5px;display: none;">
-		<form id="queryForm">
-		        <input id="cityCode" name="cityCode" type="hidden" value="10010101,10010102"/>
-		        <input id="type" name="type" type="hidden" value="1"/>
-		        <input id="startTime" name="startTime" type="hidden" value="2016-03-29"/>
-		        <input id="endTime" name="endTime" type="hidden" value="2016-04-30"/>
-		</form>
-	</div>
-	
+	<div id="lookUpSelect-window" title="选择广告商"></div>
 </body>
 </html>
