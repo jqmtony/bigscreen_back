@@ -1,0 +1,38 @@
+<div id="add-window" title="添加菜单信息" class="easyui-window" style="width: 600px; height: 450px;">
+	     <form id="addForm" method="post"  enctype="multipart/form-data">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>名称：</td>
+	    			<td>
+	    			    <input class="easyui-validatebox" type="text" name="name" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>价格：</td>
+	    			<td><input class="easyui-validatebox" type="text" name="price" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>排序：</td>
+	    			<td><input class="easyui-validatebox" type="text" name="sort" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>图片上传：</td>
+	    			<td><input type="file" id="add_file" name="file"  style="width:171px;"/>
+						<input type="button" value="上传" id="add_uploadBtn" 	onclick="uploadPic('addForm','#add_imagePath','#add_file','${base}/imagecallback/upload');">
+						<input type="text" id="add_imagePath" name="imagePath"/>
+						<!-- <img src=""  width=100 height=100 id="add_image"> -->
+					</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>描述：</td>
+	    			<td>
+	    				<textarea style="height:60px" cols="30" name="description"></textarea>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>

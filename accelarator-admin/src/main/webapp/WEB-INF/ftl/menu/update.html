@@ -1,0 +1,39 @@
+<div id="modify-window" title="修改信息" class="easyui-window" style="width: 600px; height: 450px;">
+	     <form id="modifyForm" method="post" enctype="multipart/form-data">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>名称：</td>
+	    			<td>
+	    				<input type="hidden" name="id"/>
+	    			    <input class="easyui-validatebox" type="text" name="name" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>价格：</td>
+	    			<td><input class="easyui-validatebox" type="text" name="price" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>排序：</td>
+	    			<td><input class="easyui-validatebox" type="text" name="sort" data-options="required:true"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>图片上传：</td>
+	    			<td><input type="file" id="edit_file" name="file" style="width:171px;" />
+						<input type="button" value="上传" id="edit_uploadBtn" 	onclick="uploadPic('modifyForm','#edit_imagePath','#edit_file','${base}/imagecallback/upload');">
+						<input type="hidden" id="edit_imagePath" name="imagePath"/>
+						<!-- <img src=""  width=100 height=100 id="edit_mage"> -->
+					</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>描述：</td>
+	    			<td>
+	    				<textarea style="height:60px" cols="30" name="description"></textarea>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+		    </div>
+    </div>

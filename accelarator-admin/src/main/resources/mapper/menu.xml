@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.MenuDao">
+
+	<resultMap type="Menu" id="Menu">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="description" column="description" />
+		<result property="imagePath" column="image_path" />
+		<result property="sort" column="sort" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+	
+	<select id="getListByEntity" resultMap="Menu" parameterType="Menu">
+		select * from menu order by sort asc
+	</select>
+	
+	<select id="getEntityById" resultMap="Menu" parameterType="int">
+		select * from menu where id=#{id}
+	</select>
+	
+	<insert id="save" parameterType="Menu">
+	   insert into menu(
+	            name,
+	            price,
+	            image_path,
+	            description,
+	            sort,
+	            create_time
+	            ) values (
+	            #{name},
+	            #{price},
+	            #{imagePath},
+	            #{description},
+	            #{sort},
+	            #{createTime}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Menu">
+		update menu
+		<set>
+			name=#{name},
+			price=#{price},
+            image_path=#{imagePath},
+            description=#{description},
+            sort=#{sort}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Menu">
+	  delete from menu where id = #{id}
+	</delete>
+	
+</mapper>
