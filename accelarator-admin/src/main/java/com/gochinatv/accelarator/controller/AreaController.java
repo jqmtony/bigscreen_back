@@ -24,13 +24,13 @@ public class AreaController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 
-	//fengzw
+	//fengzw333333333333
 
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
 		return "/area/list";
 	}
-	
+	//test
 	/**
 	* @author 冯志文
 	* @Description:异步树  easyui 1.2 treegrid
