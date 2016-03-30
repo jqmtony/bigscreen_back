@@ -19,6 +19,11 @@
 				modifyRow(row);
 			} 
 		});
+		$("#add-window, #modify-window").window({ 
+	        width:600,
+	        height:450
+		});
+		
 	});
 	function modifyDefaultCheck(row){
 		$("#edit_startTime").datebox('setValue','');

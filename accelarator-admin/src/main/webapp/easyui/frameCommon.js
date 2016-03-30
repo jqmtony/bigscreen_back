@@ -8,6 +8,13 @@ $(document).ready(function() {
 	modifyWin = $('#modify-window').dialogFrameWindow();
 	modifyForm = $('#modifyForm').form();
 	lookUpWin = $("#lookUpSelect-window").dialogFrameWindow();
+	$("#add-window, #modify-window").window({ 
+		top:60,   
+        left:300,
+        width:600,
+        height:360,
+		resizable: false
+	});
 });
 
 var modifyWin;
