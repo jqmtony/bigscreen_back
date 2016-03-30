@@ -10,5 +10,4 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  */
 public interface MenuDao extends BaseDao<Menu>{
 	   
-
 }

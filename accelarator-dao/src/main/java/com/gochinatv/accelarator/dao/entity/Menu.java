@@ -55,5 +55,4 @@ public class Menu implements Serializable {
 		this.createTime = createTime;
 	}
 	
-	
 }
