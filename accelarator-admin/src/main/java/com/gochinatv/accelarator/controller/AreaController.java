@@ -24,7 +24,7 @@ public class AreaController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 
-	//fengzw
+	//fengzw333333333333
 
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
@@ -103,7 +103,6 @@ public class AreaController extends BaseController{
 		return result;
 	}
 
-	//fengzhiwen
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
@@ -128,5 +127,4 @@ public class AreaController extends BaseController{
 		}
 		return result;
 	}
-	//fengzhiwen
 }
