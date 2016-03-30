@@ -4,16 +4,15 @@
 
 	<resultMap type="Advertisement" id="Advertisement">
 		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="resolution" column="resolution" />
 		<result property="type" column="type" />
 		<result property="videoPath" column="video_path" />
 		<result property="picPath" column="pic_path" />
 		<result property="content" column="content" />
 		<result property="advertiserId" column="advertiser_id" />
-		<result property="startTime" column="start_time" />
-		<result property="endTime" column="end_time" />
 		<result property="duration" column="duration" />
 		<result property="remark" column="remark" />
-		<result property="status" column="status" />
 		
 		<result property="userName" column="user_name" />
 		<result property="realName" column="real_name" />

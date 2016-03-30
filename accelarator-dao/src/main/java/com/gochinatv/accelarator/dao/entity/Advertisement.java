@@ -18,6 +18,7 @@ public class Advertisement extends BaseVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String title;//广告标题
+	private String resolution;//分辨率
 	private int type;// 广告类型    (1：视频类型    2：图片类型    3：文字类型)
 	private String videoPath;// 视频地址
 	private String picPath;// 图片地址
@@ -38,6 +39,14 @@ public class Advertisement extends BaseVo implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getResolution() {
+		return resolution;
+	}
+
+	public void setResolution(String resolution) {
+		this.resolution = resolution;
 	}
 
 	public int getType() {
