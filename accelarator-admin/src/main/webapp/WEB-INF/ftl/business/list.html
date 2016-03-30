@@ -20,13 +20,6 @@
 			} 
 		});
 	});
-	function formatStatus(val, row) {
-		if (val == 1) {
-			return '有效';
-		} else {
-			return '无效';
-		}
-	}
 	
 </script>
 </head>
@@ -43,7 +36,7 @@
 				<th data-options="field:'cityCode',width:80,formatter:formatCity">城市</th>
 				<th data-options="field:'mobile',width:80">手机</th>
 				<th data-options="field:'email',width:120">邮箱</th>
-				<th data-options="field:'status',width:60,formatter:formatValid">是否有效</th>
+				<th data-options="field:'status',width:60,formatter:formatStatus">是否启用</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
 				
 			</tr>
