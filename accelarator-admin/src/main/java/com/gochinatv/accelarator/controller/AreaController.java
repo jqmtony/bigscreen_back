@@ -24,6 +24,9 @@ public class AreaController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 
+	//zhuhh
+	//
+	
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
 		return "/area/list";
