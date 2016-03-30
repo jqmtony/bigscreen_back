@@ -30,7 +30,7 @@ public class AreaController extends BaseController{
 	public String gotoList(){
 		return "/area/list";
 	}
-	
+	//test
 	/**
 	* @author 冯志文
 	* @Description:异步树  easyui 1.2 treegrid
