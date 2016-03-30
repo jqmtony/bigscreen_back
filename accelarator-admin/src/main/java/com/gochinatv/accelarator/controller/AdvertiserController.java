@@ -29,7 +29,7 @@ import com.gochinatv.accelarator.service.AdvertiserService;
 @RequestMapping("/advertiser")
 public class AdvertiserController extends BaseController{
     
-	@Autowired
+	@Autowired 
 	private AdvertiserService advertiserService;
 	
 
