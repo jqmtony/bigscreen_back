@@ -25,7 +25,7 @@ public class AreaController extends BaseController{
 	private AreaService areaService;
 
 	//zhuhh
-	//
+	//limingrui
 	
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
