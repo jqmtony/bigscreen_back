@@ -25,6 +25,7 @@ public class AreaController extends BaseController{
 	private AreaService areaService;
 
 	//fengzw
+
 	@RequestMapping(value = "/gotoList")
 	public String gotoList(){
 		return "/area/list";
