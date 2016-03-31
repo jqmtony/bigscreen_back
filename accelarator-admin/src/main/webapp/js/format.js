@@ -69,7 +69,19 @@ function formatStatus(val, row) {
 		return '已禁用';
 	}
 }
-
+/**
+ * 分屏数量
+ * @param val
+ * @param row
+ * @returns {String}
+ */
+function formatScreenNum(val, row) {
+	if (val == 4) {
+		return '大屏';
+	} else if(val == 1) {
+		return '小屏';
+	}
+}
 /**
  * 广告来源
  * @param val
@@ -80,7 +92,7 @@ function formatSource(val, row) {
 	if (val == 1) {
 		return '自有';
 	} else if(val == 2){
-		return '商家广告';
+		return '商家';
 	}
 }
 

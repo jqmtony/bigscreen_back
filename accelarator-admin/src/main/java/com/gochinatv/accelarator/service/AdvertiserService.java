@@ -11,6 +11,15 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface AdvertiserService  extends BaseService<Advertiser>{
+
+	/**
+	 * 校验用户名唯一性
+	 * @author limr
+	 * @param id
+	 * @param userName
+	 * @return
+	 */
+	Advertiser getBusinessByUserName(int id, String userName);
    
 
 }

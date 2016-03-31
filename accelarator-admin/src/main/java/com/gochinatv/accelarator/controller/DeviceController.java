@@ -48,10 +48,33 @@ public class DeviceController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/gotoDeviceLookUp")
-    public String gotoDeviceLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+    public String gotoDeviceLookUp(Model model,
+    							   @RequestParam(value = "parentMethod") String parentMethod,
+    							   @RequestParam(value = "placeId", required = false, defaultValue = "0") int placeId){
 		model.addAttribute("parentMethod", parentMethod);
+		model.addAttribute("placeId", placeId);
 		return "device/lookUpForSysAdvertisement";
     }
+	
+	/**
+	 * 检验用户名的唯一性
+	 * @author limr
+	 * @param id
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkCode")
+	@ResponseBody
+	public String checkCode(int id, String code) throws Exception{
+		String data = "false";
+		Device device = deviceService.getDeviceByCode(id, code);
+		if(device == null){
+			data = "true";
+		}
+		return data;
+	}
+	
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList( int page, int rows,

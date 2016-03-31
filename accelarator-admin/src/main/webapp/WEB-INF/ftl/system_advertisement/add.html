@@ -4,15 +4,15 @@
 	    		<tr>
 	    			<td>商铺：</td>
 	    			<td>
-		    			<input id="add_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
-		    			data-options="required:true" type="text" name="cname"></input>
-		    			<input type="hidden" id="add_lookUpId" name="placeId"></input>
+		    			<input id="add_lookUpCname" class="easyui-validatebox" onFocus="openPlaceLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openPlaceLookUpCallBack');" 
+		    			data-options="required:true" type="text" name="cname"></input><label style="color: red"> *</label>
+		    			<input type="hidden" id="add_lookUpPlaceId" name="placeId"></input>
 	    			</td>
 	    			<td>设备：</td>
 	    			<td>
-	    				<input id="add_lookUpCode" class="easyui-validatebox" onFocus="openCheckBoxLookUp('${base}/device/gotoDeviceLookUp?parentMethod=openCheckBoxLookUpCallBack');" 
+	    				<input id="add_lookUpCode" class="easyui-validatebox" onFocus="openDeviceLookUp('#add_lookUpPlaceId');" 
 		    			type="text" name="code"></input>
-		    			<input type="hidden" id="add_lookUpId" name="deviceId"></input>
+		    			<input type="hidden" id="add_lookUpDeviceId" name="deviceId"/>
 		    		</td>
 	    		</tr>
 	    		<tr>
@@ -32,9 +32,9 @@
 	    		</tr>
 	    		<tr>
 	    			<td>排序：</td>
-	    			<td><input id="sort" class="easyui-validatebox" type="text" name="sort" data-options="required:true"></input></td>
+	    			<td><input id="sort" class="easyui-validatebox" type="text" name="sort" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td>广告位置：</td>
-	    			<td><input id="adIndex" class="easyui-validatebox" type="text" name="adIndex" data-options="required:true"></input></td>
+	    			<td><input id="adIndex" class="easyui-validatebox" type="text" name="adIndex" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
@@ -47,10 +47,10 @@
 	    		<tr>
 	    			<td>视频地址：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:60px" cols="30" name="videoPath"></textarea>
+	    				<textarea style="height:60px;width:472px" cols="30" name="videoPath"></textarea>
 	    			</td>
 	    		</tr>
-	    		<tr>
+	    		<!-- <tr>
 	    			<td>图片地址：</td>
 	    			<td colspan="3">
 	    				<textarea style="height:60px" cols="30" name="picPath"></textarea>
@@ -63,11 +63,11 @@
 	    			<td colspan="3">
 	    				<textarea style="height:60px" cols="30" name="content"></textarea>
 	    			</td>
-	    		</tr>
+	    		</tr> -->
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:60px" cols="30" name="remark"></textarea>
+	    				<textarea style="height:60px;width:472px" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>
                </table>

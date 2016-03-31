@@ -1,16 +1,23 @@
+<script type="text/javascript">
+//校验设备编码的唯一性
+function checkUpdateCode(id, code, url){
+	var deviceId = $("#id").val();
+	checkCode(id, deviceId, code, url);
+}
+</script>
 <div id="modify-window" title="修改设备信息" class="easyui-window">
 	     <form id="modifyForm" method="post" >
 	    	<table>
 	    		<tr>
 	    			<td>商铺：</td>
 	    			<td><input id="edit_lookUpCname"  class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="cname"></input>
+	    			data-options="required:true" type="text" name="cname"></input><label style="color: red"> *</label>
 	    			<input type="hidden" id="edit_lookUpId" name="placeId"></input>
 	    		</tr>
 	    		<tr>
 	    			<td>设备编码：</td>
-	    			<td><input type="hidden" name="id"></input>
-	    			    <input id="code" class="easyui-validatebox" type="text" name="code" data-options="required:true"></input></td>
+	    			<td><input type="hidden" id="id" name="id"></input>
+	    			    <input id="edit_code" class="easyui-validatebox" type="text" name="code" onblur="checkUpdateCode(this.id, this.value, '${base}/device/checkCode');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			
 	    		</tr>
 	    		
@@ -25,11 +32,16 @@
 	    		</tr>
 	    		<tr>
 	    			<td>设备MAC：</td>
-	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input></td>
+	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>分屏数量：</td>
-	    			<td><input id="screenNum" class="easyui-validatebox" type="text" name="screenNum" data-options="required:true"></input></td>
+	    			<td>
+	    				<select id="screenNum" name="screenNum" style="width:171px;" data-options="required:true">
+		    				<option value="4">大屏</option>
+			           		<option value="1">小屏</option>
+		    			</select><label style="color: red"> *</label>
+		    		</td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>

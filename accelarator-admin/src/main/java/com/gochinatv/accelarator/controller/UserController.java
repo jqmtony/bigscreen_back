@@ -4,16 +4,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.UserService;
+import com.gochinatv.accelarator.util.Md5Util;
 
 /**
  * 
@@ -34,12 +37,19 @@ public class UserController extends BaseController{
 	public String gotoList(Model model) throws Exception{
 		return "user/list";
 	}
-	
+	/**
+	 * 检验用户名的唯一性
+	 * @author limr
+	 * @param id
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/checkUserName")
 	@ResponseBody
-	public String checkUserName(String userName) throws Exception{
+	public String checkUserName(int id, String userName) throws Exception{
 		String data = "false";
-		User user = userService.getUserByUserName(userName);
+		User user = userService.getUserByUserName(id, userName);
 		if(user == null){
 			data = "true";
 		}
@@ -64,6 +74,7 @@ public class UserController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			user.setCreateTime(new Date());
+			user.setPassword(Md5Util.md5(user.getPassword()));
 //			user.setStatus(1);
 			userService.save(user);
 		}catch(Exception e){

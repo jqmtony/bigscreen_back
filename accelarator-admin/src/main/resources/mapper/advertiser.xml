@@ -15,7 +15,7 @@
 		<result property="remark" column="remark" />
 		<result property="birthday" column="birthday" />
 		<result property="createTime" column="create_time" />
-		<result property="status" column="status" />
+		<!-- <result property="status" column="status" /> -->
 	</resultMap>
 	
 	<select id="getListByEntity" resultMap="Advertiser" parameterType="Advertiser">
@@ -28,7 +28,7 @@
 			<if test="realName!=null">
 				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
 			</if>
-			<if test="countryCode!=null and countryCode!=''">
+			<!-- <if test="countryCode!=null and countryCode!=''">
 				and country_code = #{countryCode}
 			</if>
 			<if test="areaCode!=null and areaCode!=''" >
@@ -36,12 +36,19 @@
 			</if>
 			<if test="cityCode!=null and cityCode!=''">
 				and city_code = #{cityCode}
-			</if>
+			</if> -->
 		</where>
 		order by create_time desc
 	</select>
 	
-		<insert id="save" parameterType="Advertiser">
+	<select id="getAdvertiserByUserName" resultMap="Advertiser" parameterType="Advertiser">
+		select * from advertiser where user_name = #{userName}
+			<if test="id!=0">
+				and id!=#{id}
+			</if>
+	</select>
+	
+	<insert id="save" parameterType="Advertiser">
 	   insert into advertiser(
 	            user_name,
 	            password,

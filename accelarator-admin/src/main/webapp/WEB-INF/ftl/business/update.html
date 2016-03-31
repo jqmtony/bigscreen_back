@@ -3,10 +3,10 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>用户名：</td>
-	    			<td><input type="hidden" name="id"></input>
-	    			    <input id="_userName_" class="easyui-validatebox" type="text" name="userName" data-options="required:true"></input></td>
+	    			<td><input type="hidden" id="id" name="id"></input>
+	    			    <input id="edit_userName" class="easyui-validatebox" type="text" name="userName" onblur="checkUpdateUserName(this.id,this.value,'${base}/business/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td>商家：</td>
-	    			<td><input id="_realName_" class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input></td>
+	    			<td><input id="_realName_" class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    	<!-- 	<tr>
 	    			<td>国家：</td>
@@ -22,9 +22,9 @@
 	    		</tr> -->
 	    		<tr>
 	    			<td>手机：</td>
-	    			<td><input id="_mobile_" class="easyui-validatebox" type="text" name="mobile" data-options="required:true"></input></td>
+	    			<td><input id="_mobile_" class="easyui-validatebox" type="text" name="mobile" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td>电子邮箱：</td>
-	    			<td><input id="_email_" class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><input id="_email_" class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>微信号：</td>

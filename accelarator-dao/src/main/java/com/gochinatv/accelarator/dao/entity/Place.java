@@ -33,6 +33,15 @@ public class Place extends BaseVo implements Serializable {
 	
 	
 	private String userName;//临时，商家用户名称
+	private String realName;//临时，商家真实姓名
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
 
 	public String getCname() {
 		return cname;

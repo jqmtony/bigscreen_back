@@ -85,6 +85,48 @@ function removeModule(){
 		});
 	}
 }
+//校验用户名的唯一性
+//修改时
+function checkUpdateUserName(id, userName, url){
+	var userId = $("#id").val();
+	checkUserName(id, userId, userName, url);
+}
+//添加时
+function checkUserName(id, userId, userName, url){
+	$.ajax({  
+		    url:url,   
+		    data:{  
+		    	id : userId,
+		    	userName : userName
+		    },  
+		    type:'post',  
+		    dataType:'json',  
+		    success:function(data) { 
+		        if(data == false ){
+		        	alert("用户名已存在，请重新输入！");
+		            $("#"+id).val(''); 
+		            $("#"+id).focus();
+		        } 
+		     },  
+		     error : function() {  
+		          alert("异常！");  
+		     }  
+		});
+}
+//校验确认密码
+function checkRetPassword(){
+	var psw = $("#password").val();
+	var r_psw = $("#ret_password").val();
+	if((psw == null || psw == "") && (r_psw != null && r_psw != "")){
+		alert("请先输入密码！");
+		$("#password").focus();
+		$("#ret_password").val('');
+	} else if((psw != null && psw != "") && (r_psw != null && r_psw != "") && psw != r_psw){
+		alert("两次输入的密码不一样!");
+		$("#ret_password").focus();
+		$("#ret_password").val('');
+	}
+}
 
 //焦点定位
 function onFocusMain(){

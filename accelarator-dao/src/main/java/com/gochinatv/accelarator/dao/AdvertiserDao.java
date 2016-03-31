@@ -11,6 +11,14 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  * @修改时间
  */
 public interface AdvertiserDao  extends BaseDao<Advertiser>{
+
+	/**
+	 * 校验用户名唯一性
+	 * @author limr
+	 * @param advertiser
+	 * @return
+	 */
+	Advertiser getAdvertiserByUserName(Advertiser advertiser);
    
 
 }
