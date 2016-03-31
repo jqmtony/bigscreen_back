@@ -10,7 +10,7 @@
 <script type="text/javascript" src="${base}/easyui/frameCommon.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
 <script type="text/javascript" src="${base}/js/format.js"></script>
-<script type="text/javascript" src="${base}/js/region.js"></script>
+<script type="text/javascript" src="${base}/js/data.js"></script>
 <script type="text/javascript">
    $(function() {
 		
@@ -19,14 +19,14 @@
 		$('#startTime').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
-                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
                 return d1<=date;
             }
         });
 		$('#endTime').datebox().datebox('calendar').calendar({
             validator: function(date){
                 var now = new Date();
-                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
                 return d1<=date;
             }
         });

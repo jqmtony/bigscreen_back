@@ -75,7 +75,24 @@ public class DictController extends BaseController{
 		
 		buffer.append("var _xzqh=" + xzqh.toJSONString()+"\n");
 		
-		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/region.js"));
+		String[] shopType = new String[]{"餐厅","大使馆","商场","美甲区","其它"};
+		JSONArray shopTypeArray = new JSONArray();
+		for(int i=0;i<shopType.length;i++){
+			JSONObject object = new JSONObject();
+			object.put("id", i+1);
+			object.put("text",shopType[i]);
+			shopTypeArray.add(object);
+		}
+		buffer.append("var _shop_type=" + shopTypeArray.toJSONString()+"\n");
+		
+		JSONObject shopTypeTree = new JSONObject();
+		shopTypeTree.put("id", "-1");
+		shopTypeTree.put("text","全部");
+		shopTypeTree.put("children", shopTypeArray);
+		
+		buffer.append("var _shop_type_tree=" + shopTypeTree.toJSONString()+"\n");
+		
+		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/data.js"));
 		out = new OutputStreamWriter(fos, "UTF-8");
 		out.write(buffer.toString());
 		out.flush();
