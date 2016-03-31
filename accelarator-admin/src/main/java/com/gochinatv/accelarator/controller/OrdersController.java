@@ -41,7 +41,7 @@ public class OrdersController extends BaseController{
 	@ResponseBody
 	public PageInfo<Orders> queryList(int page,int rows,Orders orders) throws Exception{
 		PageInterceptor.startPage(page, rows);
-		List<Orders> list = ordersService.getListByEntity(orders);
+		List<Orders> list = ordersService.getOrdersList(orders);
 		PageInfo<Orders> pageInfo = new PageInfo<Orders>(list);
 		return pageInfo;
 	}

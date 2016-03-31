@@ -15,6 +15,14 @@ public interface OrdersDao  extends BaseDao<Orders>{
    
     
 	/**
+	 * 订单列表
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> getOrdersList(Orders orders);
+	
+	
+	/**
 	 * 在播广告列表
 	 * @param orders
 	 * @return

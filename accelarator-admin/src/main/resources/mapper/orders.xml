@@ -27,6 +27,21 @@
 		<result property="type" column="type" />
 	</resultMap>
 	
+	<select id="getOrdersList" resultMap="Orders" parameterType="Orders">
+		SELECT o.order_no,uc.id,uc.real_name AS createrName,o.create_time,o.status,a.real_name,oa.real_name AS auditorName,o.audit_time FROM orders o 
+   	    LEFT JOIN advertiser a ON a.id=o.advertiser_id  LEFT JOIN advertisement am ON am.id=o.advertisement_id 
+        LEFT JOIN user uc ON o.creater=uc.id LEFT JOIN user oa ON oa.id=o.auditor  
+        <where>
+			1=1
+			<if test="orderNo!=null and orderNo!=''">
+				and o.order_no like '%#{orderNo!=}%'
+			</if>
+			<if test="realName!=null and realName!=''">
+				and a.real_name like '%#{realName}%'
+			</if>
+		</where>
+	</select>
+	
 	<!-- 在播广告列表 -->
 	<select id="queryPlayList" parameterType="Orders" resultType="Orders">
         SELECT am.id,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
@@ -47,29 +62,13 @@
 		</where>
 	</select>
 	
-	<select id="getListByEntity" resultType="Orders" parameterType="Orders">
-		SELECT o.order_no,uc.real_name as createrName,o.create_time,o.status,a.real_name,oa.real_name as auditorName,o.audit_time FROM orders o  
-        LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
-        ON a.id=am.advertiser_id LEFT JOIN USER uc ON o.creater=uc.id LEFT JOIN USER oa 
-        ON oa.id=o.auditor 
-        <where>
-			1=1
-			<if test="orderNo!=null and orderNo!=''">
-				and o.order_no = #{countryCode}
-			</if>
-			<if test="realName!=null and realName!=''">
-				and uc.real_name like '%#{realName}%'
-			</if>
-		</where>
-	</select>
-	
 	
 	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
        SELECT p.type, p.country_code, p.area_code, p.city_code FROM place p 
        WHERE NOT EXISTS (
             SELECT * FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code AND p.type = od.type 
             <if test="startTime!=null and endTime!=null">
-			  AND ((o.start_time &gt;#{startTime} AND o.start_time &lt; #{endTime}) OR (o.end_time &gt;#{startTime} AND o.end_time &lt;#{endTime}))
+			  AND ((o.start_time &gt;=#{startTime} AND o.start_time &lt;= #{endTime}) OR (o.end_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}))
 			</if>
         )
 		<if test="types!=null and types!=''">

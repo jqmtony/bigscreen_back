@@ -15,6 +15,14 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 public interface OrdersService  extends BaseService<Orders>{
    
 	/**
+	 * 订单列表
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> getOrdersList(Orders orders);
+	
+	
+	/**
 	 * 在播广告列表
 	 * @param orders
 	 * @return

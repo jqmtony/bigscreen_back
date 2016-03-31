@@ -38,6 +38,15 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	
 	
 	/**
+	 * 订单列表
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> getOrdersList(Orders orders){
+		return ordersDao.getOrdersList(orders);
+	}
+	
+	/**
 	 * 在播广告列表
 	 * @param orders
 	 * @return
