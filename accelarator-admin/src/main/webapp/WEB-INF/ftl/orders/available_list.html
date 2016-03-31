@@ -46,18 +46,17 @@
 	   }
 	   var ids="";
 	   for(i=0;i<checked.length;i++){
-		   ids+=","+checked[i].id;
+		   ids+=",'"+checked[i].type+"-"+checked[i].cityCode+"'";
 	   }
 	   ids = ids.replace(",","");//已经勾选的id字符串
-	   var code = $("#cityCode").val();//已选择城市字符串
-	   var types = $("#types").val();//店铺类型
+
 	   var startTime= $("#startTime").datebox('getValue');//开始时间
 	   var endTime= $("#endTime").datebox('getValue');//结束时间
 	   
-	   var url = '${base}/orders/createOrder?cityCode='+code+'&types='+types+'&startTime='+startTime+'&endTime='+endTime+'&ids='+ids;
-	   
+	   var url = '${base}/orders/createOrder?startTime='+startTime+'&endTime='+endTime+'&ids='+ids;
 	   parent.addTab('订单预览',url,'',true);
    }
+   
    
    //必须精确到城市最底层
    function available_search(){
@@ -102,7 +101,7 @@
 		   $("#cityCode").val(val.replace(",",""));
 		   $("#types").val(types.replace(",",""));
 		   $('#tab').datagrid( {
-				url :'${base}/place/queryAvailableList',
+				url :'${base}/orders/queryAvailableList',
 				queryParams:$("#queryForm").serializeObject()
 		   });
 	   }
@@ -114,7 +113,6 @@
 		<thead>
 			<tr>
 			    <th data-options="field:'id',checkbox:true"></th>
-                <th data-options="field:'cname',width:100">店铺名称</th>
 			    <th data-options="field:'type',width:100,formatter:formatPlaceType">店铺类型</th>
 			    <th data-options="field:'countryCode',width:100,formatter:formatCountry">国家</th>
 				<th data-options="field:'areaCode',width:100,formatter:formatArea">地区</th>

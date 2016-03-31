@@ -31,7 +31,7 @@
 <body>
    <div id="layout" class="easyui-layout" style="width:auto;height:200px;">
 		<div data-options="region:'west'" style="width:600px;border:0px;">
-		   <table class="easyui-datagrid" id="tab"  data-options="title:'订单号：${order_no}'">
+		   <table class="easyui-datagrid" id="tab"  data-options="title:'订单号：${orders.orderNo}'">
 				<thead>
 					<tr>
 					    <th data-options="field:'type',width:100,formatter:formatPlaceType">店铺类型</th>
@@ -45,7 +45,7 @@
 		<div data-options="region:'center'" style="border:0px 0px 1px 0px;">
 			 <div id="n" class="easyui-panel" title="订单有效期" style="width:100%;height:90px;">
 				<p style="font-size:18px;color:red;">
-				  该订单视频将于 ${place.startTime}日0点   至    ${place.endTime}日23:59:59播放
+				  该订单视频将于 ${orders.startTime}日0点   至    ${orders.endTime}日23:59:59播放
 				</p>
 			 </div><br/><br/>
              <div id="s" class="easyui-panel" title="广告商信息" style="width:100%;height:85px;border-bottom:0px;">
@@ -53,16 +53,16 @@
 					<table>
 						<tr>
 							<td>广告商：
-							    <input name="ids" type="hidden" value="${place.ids}"/>
-							    <input name="order_no" type="hidden" value="${order_no}"/>
-						        <input name="startTime" type="hidden" value="${place.startTime}"/>
-						        <input name="endTime" type="hidden" value="${place.endTime}"/>
+							    <input name="ids" type="hidden" value="${orders.ids}"/>
+							    <input name="orderNo" type="hidden" value="${orders.orderNo}"/>
+						        <input name="startTime" type="hidden" value="${orders.startTime}"/>
+						        <input name="endTime" type="hidden" value="${orders.endTime}"/>
 							</td>
 							<td>
 							  <input id="add_lookUpName" class="easyui-validatebox" 
 							  onFocus="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');" 
 	    			          data-options="required:true" type="text" name="advertiserName"/>
-	    			          <input type="hidden" id="add_lookUpId" name="advertiserId"/>
+	    			          <input type="hidden" id="add_lookUpId" name="advertiserId" value="0"/>
 							</td>
 						</tr>
 						<tr>
@@ -73,7 +73,7 @@
 				</form>
 			</div>
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">提交订单</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('saveOrder');">提交订单</a>
 		    </div>
 		</div>
 	</div>

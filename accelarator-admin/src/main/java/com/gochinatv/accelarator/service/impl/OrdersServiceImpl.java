@@ -3,13 +3,13 @@ package com.gochinatv.accelarator.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.OrdersDao;
 import com.gochinatv.accelarator.dao.OrdersDetailDao;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.dao.entity.OrdersDetail;
-import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.service.OrdersService;
@@ -31,7 +31,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	@Autowired
 	private OrdersDetailDao ordersDetailDao;
 	
-	
 	@Override
 	protected BaseDao<Orders> getDao() {
 		return ordersDao;
@@ -47,30 +46,53 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return ordersDao.queryPlayList(orders);
 	}
 	
+	/**
+	 * 查看可用广告位
+	 * @param order
+	 * @return
+	 */
+	public List<Orders> getAvailableList(Orders orders){
+		String cityCode = orders.getCityCode();
+		StringBuffer buffer = new StringBuffer("'");
+		if(!StringUtils.isEmpty(cityCode)){
+		   cityCode = cityCode.replaceAll(",","','");
+		   buffer.append(cityCode);
+		}
+		buffer.append("'");
+		orders.setCityCode(buffer.toString());
+		return ordersDao.getAvailableList(orders);
+	}
+	
+	/**
+	 * 订单预览确认
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> getRetryOrdersList(Orders orders){
+		return ordersDao.getRetryOrdersList(orders);
+	}
 	
 	/**
 	 * 保存订单，保存订单详情
 	 * @param place
 	 * @throws Exception 
 	 */
-	public void save(Place place) throws Exception{
-		
-		Orders orders = new Orders();
-		orders.setOrderNo("");
+	public void save(Orders orders) throws Exception{
 		orders.setCreater(SessionUtils.getLoginUser().getId());
 		orders.setCreateTime(new Date());
-		orders.setAdvertiserId(advertiserId);
-		orders.setStartTime(startTime);
-		orders.setEndTime(endTime);
 		orders.setStatus(1);
 		ordersDao.save(orders);
 		
-		OrdersDetail detail = new OrdersDetail();
-		detail.setType(type);
-		detail.setOrdersId(orders.getId());
-		detail.setCountryCode(countryCode);
-		detail.setAreaCode(areaCode);
-		detail.setCityCode(cityCode);
-		ordersDetailDao.save(detail);
+		List<Orders> ordersList = this.getRetryOrdersList(orders);
+		for (Orders o : ordersList) {
+			OrdersDetail detail = new OrdersDetail();
+			detail.setType(o.getType());
+			detail.setOrdersId(orders.getId());
+			detail.setCountryCode(o.getCountryCode());
+			detail.setAreaCode(o.getAreaCode());
+			detail.setCityCode(o.getCityCode());
+			ordersDetailDao.save(detail);
+		}
 	}
+	
 }

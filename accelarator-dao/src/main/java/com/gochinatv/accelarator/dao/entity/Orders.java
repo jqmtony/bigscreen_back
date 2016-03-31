@@ -26,8 +26,8 @@ public class Orders extends BaseVo implements Serializable {
 	private Date auditTime;// 审核时间
 	private int advertiserId;// 广告商id
 	private int advertisementId;// 视频广告id
-	private Date startTime;// 开始时间
-	private Date endTime;// 结束时间
+	private String startTime;// 开始时间
+	private String endTime;// 结束时间
 	private int status;//订单状态   （1：待审核, 2：已审核，3：等待上线, 4：在线播放中, 5：等待下线, 6：已下线）
 	
 	
@@ -37,6 +37,10 @@ public class Orders extends BaseVo implements Serializable {
 	private String cityCode;//临时，城市code
 	private String createrName;//临时，创建人名称
 	private String auditorName;//临时，审核人名称
+	
+	private int type;//临时，店铺类型
+	private String ids;//id集合，查看可用广告逗号分隔
+	private String types;//临时，店铺类型的多选逗号分隔
 
 	public String getOrderNo() {
 		return orderNo;
@@ -94,19 +98,19 @@ public class Orders extends BaseVo implements Serializable {
 		this.advertisementId = advertisementId;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -168,4 +172,27 @@ public class Orders extends BaseVo implements Serializable {
 		this.auditorName = auditorName;
 	}
 
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
+
+	public String getTypes() {
+		return types;
+	}
+
+	public void setTypes(String types) {
+		this.types = types;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 }

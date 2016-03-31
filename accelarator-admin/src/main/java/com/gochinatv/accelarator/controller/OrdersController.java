@@ -3,7 +3,6 @@ package com.gochinatv.accelarator.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Orders;
-import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.OrdersService;
-import com.gochinatv.accelarator.service.PlaceService;
 
 
 /**
@@ -33,10 +30,6 @@ public class OrdersController extends BaseController{
     
 	@Autowired
 	private OrdersService ordersService;
-	
-	@Autowired
-	private PlaceService placeService;
-	
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
@@ -87,6 +80,7 @@ public class OrdersController extends BaseController{
 		return pageInfo;
 	}
 	
+	
 	/*****************************************************************************************************************/
 	/**
 	 * 到可用广告列表
@@ -96,7 +90,7 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/gotoAvailableList")
 	public String gotoAvailableList() throws Exception{
-		return "place/available_list";
+		return "orders/available_list";
 	}
 	
 	/**
@@ -107,8 +101,8 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/queryAvailableList")
 	@ResponseBody
-	public List<Place> queryAvailableList(Place place) throws Exception{
-		List<Place> list = placeService.getAvailableList(place);
+	public List<Orders> queryAvailableList(Orders orders) throws Exception{
+		List<Orders> list = ordersService.getAvailableList(orders);
 		return list;
 	}
 	
@@ -120,9 +114,9 @@ public class OrdersController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping("/createOrder")
-	public String createOrder(Place place,Model model) throws Exception{
-		model.addAttribute("order_no",DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
-		model.addAttribute("place",place);
+	public String createOrder(Orders orders,Model model) throws Exception{
+		orders.setOrderNo(DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
+		model.addAttribute("orders",orders);
 		return "orders/order_preview";
 	}
 	
@@ -135,8 +129,8 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/orderDetail")
 	@ResponseBody
-	public List<Place> orderDetail(Place place) throws Exception{
-		List<Place> list = placeService.getAvailableList(place);
+	public List<Orders> orderDetail(Orders orders) throws Exception{
+		List<Orders> list = ordersService.getRetryOrdersList(orders);
 		return list;
 	}
 	
@@ -148,10 +142,10 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/saveOrder")
 	@ResponseBody
-	public Map<String,Object> saveOrder(Place place){
+	public Map<String,Object> saveOrder(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.save(place);
+			ordersService.save(orders);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

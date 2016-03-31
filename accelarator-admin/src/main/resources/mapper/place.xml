@@ -18,7 +18,7 @@
 		<result property="createTime" column="create_time" />
 		
 		<result property="userName" column="user_name" />
-		<result property="code" column="code" />
+		<result property="realName" column="real_name" />
 	</resultMap>
 	
 	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
@@ -26,7 +26,7 @@
 	</select>
 	
 	<select id="getListByEntity" resultMap="Place" parameterType="Place">
-		select p.*, b.user_name from place p left join business b on p.business_id=b.id
+		select p.*, b.user_name, b.real_name from place p left join business b on p.business_id=b.id
 		<where>
 			1=1
 			<if test="cname!=null">
@@ -107,23 +107,4 @@
 	  delete from place where id = #{id}
 	</delete>
 	
-	<select id="getAvailableList" resultMap="Place" resultType="Place">
-       SELECT p.id, p.cname, p.type, p.country_code, p.area_code, p.city_code FROM place p 
-       WHERE NOT EXISTS (
-            SELECT * FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code 
-            <if test="startTime!=null and endTime!=null">
-			  AND ((o.start_time &gt;#{startTime} AND o.start_time &lt; #{endTime}) OR (o.end_time &gt;#{startTime} AND o.end_time &lt;#{endTime}))
-			</if>
-        )
-		<if test="types!=null and types!=''">
-			AND p.type in(${types})
-		</if>
-		<if test="cityCode!=null and cityCode!=''">
-			AND p.city_code in(${cityCode})
-		</if>
-		<if test="ids!=null and ids!=''">
-			AND p.id in(${ids})
-		</if>
-	</select>
-
 </mapper>

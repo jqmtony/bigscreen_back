@@ -3,7 +3,6 @@ package com.gochinatv.accelarator.service;
 
 import java.util.List;
 import com.gochinatv.accelarator.dao.entity.Orders;
-import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
 /**
@@ -24,9 +23,25 @@ public interface OrdersService  extends BaseService<Orders>{
 	
 	
 	/**
+	 * 查看可用广告位
+	 * @param place
+	 * @return
+	 */
+	public List<Orders> getAvailableList(Orders orders);
+	
+	
+	/**
+	 * 订单预览确认
+	 * @param orders
+	 * @return
+	 */
+	public List<Orders> getRetryOrdersList(Orders orders);
+	
+	
+	/**
 	 * 保存订单，保存订单详情
 	 * @param place
 	 * @throws Exception 
 	 */
-	public void save(Place place) throws Exception;
+	public void save(Orders orders) throws Exception;
 }

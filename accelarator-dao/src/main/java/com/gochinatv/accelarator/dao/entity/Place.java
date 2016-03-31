@@ -33,10 +33,6 @@ public class Place extends BaseVo implements Serializable {
 	
 	
 	private String userName;//临时，商家用户名称
-	private String startTime;//临时，查看可用广告的开始时间
-	private String endTime;//临时，查看可用广告的结束时间
-	private String ids;//id集合，查看可用广告逗号分隔
-	private String types;//临时，店铺类型的多选逗号分隔
 
 	public String getCname() {
 		return cname;
@@ -142,36 +138,4 @@ public class Place extends BaseVo implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
-	public String getIds() {
-		return ids;
-	}
-
-	public void setIds(String ids) {
-		this.ids = ids;
-	}
-
-	public String getTypes() {
-		return types;
-	}
-
-	public void setTypes(String types) {
-		this.types = types;
-	}
-	
 }

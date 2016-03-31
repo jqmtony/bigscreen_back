@@ -22,6 +22,9 @@
 		<result property="cityCode" column="city_code" />
 		<result property="createrName" column="createrName" />
 		<result property="auditorName" column="auditorName" />
+		
+		<result property="cname" column="cname" />
+		<result property="type" column="type" />
 	</resultMap>
 	
 	<!-- 在播广告列表 -->
@@ -60,7 +63,35 @@
 		</where>
 	</select>
 	
-	<insert id="save" parameterType="Orders">
+	
+	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
+       SELECT p.type, p.country_code, p.area_code, p.city_code FROM place p 
+       WHERE NOT EXISTS (
+            SELECT * FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code AND p.type = od.type 
+            <if test="startTime!=null and endTime!=null">
+			  AND ((o.start_time &gt;#{startTime} AND o.start_time &lt; #{endTime}) OR (o.end_time &gt;#{startTime} AND o.end_time &lt;#{endTime}))
+			</if>
+        )
+		<if test="types!=null and types!=''">
+			AND p.type in(${types})
+		</if>
+		<if test="cityCode!=null and cityCode!=''">
+			AND p.city_code in(${cityCode})
+		</if>
+	</select>
+	
+	
+	<select id="getRetryOrdersList" resultMap="Orders" parameterType="Orders">
+       SELECT type, country_code, area_code, city_code FROM place 
+        <where>
+             1=1 
+             <if test="ids!=null and ids!=''">
+				 AND CONCAT(type,'-',city_code) IN (${ids})
+			 </if>
+        </where>
+	</select>
+	
+	<insert id="save" parameterType="Orders" keyProperty="id">
 	   insert into orders (
 			order_no,
 			creater,
