@@ -7,33 +7,21 @@
 <script type="text/javascript">
 	$(function(){
 		grid =	$('#areaTreeGrid').treegrid({
-				title:'地域管理',
 				nowrap: false,
 				rownumbers: true,
 				mouseoverShowObar:true,
+				fit:true,
+				fitColumns:true,
 				animate:true,
 				url:'${base}/area/querySynAreaList',
 				idField:'areaCode',
 				treeField:'areaNameH',
 				height:420,
 				width:800,
-				toolbar : [ {
-					text : '新建',
-					iconCls : 'icon-add',
-					handler : add
-				}, {
-					text : '修改',
-					iconCls : 'icon-cut',
-					handler : modify
-				}, {
-					text : '删除',
-					iconCls : 'icon-remove',
-					handler : deleteArea
-				} ],
-			
-					onDblClickRow:function(row){
-						modifyRow(row);
-					}
+				toolbar:'#toolbar',
+				onDblClickRow:function(row){
+					modifyRow(row);
+				}
 			});
 			
 		
@@ -68,39 +56,12 @@
 		});
 		}
    }
-
-	
-	//菜单右键
-	function rightMenu(eve){
-		var left=0;
-		var top=0;
-		if(eve.pageY||eve.pageX){
-  			 //火狐
-  			 top = eve.pageY +10;
-  			 left = eve.pageX +10;
-  		 }else{
-  			 //IE
-  			 left = event.clientX + document.body.scrollLeft+ document.documentElement.scrollLeft +10;
-  			 top = event.clientY + document.body.scrollTop + document.documentElement.scrollTop + 10;
-  		 }
-			$('#rightMenu').menu('show',{
-					left:left,
-					top:top
-				});
-		return false;
-	}
-	
-/* 	$(function(){
-		$('#addsort').numberbox({min:1,max:99,precision:0});
-		$('#updatesort').numberbox({min:1,max:99,precision:0});
-	});
- */</script>
+</script>
 	
 </head>
 <body >
 
- <div id="mainPanle"> 
-<table id="areaTreeGrid" border="0" cellspacing="0" cellpadding="1" >
+<table id="areaTreeGrid" class="easyui-datagrid">
 	<thead>
 		<tr>
 		    <th field="areaNameH" width="200" >名称</th>
@@ -110,17 +71,15 @@
 			<th field="sort" width="30">排序</th>
 			<th field="createTime" width="180">更新时间</th>
 		</tr>
-		
 	</thead>
 </table>
-</div>
 
    <#include "./add.html">
    <#include "./update.html">
-<div id="rightMenu" class="easyui-menu" style="width:120px;">
-		<div iconCls="icon-add"  onclick="add();">新建</div>
-		<div iconCls="icon-cut" onclick="modify();">修改</div>
-		<div iconCls="icon-remove" onclick="deleteArea();">删除</div>
+   <div id="toolbar" style="padding:2px 5px;">
+		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
+		<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">修改</a>
+		<a href="javascript:void(0);" onclick="deleteArea();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
 	</div>
 </body>
 </html>

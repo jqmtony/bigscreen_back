@@ -35,7 +35,7 @@
 	 <input type="hidden" id="parentCode" name="parentCode"  />
     <input type="hidden" id="areaCode" name="areaCode"  />
     <input type="hidden" id="updatelevel" name="level"  />
-<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+<table>
 <!-- 
 	<tr class="datagrid-row-alt">
 		<td>区号：</td>
@@ -45,13 +45,13 @@
 	<td></td>
 	</tr> -->
 	
-	<tr class="datagrid-row-alt">
-		<td>区号：</td>
-		<td ><input type="text" id="updateareaCode" name="areaCode" disabled="disabled" maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />(命名规范4-6-8)</td>
-		<td>名称：</td>
-		<td >
+	<tr>
+	    <td width="12%">名称：</td>
+		<td width="38%">
 		   <input id="updatename" name="name"  class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /> 
 		</td>
+		<td width="12%">区号：</td>
+		<td width="38%"><input type="text" id="updateareaCode" name="areaCode" disabled="disabled" maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />(命名规范4-6-8)</td>
 	</tr>
 	<tr >
 		<td>状态：</td>
@@ -59,17 +59,19 @@
 			<input type="radio" id="updatestatus" name="status" value="1" >无效
 			<input type="radio" id="updatestatus" name="status" value="2"  >有效
 		</td>
-		<td>排序</td>
+		<td>排序：</td>
 		<td >
-		<input type="text" id="updatesort" name="sort" style="width:50px; style="width:50px;" maxLength="2" class="easyui-validatebox" required="true" missingMessage="必填"/>(值为0-99)
+		<input type="text" id="updatesort" name="sort" style="width:80px; maxLength="2" class="easyui-validatebox" required="true" missingMessage="必填"/>(值为0-99)
 		</td>
 	</tr>
-	<tr><td></td><td></td><td></td><td></td></tr>
-	<tr class="datagrid-row-alt"><td colspan="6" align="center">
-	<input type="button" name="sub" value="提交" onclick="modifySave('update');"/>
-	<input type="button" name="resetButton" value="取消" onclick="winClose();"/>
-	</td></tr>
-
 </table>
 </form>
+
+<div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+		    </div>
+		    
 </div>
+
+
