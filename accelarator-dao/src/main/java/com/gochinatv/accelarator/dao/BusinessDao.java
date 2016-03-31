@@ -12,6 +12,14 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  * @修改时间
  */
 public interface BusinessDao extends BaseDao<Business>{
+
+	/**
+	 * 校验用户名唯一性
+	 * @author limr
+	 * @param business
+	 * @return
+	 */
+	Business getBusinessByUserName(Business business);
 	   
 
 }

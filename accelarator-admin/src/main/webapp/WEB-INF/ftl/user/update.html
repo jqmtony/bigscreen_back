@@ -1,25 +1,26 @@
+
 <div id="modify-window" title="修改用户信息" class="easyui-window" >
 	     <form id="modifyForm" method="post" >
 	    	<table>
 	    		<tr>
 	    			<td>用户名：</td>
 	    			<td><input type="hidden" name="id" id="id"></input>
-	    			    <input class="easyui-validatebox" type="text" id="edit_userName" name="userName"  onblur="checkUserName(this.id,this.value);" data-options="required:true"></input></td>
+	    			    <input class="easyui-validatebox" type="text" id="edit_userName" name="userName"  onblur="checkUpdateUserName(this.id,this.value,'${base}/user/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		
 	    		<tr>
 	    			<td>真实姓名：</td>
-	    			<td><input class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input></td>
+	    			<td><input class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		
 	    		<tr>
 	    			<td>手机：</td>
-	    			<td><input  class="easyui-validatebox" type="text" name="mobile" data-options="required:true"></input></td>
+	    			<td><input  class="easyui-validatebox" type="text" name="mobile" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		
 	    		<tr>
 	    			<td>电子邮箱：</td>
-	    			<td><input  class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><input  class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>

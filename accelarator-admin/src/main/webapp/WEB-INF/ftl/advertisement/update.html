@@ -33,18 +33,29 @@ $(function(){
 	    			<td>广告商：</td>
 	    			<td><input type="hidden" name="id"></input>
 	    				<input id="edit_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="userName"></input>
+	    			data-options="required:true" type="text" name="userName"></input><label style="color: red"> *</label>
 	    			<input type="hidden" id="edit_lookUpId" name="advertiserId"></input>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>广告标题：</td>
-	    			<td><input id="title" class="easyui-validatebox" type="text" name="title" data-options="required:true"></input></td>
+	    			<td><input id="title" class="easyui-validatebox" type="text" name="title" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>视频分辨率：</td>
 	    			<td><input id="resolution" class="easyui-validatebox" type="text" name="resolution"></input></td>
 	    		</tr>	
+	    		<tr>
+	    			<td>
+	    				广告来源：
+	    			</td>
+	    			<td>
+		    			<select name="source" style="width:171px;">
+				            <option value="1">自有</option>
+				            <option value="2">商家</option>
+			           	</select>
+		           	</td>
+	    		</tr>
 	    		<tr>
 	    			<td>广告类型：</td>
 	    			<td><select id="type" name="type" style="width:171px;">
@@ -63,7 +74,7 @@ $(function(){
 	    		</tr> -->
 	    		<tr>
 	    			<td>广告时长：</td>
-	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input>（秒）</td>
+	    			<td><input id="duration" class="easyui-validatebox" type="text" name="duration" data-options="required:true"></input>（秒）<label style="color: red"> *</label></td>
 	    			<!-- <td>状态：</td>
 	    			<td><select id="status" name="status" style="width:171px;">
 			           		<option value="1">启用</option>

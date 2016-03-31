@@ -43,6 +43,13 @@
 		</where>
 	</select>
 	
+	<select id="getBusinessByUserName" resultMap="Business" parameterType="Business">
+		select * from business where user_name = #{userName}
+			<if test="id!=0">
+				and id!=#{id}
+			</if>
+	</select>
+	
 	<select id="getEntityById" resultMap="Business" parameterType="int">
 		select * from business where id=#{id}
 	</select>

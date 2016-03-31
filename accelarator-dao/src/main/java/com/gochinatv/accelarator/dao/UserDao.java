@@ -13,6 +13,12 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  */
 public interface UserDao  extends BaseDao<User>{
 
-	User getUserByUserName(String userName);
+	/**
+	 * 校验用户名唯一性
+	 * @author limr
+	 * @param user
+	 * @return
+	 */
+	User getUserByUserName(User user);
 
 }

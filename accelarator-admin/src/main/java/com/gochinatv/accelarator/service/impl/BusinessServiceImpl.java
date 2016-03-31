@@ -40,4 +40,12 @@ public class BusinessServiceImpl extends BaseServiceImpl<Business> implements Bu
 		}
 	
 	}
+
+	public Business getBusinessByUserName(int id, String userName) {
+		Business business = new Business();
+		business.setId(id);
+		business.setUserName(userName);
+		return businessDao.getBusinessByUserName(business);
+
+	}
 }

@@ -16,6 +16,7 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.BusinessService;
+import com.gochinatv.accelarator.util.Md5Util;
 
 /**
  * 
@@ -48,6 +49,26 @@ public class BusinessController extends BaseController{
 		PageInfo<Business> pageInfo = new PageInfo<Business>(list);
 		return pageInfo;
 	}
+	
+	/**
+	 * 检验用户名的唯一性
+	 * @author limr
+	 * @param id
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkUserName")
+	@ResponseBody
+	public String checkUserName(int id, String userName) throws Exception{
+		String data = "false";
+		Business business = businessService.getBusinessByUserName(id, userName);
+		if(business == null){
+			data = "true";
+		}
+		return data;
+	}
+	
 	/**
 	 * 
 	 * @param parentMethod
@@ -66,6 +87,7 @@ public class BusinessController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			business.setCreateTime(new Date());
+			business.setPassword(Md5Util.md5(business.getPassword()));
 //			business.setStatus(1);
 			businessService.save(business);
 		}catch(Exception e){

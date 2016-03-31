@@ -20,12 +20,35 @@
 		});
 	});
 	
+	function openPlaceLookUp(url) {
+		lookUpWin.dialogFrameHtml(url);
+	}
+
+	function openPlaceLookUpCallBack(row){
+		$('#add_lookUpPlaceId,#edit_lookUpPlaceId').val(row.id);
+		$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
+		$('#edit_lookUpDeviceId,#edit_lookUpCode').val('');
+		lookUpWin.window('close');
+		$("#add_lookUpDeviceId").val("0");
+	}
+	
+	
+	function openDeviceLookUp(placeId){
+		placeId = $(""+placeId).val();
+		if(placeId == 0){
+			alert("请先选择商铺！");
+			$(""+placeId).focus();
+		}else{
+			openCheckBoxLookUp('${base}/device/gotoDeviceLookUp?parentMethod=openCheckBoxLookUpCallBack&placeId='+placeId);
+		}
+	}
+	
 	function openCheckBoxLookUp(url) {
-		$("#device-lookUpSelect-window").dialogFrameWindow().dialogFrameHtml(url);
+		$("#device-lookUpSelect-window").dialogFrameWindow(900,320).dialogFrameHtml(url);
 	}
 	
 	function openCheckBoxLookUpCallBack(row){
-		$('#add_lookUpId,#edit_lookUpId').val(row.id);
+		$('#add_lookUpDeviceId,#edit_lookUpDeviceId').val(row.id);
 		$('#add_lookUpCode,#edit_lookUpCode').val(row.code);
 		$("#device-lookUpSelect-window").dialogFrameWindow().window('close');
 	}
@@ -39,12 +62,13 @@
 			    <th data-options="field:'cname',width:80">商铺名称</th>
 			    <th data-options="field:'code',width:80">设备编码</th>
 				<th data-options="field:'type',width:80,formatter:formatAdvertisementType">广告类型</th>
-				<th data-options="field:'picPath',width:100">图片</th>
-				<th data-options="field:'content',width:80">内容</th>
-				<th data-options="field:'adIndex',width:100">广告位置</th>
+				<!-- <th data-options="field:'picPath',width:100">图片</th>
+				<th data-options="field:'content',width:80">内容</th> -->
+				<th data-options="field:'adIndex',width:80">广告位置</th>
+				<th data-options="field:'sort',width:50">排序</th>
 				<th data-options="field:'remark',width:100">备注</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
-				<th data-options="field:'status',formatter:formatStatus">状态</th>
+				<th data-options="field:'status',width:50,formatter:formatStatus">状态</th>
 			</tr>
 		</thead>
 	</table>

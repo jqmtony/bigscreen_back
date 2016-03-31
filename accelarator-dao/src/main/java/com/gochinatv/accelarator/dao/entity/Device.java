@@ -31,7 +31,35 @@ public class Device extends BaseVo implements Serializable {
 
 	private String cname;// 临时，店铺中文名称
 	private String userName;// 临时，店主用户名
+	//供查询使用
+	private String countryCode;// 临时，国家
+	private String areaCode;// 临时，地区
+	private String cityCode;// 临时，城市
 	
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

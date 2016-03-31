@@ -14,11 +14,12 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 public interface UserService  extends BaseService<User>{
 
 	/**
-	 * 根据用户名得到用户
+	 * 校验用户名唯一性
 	 * @author limr
+	 * @param id
 	 * @param userName
 	 * @return
 	 */
-	User getUserByUserName(String userName);
+	User getUserByUserName(int id, String userName);
 
 }

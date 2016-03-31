@@ -17,6 +17,7 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.AdvertiserService;
+import com.gochinatv.accelarator.util.Md5Util;
 
 /**
  * 
@@ -47,6 +48,25 @@ public class AdvertiserController extends BaseController{
 		model.addAttribute("parentMethod", parentMethod);
 		return "advertiser/lookUpForAdvertisement";
     }
+	/**
+	 * 检验用户名的唯一性
+	 * @author limr
+	 * @param id
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkUserName")
+	@ResponseBody
+	public String checkUserName(int id, String userName) throws Exception{
+		String data = "false";
+		Advertiser advertiser = advertiserService.getBusinessByUserName(id, userName);
+		if(advertiser == null){
+			data = "true";
+		}
+		return data;
+	}
+	
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList(int page,int rows,Advertiser advertiser) throws Exception{
@@ -66,6 +86,7 @@ public class AdvertiserController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			advertiser.setCreateTime(new Date());
+			advertiser.setPassword(Md5Util.md5(advertiser.getPassword()));
 //			advertiser.setStatus(1);
 			advertiserService.save(advertiser);
 		}catch(Exception e){

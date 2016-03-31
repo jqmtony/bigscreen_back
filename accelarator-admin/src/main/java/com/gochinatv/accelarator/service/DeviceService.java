@@ -12,6 +12,15 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface DeviceService extends BaseService<Device>{
+
+	/**
+	 * 校验设备编码唯一性
+	 * @author limr
+	 * @param id
+	 * @param code
+	 * @return
+	 */
+	Device getDeviceByCode(int id, String code);
 	   
 
 }

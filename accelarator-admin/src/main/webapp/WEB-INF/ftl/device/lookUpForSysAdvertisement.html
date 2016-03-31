@@ -4,6 +4,7 @@
 <#include "/frame/pageInclude.html">
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#lookup_placeId").val(${placeId});
 		grid = $('#tab').datagrid( {
 			url :'${base}/device/queryList',
 			queryParams:$("#queryForm").serializeObject(),
@@ -35,23 +36,38 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
+				<th data-options="field:'placeId',width:20">商铺id</th>
 				<th data-options="field:'code',width:100">设备编码</th>
 				<th data-options="field:'brand',width:80">设备品牌</th>
 				<th data-options="field:'model',width:100">设备型号</th>
 				<th data-options="field:'mac',width:80">设备mac</th>
-				<th data-options="field:'userName',width:80">商家负责人</th>
+				<th data-options="field:'userName',width:50">商家负责人</th>
 				<th data-options="field:'cname',width:80">商铺名称</th>
-				<th data-options="field:'screenNum',width:80">分屏数量</th>
+				<th data-options="field:'countryCode',width:50,formatter:formatCountry">国家</th>
+				<th data-options="field:'areaCode',width:50,formatter:formatArea">地区</th>
+				<th data-options="field:'cityCode',width:50,formatter:formatCity">城市</th>
+				<th data-options="field:'screenNum',width:50,formatter:formatScreenNum">分屏数量</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
-				<th data-options="field:'status',width:60,formatter:formatStatus">状态</th>
+				<th data-options="field:'status',width:50,formatter:formatStatus">状态</th>
 			</tr>
 		</thead>
 	</table>
 	<div id="toolbar" style="padding:2px 5px;">
-		<!-- <div>
-            <a id="closebtn" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">取消</a>			
-			<a id="savebtn" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">确定</a>														 
-        </div> -->
+		<form id="queryForm">
+			<input type="hidden" id="lookup_placeId" name="placeId"></input>
+			 地区：	 <select id="query_code" name="query_code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
+    			 	 <input type="hidden" id="queryCountryCode" name="countryCode"></input> 
+    			 	 <input type="hidden" id="queryAreaCode" name="areaCode"></input> 
+    			 	 <input type="hidden" id="queryCityCode" name="cityCode"></input>
+		           设备编码： <input type="text" id="code" name="code" style="width:110px"></input>
+		           设备品牌： <input type="text" id="mac" name="mac" style="width:110px"></input>
+		           分屏数量： <select id="screenNum" name="screenNum"  style="width:90px;">
+		           		<option value="0" selected>--请选择--</option>
+	    				<option value="4">大屏</option>
+		           		<option value="1">小屏</option>
+		           	</select>
+			<a href="javascript:void(0);" onclick="queryWithCode()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+		</form>
 	</div>
 	
 </body>

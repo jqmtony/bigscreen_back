@@ -5,7 +5,6 @@
 	<resultMap type="Orders" id="Orders">
 		<id property="id" column="id" />
 		<result property="orderNo" column="order_no" />
-		<result property="type" column="type" />
 		<result property="creater" column="creater" />
 		<result property="createTime" column="create_time" />
 		<result property="auditor" column="auditor" />
@@ -63,26 +62,22 @@
 	
 	<insert id="save" parameterType="Orders">
 	   insert into orders (
-	                    id,
-						order_no,
-						type,
-						creater,
-						create_time,
-						advertiser_id,
-						start_time,
-						end_time,
-						status
-						) values (
-	            #{id},
-	            #{orderNo},
-	            #{type},
-	            #{creater},
-	            #{createTime},
-	            #{advertiser_id},
-	            #{start_time},
-	            #{end_time},
-	            #{status}
-	            )
+			order_no,
+			creater,
+			create_time,
+			advertiser_id,
+			start_time,
+			end_time,
+			status
+		) values (
+	        #{orderNo},
+	        #{creater},
+	        #{createTime},
+	        #{advertiserId},
+	        #{startTime},
+	        #{endTime},
+	        #{status}
+        )
 	</insert>
 	
 </mapper>

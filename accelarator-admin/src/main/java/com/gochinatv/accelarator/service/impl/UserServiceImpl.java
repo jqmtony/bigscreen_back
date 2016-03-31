@@ -28,8 +28,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		return userDao;
 	}
 
-	public User getUserByUserName(String userName) {
-		return userDao.getUserByUserName(userName);
+	public User getUserByUserName(int id, String userName) {
+		User user = new User();
+		user.setId(id);
+		user.setUserName(userName);
+		return userDao.getUserByUserName(user);
 	}
 	
 	

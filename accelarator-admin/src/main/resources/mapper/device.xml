@@ -16,18 +16,45 @@
 		
 		<result property="cname" column="cname" />
 		<result property="userName" column="user_name" />
+		
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
 	</resultMap>
+	
+	<select id="getDeviceByCode" resultMap="Device" parameterType="Device">
+		select * from device where code = #{code}
+			<if test="id!=0">
+				and id!=#{id}
+			</if>
+	</select>
+	
 	<select id="getListByEntity" resultMap="Device" parameterType="Device">
-		select d.*, p.cname, b.user_name from device d 
+		select d.*, p.cname as cname, p.country_code as country_code, p.area_code as area_code, p.city_code as city_code, b.user_name as user_name from device d 
 		left join place p on d.place_id=p.id
 		left join business b on d.business_id=b.id
 		<where>
 			1=1
 			<if test="code!=null">
-				and code like CONCAT(CONCAT('%',#{code}),'%')
+				and d.code like CONCAT(CONCAT('%',#{code}),'%')
 			</if>
-			<if test="brand!=null">
-				and brand like CONCAT(CONCAT('%',#{brand}),'%')
+			<if test="mac!=null">
+				and d.mac like CONCAT(CONCAT('%',#{mac}),'%')
+			</if>
+			<if test="screenNum!=0">
+				and d.screen_num = #{screenNum}
+			</if>
+			<if test="placeId!=0">
+				and d.place_id = #{placeId}
+			</if>
+			<if test="countryCode!=null and countryCode!=''">
+				and p.country_code = #{countryCode}
+			</if>
+			<if test="areaCode!=null and areaCode!=''">
+				and p.area_code = #{areaCode}
+			</if>
+			<if test="cityCode!=null and cityCode!=''">
+				and p.city_code = #{cityCode}
 			</if>
 		</where>
 		order by create_time desc
