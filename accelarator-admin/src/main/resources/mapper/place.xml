@@ -115,10 +115,10 @@
 			  AND ((o.start_time &gt;#{startTime} AND o.start_time &lt; #{endTime}) OR (o.end_time &gt;#{startTime} AND o.end_time &lt;#{endTime}))
 			</if>
         )
-		<if test="type!=null">
-			and p.type = #{type}
+		<if test="types!=null and types!=''">
+			AND p.type in(${types})
 		</if>
-		<if test="cityCode!=null">
+		<if test="cityCode!=null and cityCode!=''">
 			AND p.city_code in(${cityCode})
 		</if>
 		<if test="ids!=null and ids!=''">

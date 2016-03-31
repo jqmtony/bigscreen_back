@@ -87,6 +87,31 @@ public class OrdersController extends BaseController{
 		return pageInfo;
 	}
 	
+	/*****************************************************************************************************************/
+	/**
+	 * 到可用广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoAvailableList")
+	public String gotoAvailableList() throws Exception{
+		return "place/available_list";
+	}
+	
+	/**
+	 * 查询可用广告列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryAvailableList")
+	@ResponseBody
+	public List<Place> queryAvailableList(Place place) throws Exception{
+		List<Place> list = placeService.getAvailableList(place);
+		return list;
+	}
+	
 	
 	/**
 	 * 生成订单

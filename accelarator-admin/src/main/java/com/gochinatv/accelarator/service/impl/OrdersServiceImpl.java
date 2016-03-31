@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.service.OrdersService;
+import com.gochinatv.accelarator.util.SessionUtils;
 
 /**
  * 
@@ -54,9 +56,21 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	public void save(Place place) throws Exception{
 		
 		Orders orders = new Orders();
+		orders.setOrderNo("");
+		orders.setCreater(SessionUtils.getLoginUser().getId());
+		orders.setCreateTime(new Date());
+		orders.setAdvertiserId(advertiserId);
+		orders.setStartTime(startTime);
+		orders.setEndTime(endTime);
+		orders.setStatus(1);
 		ordersDao.save(orders);
 		
 		OrdersDetail detail = new OrdersDetail();
+		detail.setType(type);
+		detail.setOrdersId(orders.getId());
+		detail.setCountryCode(countryCode);
+		detail.setAreaCode(areaCode);
+		detail.setCityCode(cityCode);
 		ordersDetailDao.save(detail);
 	}
 }

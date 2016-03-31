@@ -20,7 +20,6 @@ public class Orders extends BaseVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String orderNo;// 订单号
-	private int type;// 店铺类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private int creater;// 创建人
 	private Date createTime;// 创建时间
 	private int auditor;// 审核人
@@ -45,14 +44,6 @@ public class Orders extends BaseVo implements Serializable {
 
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
 	}
 
 	public int getCreater() {

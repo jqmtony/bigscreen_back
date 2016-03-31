@@ -98,34 +98,4 @@ public class PlaceController extends BaseController{
 		return result;
 	}
 	
-	
-	/******************************************************************************************/
-	/**
-	 * 到可用广告列表
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/gotoAvailableList")
-	public String gotoAvailableList() throws Exception{
-		return "place/available_list";
-	}
-	
-	/**
-	 * 查询可用广告列表
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/queryAvailableList")
-	@ResponseBody
-	public List<Place> queryAvailableList(Place place) throws Exception{
-		//PageInterceptor.startPage(page, rows);
-		List<Place> list = placeService.getAvailableList(place);
-		//PageInfo<Place> pageInfo = new PageInfo<Place>(list);
-		return list;
-	}
-	
-	/*********************************************************************************************/
-	
 }
