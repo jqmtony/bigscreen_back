@@ -3,21 +3,16 @@ package com.gochinatv.accelarator.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
-import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.PlaceService;
 
 /**
@@ -131,51 +126,6 @@ public class PlaceController extends BaseController{
 		return list;
 	}
 	
-	
-	/**
-	 * 生成订单
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/createOrder")
-	public String createOrder(Place place,Model model) throws Exception{
-		model.addAttribute("order_no",DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
-		model.addAttribute("place",place);
-		return "place/order_preview";
-	}
-	
-	
-	/**
-	 * 订单详情
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/orderDetail")
-	@ResponseBody
-	public List<Place> orderDetail(Place place) throws Exception{
-		List<Place> list = placeService.getAvailableList(place);
-		return list;
-	}
-	
-	/**
-	 * 保存订单
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/saveOrder")
-	@ResponseBody
-	public Map<String,Object> saveOrder(Orders order){
-		Map<String,Object> result = this.success(null);
-		try{
-			//placeService.deleteByEntity(place);
-		}catch(Exception e){
-			result = this.error(e.getMessage());
-		}
-		return result;
-	}
 	/*********************************************************************************************/
 	
 }

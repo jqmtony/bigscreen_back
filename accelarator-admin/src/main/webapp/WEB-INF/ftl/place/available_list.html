@@ -53,7 +53,7 @@
 	   var startTime= $("#startTime").datebox('getValue');//开始时间
 	   var endTime= $("#endTime").datebox('getValue');//结束时间
 	   
-	   var url = '${base}/place/createOrder?cityCode='+code+'&type='+type+'&startTime='+startTime+'&endTime='+endTime+'&ids='+ids;
+	   var url = '${base}/orders/createOrder?cityCode='+code+'&type='+type+'&startTime='+startTime+'&endTime='+endTime+'&ids='+ids;
 	   
 	   parent.addTab('订单预览',url,'',true);
    }

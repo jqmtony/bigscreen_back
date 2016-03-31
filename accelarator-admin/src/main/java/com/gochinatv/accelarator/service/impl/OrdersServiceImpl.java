@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.OrdersDao;
+import com.gochinatv.accelarator.dao.OrdersDetailDao;
 import com.gochinatv.accelarator.dao.entity.Orders;
+import com.gochinatv.accelarator.dao.entity.OrdersDetail;
+import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.service.OrdersService;
@@ -23,6 +26,10 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	@Autowired
 	private OrdersDao ordersDao;
 	
+	@Autowired
+	private OrdersDetailDao ordersDetailDao;
+	
+	
 	@Override
 	protected BaseDao<Orders> getDao() {
 		return ordersDao;
@@ -39,4 +46,17 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	}
 	
 	
+	/**
+	 * 保存订单，保存订单详情
+	 * @param place
+	 * @throws Exception 
+	 */
+	public void save(Place place) throws Exception{
+		
+		Orders orders = new Orders();
+		ordersDao.save(orders);
+		
+		OrdersDetail detail = new OrdersDetail();
+		ordersDetailDao.save(detail);
+	}
 }

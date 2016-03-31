@@ -6,7 +6,7 @@
 <script type="text/javascript">
    $(function() {
 		grid = $('#tab').datagrid( {
-			url :'${base}/place/orderDetail',
+			url :'${base}/orders/orderDetail',
 			queryParams:$("#addForm").serializeObject(),
 			fit:true,
 			rownumbers:true,
@@ -22,11 +22,8 @@
    
    function openCallBack(row){
 	   $("#add_lookUpId").val(row.id);
-	   $("#add_lookUpName").val(row.realName);
-	   var country = formatCountry(row.countryCode);
-	   var area = formatArea(row.areaCode)
-	   var city = formatCity(row.cityCode)
-	   $("#area").text(country+"  "+area+"  "+city);
+	   $("#add_lookUpName").val(row.userName);
+	   $("#realName").text(row.realName);
 	   lookUpWin.window('close');
    }
 </script>
@@ -71,8 +68,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td>所在地区：</td>
-							<td id="area"></td>
+							<td>真实姓名：</td>
+							<td id="realName"></td>
 						</tr>
 					</table>
 				</form>

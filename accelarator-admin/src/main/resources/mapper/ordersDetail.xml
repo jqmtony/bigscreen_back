@@ -11,5 +11,20 @@
 		<result property="ordersId" column="orders_id" />
 	</resultMap>
 	
+	<insert id="save" parameterType="OrdersDetail">
+	   insert into orders_detail (
+			type,
+			country_code,
+			area_code,
+			city_code,
+			orders_id
+		) values (
+	        #{type},
+	        #{countryCode},
+	        #{areaCode},
+	        #{cityCode},
+	        #{orderId}
+        )
+	</insert>
 	
 </mapper>
