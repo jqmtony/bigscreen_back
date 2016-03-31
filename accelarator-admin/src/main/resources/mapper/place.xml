@@ -18,6 +18,7 @@
 		<result property="createTime" column="create_time" />
 		
 		<result property="userName" column="user_name" />
+		<result property="realName" column="real_name" />
 		<result property="code" column="code" />
 	</resultMap>
 	
@@ -26,7 +27,7 @@
 	</select>
 	
 	<select id="getListByEntity" resultMap="Place" parameterType="Place">
-		select p.*, b.user_name from place p left join business b on p.business_id=b.id
+		select p.*, b.user_name, b.real_name from place p left join business b on p.business_id=b.id
 		<where>
 			1=1
 			<if test="cname!=null">
@@ -115,10 +116,10 @@
 			  AND ((o.start_time &gt;#{startTime} AND o.start_time &lt; #{endTime}) OR (o.end_time &gt;#{startTime} AND o.end_time &lt;#{endTime}))
 			</if>
         )
-		<if test="type!=null">
-			and p.type = #{type}
+		<if test="types!=null and types!=''">
+			AND p.type in(${types})
 		</if>
-		<if test="cityCode!=null">
+		<if test="cityCode!=null and cityCode!=''">
 			AND p.city_code in(${cityCode})
 		</if>
 		<if test="ids!=null and ids!=''">
