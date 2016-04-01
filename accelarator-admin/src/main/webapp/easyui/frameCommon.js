@@ -60,9 +60,10 @@ function modify(){
 //更新
 function modifyRow(row){
 		modifyWin.window('open');
-		XFrameUtils.clearForm('modifyForm'); 
-//		$('#modifyForm').form('clear');
-		XFrameUtils.fillForm('modifyForm',row);
+		//XFrameUtils.clearForm('modifyForm'); 
+		$('#modifyForm').form('clear');
+		//XFrameUtils.fillForm('modifyForm',row);
+		$('#modifyForm').form('load',row);
 		modifyDefaultCheck(row);
 }
 
