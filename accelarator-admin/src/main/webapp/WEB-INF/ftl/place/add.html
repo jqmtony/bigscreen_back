@@ -1,16 +1,15 @@
-
 <div id="add-window" title="添加商铺信息" class="easyui-window" style="width: 800px; height: 450px;">
 	     <form id="addForm" method="post" >
 	     <input type="hidden" id="addbusinessId" name="businessId"/>
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>商家：</td>
-	    			<td><input id="add_lookUpName" class="easyui-validatebox" onFocus="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true" type="text" name="userName"></input><label style="color: red"> *</label>
+	    			<td><input id="add_lookUpName" class="easyui-validatebox textbox" onclick="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
+	    			data-options="required:true,editable:false" type="text" name="userName"></input><label style="color: red"> *</label>
 	    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
 	    			</td>
 	    			<td>类型：</td>
-	    			<td><select id="_type_" name="type" style="width:171px;">
+	    			<td><select id="add_type" name="type"class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;">
 		    				<option value="1">餐厅</option>
 		    				<option value="2">大使馆</option>
 		    				<option value="3">商场</option>
@@ -22,9 +21,9 @@
 	    		<tr>
 	    			<td>中文名称：</td>
 	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="_cname_" class="easyui-validatebox" type="text" name="cname" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			    <input id="_cname_" class="easyui-validatebox textbox" type="text" name="cname" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td>英文名称：</td>
-	    			<td><input id="_ename_" class="easyui-validatebox" type="text" name="ename"></input></td>
+	    			<td><input id="_ename_" class="easyui-validatebox textbox" type="text" name="ename"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>地区：</td>
@@ -32,18 +31,18 @@
 	    				<select id="add_cityCode" name="cityCode" class="easyui-combotree" data-options="required:true,url:'${base}/area/areaStaticTree',method:'get'"  style="width:171px;"></select><label style="color: red"> *</label>
 	    			</td>
 	    			<td>邮编：</td>
-	    			<td><input id="_zipCode_" class="easyui-validatebox" type="text" name="zipCode" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="_zipCode_" class="easyui-validatebox textbox" type="text" name="zipCode" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>规模大小：</td>
-	    			<td><input id="_scale_" class="easyui-validatebox" type="text" name="scale"></input></td>
+	    			<td><input id="_scale_" class="easyui-validatebox textbox" type="text" name="scale"></input></td>
 	    			<td>日均人流量：</td>
-	    			<td><input id="_averageDailyFlow_" class="easyui-validatebox" type="text" name="averageDailyFlow"></input></td>
+	    			<td><input id="_averageDailyFlow_" class="easyui-validatebox textbox" type="text" name="averageDailyFlow"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>详细地址：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:30px;width:472px;"  class="easyui-validatebox" cols="30" name="address" data-options="required:true"></textarea><label style="color: red"> *</label>
+	    				<textarea style="height:60px;width:472px;" class="easyui-validatebox textbox" cols="30" name="address" data-options="required:true"></textarea><label style="color: red"> *</label>
 	    			</td>
 	    		</tr>
                </table>

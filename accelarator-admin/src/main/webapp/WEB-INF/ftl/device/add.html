@@ -4,34 +4,34 @@
 	    		<tr>
 	    			<td>商铺：</td>
 	    			<td>
-		    			<input id="add_lookUpCname" class="easyui-validatebox" onFocus="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
-		    			data-options="required:true" type="text" name="cname"></input><label style="color: red"> *</label>
+		    			<input id="add_lookUpCname" class="easyui-validatebox textbox" onclick="openLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openLookUpCallBack');" 
+		    			data-options="required:true,editable:false" type="text" name="cname"></input><label style="color: red"> *</label>
 		    			<input type="hidden" id="add_lookUpId" name="placeId"></input>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>设备编码：</td>
 	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="add_code" class="easyui-validatebox" type="text" name="code"  onblur="checkCode(this.id, 0, this.value, '${base}/device/checkCode');" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			    <input id="add_code" class="easyui-validatebox textbox" type="text" name="code"  onblur="checkCode(this.id, 0, this.value, '${base}/device/checkCode');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>设备品牌：</td>
-	    			<td><input id="brand" class="easyui-validatebox" type="text" name="brand"></input></td>
+	    			<td><input id="brand" class="easyui-validatebox textbox" type="text" name="brand"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>设备型号：</td>
-	    			<td><input id="model" class="easyui-validatebox" type="text" name="model"></input></td>
+	    			<td><input id="model" class="easyui-validatebox textbox" type="text" name="model"></input></td>
 	    		</tr>
 	    		
 	    		<tr>
 	    			<td>设备MAC：</td>
-	    			<td><input id="mac" class="easyui-validatebox" type="text" name="mac" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="mac" class="easyui-validatebox textbox" type="text" name="mac" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>分屏数量：</td>
 	    			<td>
-	    				<select id="screenNum" name="screenNum" style="width:171px;" data-options="required:true">
-		    				<option value="4">大屏</option>
+	    				<select id="add_screenNum" name="screenNum" class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;" data-options="required:true">
+		    				<option value="4" selected="selected">大屏</option>
 			           		<option value="1">小屏</option>
 		    			</select><label style="color: red"> *</label>
 		    		</td>
@@ -39,7 +39,7 @@
 	    		
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td><select id="status" name="status" style="width:171px;">
+	    			<td><select id="add_status" name="status" class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;">
 			           		<option value="1" selected="selected">启用</option>
 		    				<option value="2">禁用</option>
 		    			</select>

@@ -4,19 +4,19 @@
 	    		<tr>
 	    			<td>用户名：</td>
 	    			<td><!-- <input type="hidden" name="id"></input> -->
-	    			    <input id="add_userName" class="easyui-validatebox" type="text" name="userName" onblur="checkUserName(this.id, 0, this.value, '${base}/advertiser/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			    <input id="add_userName" class="easyui-validatebox textbox" type="text" name="userName" onblur="checkUserName(this.id, 0, this.value, '${base}/advertiser/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>真实姓名：</td>
-	    			<td><input id="_realName_" class="easyui-validatebox" type="text" name="realName" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="_realName_" class="easyui-validatebox textbox" type="text" name="realName" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>密码：</td>
-	    			<td><input id="password" class="easyui-validatebox" type="password" name="password" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="password" class="easyui-validatebox textbox" type="password" name="password" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>确认密码：</td>
-	    			<td><input id="ret_password" class="easyui-validatebox" type="password" name="ret_password"  onblur="checkRetPassword();" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="ret_password" class="easyui-validatebox textbox" type="password" name="ret_password"  onblur="checkRetPassword();" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<!-- <tr>
 	    			<td>地区：</td>
@@ -26,21 +26,21 @@
 	    		</tr> -->
 	    		<tr>
 	    			<td>出生年月：</td>
-	    			<td><input id="_birthday_" class="easyui-validatebox" type="text" name="birthday"></input></td>
+	    			<td><input id="_birthday_" class="easyui-validatebox textbox" type="text" name="birthday"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>手机：</td>
-	    			<td><input id="_mobile_" class="easyui-validatebox" type="text" name="mobile" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="_mobile_" class="easyui-validatebox textbox" type="text" name="mobile" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>电子邮箱：</td>
-	    			<td><input id="_email_" class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input><label style="color: red"> *</label></td>
+	    			<td><input id="_email_" class="easyui-validatebox textbox" type="text" name="email" data-options="required:true,validType:'email'"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<!-- <tr>
 	    			<td>微信号：</td>
-	    			<td><input id="_weixin_" class="easyui-validatebox" type="text" name="weixin"></input></td>
+	    			<td><input id="_weixin_" class="easyui-validatebox textbox" type="text" name="weixin"></input></td>
 	    			<td>FaceBook：</td>
-	    			<td><input id="_facebook_" class="easyui-validatebox" type="text" name="facebook"></input></td>
+	    			<td><input id="_facebook_" class="easyui-validatebox textbox" type="text" name="facebook"></input></td>
 	    		</tr> -->
 	    		<!-- <tr>
 	    			<td>状态：</td>
@@ -54,7 +54,7 @@
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td>
-	    				<textarea style="height:60px;width:171px;" cols="30" name="remark"></textarea>
+	    				<textarea style="height:60px;width:171px;" class="easyui-validatebox textbox" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>
                </table>

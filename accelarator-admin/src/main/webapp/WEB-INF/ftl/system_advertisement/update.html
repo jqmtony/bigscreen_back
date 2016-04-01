@@ -4,26 +4,26 @@
 	    		<tr>
 	    			<td>商铺：</td>
 	    			<td>
-		    			<input id="edit_lookUpCname" class="easyui-validatebox" onFocus="openPlaceLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openPlaceLookUpCallBack');" 
-		    			data-options="required:true" type="text" name="cname"></input><label style="color: red"> *</label>
+		    			<input id="edit_lookUpCname" class="easyui-validatebox textbox" onclick="openPlaceLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openPlaceLookUpCallBack');" 
+		    			data-options="required:true,editable:true" type="text" name="cname"></input><label style="color: red"> *</label>
 		    			<input type="hidden" id="edit_lookUpPlaceId" name="placeId"></input>
 	    			</td>
 	    			<td>设备：</td>
 	    			<td>
-	    				<input id="edit_lookUpCode" class="easyui-validatebox" onFocus="openDeviceLookUp('#edit_lookUpPlaceId');" 
-		    			type="text" name="code"></input>
+	    				<input id="edit_lookUpCode" class="easyui-validatebox textbox" onclick="openDeviceLookUp('#edit_lookUpPlaceId');" 
+		    			data-options="editable:false" type="text" name="code"></input>
 		    			<input type="hidden" id="edit_lookUpDeviceId" name="deviceId"></input>
 		    		</td>
 	    		</tr>
 	    		<tr>
 	    			<td>广告来源：</td>
 	    			<td><input type="hidden" name="id"></input>
-	    			    <select id="source" name="source"  style="width:171px;">
+	    			    <select id="source" name="source"  class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;">
 		           		<option value="1">自有</option>
 	    				<option value="2">商家</option>
 		           	</select>
 	    			<td>广告类型：</td>
-	    			<td><select id="type" name="type"  style="width:171px;" >
+	    			<td><select id="type" name="type"  class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;" >
 			           		<option value="1">视频</option>
 		    				<option value="2">图片</option>
 		    				<option value="3">文字内容</option>
@@ -32,13 +32,13 @@
 	    		</tr>
 	    		<tr>
 	    			<td>排序：</td>
-	    			<td><input id="sort" class="easyui-validatebox" type="text" name="sort" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="sort" class="easyui-validatebox textbox" type="text" name="sort" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td>广告位置：</td>
-	    			<td><input id="adIndex" class="easyui-validatebox" type="text" name="adIndex" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="adIndex" class="easyui-validatebox textbox" type="text" name="adIndex" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
-	    			<td colspan="3"><select id="status" name="status"  style="width:171px;">
+	    			<td colspan="3"><select id="status" name="status" class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;">
 			           		<option value="1">启用</option>
 		    				<option value="2">禁用</option>
 		    			</select>
@@ -47,7 +47,7 @@
 	    		<tr>
 	    			<td>视频地址：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:60px;width:472px" cols="30" name="videoPath"></textarea>
+	    				<textarea style="height:60px;width:472px" class="easyui-validatebox textbox" cols="30" name="videoPath"></textarea>
 	    			</td>
 	    		</tr>
 	    		<!-- <tr>
@@ -67,7 +67,7 @@
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td colspan="3">
-	    				<textarea style="height:60px;width:472px" cols="30" name="remark"></textarea>
+	    				<textarea style="height:60px;width:472px" class="easyui-validatebox textbox" cols="30" name="remark"></textarea>
 	    			</td>
 	    		</tr>
                </table>

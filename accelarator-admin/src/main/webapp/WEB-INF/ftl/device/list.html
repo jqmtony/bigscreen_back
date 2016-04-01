@@ -74,22 +74,24 @@
 	<div id="toolbar" style="padding:2px 5px;">
 	
 		<form id="queryForm">
-			 地区：	 <select id="query_code" name="query_code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:200px;"></select>
+			 地区：	 <select id="query_code" name="query_code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get'"  style="width:150px;"></select>
     			 	 <input type="hidden" id="queryCountryCode" name="countryCode"></input> 
     			 	 <input type="hidden" id="queryAreaCode" name="areaCode"></input> 
     			 	 <input type="hidden" id="queryCityCode" name="cityCode"></input>
-		           设备编码： <input type="text" id="code" name="code" style="width:110px"></input>
-		           设备品牌： <input type="text" id="mac" name="mac" style="width:110px"></input>
-		           分屏数量： <select id="screenNum" name="screenNum"  style="width:90px;">
+		           设备编码： <input type="text" class="easyui-validatebox textbox" id="code" name="code" style="width:110px"></input>
+		           设备品牌： <input type="text" class="easyui-validatebox textbox" id="mac" name="mac" style="width:110px"></input>
+		           分屏数量： <select id="screenNum" class="easyui-combobox" data-options="editable:false" name="screenNum"  style="width:90px;">
 		           		<option value="0" selected>--请选择--</option>
 	    				<option value="4">大屏</option>
 		           		<option value="1">小屏</option>
 		           	</select>
 			<a href="javascript:void(0);" onclick="queryWithCode()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</form>	
-		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
-		<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">修改</a>
-		<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+		<div style="margin:5px">
+			<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">添加</a>
+			<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">修改</a>
+			<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+		</div>
 	</div>
 	
    <#include "./add.html">
