@@ -4,7 +4,9 @@
 
 	<resultMap type="PlayList" id="PlayList">
 		<id property="id" column="id" />
-		<result property="areaId" column="area_id" />
+		<result property="deviceId" column="device_id" />
+		<result property="placeId" column="place_id" />
+		<result property="cityCode" column="city_code" />
 		<result property="type" column="type" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />

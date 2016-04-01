@@ -19,17 +19,36 @@ public class PlayList extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int areaId;// 区域id
-	private int type;// 区域类型
+	private int deviceId;//设备id
+	private int placeId;//店铺id
+	private String cityCode;//地市code
+	private int type;//店铺类型  （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private Date startTime;// 开始时间
 	private Date endTime;// 结束时间
 
-	public int getAreaId() {
-		return areaId;
+
+	public int getDeviceId() {
+		return deviceId;
 	}
 
-	public void setAreaId(int areaId) {
-		this.areaId = areaId;
+	public void setDeviceId(int deviceId) {
+		this.deviceId = deviceId;
+	}
+
+	public int getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(int placeId) {
+		this.placeId = placeId;
+	}
+
+	public String getCityCode() {
+		return cityCode;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
 	}
 
 	public int getType() {
