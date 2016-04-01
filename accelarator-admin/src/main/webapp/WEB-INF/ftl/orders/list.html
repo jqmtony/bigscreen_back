@@ -20,6 +20,12 @@
 			} 
 		});
 	});
+	
+	function formatOper(val,row,index){  
+	    return '<a href="javascript:void(0);" onclick="" class="easyui-linkbutton" iconCls="icon-audit-ok">审核订单</a>&nbsp;'+
+	           '<a href="javascript:void(0);" onclick="" class="easyui-linkbutton" iconCls="icon-audit-cancel">取消订单</a>&nbsp;'+
+	           '<a href="javascript:void(0);" onclick="" class="easyui-linkbutton" iconCls="icon-offline">提前下线</a>';
+	} 
 </script>
 </head>
 <body>
@@ -33,6 +39,7 @@
 				<th data-options="field:'realName',width:100">广告商</th>
 				<th data-options="field:'auditorName',width:100">处理人</th>
 				<th data-options="field:'auditTime',width:100,formatter:formatYYYYMMDD">处理时间</th>
+				<th data-options="field:'_operate',width:150,formatter:formatOper">操作</th>
 			</tr>
 		</thead>
 	</table>

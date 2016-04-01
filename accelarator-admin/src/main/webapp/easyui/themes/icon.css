@@ -97,3 +97,16 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+
+
+.icon-audit-ok{
+	background:url('icons/audit_ok.png') no-repeat center center;
+}
+
+.icon-audit-cancel{
+	background:url('icons/audit_cancel.png') no-repeat center center;
+}
+
+.icon-offline{
+	background:url('icons/offline.png') no-repeat center center;
+}

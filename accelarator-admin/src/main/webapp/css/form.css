@@ -13,6 +13,21 @@ input,textarea {
   border-radius: 5px 5px 5px 5px;
 }
 
+/* select {
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border: 1px solid;
+    border-color: #95B8E7;
+    background-color: #fff;
+    border-radius: 5px 5px 5px 5px;
+} */
+
 /*
 select {
   padding: 0;
