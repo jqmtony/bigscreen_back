@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.dao;
 
+import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -13,5 +15,11 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  */
 public interface AdvertisementDao  extends BaseDao<Advertisement>{
    
+	
+	/**
+	 * 自有广告查询，最新的10个广告
+	 * @return
+	 */
+	public List<Advertisement> getOwnAdvertisement();
 
 }

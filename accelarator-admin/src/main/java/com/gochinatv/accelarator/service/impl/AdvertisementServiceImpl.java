@@ -1,6 +1,8 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.AdvertisementDao;
@@ -29,4 +31,11 @@ public class AdvertisementServiceImpl extends BaseServiceImpl<Advertisement> imp
 	}
 	
 	
+	/**
+	 * 自有广告查询，最新的10个广告
+	 * @return
+	 */
+	public List<Advertisement> getOwnAdvertisement(){
+		return advertiseMentDao.getOwnAdvertisement();
+	}
 }

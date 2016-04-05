@@ -27,6 +27,7 @@
 		<result property="type" column="type" />
 	</resultMap>
 	
+	<!-- 订单列表 -->
 	<select id="getOrdersList" resultMap="Orders" parameterType="Orders">
 		SELECT o.order_no,uc.id,uc.real_name AS createrName,o.create_time,o.status,a.real_name,oa.real_name AS auditorName,o.audit_time FROM orders o 
    	    LEFT JOIN advertiser a ON a.id=o.advertiser_id  LEFT JOIN advertisement am ON am.id=o.advertisement_id 
@@ -62,7 +63,7 @@
 		</where>
 	</select>
 	
-	
+	<!-- 可用广告列表 -->
 	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
        SELECT p.type, p.country_code, p.area_code, p.city_code FROM place p 
        WHERE NOT EXISTS (
@@ -79,7 +80,7 @@
 		</if>
 	</select>
 	
-	
+	<!-- 生成订单列表 -->
 	<select id="getRetryOrdersList" resultMap="Orders" parameterType="Orders">
        SELECT type, country_code, area_code, city_code FROM place 
         <where>
@@ -110,4 +111,9 @@
         )
 	</insert>
 	
+	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
+	   SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
+       LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) 
+       AND o.endTime>asdfasdfadsf
+	</select>
 </mapper>

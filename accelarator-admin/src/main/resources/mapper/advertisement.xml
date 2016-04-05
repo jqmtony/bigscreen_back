@@ -84,5 +84,9 @@
 	  delete from advertisement where id = #{id}
 	</delete>
 	
-	<select id=""></select>
+	<!-- 自有广告查询 -->
+	<select id="getOwnAdvertisement" resultMap="Advertisement">
+	   SELECT * FROM advertisement WHERE source =1 order by id desc limit 0,10
+	</select>
+	
 </mapper>
