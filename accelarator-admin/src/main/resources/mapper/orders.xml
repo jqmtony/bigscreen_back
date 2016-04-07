@@ -17,6 +17,8 @@
 		
 		
 		<result property="realName" column="real_name" />
+		<result property="advertiserName" column="user_name" />
+		<result property="title" column="title" />
 		<result property="countryCode" column="country_code" />
 		<result property="areaCode" column="area_code" />
 		<result property="cityCode" column="city_code" />
@@ -27,8 +29,9 @@
 		<result property="type" column="type" />
 	</resultMap>
 	
+	<!-- 订单列表 -->
 	<select id="getOrdersList" resultMap="Orders" parameterType="Orders">
-		SELECT o.order_no,uc.id,uc.real_name AS createrName,o.create_time,o.status,a.real_name,oa.real_name AS auditorName,o.audit_time FROM orders o 
+		SELECT o.id, o.order_no,uc.id,uc.real_name AS createrName,o.create_time,o.status,a.real_name,oa.real_name AS auditorName,o.audit_time FROM orders o 
    	    LEFT JOIN advertiser a ON a.id=o.advertiser_id  LEFT JOIN advertisement am ON am.id=o.advertisement_id 
         LEFT JOIN user uc ON o.creater=uc.id LEFT JOIN user oa ON oa.id=o.auditor  
         <where>
@@ -62,7 +65,7 @@
 		</where>
 	</select>
 	
-	
+	<!-- 可用广告列表 -->
 	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
        SELECT p.type, p.country_code, p.area_code, p.city_code FROM place p 
        WHERE NOT EXISTS (
@@ -79,7 +82,7 @@
 		</if>
 	</select>
 	
-	
+	<!-- 生成订单列表 -->
 	<select id="getRetryOrdersList" resultMap="Orders" parameterType="Orders">
        SELECT type, country_code, area_code, city_code FROM place 
         <where>
@@ -110,4 +113,25 @@
         )
 	</insert>
 	
+	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
+	   SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
+       LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) 
+       AND o.endTime>asdfasdfadsf
+	</select>
+	<select id="getEntityById" resultMap="Orders" parameterType="int">
+		select am.title as title,o.id,o.advertiser_id,o.auditor,o.order_no,o.audit_time,o.advertisement_id,o.start_time,o.end_time,o.status,a.real_name as realName,a.user_name as advertiserName from orders o
+		LEFT JOIN advertiser a ON o.advertiser_id=a.id
+		LEFT JOIN advertisement am ON o.advertisement_id=am.id
+		where o.id=#{id}
+	</select>
+	
+	<update id="update" parameterType="Orders">
+		update orders
+		<set>
+			advertiser_id=#{advertiserId},
+            advertisement_id=#{advertisementId},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
 </mapper>

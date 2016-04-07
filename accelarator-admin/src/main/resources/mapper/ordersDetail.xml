@@ -10,6 +10,9 @@
 		<result property="cityCode" column="city_code" />
 		<result property="ordersId" column="orders_id" />
 	</resultMap>
+	<select id="getOrdersDetailList" resultMap="OrdersDetail" parameterType="int">
+		select * from orders_detail where orders_id=#{ordersId}
+	</select>
 	
 	<insert id="save" parameterType="OrdersDetail">
 	   insert into orders_detail (
@@ -26,5 +29,9 @@
 	        #{ordersId}
         )
 	</insert>
+	
+	<select id="getOrdersDetailByOrdersId" resultMap="OrdersDetail" parameterType="int">
+	   SELECT type,city_code from orders_detail where orders_id=#{ordersId}
+	</select>
 	
 </mapper>

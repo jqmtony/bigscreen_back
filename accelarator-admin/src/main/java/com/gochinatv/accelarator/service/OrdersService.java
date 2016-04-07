@@ -52,4 +52,12 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @throws Exception 
 	 */
 	public void save(Orders orders) throws Exception;
+
+
+	/**
+	 * 审核订单上线
+	 * @param orders
+	 * @throws Exception 
+	 */
+	public void checkOnline(Orders orders) throws Exception;
 }

@@ -1,8 +1,8 @@
 package com.gochinatv.accelarator.service;
 
+import java.util.List;
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
-
 
 /**
  * 
@@ -13,5 +13,11 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  */
 public interface AdvertisementService  extends BaseService<Advertisement>{
    
+	
+	/**
+	 * 自有广告查询，最新的10个广告
+	 * @return
+	 */
+	public List<Advertisement> getOwnAdvertisement();
 
 }

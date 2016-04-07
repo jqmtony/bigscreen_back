@@ -24,6 +24,9 @@
 		       from advertisement atm left join advertiser at on atm.advertiser_id=at.id 
 	   <where>
 			1=1
+			<if test="advertiserId!=0">
+				and atm.advertiser_id=#{advertiserId}
+			</if>
 			<if test="source!=0">
 				and atm.source=#{source}
 			</if>
@@ -84,5 +87,9 @@
 	  delete from advertisement where id = #{id}
 	</delete>
 	
-	<select id=""></select>
+	<!-- 自有广告查询 -->
+	<select id="getOwnAdvertisement" resultMap="Advertisement">
+	   SELECT * FROM advertisement WHERE source =1 order by id desc limit 0,10
+	</select>
+	
 </mapper>

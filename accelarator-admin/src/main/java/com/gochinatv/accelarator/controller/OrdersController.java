@@ -3,17 +3,22 @@ package com.gochinatv.accelarator.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.Orders;
+import com.gochinatv.accelarator.dao.entity.OrdersDetail;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
+import com.gochinatv.accelarator.service.OrdersDetailService;
 import com.gochinatv.accelarator.service.OrdersService;
 
 
@@ -30,6 +35,9 @@ public class OrdersController extends BaseController{
     
 	@Autowired
 	private OrdersService ordersService;
+	
+	@Autowired
+	private OrdersDetailService ordersDetailService;
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
@@ -152,4 +160,74 @@ public class OrdersController extends BaseController{
 		return result;
 	}
 	/*********************************************************************************************/
+
+	/**
+	 * 审核订单上线
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkOnline")
+	@ResponseBody
+	public Map<String,Object> checkOnline(Orders orders){
+		Map<String,Object> result = this.success(null);
+		try{
+			ordersService.checkOnline(orders);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 退回
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/sendBack")
+	@ResponseBody
+	public Map<String,Object> sendBack(int id){
+		Map<String,Object> result = this.success(null);
+		try{
+			Orders orders = ordersService.getEntityById(id);
+			//审核不通过
+			orders.setStatus(3);
+			ordersService.update(orders);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 审核订单
+	 * @param orderId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkOrder")
+	public String checkOrder(int ordersId, Model model) throws Exception{
+		Orders orders = ordersService.getEntityById(ordersId);
+		if(orders.getTitle() == null){
+			orders.setTitle("暂无");
+		}
+		model.addAttribute("orders",orders);
+		return "orders/order_check";
+	}
+	
+	/**
+	 * 审核订单详情
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkOrderDetail")
+	@ResponseBody
+	public List<OrdersDetail> checkOrderDetail(@RequestParam(value="id",defaultValue="0")int id) throws Exception{
+		List<OrdersDetail> list = ordersDetailService.getOrdersDetailList(id);
+		return list;
+	}
+
+
 }
