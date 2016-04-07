@@ -155,6 +155,7 @@ public class OrdersController extends BaseController{
 		try{
 			ordersService.save(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -174,6 +175,7 @@ public class OrdersController extends BaseController{
 		try{
 			ordersService.checkOnline(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -195,6 +197,7 @@ public class OrdersController extends BaseController{
 			orders.setStatus(3);
 			ordersService.update(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -228,6 +231,33 @@ public class OrdersController extends BaseController{
 		List<OrdersDetail> list = ordersDetailService.getOrdersDetailList(id);
 		return list;
 	}
+	/**
+	 * 查看订单
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/viewOrder")
+	public String viewOrder(int ordersId,Model model) throws Exception{
+		Orders orders = ordersService.getEntityById(ordersId);
+		if(orders.getTitle() == null){
+			orders.setTitle("暂无");
+		}
+		model.addAttribute("orders",orders);
+		return "orders/order_view";
+	}
 
-
+	@RequestMapping("/cancleOrder")
+	@ResponseBody
+	public Map<String,Object> cancleOrder(int id){
+		Map<String,Object> result = this.success(null);
+		try{
+			Orders orders = ordersService.getEntityById(id);
+			orders.setStatus(0);
+			ordersService.update(orders);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
 }

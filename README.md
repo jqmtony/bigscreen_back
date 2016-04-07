@@ -17,3 +17,20 @@ UPDATE business SET `area`=7 WHERE id>135 AND id<=145;
 UPDATE business SET `area`=8 WHERE id>145 AND id<=150;
 UPDATE business SET `area`=9 WHERE id>150 AND id<=153;
 UPDATE business SET `area`=10 WHERE id>153;
+
+
+
+
+TRUNCATE TABLE `advertisement`;
+TRUNCATE TABLE `advertiser`;
+TRUNCATE TABLE `device`;
+TRUNCATE TABLE `orders`;
+TRUNCATE TABLE `orders_detail`;
+TRUNCATE TABLE `place`;
+TRUNCATE TABLE `play_list`;
+TRUNCATE TABLE `play_list_detail`;
+
+
+INSERT INTO `advertiser` (id,user_name,PASSWORD,real_name,country_code,area_code,city_code,mobile,email,remark,STATUS)
+ SELECT id,user_name,PASSWORD,real_name,country_code,area_code,city_code,mobile,email,remark,STATUS FROM `business` WHERE 
+ id IN (83,92,94,95,99,100)

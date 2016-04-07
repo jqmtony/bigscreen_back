@@ -34,6 +34,7 @@ public class Orders extends BaseVo implements Serializable {
 	private String aheadTime;// 提前下线时间
 	private String remark;// 下线备注描述
 	
+	
 	private String title;//临时，广告标题
 	
 	private String countryCode;//临时，国家code
