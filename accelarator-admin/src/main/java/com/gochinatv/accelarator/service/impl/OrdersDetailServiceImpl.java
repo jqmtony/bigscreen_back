@@ -30,7 +30,7 @@ public class OrdersDetailServiceImpl extends BaseServiceImpl<OrdersDetail> imple
 	}
 	
 	public List<OrdersDetail> getOrdersDetailList(int ordersId) {
-		return ordersDetailDao.getOrdersDetailList(ordersId);
+		return ordersDetailDao.getOrdersDetailByOrdersId(ordersId);
 	}
 	
 	
