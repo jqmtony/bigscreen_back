@@ -237,11 +237,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return ordersDao.getOrdersPlayList(data);
 	}
     
-	
-	public static void main(String[] args) {
-		int count = GlobalUtils.ADS_EACH_PLAY_TIME;
-		System.out.println(count/240);
-	}
 	/**
 	 * 审核订单保存
 	 * @param orders
@@ -253,4 +248,10 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		orders.setStatus(2);
 		ordersDao.update(orders);
 	}
+	
+	public static void main(String[] args) {
+		int count = GlobalUtils.ADS_EACH_PLAY_TIME;
+		System.out.println(count/240);
+	}
+	
 }

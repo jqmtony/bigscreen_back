@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.service;
 
+import java.util.List;
 import com.gochinatv.accelarator.dao.entity.OrdersDetail;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -12,6 +13,14 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface OrdersDetailService  extends BaseService<OrdersDetail>{
+
+	/**
+	 * 根据订单id得到订单详情列表
+	 * @author limr
+	 * @param ordersId
+	 * @return
+	 */
+	List<OrdersDetail> getOrdersDetailList(int ordersId);
    
 
 }

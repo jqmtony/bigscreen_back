@@ -24,6 +24,9 @@
 		       from advertisement atm left join advertiser at on atm.advertiser_id=at.id 
 	   <where>
 			1=1
+			<if test="advertiserId!=0">
+				and atm.advertiser_id=#{advertiserId}
+			</if>
 			<if test="source!=0">
 				and atm.source=#{source}
 			</if>

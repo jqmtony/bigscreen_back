@@ -30,8 +30,8 @@ public class Orders extends BaseVo implements Serializable {
 	private String endTime;// 结束时间
 	private int status;//订单状态   （1：待审核, 2：已审核， 3：在线播放中, 4：等待下线, 5：已下线）
 	
+	private String title;//临时，广告标题
 	
-	private String realName;//临时，真实姓名
 	private String countryCode;//临时，国家code
 	private String areaCode;//临时，地区code
 	private String cityCode;//临时，城市code
@@ -42,6 +42,25 @@ public class Orders extends BaseVo implements Serializable {
 	private int type;//临时，店铺类型
 	private String ids;//id集合，查看可用广告逗号分隔
 	private String types;//临时，店铺类型的多选逗号分隔
+
+	private String advertiserName;//临时，广告主
+	private String realName;//临时，真实姓名
+	
+	public String getAdvertiserName() {
+		return advertiserName;
+	}
+
+	public void setAdvertiserName(String advertiserName) {
+		this.advertiserName = advertiserName;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getOrderNo() {
 		return orderNo;

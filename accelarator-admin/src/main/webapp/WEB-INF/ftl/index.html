@@ -143,6 +143,16 @@
 				tabPanel.tabs('close', index);
 			}
 		}
+		//刷新datagrid
+		function reloadTabGrid(refreshTitle,closeTitle){ 
+			var tabPanel = $('#vrs-tabs');
+	    	if(tabPanel.tabs('exists', refreshTitle)) { 
+	    		tabPanel.tabs('select', refreshTitle); 
+	            window.top.reload_Abnormal_Monitor.call();
+	            tabPanel.tabs('close', closeTitle);
+	        } 
+	   }
+		
 	</script>
 </body>
 </html>

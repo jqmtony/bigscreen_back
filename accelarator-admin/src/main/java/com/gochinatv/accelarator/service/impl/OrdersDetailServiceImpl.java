@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.OrdersDetailDao;
@@ -26,6 +27,10 @@ public class OrdersDetailServiceImpl extends BaseServiceImpl<OrdersDetail> imple
 	@Override
 	protected BaseDao<OrdersDetail> getDao() {
 		return ordersDetailDao;
+	}
+	
+	public List<OrdersDetail> getOrdersDetailList(int ordersId) {
+		return ordersDetailDao.getOrdersDetailByOrdersId(ordersId);
 	}
 	
 	

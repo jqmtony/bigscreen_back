@@ -28,7 +28,7 @@
 	</insert>
 	
 	<select id="getOrdersDetailByOrdersId" resultMap="OrdersDetail" parameterType="int">
-	   SELECT type,city_code from orders_detail where orders_id=#{ordersId}
+	   SELECT * from orders_detail where orders_id=#{ordersId}
 	</select>
 	
 </mapper>

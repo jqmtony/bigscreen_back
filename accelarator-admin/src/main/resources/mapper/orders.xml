@@ -120,7 +120,7 @@
        LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm on adm.id=o.advertisement_id 
        WHERE od.type=#{type} AND od.city_code=#{cityCode} AND o.status IN(2,3,4) AND o.endTime> DATE_FORMAT(NOW(),'%Y-%m-%d')
 	</select>
-	
+
 	<select id="getEntityById" resultMap="Orders" parameterType="int">
 		select am.title as title,o.id,o.advertiser_id,o.auditor,o.order_no,o.audit_time,o.advertisement_id,o.start_time,o.end_time,o.status,a.real_name as realName,a.user_name as advertiserName from orders o
 		LEFT JOIN advertiser a ON o.advertiser_id=a.id

@@ -1,0 +1,166 @@
+<#assign base=request.contextPath/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "/frame/pageInclude.html">
+<script type="text/javascript">
+   $(function() {
+		grid = $('#check_tab').datagrid( {
+			url :'${base}/orders/checkOrderDetail',
+			queryParams:{id:${orders.id}},
+			fit:true,
+			rownumbers:true,
+			fitColumns:true
+		});
+		
+		var height =$("div[class^='vrs-main']",$(parent.window.document)).height();
+		var layout = $('#layout');
+		layout.layout('resize',{
+			height:height-35
+		});
+   });
+   
+   function modifyAdvertisement(){
+	   var advertiserId = $("#advertiserId").val();
+	   var url = '${base}/advertisement/gotoAdvertisementLookUp?parentMethod=openAdvertisementCallBack&advertiserId='+advertiserId
+	   openAdvertisementLookUp(url);
+   }
+   function openAdvertisementLookUp(url) {
+		$("#lookUpSelect-advertisement-window").dialogFrameWindow().dialogFrameHtml(url);
+	}
+   
+   function openAdvertisementCallBack(row){
+	   $("#advertisementId").val(row.id);
+	   $("#title").text(row.title);
+	   $("#lookUpSelect-advertisement-window").dialogFrameWindow().window('close');
+   }
+   
+   function openCallBack(row){
+	   $("#advertiserId").val(row.id);
+	   var advertiserId = $("#advertiserId").val();
+	   var parentId = $("#parentId").val();
+	   if(parentId != advertiserId){
+		   $("#parentId").val(row.id);
+		   $("#title").text('请重新选择');
+		   $("#advertisementId").val('');
+	   }
+	   $("#advertiserName").text(row.userName);
+	   $("#realName").text(row.realName);
+	   lookUpWin.window('close');
+   }
+   
+   function checkOnline(url){
+		if($('#modifyForm').form('validate')){
+				$.post(url,$("#modifyForm").serializeObject(),checkOnlineCallback,'json');		
+		}
+	}
+		
+	function checkOnlineCallback(data){
+		if(data.status == 'success'){
+			$.messager.alert('系统提示',"审核通过",'warning');
+		}else{
+			$.messager.alert('系统提示',"审核失败",'error');	
+		}
+	}
+	function sendBack(){
+		$.ajax({
+			url :'${base}/orders/sendBack',
+		    data:{    
+		             id : $("#advertiserId").val()
+		    },    
+		    type:'post',    
+		    cache:false,    
+		    dataType:'json',    
+		    success:function(data) {   
+		        if(data.status =="success" ){    
+		            alert("审核不通过！");
+		            parent.reloadTabGrid("订单列表","审核订单");  
+		        }else{    
+		        	alert("退回失败！");
+		        }    
+		     },    
+		     error : function() {    
+		          alert("异常！" + data.msg);    
+		     } 
+			
+		});
+		
+	}
+   
+</script>
+</head>
+<body>
+   <div id="layout" class="easyui-layout" style="width:auto;height:200px;">
+		<div data-options="region:'west'" style="width:600px;border:0px;">
+		   <table class="easyui-datagrid" id="check_tab"  data-options="title:'订单号：${orders.orderNo}'">
+				<thead>
+					<tr>
+					    <th data-options="field:'type',width:100,formatter:formatPlaceType">店铺类型</th>
+					    <th data-options="field:'countryCode',width:100,formatter:formatCountry">国家</th>
+						<th data-options="field:'areaCode',width:100,formatter:formatArea">地区</th>
+						<th data-options="field:'cityCode',width:100,formatter:formatCity">城市</th>
+					</tr>
+				</thead>
+			 </table>
+		</div>
+		<div data-options="region:'center'" style="border:0px 0px 1px 0px;">
+			 <div id="n" class="easyui-panel" title="订单有效期" style="width:100%;height:90px;">
+				<p style="font-size:18px;color:red;">
+				  该订单视频将于 ${orders.startTime}日0点   至    ${orders.endTime}日23:59:59播放
+				</p>
+			 </div><br/><br/>
+			 <form id="modifyForm" method="post">
+	             <div id="advertiserInfo" class="easyui-panel" title="广告商信息" style="width:100%;height:95px;border-bottom:0px;">
+						<table>
+							<tr >
+								<td>广告商：
+									<input name="id" type="hidden" value="${orders.id}"></input>
+									<input id="advertiserId" name="advertiserId" type="hidden" value="${orders.advertiserId}"/>
+								</td>
+								<td id="advertiserName">
+									${orders.advertiserName}
+								</td>
+								<td>
+									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');">修改广告商信息</a>
+								</td>
+							</tr>
+							<tr >
+								<td bgcolor="#E0ECFF">真实姓名：</td>
+								<td style="background-color: white;" id="realName">${orders.realName}</td>
+								<td bgcolor="#E0ECFF"></td>
+							</tr>
+							
+						</table>
+					
+				</div>
+				
+				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:85px;border-bottom:0px;">
+						<table>
+							<tr>
+								<td>广告：
+									<input id="parentId" type="hidden" value="${orders.advertiserId}"/>
+									<input id="advertisementId" name="advertisementId" type="hidden" value="${orders.advertisementId}"/>
+								</td>
+								<td id="title">
+									${orders.title}
+									<!-- <input id="title" value='${orders.title}' class="easyui-validatebox" data-options="editable:false" type="text" name="title"/> -->
+									
+								</td>
+								<td>
+									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifyAdvertisement()">添加广告信息</a>
+								</td>
+							</tr>
+							
+						</table>
+				</div>
+			</form>
+			 <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="sendBack()">退回</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="checkOnline('checkOnline');">审核上线</a>
+		    </div>
+		</div>
+	</div>
+	<div id="lookUpSelect-window" title="选择广告商"></div>
+	<div id="lookUpSelect-advertisement-window" title="选择广告"></div>
+</body>
+</html>
