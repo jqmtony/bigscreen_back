@@ -2,7 +2,6 @@ package com.gochinatv.accelarator.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.TreeMap;
 
 /**
  * Md5工具，用于计算输入的md5

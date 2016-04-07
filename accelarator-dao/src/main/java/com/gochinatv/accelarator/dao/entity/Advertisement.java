@@ -24,7 +24,7 @@ public class Advertisement extends BaseVo implements Serializable {
 	private String picPath;// 图片地址
 	private String content;// 文字内容
 	private int advertiserId;// 广告商id
-	private int duration;// 广告时长
+	private int duration;// 广告时长(秒)
 	private String remark;// 描述
 	private int source;// 广告来源   (1：自有   2：商家)
 	

@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
@@ -47,9 +48,24 @@ public interface OrdersService  extends BaseService<Orders>{
 	
 	
 	/**
+	 * 保存排播组合前查询需要排播组合的列表
+	 * @param data {type,cityCode}
+	 */
+	public List<Orders>  getOrdersPlayList(HashMap<String,Object> data);
+	
+	
+	/**
 	 * 保存订单，保存订单详情
 	 * @param place
 	 * @throws Exception 
 	 */
 	public void save(Orders orders) throws Exception;
+
+
+	/**
+	 * 审核订单上线
+	 * @param orders
+	 * @throws Exception 
+	 */
+	public void checkOnline(Orders orders) throws Exception;
 }

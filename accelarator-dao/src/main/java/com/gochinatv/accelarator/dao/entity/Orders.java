@@ -37,6 +37,7 @@ public class Orders extends BaseVo implements Serializable {
 	private String cityCode;//临时，城市code
 	private String createrName;//临时，创建人名称
 	private String auditorName;//临时，审核人名称
+	private int duration;//临时，广告时长(秒)
 	
 	private int type;//临时，店铺类型
 	private String ids;//id集合，查看可用广告逗号分隔
@@ -122,8 +123,6 @@ public class Orders extends BaseVo implements Serializable {
 		this.status = status;
 	}
 
-	
-	
 	public String getRealName() {
 		return realName;
 	}
@@ -170,6 +169,14 @@ public class Orders extends BaseVo implements Serializable {
 
 	public void setAuditorName(String auditorName) {
 		this.auditorName = auditorName;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	public String getIds() {

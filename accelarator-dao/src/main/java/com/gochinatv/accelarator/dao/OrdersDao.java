@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
@@ -43,4 +44,12 @@ public interface OrdersDao  extends BaseDao<Orders>{
 	 * @return
 	 */
 	public List<Orders>  getRetryOrdersList(Orders orders);
+	
+	
+	/**
+	 * 保存排播组合前查询需要排播组合的列表
+	 * @param data {type,cityCode}
+	 */
+	public List<Orders>  getOrdersPlayList(HashMap<String,Object> data);
+	
 }
