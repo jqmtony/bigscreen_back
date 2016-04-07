@@ -28,7 +28,11 @@ public class Orders extends BaseVo implements Serializable {
 	private int advertisementId;// 视频广告id
 	private String startTime;// 开始时间
 	private String endTime;// 结束时间
-	private int status;//订单状态   （1：待审核, 2：已审核， 3：在线播放中, 4：等待下线, 5：已下线）
+	private int status;//订单状态   （1:取消订单, 2:待审核, 3：审核通过, 4：审核不通过, 5：已过期）
+	//补充字段
+	private String aheadModifyTime;// 提前下线修改时间
+	private String aheadTime;// 提前下线时间
+	private String remark;// 下线备注描述
 	
 	private String title;//临时，广告标题
 	
@@ -46,6 +50,30 @@ public class Orders extends BaseVo implements Serializable {
 	private String advertiserName;//临时，广告主
 	private String realName;//临时，真实姓名
 	
+	public String getAheadModifyTime() {
+		return aheadModifyTime;
+	}
+
+	public void setAheadModifyTime(String aheadModifyTime) {
+		this.aheadModifyTime = aheadModifyTime;
+	}
+
+	public String getAheadTime() {
+		return aheadTime;
+	}
+
+	public void setAheadTime(String aheadTime) {
+		this.aheadTime = aheadTime;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getAdvertiserName() {
 		return advertiserName;
 	}

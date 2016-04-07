@@ -13,6 +13,9 @@
 		<result property="advertisementId" column="advertisement_id" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
+		<result property="aheadModifyTime" column="ahead_modify_time" />
+		<result property="aheadTime" column="ahead_time" />
+		<result property="remark" column="remark" />
 		<result property="status" column="status" />
 		
 		
@@ -24,7 +27,6 @@
 		<result property="cityCode" column="city_code" />
 		<result property="createrName" column="createrName" />
 		<result property="auditorName" column="auditorName" />
-		<result property="duration" column="duration" />
 		
 		<result property="cname" column="cname" />
 		<result property="type" column="type" />
@@ -69,8 +71,8 @@
 	<!-- 可用广告列表 -->
 	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
        SELECT p.type, p.country_code, p.area_code, p.city_code FROM place p 
-       WHERE 10>(
-            SELECT count(*) FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code AND p.type = od.type 
+       WHERE NOT EXISTS (
+            SELECT * FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code AND p.type = od.type 
             <if test="startTime!=null and endTime!=null">
 			  AND ((o.start_time &gt;=#{startTime} AND o.start_time &lt;= #{endTime}) OR (o.end_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}))
 			</if>
@@ -114,13 +116,11 @@
         )
 	</insert>
 	
-	<!-- 保存排播组合前查询需要排播组合的列表 -->
-	<select id="getOrdersPlayList" parameterType="map" resultMap="Orders">
-	   SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
-       LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm on adm.id=o.advertisement_id 
-       WHERE od.type=#{type} AND od.city_code=#{cityCode} AND o.status IN(2,3,4) AND o.endTime> DATE_FORMAT(NOW(),'%Y-%m-%d')
+	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
+	   SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
+       LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) 
+       AND o.endTime>asdfasdfadsf
 	</select>
-
 	<select id="getEntityById" resultMap="Orders" parameterType="int">
 		select am.title as title,o.id,o.advertiser_id,o.auditor,o.order_no,o.audit_time,o.advertisement_id,o.start_time,o.end_time,o.status,a.real_name as realName,a.user_name as advertiserName from orders o
 		LEFT JOIN advertiser a ON o.advertiser_id=a.id
