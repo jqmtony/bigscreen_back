@@ -220,18 +220,16 @@ function formatOnlineStatus(val, row) {
 
 function formatOrderStatus(val,row){
 	var text='';
-	if(val=='1'){
+	if(val=='0'){
+		text = '已取消';
+	}else if(val=='1'){
 		text = '待审核';
 	}else if(val=='2'){
-		text = '已审核';
+		text = '审核通过';
 	}else if(val=='3'){
-		text = '等待上线';
+		text = '审核不通过';
 	}else if(val=='4'){
-		text = '在线播放中';
-	}else if(val=='5'){
-		text = '等待下线';
-	}else{
-		text = '已下线';
+		text = '已过期';
 	}
 	return text;
 }

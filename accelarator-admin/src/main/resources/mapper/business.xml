@@ -39,6 +39,9 @@
 			<if test="cityCode!=null and cityCode!=''">
 				and city_code = #{cityCode}
 			</if>
+			<if test="status!=0">
+				and status=#{status}
+			</if>
 			order by create_time desc
 		</where>
 	</select>
