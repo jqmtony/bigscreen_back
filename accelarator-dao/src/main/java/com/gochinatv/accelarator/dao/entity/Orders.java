@@ -28,7 +28,7 @@ public class Orders extends BaseVo implements Serializable {
 	private int advertisementId;// 视频广告id
 	private String startTime;// 开始时间
 	private String endTime;// 结束时间
-	private int status;//订单状态   （1:取消订单, 2:待审核, 3：审核通过, 4：审核不通过, 5：已过期）
+	private int status;//订单状态   （0:取消订单, 1:待审核, 2：审核通过, 3：审核不通过, 4：已过期）
 	//补充字段
 	private String aheadModifyTime;// 提前下线修改时间
 	private String aheadTime;// 提前下线时间

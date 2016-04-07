@@ -58,6 +58,7 @@
 	function checkOnlineCallback(data){
 		if(data.status == 'success'){
 			$.messager.alert('系统提示',"审核通过",'warning');
+			parent.reloadTabGrid("订单列表","审核订单");
 		}else{
 			$.messager.alert('系统提示',"审核失败",'error');	
 		}
@@ -66,7 +67,7 @@
 		$.ajax({
 			url :'${base}/orders/sendBack',
 		    data:{    
-		             id : $("#advertiserId").val()
+		             id : $("#id").val()
 		    },    
 		    type:'post',    
 		    cache:false,    
@@ -113,21 +114,21 @@
 	             <div id="advertiserInfo" class="easyui-panel" title="广告商信息" style="width:100%;height:95px;border-bottom:0px;">
 						<table>
 							<tr >
-								<td>广告商：
-									<input name="id" type="hidden" value="${orders.id}"></input>
+								<td width="20%">广告商：
+									<input id="id" name="id" type="hidden" value="${orders.id}"></input>
 									<input id="advertiserId" name="advertiserId" type="hidden" value="${orders.advertiserId}"/>
 								</td>
-								<td id="advertiserName">
+								<td id="advertiserName" width="40%">
 									${orders.advertiserName}
 								</td>
-								<td>
+								<td width="40%">
 									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');">修改广告商信息</a>
 								</td>
 							</tr>
 							<tr >
-								<td bgcolor="#E0ECFF">真实姓名：</td>
-								<td style="background-color: white;" id="realName">${orders.realName}</td>
-								<td bgcolor="#E0ECFF"></td>
+								<td bgcolor="#E0ECFF" width="20%">真实姓名：</td>
+								<td style="background-color: white;" id="realName" width="40%">${orders.realName}</td>
+								<td bgcolor="#E0ECFF" width="40%"></td>
 							</tr>
 							
 						</table>
@@ -137,16 +138,16 @@
 				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:85px;border-bottom:0px;">
 						<table>
 							<tr>
-								<td>广告：
+								<td width="20%">广告：
 									<input id="parentId" type="hidden" value="${orders.advertiserId}"/>
 									<input id="advertisementId" name="advertisementId" type="hidden" value="${orders.advertisementId}"/>
 								</td>
-								<td id="title">
+								<td id="title" width="40%">
 									${orders.title}
 									<!-- <input id="title" value='${orders.title}' class="easyui-validatebox" data-options="editable:false" type="text" name="title"/> -->
 									
 								</td>
-								<td>
+								<td width="40%">
 									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifyAdvertisement()">添加广告信息</a>
 								</td>
 							</tr>
