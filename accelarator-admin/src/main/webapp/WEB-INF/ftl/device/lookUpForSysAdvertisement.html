@@ -36,7 +36,7 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-				<th data-options="field:'placeId',width:20">商铺id</th>
+				<th data-options="field:'placeId',width:50">商铺id</th>
 				<th data-options="field:'code',width:100">设备编码</th>
 				<th data-options="field:'brand',width:80">设备品牌</th>
 				<th data-options="field:'model',width:100">设备型号</th>
@@ -55,6 +55,7 @@
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
 			<input type="hidden" id="lookup_placeId" name="placeId"></input>
+			<input type="hidden" name="status" value="1"/>
 			 地区：	 <select id="query_code" name="query_code" class="easyui-combotree" data-options="url:'${base}/area/areaStaticTree',method:'get',editable:false"  style="width:150px;"></select>
     			 	 <input type="hidden" id="queryCountryCode" name="countryCode"></input> 
     			 	 <input type="hidden" id="queryAreaCode" name="areaCode"></input> 

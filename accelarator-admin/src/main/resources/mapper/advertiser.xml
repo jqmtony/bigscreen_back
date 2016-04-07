@@ -28,6 +28,9 @@
 			<if test="realName!=null">
 				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
 			</if>
+			<if test="status!=0">
+				and status=#{status}
+			</if>
 			<!-- <if test="countryCode!=null and countryCode!=''">
 				and country_code = #{countryCode}
 			</if>
