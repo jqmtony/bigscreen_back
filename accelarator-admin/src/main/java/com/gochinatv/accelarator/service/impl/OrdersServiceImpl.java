@@ -15,9 +15,13 @@ import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.AdvertisementDao;
 import com.gochinatv.accelarator.dao.OrdersDao;
 import com.gochinatv.accelarator.dao.OrdersDetailDao;
+import com.gochinatv.accelarator.dao.PlayListDao;
+import com.gochinatv.accelarator.dao.PlayListDetailDao;
 import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.dao.entity.OrdersDetail;
+import com.gochinatv.accelarator.dao.entity.PlayList;
+import com.gochinatv.accelarator.dao.entity.PlayListDetail;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
@@ -43,6 +47,13 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	
 	@Autowired
 	private AdvertisementDao advertisementDao;
+	
+	@Autowired
+	private PlayListDao playListDao;
+	
+	@Autowired
+	private PlayListDetailDao playListDetailDao;
+	
 	
 	@Override
 	protected BaseDao<Orders> getDao() {
@@ -203,6 +214,33 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				}
 				
 				//循环playMap 开始排播组合
+				Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
+				for (Entry<String, List<Integer>> entry : playSet) {
+					
+					savePlayList(entry);
+					
+                    PlayList playList = new PlayList();
+                    playList.setCityCode(detail.getCityCode());
+                    playList.setType(detail.getType());
+                    playList.setStartTime(entry.getKey());
+                    playList.setEndTime(entry.getKey());
+                   
+					List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
+					List<Integer> values = entry.getValue();
+					
+					for (Integer advertisementId : values) {
+						PlayListDetail details = new PlayListDetail();
+			            details.setPlayListId(playList.getId());
+						details.setAdvertisementId(advertisementId);
+						details.setStartTime(entry.getKey());
+						details.setEndTime(entry.getKey());
+						//details.setDuration(duration);
+						details.setSort((int)System.currentTimeMillis());
+						detailList.add(details);
+					}
+					playListDao.save(playList);
+					playListDetailDao.saveAll(detailList);
+				}
 			} 
 		  }else{
 			  //结束时间必须大于当天
@@ -229,6 +267,30 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return randomList;
 	}
 	
+	
+	/**
+	 * 保存排播
+	 * @param playMap
+	 */
+	private void savePlayList(Entry<String, List<Integer>> entry){
+			List<Integer> values = entry.getValue();//广告id集合
+			List<Integer> playValues = new ArrayList<Integer>();
+			
+			int totalSize = values.size();
+			int index = 0;
+	 		while(totalSize>0){
+	 			int randomNumber=(int)(Math.random()*totalSize);
+	 			int value = values.get(randomNumber);
+	 			if(index==0 || values.get(index-1)!=value){
+	 				values.remove(randomNumber);
+	 				playValues.add(value);
+	 	 			totalSize--;
+	 	 			index++;
+	 			}
+	 	   }
+	 	   entry.setValue(playValues);
+	}
+	
 	/**
 	 * 保存排播组合前查询需要排播组合的列表
 	 * @param data {type,cityCode}
@@ -247,11 +309,9 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		orders.setAuditTime(new Date());
 		orders.setStatus(2);
 		ordersDao.update(orders);
-	}
-	
-	public static void main(String[] args) {
-		int count = GlobalUtils.ADS_EACH_PLAY_TIME;
-		System.out.println(count/240);
+		
+		//创建排播组合
+		this.createPlayList(orders);
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
 
 
@@ -20,8 +19,8 @@ public class PlayListDetail extends BaseVo implements Serializable {
 
 	private int playListId;// 排播列表id
 	private int advertisementId;// 广告视频id
-	private Date startTime;// 开始时间
-	private Date endTime;// 结束时间
+	private String startTime;// 开始时间
+	private String endTime;// 结束时间
 	private int duration;// 视频时长
 	private int sort;// 排序
 
@@ -41,19 +40,19 @@ public class PlayListDetail extends BaseVo implements Serializable {
 		this.advertisementId = advertisementId;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
