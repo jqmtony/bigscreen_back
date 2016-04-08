@@ -14,7 +14,7 @@
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
 		<result property="aheadModifyTime" column="ahead_modify_time" />
-		<result property="aheadTime" column="ahead_time" />
+		<result property="originalEndTime" column="originalEndTime" />
 		<result property="remark" column="remark" />
 		<result property="status" column="status" />
 		
@@ -137,6 +137,10 @@
 		<set>
 			advertiser_id=#{advertiserId},
             advertisement_id=#{advertisementId},
+            ahead_modify_time=#{aheadModifyTime},
+            auditor=#{auditor},
+            audit_time=#{auditTime},
+            original_end_time=#{originalEndTime},
             status=#{status}
 		</set>
 		where id = #{id}
