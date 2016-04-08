@@ -58,7 +58,7 @@ $(function(){
 	    		</tr> -->
 	    		<tr>
 	    			<td>广告时长：</td>
-	    			<td><input id="duration" class="easyui-validatebox textbox" type="text" name="duration" data-options="required:true"></input>（秒）<label style="color: red"> *</label></td>
+	    			<td><input id="duration" class="easyui-validatebox textbox" type="text" name="duration" data-options="required:true"></input><label style="color: red"> *</label>（秒）</td>
 	    			<!-- <td>状态：</td>
 	    			<td><select id="status" name="status" style="width:171px;">
 			           		<option value="1" selected="selected">启用</option>
@@ -68,7 +68,9 @@ $(function(){
 	    		</tr>
 	    		<tr>
 	    			<td>视频地址：</td>
-	    			<td><textarea style="height:60px;width:171px;" class="easyui-validatebox textbox" cols="30" name="videoPath"></textarea></td>
+	    			<td>
+	    			   <input class="easyui-textbox" name="videoPath" data-options="multiline:true" style="height:70px;width:171px;"/>
+	    			</td>
 	    		</tr>
 	    		<!-- <tr>
 	    			<td>图片地址：</td>
@@ -83,7 +85,7 @@ $(function(){
 	    		<tr>
 	    			<td>备注：</td>
 	    			<td>
-	    			   <textarea style="height:60px;width:171px;" class="easyui-validatebox textbox" cols="30" name="remark"></textarea>
+	    			   <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px;width:171px;"/>
 	    			</td>
 	    		</tr>
                </table>
