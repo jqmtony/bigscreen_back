@@ -1,7 +1,6 @@
 package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
-import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
 
 /**
  * 
@@ -10,13 +9,14 @@ import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
  * @创建时间 2016年3月14日 上午11:26:55
  * @修改时间
  */
-public class PlayList extends BaseVo implements Serializable {
+public class PlayList implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private long id;//主键id，因为保存排播组合的特殊性，所有这里特殊处理
 	private int deviceId;//设备id
 	private int placeId;//店铺id
 	private String cityCode;//地市code
@@ -24,6 +24,14 @@ public class PlayList extends BaseVo implements Serializable {
 	private String startTime;// 开始时间
 	private String endTime;// 结束时间
 
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public int getDeviceId() {
 		return deviceId;
