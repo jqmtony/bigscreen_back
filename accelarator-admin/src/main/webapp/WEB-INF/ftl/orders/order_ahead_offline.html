@@ -1,0 +1,173 @@
+<#assign base=request.contextPath/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "/frame/pageInclude.html">
+<script type="text/javascript">
+   $(function() {
+	   $("#offline-window").window('close');
+		grid = $('#tab').datagrid( {
+			url :'${base}/orders/checkOrderDetail',
+			queryParams:{id:${orders.id}},
+			fit:true,
+			rownumbers:true,
+			fitColumns:true
+		});
+		
+		var height =$("div[class^='vrs-main']",$(parent.window.document)).height();
+		var layout = $('#layout');
+		layout.layout('resize',{
+			height:height-35
+		});
+		var startTime = new Date('${orders.startTime}');
+		var endTime = new Date('${orders.endTime}');
+		var timing=endTime-startTime  //时间差的毫秒数 
+		//计算出相差天数  
+		var days=Math.floor(timing/(24*3600*1000));
+		$("#onlineDay").text(days);
+   });
+   
+   function closeTab(){
+	   parent.removeTab();
+   }
+   
+   function changeOnlineTime(){
+	   $("#offline-window").window('open');
+	   //$("#offlineTime").datebox('setValue',$("#onlineEndTime").text());
+	   $('#offlineTime').datebox().datebox('calendar').calendar({
+	        validator: function(date){
+	        	var startTimeStr = $("#onlineStartTime").text();
+	        	var endTimeStr = $("#onlineEndTime").text();
+	            var startTime = new Date(startTimeStr);
+	            var nowTime = new Date();
+	            if(nowTime > startTime){
+	            	startTime = nowTime;
+	            }
+	            var endTime = new Date(endTimeStr);
+	            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+	            var endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
+	            return  date>startDate && endDate>date;
+	        }
+	    });
+	   
+   }
+   
+   function updateOfflineTime(url){
+		if(modifyForm.form('validate')){
+				$.post(url,$("#modifyForm").serializeObject(),updateOfflineTimeCallback,'json');		
+		}
+	}
+		
+	function updateOfflineTimeCallback(data){
+		if(!data.status){
+			$.messager.alert('系统提示',data.msg,'warning');
+		}else{
+			alert(data.data.modifyName);
+			var newEndTime = data.data.endTime;
+			$("#onlineEndTime").text(newEndTime);
+			$("#oldStartTime").text(data.data.startTime);
+			$("#newEndTime1").text(newEndTime);
+			$("#newEndTime2").text(newEndTime);
+			$("#aheadModifyTime").text(formatYYYYMMDD(data.data.aheadModifyTime));
+			$("#modifyer").text(data.data.modifyName);
+			$("#offline-window").window('close');
+		}
+	}
+   
+</script>
+</head>
+<body>
+   <div id="layout" class="easyui-layout" style="width:auto;height:200px;">
+		<div data-options="region:'west'" style="width:600px;border:0px;">
+		   <table class="easyui-datagrid" id="tab"  data-options="title:'订单号：${orders.orderNo}'">
+				<thead>
+					<tr>
+					    <th data-options="field:'type',width:100,formatter:formatPlaceType">店铺类型</th>
+					    <th data-options="field:'countryCode',width:100,formatter:formatCountry">国家</th>
+						<th data-options="field:'areaCode',width:100,formatter:formatArea">地区</th>
+						<th data-options="field:'cityCode',width:100,formatter:formatCity">城市</th>
+					</tr>
+				</thead>
+			 </table>
+		</div>
+		<div data-options="region:'center'" style="border:0px 0px 1px 0px;">
+			 <div id="n" class="easyui-panel" title="订单有效期" style="width:100%;height:120px;">
+				<p style="font-size:18px;color:red;">
+				  <label id="onlineStartTime">${orders.startTime}</label>日0点    至
+				  <label id="onlineEndTime">    ${orders.endTime}</label>日23:59:59,共<label id="onlineDay"></label>天
+				</p>
+				<div style="text-align:center">
+		    		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="changeOnlineTime();"> 修改时间 </a>
+		    	</div>
+			 </div><br/>
+			 <div id="onlineDiv" class="easyui-panel" title="修改记录"  style="width:100%;height:180px;">
+	    		<p style="font-size:18px;">
+		    		订单下线时间：</br> 
+					<label id="oldStartTime"></label>    修改至     <label id="newEndTime1"> </label><br/>
+					修改记录01：<label id="aheadModifyTime"></label><br/>
+					<label id="modifyer"></label>修改该片将于<label id="newEndTime2"></label>日23：59：59   下线
+				</p>
+	    	 </div>
+			 <form id="addForm" method="post">
+	             <div id="s" class="easyui-panel" title="广告商信息" style="width:100%;height:85px;border-bottom:0px;">
+						<table>
+							<tr>
+								<td width="20%">广告商：
+									<input id="advertiserId" name="advertiserId" type="hidden" value="${orders.advertiserId}"/>
+								</td>
+								<td id="advertiserName" width="80%">
+									${orders.advertiserName}
+								</td>
+							</tr>
+							<tr>
+								<td width="20%">真实姓名：</td>
+								<td id="realName" width="80%">${orders.realName}</td>
+							</tr>
+						</table>
+				</div>
+				
+				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:85px;border-bottom:0px;">
+						<table>
+							<tr>
+								<td width="20%">广告：
+								</td>
+								<td id="title" width="80%">
+									${orders.title}
+									
+								</td>
+							</tr>
+							
+						</table>
+				</div>
+			</form>
+			
+			 <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeTab();">关闭</a>
+		    </div>
+		</div>
+	</div>
+	<!-- 修改时间弹出框 -->
+	<div id="offline-window" title="修改下线时间" class="easyui-window">
+	     <form id="modifyForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>下线时间：</td>
+	    			<td>
+					    <input type="hidden" id="online_ordersId" name="id" value="${orders.id}"/>
+					    <input type="hidden" name="originalEndTime" value="${orders.endTime}"/>
+	    				<input id="offlineTime" class="easyui-datebox" data-options="editable:false" type="text" name="endTime"></input>
+	    			</td>
+	    			
+	    		</tr>
+	    		
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="updateOfflineTime('updateOfflineTime');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+		    </div>
+    </div>
+	
+	
+</body>
+</html>

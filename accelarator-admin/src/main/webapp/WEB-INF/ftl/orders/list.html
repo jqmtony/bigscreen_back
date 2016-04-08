@@ -42,6 +42,11 @@
 		});
 	}
 	
+	function aheadOffline(id){
+		var url = "${base}/orders/aheadOffline?ordersId="+id;
+		parent.addTab('提前下线',url,'',true);
+	}
+	
 	function formatOper(val,row,index){ 
 		var operateStr = "";
 		var status = row.status;
@@ -52,7 +57,7 @@
 	           '<a href="javascript:void(0);" onclick="cancleOrder('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-cancel">取消订单</a>&nbsp;'
 		}else if(status == 2){
 			operateStr = '<a href="javascript:void(0);" onclick="viewOrderTab('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-ok">查看订单</a>&nbsp;'+
-	           '<a href="javascript:void(0);" onclick="" class="easyui-linkbutton" iconCls="icon-offline">提前下线</a>'
+	           '<a href="javascript:void(0);" onclick="aheadOffline('+row.id+')" class="easyui-linkbutton" iconCls="icon-offline">提前下线</a>'
 		}else if(status == 3 || status == 4){
 			operateStr = '<a href="javascript:void(0);" onclick="viewOrderTab('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-ok">查看订单</a>&nbsp;'
 		}
@@ -65,7 +70,7 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-				<th data-options="field:'id',width:10">订单id</th>
+				<th data-options="field:'id',hidden:true,width:10">订单id</th>
 			    <th data-options="field:'orderNo',width:100">订单号</th>
 				<th data-options="field:'createrName',width:100">提交人</th>
 				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">提交时间</th>
