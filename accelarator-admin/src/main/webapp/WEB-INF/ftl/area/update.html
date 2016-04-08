@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	//修改
+	//编辑
 	function modify(){   
           var row = getChecked();
           if(row){
@@ -18,7 +18,7 @@
           }
 	}
 
-		//修改回调
+		//编辑回调
 	function modifyCallback(data){
 		if(data.status=='success'){
 			modifyWin.window('close');
@@ -30,7 +30,7 @@
 	
 </script>
 
-<div id="modify-window" title="修改地域信息" class="datagrid-body">
+<div id="modify-window" title="编辑地域信息" class="datagrid-body">
 <form id = "modifyForm" method="post" >
 	 <input type="hidden" id="parentCode" name="parentCode"  />
     <input type="hidden" id="areaCode" name="areaCode"  />
