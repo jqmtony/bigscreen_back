@@ -17,18 +17,18 @@ public class PlayListDetail extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int playListId;// 排播列表id
+	private long playListId;// 排播列表id
 	private int advertisementId;// 广告视频id
 	private String startTime;// 开始时间
 	private String endTime;// 结束时间
 	private int duration;// 视频时长
 	private int sort;// 排序
 
-	public int getPlayListId() {
+	public long getPlayListId() {
 		return playListId;
 	}
 
-	public void setPlayListId(int playListId) {
+	public void setPlayListId(long playListId) {
 		this.playListId = playListId;
 	}
 

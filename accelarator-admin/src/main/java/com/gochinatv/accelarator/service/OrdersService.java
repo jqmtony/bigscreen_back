@@ -67,5 +67,14 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void checkOnline(Orders orders) throws Exception;
+	public void updateCheckOnline(Orders orders) throws Exception;
+
+
+	/**
+	 * 提前下线
+	 * @param orders
+	 * @return 
+	 * @throws Exception 
+	 */
+	public Orders updateOfflineTime(Orders orders) throws Exception;
 }

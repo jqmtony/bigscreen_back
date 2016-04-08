@@ -150,6 +150,9 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		  if(now.before(end)){//表示结束日期大于今天
 			 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());
 			 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//需要随机从自有广告中取出几个出来
+			 
+			 long playListId = System.currentTimeMillis();
+			 
 			for (OrdersDetail detail : ordersDetails) {
 				HashMap<String, Object> data = new HashMap<String, Object>();
 				data.put("type", detail.getType());
@@ -216,10 +219,12 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				//循环playMap 开始排播组合
 				Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
 				for (Entry<String, List<Integer>> entry : playSet) {
-					//System.out.println(playSet.size()+"========================================");
-					HashMap<String, List<Integer>> result = savePlayList(entry);
 					
+					savePlayList(entry);
+					
+					playListId++;
                     PlayList playList = new PlayList();
+                    playList.setId(playListId);
                     playList.setCityCode(detail.getCityCode());
                     playList.setType(detail.getType());
                     playList.setStartTime(entry.getKey());
@@ -227,7 +232,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
                     playListDao.save(playList);
                     
 					List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
-					List<Integer> values = result.get(entry.getKey());
+					List<Integer> values = entry.getValue();
 					
 					for (Integer advertisementId : values) {
 						PlayListDetail details = new PlayListDetail();
@@ -272,23 +277,40 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * 保存排播
 	 * @param playMap
 	 */
-	private HashMap<String, List<Integer>> savePlayList(Entry<String, List<Integer>> entry){
-		    HashMap<String, List<Integer>> result = new HashMap<String, List<Integer>>();
-			List<Integer> values = entry.getValue();//广告id集合
-			List<Integer> playValues = new ArrayList<Integer>();
-			
-			//int counter = 0;
-	 		while(values.size()>0){
-	 			int index=(int)(Math.random()*values.size());
-	 			int value = values.get(index);
-	 			//if(counter==0 || playValues.get(counter-1)!=value){
-	 				values.remove(index);
-	 				playValues.add(value);
-	 				//counter++;
-	 			//}
-	 	   }
-	 	result.put(entry.getKey(), playValues);
-	 	return result;
+	private void savePlayList(Entry<String, List<Integer>> entry) {
+		List<Integer> values = entry.getValue();// 广告id集合
+		List<Integer> result = new ArrayList<Integer>();
+		List<Integer> repeat = new ArrayList<Integer>();
+
+		int temp = -1;
+		while (values.size() > 0) {
+			int index = (int) (Math.random() * values.size());
+			int value = values.get(index);
+			if (temp == value)
+				repeat.add(value);
+			else
+				result.add(value);
+			temp = value;
+			values.remove(index);
+		}
+
+		while (repeat.size() > 0) {
+			int repeatIndex = (int) (Math.random() * repeat.size());
+			int repeatValue = repeat.get(repeatIndex);
+
+			int resultIndex = (int) (Math.random() * result.size());
+			int resultValue = result.get(resultIndex);
+			int beforeIndex = resultIndex - 1;
+
+			if (beforeIndex != -1) {
+				int beforeValue = result.get(beforeIndex);
+				if (beforeValue != repeatValue && repeatValue != resultValue) {
+					repeat.remove(repeatIndex);
+					result.add(resultIndex, repeatValue);
+				}
+			}
+		}
+		entry.setValue(result);
 	}
 	
 	/**
@@ -304,7 +326,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void checkOnline(Orders orders) throws Exception{
+	public void updateCheckOnline(Orders orders) throws Exception{
 		orders.setAuditor(SessionUtils.getLoginUser().getId());
 		orders.setAuditTime(new Date());
 		orders.setStatus(2);
@@ -313,5 +335,20 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		//创建排播组合
 		this.createPlayList(orders);
 	}
-	
+
+	/**
+	 * 提前下线
+	 * @param orders
+	 * @throws Exception 
+	 */
+	public Orders updateOfflineTime(Orders orders) throws Exception{
+		Orders o = getEntityById(orders.getId());
+		o.setOriginalEndTime(orders.getOriginalEndTime());
+		o.setEndTime(orders.getEndTime());
+		o.setAheadModifyTime(new Date());
+		orders.setAuditTime(new Date());
+		o.setAuditor(SessionUtils.getLoginUser().getId());
+		ordersDao.update(o);
+		return o;
+	}
 }

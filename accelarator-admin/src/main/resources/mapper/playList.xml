@@ -12,13 +12,15 @@
 		<result property="endTime" column="end_time" />
 	</resultMap>
 	
-	<insert id="save" parameterType="PlayList" keyProperty="id">
+	<insert id="save" parameterType="PlayList">
 	   insert into play_list(
+	            id,
 	            city_code,
 	            type,
 	            start_time,
 	            end_time
 	            ) values (
+	            #{id},
 	            #{cityCode},
 	            #{type},
 	            #{startTime},
