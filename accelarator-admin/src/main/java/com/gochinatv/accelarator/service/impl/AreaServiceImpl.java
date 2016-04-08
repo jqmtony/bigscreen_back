@@ -28,12 +28,17 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	
 	@Override
 	public void save(Area area) throws Exception{
-		if(area.getAreaCode().startsWith(area.getParentCode())
-				&& area.getAreaCode().length()==area.getParentCode().length()+2){
-				super.save(area);
+		if(area.getParentCode().equals("-1") ){
+			super.save(area);
 		}else{
-			throw new Exception("地域区号不合法");
+			if(area.getAreaCode().startsWith(area.getParentCode())
+					&& area.getAreaCode().length()==area.getParentCode().length()+2){
+					super.save(area);
+			}else{
+				throw new Exception("地域区号不合法");
+			}
 		}
+	
 	}
 	
 	public void delete(String areaCode) {
