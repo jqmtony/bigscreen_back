@@ -175,7 +175,7 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> checkOnline(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.checkOnline(orders);
+			ordersService.updateCheckOnline(orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
@@ -292,16 +292,9 @@ public class OrdersController extends BaseController{
 	@RequestMapping("/updateOfflineTime")
 	@ResponseBody
 	public Map<String,Object> updateOfflineTime(Orders orders){
-		Map<String,Object> data = new HashMap<String, Object>();
-		Map<String,Object> result = new HashMap<String, Object>();
+		Map<String,Object> result = this.success(null);
 		try{
-			orders = ordersService.updateOfflineTime(orders);
-			data.put("modifyName", SessionUtils.getLoginUser().getUserName());
-			data.put("aheadModifyTime", orders.getAheadModifyTime());
-			data.put("endTime", orders.getEndTime());
-			data.put("startTime", orders.getStartTime());
-			data.put("originalEndTime", orders.getOriginalEndTime());
-			result = this.success(data);
+			ordersService.updateOfflineTime(orders);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
