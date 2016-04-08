@@ -39,7 +39,7 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 			entity.setCountryCode(entity.getCityCode().substring(0, 4));
 			placeDao.save(entity);
 		}else{
-			throw new Exception("地区输入错误，添加商铺失败");
+			throw new Exception("地区输入错误，新增商铺失败");
 		}
 	
 	}

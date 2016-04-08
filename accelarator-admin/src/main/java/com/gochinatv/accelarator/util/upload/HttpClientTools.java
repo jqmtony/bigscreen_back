@@ -31,6 +31,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
 
+@SuppressWarnings("all")
 public class HttpClientTools {
 
 	public static String textformat = "utf8";

@@ -30,7 +30,6 @@ public class ImageUploadController {
 	@RequestMapping("/upload")
     public void upload(HttpServletRequest request,
 			HttpServletResponse response,@RequestParam("file") MultipartFile file) throws Exception {
-		boolean success = true;
 		String wq ="";
 		try {
 			 FileChangeLocal fcl = new FileChangeLocal();
@@ -46,7 +45,7 @@ public class ImageUploadController {
 		    wq = HttpClientTools.Upload(url, localFile, heads,params);
 			logger.info(wq);
 		} catch (Exception e) {
-			success = false;
+			e.printStackTrace();
 		}
 		response.setContentType("text/html; charset=utf-8");
 		

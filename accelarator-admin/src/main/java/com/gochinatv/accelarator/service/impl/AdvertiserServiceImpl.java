@@ -34,7 +34,7 @@ public class AdvertiserServiceImpl extends BaseServiceImpl<Advertiser> implement
 //			entity.setCountryCode(entity.getCityCode().substring(0, 4));
 //			advertiserDao.save(entity);
 //		}else{
-//			throw new Exception("地区输入错误，添加广告失败");
+//			throw new Exception("地区输入错误，新增广告失败");
 //		}
 //	
 //	}
