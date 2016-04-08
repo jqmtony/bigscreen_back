@@ -51,5 +51,12 @@ public interface OrdersDao  extends BaseDao<Orders>{
 	 * @param data {type,cityCode}
 	 */
 	public List<Orders>  getOrdersPlayList(HashMap<String,Object> data);
+
+
+	/**
+	 * 提前下线
+	 * @param orders
+	 */
+	public void updateOfflineTime(Orders orders);
 	
 }

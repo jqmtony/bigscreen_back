@@ -70,14 +70,18 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-				<th data-options="field:'id',hidden:true,width:10">订单id</th>
+				<th data-options="field:'id',hidden:true,width:2">订单id</th>
 			    <th data-options="field:'orderNo',width:100">订单号</th>
-				<th data-options="field:'createrName',width:100">提交人</th>
-				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">提交时间</th>
-				<th data-options="field:'status',width:100,formatter:formatOrderStatus">订单状态</th>
-				<th data-options="field:'realName',width:100">广告商</th>
-				<th data-options="field:'auditorName',width:100">处理人</th>
-				<th data-options="field:'auditTime',width:100,formatter:formatYYYYMMDD">处理时间</th>
+				<th data-options="field:'createrName',width:50">提交人</th>
+				<th data-options="field:'createTime',width:60,formatter:formatYYYYMMDD">提交时间</th>
+				<th data-options="field:'status',width:65,formatter:formatOrderStatus">订单状态</th>
+				<th data-options="field:'realName',width:60">广告商</th>
+				<th data-options="field:'auditorName',width:60">处理人</th>
+				<th data-options="field:'auditTime',width:60,formatter:formatYYYYMMDD">处理时间</th>
+				<th data-options="field:'originalEndTime',width:65">原下线时间</th>
+				<th data-options="field:'endTime',width:75">最新下线时间</th>
+				<th data-options="field:'aheadModifyTime',width:100,formatter:formatYYYYMMDD">最新下线修改时间</th>
+				<th data-options="field:'remark',width:200">备注</th>
 				<th data-options="field:'_operate',width:150,formatter:formatOper">操作</th>
 			</tr>
 		</thead>
