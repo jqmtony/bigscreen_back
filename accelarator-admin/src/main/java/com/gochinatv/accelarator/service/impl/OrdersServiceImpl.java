@@ -216,17 +216,18 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				//循环playMap 开始排播组合
 				Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
 				for (Entry<String, List<Integer>> entry : playSet) {
-					
-					savePlayList(entry);
+					//System.out.println(playSet.size()+"========================================");
+					HashMap<String, List<Integer>> result = savePlayList(entry);
 					
                     PlayList playList = new PlayList();
                     playList.setCityCode(detail.getCityCode());
                     playList.setType(detail.getType());
                     playList.setStartTime(entry.getKey());
                     playList.setEndTime(entry.getKey());
-                   
+                    playListDao.save(playList);
+                    
 					List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
-					List<Integer> values = entry.getValue();
+					List<Integer> values = result.get(entry.getKey());
 					
 					for (Integer advertisementId : values) {
 						PlayListDetail details = new PlayListDetail();
@@ -238,7 +239,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						details.setSort((int)System.currentTimeMillis());
 						detailList.add(details);
 					}
-					playListDao.save(playList);
 					playListDetailDao.saveAll(detailList);
 				}
 			} 
@@ -272,23 +272,23 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * 保存排播
 	 * @param playMap
 	 */
-	private void savePlayList(Entry<String, List<Integer>> entry){
+	private HashMap<String, List<Integer>> savePlayList(Entry<String, List<Integer>> entry){
+		    HashMap<String, List<Integer>> result = new HashMap<String, List<Integer>>();
 			List<Integer> values = entry.getValue();//广告id集合
 			List<Integer> playValues = new ArrayList<Integer>();
 			
-			int totalSize = values.size();
-			int index = 0;
-	 		while(totalSize>0){
-	 			int randomNumber=(int)(Math.random()*totalSize);
-	 			int value = values.get(randomNumber);
-	 			if(index==0 || values.get(index-1)!=value){
-	 				values.remove(randomNumber);
+			//int counter = 0;
+	 		while(values.size()>0){
+	 			int index=(int)(Math.random()*values.size());
+	 			int value = values.get(index);
+	 			//if(counter==0 || playValues.get(counter-1)!=value){
+	 				values.remove(index);
 	 				playValues.add(value);
-	 	 			totalSize--;
-	 	 			index++;
-	 			}
+	 				//counter++;
+	 			//}
 	 	   }
-	 	   entry.setValue(playValues);
+	 	result.put(entry.getKey(), playValues);
+	 	return result;
 	}
 	
 	/**
@@ -313,5 +313,19 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		//创建排播组合
 		this.createPlayList(orders);
 	}
-	
+	/**
+	 * 提前下线
+	 * @param orders
+	 * @throws Exception 
+	 */
+	public Orders updateOfflineTime(Orders orders) throws Exception{
+		Orders o = getEntityById(orders.getId());
+		o.setOriginalEndTime(orders.getOriginalEndTime());
+		o.setEndTime(orders.getEndTime());
+		o.setAheadModifyTime(new Date());
+		orders.setAuditTime(new Date());
+		o.setAuditor(SessionUtils.getLoginUser().getId());
+		ordersDao.update(o);
+		return o;
+	}
 }

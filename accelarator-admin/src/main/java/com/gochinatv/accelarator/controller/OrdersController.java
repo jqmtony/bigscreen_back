@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.OrdersDetailService;
 import com.gochinatv.accelarator.service.OrdersService;
+import com.gochinatv.accelarator.util.SessionUtils;
 
 
 /**
@@ -155,6 +157,7 @@ public class OrdersController extends BaseController{
 		try{
 			ordersService.save(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -174,6 +177,7 @@ public class OrdersController extends BaseController{
 		try{
 			ordersService.checkOnline(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -195,6 +199,7 @@ public class OrdersController extends BaseController{
 			orders.setStatus(3);
 			ordersService.update(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -244,6 +249,11 @@ public class OrdersController extends BaseController{
 		return "orders/order_view";
 	}
 
+	/**
+	 * 取消订单
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/cancleOrder")
 	@ResponseBody
 	public Map<String,Object> cancleOrder(int id){
@@ -252,6 +262,46 @@ public class OrdersController extends BaseController{
 			Orders orders = ordersService.getEntityById(id);
 			orders.setStatus(0);
 			ordersService.update(orders);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 提前下线
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/aheadOffline")
+	public String aheadOffline(int ordersId,Model model) throws Exception{
+		Orders orders = ordersService.getEntityById(ordersId);
+		if(orders.getTitle() == null){
+			orders.setTitle("暂无");
+		}
+		model.addAttribute("orders",orders);
+		return "orders/order_ahead_offline";
+	}
+	/**
+	 * 修改提前下线时间
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/updateOfflineTime")
+	@ResponseBody
+	public Map<String,Object> updateOfflineTime(Orders orders){
+		Map<String,Object> data = new HashMap<String, Object>();
+		Map<String,Object> result = new HashMap<String, Object>();
+		try{
+			orders = ordersService.updateOfflineTime(orders);
+			data.put("modifyName", SessionUtils.getLoginUser().getUserName());
+			data.put("aheadModifyTime", orders.getAheadModifyTime());
+			data.put("endTime", orders.getEndTime());
+			data.put("startTime", orders.getStartTime());
+			data.put("originalEndTime", orders.getOriginalEndTime());
+			result = this.success(data);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

@@ -30,9 +30,10 @@ public class Orders extends BaseVo implements Serializable {
 	private String endTime;// 结束时间
 	private int status;//订单状态   （0:取消订单, 1:待审核, 2：审核通过, 3：审核不通过, 4：已过期）
 	//补充字段
-	private String aheadModifyTime;// 提前下线修改时间
-	private String aheadTime;// 提前下线时间
+	private Date aheadModifyTime;// 提前下线修改时间
+	private String originalEndTime;// 记录最初的下线时间时间
 	private String remark;// 下线备注描述
+	
 	
 	private String title;//临时，广告标题
 	
@@ -50,20 +51,21 @@ public class Orders extends BaseVo implements Serializable {
 	private String advertiserName;//临时，广告主
 	private String realName;//临时，真实姓名
 	
-	public String getAheadModifyTime() {
+
+	public Date getAheadModifyTime() {
 		return aheadModifyTime;
 	}
 
-	public void setAheadModifyTime(String aheadModifyTime) {
+	public void setAheadModifyTime(Date aheadModifyTime) {
 		this.aheadModifyTime = aheadModifyTime;
 	}
 
-	public String getAheadTime() {
-		return aheadTime;
+	public String getOriginalEndTime() {
+		return originalEndTime;
 	}
 
-	public void setAheadTime(String aheadTime) {
-		this.aheadTime = aheadTime;
+	public void setOriginalEndTime(String originalEndTime) {
+		this.originalEndTime = originalEndTime;
 	}
 
 	public String getRemark() {

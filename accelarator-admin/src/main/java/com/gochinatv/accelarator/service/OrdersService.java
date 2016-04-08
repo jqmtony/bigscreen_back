@@ -3,6 +3,7 @@ package com.gochinatv.accelarator.service;
 
 import java.util.HashMap;
 import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -68,4 +69,13 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @throws Exception 
 	 */
 	public void checkOnline(Orders orders) throws Exception;
+
+
+	/**
+	 * 提前下线
+	 * @param orders
+	 * @return 
+	 * @throws Exception 
+	 */
+	public Orders updateOfflineTime(Orders orders) throws Exception;
 }
