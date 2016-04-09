@@ -65,7 +65,7 @@
 	   var startTime = $('#startTime').datebox('getValue');
 	   var endTime = $('#endTime').datebox('getValue');
 	   if(nodes.length==0){
-		   alert("请选择国家、地区、城市！");
+		   alert("请选择地区！");
 		   return false;
 	   }
 	   
@@ -83,6 +83,14 @@
 		   alert("请选择结束时间！");
 		   return false;
 	   }
+	   
+	   var start=new Date(startTime);
+	   var end=new Date(endTime);
+	   if(start.getTime()>end.getTime()){
+		   alert("结束时间必须大于等于开始时间！");
+		   return false;
+	   }
+	   
 	   var val = "";
 	   for(i=0;i<nodes.length;i++){
 		   var code = nodes[i].id;
