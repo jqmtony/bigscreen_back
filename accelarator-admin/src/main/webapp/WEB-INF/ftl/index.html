@@ -26,36 +26,44 @@
     <!-- end of header -->
     
     <!-- begin of sidebar -->
-	<div class="vrs-sidebar" data-options="region:'west',split:true,border:true,title:'权限菜单'"> 
+	<div class="vrs-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
     	<div class="easyui-accordion" data-options="border:false,fit:true"> 
-        	<div title="系统管理" data-options="iconCls:'icon-application-cascade'" style="padding:5px;">  	
+        	<div title="系统管理" data-options="iconCls:'icon-application-system'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/user/gotoList" iframe="1">用户列表</a></li>
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/area/gotoList" iframe="1">地域列表</a></li>
+                	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/user/gotoList" iframe="1">用户列表</a></li>
+                	<li iconCls="icon-system-area"><a href="javascript:void(0)" data-icon="icon-system-area" data-link="${base}/area/gotoList" iframe="1">地域列表</a></li>
                 </ul>
             </div>
             
-            <div title="商家管理" data-options="iconCls:'icon-application-form-edit'" style="padding:5px;">  	
+            <div title="商家管理" data-options="iconCls:'icon-application-business'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/business/gotoList" iframe="1">商家列表</a></li>
-                    <li iconCls="icon-users"><a href="javascript:void(0)" data-icon="icon-users" data-link="${base}/place/gotoList" iframe="1">商铺列表</a></li>
-                    <li iconCls="icon-user-group"><a href="javascript:void(0)" data-icon="icon-user-group" data-link="${base}/device/gotoList" iframe="1">设备列表</a></li>
-                    <li iconCls="icon-book"><a href="javascript:void(0)" data-icon="icon-book" data-link="${base}/system_advertisement/gotoList" iframe="1">商家广告列表</a></li>
+                	<li iconCls="icon-business-user"><a href="javascript:void(0)" data-icon="icon-business-user" data-link="${base}/business/gotoList" iframe="1">商家列表</a></li>
+                    <li iconCls="icon-business-shop"><a href="javascript:void(0)" data-icon="icon-business-shop" data-link="${base}/place/gotoList" iframe="1">商铺列表</a></li>
+                    <li iconCls="icon-business-device"><a href="javascript:void(0)" data-icon="icon-business-device" data-link="${base}/device/gotoList" iframe="1">设备列表</a></li>
+                    <li iconCls="icon-business-ads"><a href="javascript:void(0)" data-icon="icon-business-ads" data-link="${base}/system_advertisement/gotoList" iframe="1">商家广告列表</a></li>
                 </ul>
             </div>
             
-            <div title="广告商管理" data-options="iconCls:'icon-creditcards'" style="padding:5px;">  	
+            <div title="广告商管理" data-options="iconCls:'icon-application-ads'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/advertiser/gotoList" iframe="1">广告商列表</a></li>
-                    <li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/advertisement/gotoList" iframe="1">广告列表</a></li>
+                	<li iconCls="icon-ads-user"><a href="javascript:void(0)" data-icon="icon-ads-user" data-link="${base}/advertiser/gotoList" iframe="1">广告商列表</a></li>
+                    <li iconCls="icon-ads-video"><a href="javascript:void(0)" data-icon="icon-ads-video" data-link="${base}/advertisement/gotoList" iframe="1">广告列表</a></li>
                 </ul>
             </div>
             
-            <div title="播控管理" data-options="iconCls:'icon-cart'" style="padding:5px;">  	
+            <div title="播控管理" data-options="iconCls:'icon-application-play'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
-    			    <li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/orders/gotoAvailableList" iframe="1">可用广告位</a></li>
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/orders/gotoPlayList" iframe="1">在播广告</a></li>
-                	<li iconCls="icon-chart-organisation"><a href="javascript:void(0)" data-icon="icon-chart-organisation" data-link="${base}/orders/gotoList" iframe="1">订单列表</a></li>
+    			    <li iconCls="icon-play-free"><a href="javascript:void(0)" data-icon="icon-play-free" data-link="${base}/orders/gotoAvailableList" iframe="1">可用广告位</a></li>
+                	<li iconCls="icon-play-play"><a href="javascript:void(0)" data-icon="icon-play-play" data-link="${base}/orders/gotoPlayList" iframe="1">在播广告</a></li>
+                	<li iconCls="icon-play-order"><a href="javascript:void(0)" data-icon="icon-play-order" data-link="${base}/orders/gotoList" iframe="1">订单列表</a></li>
+                </ul>
+            </div>
+            
+            <div title="统计管理" data-options="iconCls:'icon-application-statictics'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-statictics-play"><a href="javascript:void(0)" data-icon="icon-statictics-play" data-link="${base}/orders/gotoList" iframe="1">在播广告组合</a></li>
+                	<li iconCls="icon-statictics-device"><a href="javascript:void(0)" data-icon="icon-statictics-device" data-link="${base}/orders/gotoList" iframe="1">设备播放列表</a></li>
+                	<li iconCls="icon-statictics-detail"><a href="javascript:void(0)" data-icon="icon-statictics-detail" data-link="${base}/orders/gotoList" iframe="1">设备播放详情</a></li>
                 </ul>
             </div>
 
@@ -90,7 +98,7 @@
 			});	
 			
 			//init 
-			addTab('用户列表','${base}/user/gotoList','',true);
+			addTab('用户列表','${base}/user/gotoList','icon-system-user',true);
 		})
 		
 		/**
@@ -108,7 +116,7 @@
 					tabPanel.tabs('add',{
 						title:title,
 						content:content,
-						//iconCls:iconCls,
+						iconCls:iconCls,
 						fit:true,
 						cls:'pd3',
 						closable:true
