@@ -4,14 +4,12 @@
 		var row = grid.treegrid('getSelected');
 		if(row){
 			addWin.window('open');
-			XFrameUtils.clearForm('addForm'); 
-				$("#name").val(row.name);
-				$("#addsort").val(1);
-				$("#parentCode").val(row.areaCode);
-				$("#areaCode").val(row.areaCode);
-				$("#addlevel").val(row.level+1);
-				$("#addstatus").val(2);
-				$('#addstatus').attr("checked",true);
+			//XFrameUtils.clearForm('addForm'); 
+			$("#name").val(row.name);
+			$("#addsort").val(1);
+			$("#parentCode").val(row.areaCode);
+			$("#areaCode").val(row.areaCode);
+			$("#addlevel").val(row.level+1);
 		}else{
 			$.messager.show({
 					title:'警告', 
@@ -32,39 +30,43 @@
 </script>
 
 
-<div id="add-window" title="新增地域信息" class="datagrid-body">
+<div id="add-window" title="新增地域信息" class="easyui-window">
 <form id = "addForm" method="post" >
 <table>
 	<tr>
 		<td width="12%">父级名称：</td>
-		<td colspan="3" >
-			<input type="text" id="name" name="name"  disabled="false"/>
+		<td>
+			<input id="name" class="easyui-validatebox textbox" disabled="disabled" data-options="required:true"/>
 		    <input type="hidden" id="parentCode" name="parentCode"  />
 		    <input type="hidden" id="addlevel" name="level"  />
 		</td>
 	</tr>
 	<tr>
-		<td width="12%">名称：</td>
-		<td width="38%">
-		   <input id="name" name="name"   class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /> 
+		<td>名称：</td>
+		<td>
+		   <input class="easyui-validatebox textbox" name="name" data-options="required:true"/><label style="color: red"> *</label> 
 		</td>
-		<td width="12%">区号：</td>
-		<td width="38%"><input type="text" id="areaCode" name="areaCode"  maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />
-		(命名规范4-6-8)</td>
 	</tr>
 	<tr>
-		<td>状态：</td>
+		<td>区号：</td>
 		<td>
-				<input type="radio" id="addstatus" name="status" value="1" checked>有效
-				<input type="radio" id="addstatus" name="status" value="2">无效
-				
-		</td>
-		<td>排序：</td>
-		<td >
-		<input type="text" id="addsort" name="sort" style="width:80px;" maxLength="2" class="easyui-validatebox" required="true" missingMessage="必填"/>(值为0-99)
+		   <input id="areaCode" class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(命名规范4-6-8) 
 		</td>
 	</tr>
-</table>
+		<tr>
+			<td>状态：</td>
+			<td>
+			   <input type="radio" ref="add" name="status" value="1" checked="checked">有效
+			   <input type="radio" ref="add" name="status" value="2">无效
+			</td>
+		</tr>
+		<tr>
+			<td>排序：</td>
+			<td>
+			  <input id="addsort" class="easyui-validatebox textbox" name="sort" data-options="required:true"/><label style="color: red"> *</label>(值为0-99)
+		    </td>
+		</tr>
+	</table>
 </form>
 
 <div style="text-align:center;padding:5px">

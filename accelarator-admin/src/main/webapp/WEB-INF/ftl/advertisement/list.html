@@ -38,14 +38,14 @@
 		<thead>
 			<tr>
 			    <th data-options="field:'userName',width:100">广告商账号</th>
-			    <th data-options="field:'realName',width:100">广告商昵称</th>
-				<th data-options="field:'title',width:100">广告标题</th>
-				<th data-options="field:'type',width:100,formatter:formatAdvertisementType">广告类型</th>
-				<th data-options="field:'source',width:100,formatter:formatSource">广告来源</th>
-			    <th data-options="field:'resolution',width:100">视频分辨率</th>
+			    <th data-options="field:'realName',width:120">广告商昵称</th>
+				<th data-options="field:'title',width:160">广告标题</th>
+				<th data-options="field:'type',width:80,formatter:formatAdvertisementType">广告类型</th>
+				<th data-options="field:'source',width:80,formatter:formatSource">广告来源</th>
+			    <th data-options="field:'resolution',width:90">视频分辨率</th>
 				<!-- <th data-options="field:'startTime',width:100,formatter:formatYYYYMMDD">生效时间</th>
 				<th data-options="field:'endTime',width:100,formatter:formatYYYYMMDD">失效时间</th> -->
-				<th data-options="field:'duration',width:100">广告时长（秒）</th>
+				<th data-options="field:'duration',width:80">广告时长（秒）</th>
 				<!-- <th data-options="field:'status',width:100,formatter:formatStatus">状态</th> -->
 				<th data-options="field:'remark',width:150">备注</th>
 			</tr>
@@ -54,12 +54,12 @@
 	
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-			广告来源： <select name="source" class="easyui-combobox" data-options="editable:false" style="width:90px;">
+			广告来源： <select name="source" class="easyui-combobox" data-options="editable:false" style="width:110px;">
 			            <option value="0" selected="selected">--请选择--</option>
 			            <option value="1">自有</option>
 			            <option value="2">商家</option>
 		           	</select>
-			广告类型： <select name="type" class="easyui-combobox" data-options="editable:false" style="width:90px;">
+			广告类型： <select name="type" class="easyui-combobox" data-options="editable:false" style="width:110px;">
 			            <option value="0" selected="selected">--请选择--</option>
 			            <option value="1">视频</option>
 		            	<option value="2">图片</option> 

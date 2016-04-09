@@ -9,21 +9,6 @@ $(function(){
         }
     });
 });
-/* function modifySave(url){
-	var startTime = $("#edit_startTime").datebox('getValue');
-	var endTime = $('#edit_endTime').datebox('getValue');
-	
-	if(startTime != null && endTime != null){
-		if(endTime < startTime){
-			alert("失效时间不能小于生效时间！");
-			$("#edit_endTime").datebox("setValue","");
-			return;
-		}
-	}
-	if(modifyForm.form('validate')){
-		$.post(url,$("#modifyForm").serializeObject(),modifyCallback,'json');		
-	}
-} */
 </script>
 
 <div id="modify-window" title="编辑广告信息" class="easyui-window" style="width: 600px; height: 600px;">
@@ -74,7 +59,14 @@ $(function(){
 	    		</tr> -->
 	    		<tr>
 	    			<td>广告时长：</td>
-	    			<td><input id="duration" class="easyui-validatebox textbox" type="text" name="duration" data-options="required:true"></input><label style="color: red"> *</label>（秒）</td>
+	    			<td>
+                      <select id="duration" name="duration" class="easyui-combobox" data-options="required:true,editable:false" style="width:171px;">
+			            <option value="120">120</option>
+			            <option value="180">180</option>
+			            <option value="300">300</option>
+			            <option value="360">360</option>
+			          </select><label style="color: red"> *</label>（秒）	    			  
+	    			</td>
 	    			<!-- <td>状态：</td>
 	    			<td><select id="status" name="status" style="width:171px;">
 			           		<option value="1">启用</option>

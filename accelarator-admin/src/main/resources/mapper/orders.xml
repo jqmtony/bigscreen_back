@@ -42,7 +42,7 @@
         <where>
 			1=1
 			<if test="orderNo!=null and orderNo!=''">
-				and o.order_no like '%#{orderNo!=}%'
+				and o.order_no like '%#{orderNo}%'
 			</if>
 			<if test="realName!=null and realName!=''">
 				and a.real_name like '%#{realName}%'
@@ -144,6 +144,7 @@
 		</set>
 		where id = #{id}
 	</update>
+	
 	<update id="updateOfflineTime" parameterType="Orders">
 		update orders
 		<set>
@@ -156,4 +157,5 @@
 		</set>
 		where id = #{id}
 	</update>
+	
 </mapper>

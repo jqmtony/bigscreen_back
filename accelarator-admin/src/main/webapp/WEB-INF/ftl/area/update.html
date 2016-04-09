@@ -4,8 +4,9 @@
           var row = getChecked();
           if(row){
         	  modifyWin.window('open');
-               XFrameUtils.fillForm('modifyForm',row); 
-               $("#updatestatus").val(row.status);
+               //XFrameUtils.fillForm('modifyForm',row); 
+               $('#modifyForm').form('load',row);
+               //$("#updatestatus").val(row.status);
           }
       }   
 	
@@ -13,8 +14,9 @@
 		  var row = getChecked();
           if(row){
         	  modifyWin.window('open');
-               XFrameUtils.fillForm('modifyForm',row); 
-               $("#updatestatus").val(row.status);
+        	  $('#modifyForm').form('load',row);
+               //XFrameUtils.fillForm('modifyForm',row); 
+               //$("#updatestatus").val(row.status);
           }
 	}
 
@@ -30,7 +32,7 @@
 	
 </script>
 
-<div id="modify-window" title="编辑地域信息" class="datagrid-body">
+<div id="modify-window" title="编辑地域信息" class="easyui-window">
 <form id = "modifyForm" method="post" >
 	 <input type="hidden" id="parentCode" name="parentCode"  />
     <input type="hidden" id="areaCode" name="areaCode"  />
@@ -44,27 +46,33 @@
 	</td>
 	<td></td>
 	</tr> -->
-	
-	<tr>
-	    <td width="12%">名称：</td>
-		<td width="38%">
-		   <input id="updatename" name="name"  class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" /> 
-		</td>
-		<td width="12%">区号：</td>
-		<td width="38%"><input type="text" id="updateareaCode" name="areaCode" disabled="disabled" maxLength="8"  style="width:80px;" class="easyui-validatebox" required="true" missingMessage="必填" validType="length[1,32]" />(命名规范4-6-8)</td>
-	</tr>
-	<tr >
-		<td>状态：</td>
-		<td>
-			<input type="radio" id="updatestatus" name="status" value="1" >有效
-			<input type="radio" id="updatestatus" name="status" value="2"  >无效
-		</td>
-		<td>排序：</td>
-		<td >
-		<input type="text" id="updatesort" name="sort" style="width:80px; maxLength="2" class="easyui-validatebox" required="true" missingMessage="必填"/>(值为0-99)
-		</td>
-	</tr>
-</table>
+
+			<tr>
+				<td width="12%">名称：</td>
+				<td>
+				   <input id="updatename" class="easyui-validatebox textbox" name="name" data-options="required:true"/><label style="color: red"> *</label> 
+				</td>
+			</tr>
+			<tr>
+				<td>区号：</td>
+				<td>
+					<input id="updateareaCode" class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(命名规范4-6-8) 
+				</td>
+			</tr>
+			<tr>
+				<td>状态：</td>
+				<td>
+				  <input type="radio" id="updatestatus" name="status" value="1">有效 
+				  <input type="radio" id="updatestatus" name="status" value="2">无效
+				</td>
+			</tr>
+			<tr>
+				<td>排序：</td>
+				<td>
+					<input id="updatesort" class="easyui-validatebox textbox" name="sort" data-options="required:true"/><label style="color: red"> *</label>(值为0-99)
+			    </td>
+			</tr>
+		</table>
 </form>
 
 <div style="text-align:center;padding:5px">
