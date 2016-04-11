@@ -14,7 +14,7 @@ public interface AreaService  extends BaseService<Area>{
 	
 	public Area queryById(long areaId);
 	
-	public void delete(String areaCode);
+	public void delete(String areaCode,HttpServletRequest request) throws Exception;
 	
 	public Area queryBycq(long areaId);
 	
@@ -54,5 +54,10 @@ public interface AreaService  extends BaseService<Area>{
 	 * @throws Exception
 	 */
 	public JSONArray createAreaJson(HttpServletRequest request) throws Exception;
+	
+	
+	public void save(Area area,HttpServletRequest request) throws Exception;
+	
+	public void update(Area area,HttpServletRequest request) throws Exception;
 	
 }

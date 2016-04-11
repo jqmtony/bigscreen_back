@@ -74,4 +74,8 @@
 		select * from area where status=1 and parent_code=#{parentCode}
 	</select> 
 	
+	<!-- 生成json用 -->
+	<select id="queryByAreaCode" resultMap="AreaResultMap" parameterType="string">
+		select * from area where area_code=#{areaCode}
+	</select> 
 </mapper>

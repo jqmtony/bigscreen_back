@@ -92,10 +92,10 @@ public class AreaController extends BaseController{
 	
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Map<String,Object> save(Area area){
+	public Map<String,Object> save(Area area,HttpServletRequest request){
 		Map<String,Object> result = this.success(null);
 		try{
-			areaService.save(area);
+			areaService.save(area,request);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -105,10 +105,10 @@ public class AreaController extends BaseController{
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public Map<String,Object> update(Area area){
+	public Map<String,Object> update(Area area,HttpServletRequest request){
 		Map<String,Object> result = this.success(null);
 		try{
-			areaService.update(area);
+			areaService.update(area,request);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -117,10 +117,10 @@ public class AreaController extends BaseController{
 	
 	@RequestMapping(value = "/delete/{areaCode}")
 	@ResponseBody
-	public Map<String,Object> delete(@PathVariable("areaCode")String areaCode){
+	public Map<String,Object> delete(@PathVariable("areaCode")String areaCode,HttpServletRequest request){
 		Map<String,Object> result = this.success(null);
 		try{
-			areaService.delete(areaCode);
+			areaService.delete(areaCode,request);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

@@ -20,11 +20,11 @@
 
 
 	function addCallback(data){
-		if(data.status=='failure'){
-			$.messager.alert('系统提示',data.data,'warning');
-		}else{
-			addWin.window('close');
+		if(data.status){
+			 addWin.window('close');
 			 grid.treegrid('reload',$("#queryForm").serializeObject());	
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
 		}
 	}
 </script>

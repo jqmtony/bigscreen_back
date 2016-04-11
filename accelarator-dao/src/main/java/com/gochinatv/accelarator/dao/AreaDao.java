@@ -45,4 +45,7 @@ public interface AreaDao extends BaseDao<Area>{
 	 * @return
 	 */
 	public List<Area> queryByParentCode(@Param(value="parentCode") String parentCode);
+	
+	
+	public Area queryByAreaCode(@Param(value="areaCode") String areaCode);
 }

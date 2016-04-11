@@ -22,7 +22,7 @@
 
 		//编辑回调
 	function modifyCallback(data){
-		if(data.status=='success'){
+		if(data.status){
 			modifyWin.window('close');
 		    grid.treegrid('reload',$("#queryForm").serializeObject());	
 		}else{
@@ -35,7 +35,6 @@
 <div id="modify-window" title="编辑地域信息" class="easyui-window">
 <form id = "modifyForm" method="post" >
 	 <input type="hidden" id="parentCode" name="parentCode"  />
-    <input type="hidden" id="areaCode" name="areaCode"  />
     <input type="hidden" id="updatelevel" name="level"  />
 <table>
 <!-- 
@@ -56,7 +55,7 @@
 			<tr>
 				<td>区号：</td>
 				<td>
-					<input id="updateareaCode" class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(命名规范4-6-8) 
+					<input id="updateareaCode" readonly class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(不可修改,命名规范4-6-8) 
 				</td>
 			</tr>
 			<tr>
