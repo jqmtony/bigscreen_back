@@ -33,27 +33,53 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	}
 	
 	@Override
-	public void save(Area area) throws Exception{
+	public void save(Area area,HttpServletRequest request) throws Exception{
+		Area area2 = areaDao.queryByAreaCode(area.getAreaCode().trim());
+		if(area2 !=null ){
+			throw new Exception("地域区号已存在");
+		}
 		if(area.getParentCode().equals("-1") ){//国家
-			if(area.getAreaCode().length()==4){
+			if(area.getAreaCode().trim().length()==4){
 				super.save(area);
 			}else{
 				throw new Exception("地域区号不合法,国家区号必须4位");
 			}
 			
 		}else{
-			if(area.getAreaCode().startsWith(area.getParentCode())
-					&& area.getAreaCode().length()==area.getParentCode().length()+2){
+			if(area.getAreaCode().startsWith(area.getParentCode().trim())
+					&& area.getAreaCode().trim().length()==area.getParentCode().trim().length()+2){
 					super.save(area);
 			}else{
 				throw new Exception("地域区号不合法");
 			}
 		}
-	
+
+        createAreaJson(request);
 	}
 	
-	public void delete(String areaCode) {
-		areaDao.delete(areaCode);
+	@Override
+	public void update(Area area,HttpServletRequest request) throws Exception{
+		super.update(area);
+        createAreaJson(request);
+	}
+	
+	public void delete(String areaCode,HttpServletRequest request) throws Exception{
+		List<Area> childList = areaDao .queryByParentCode(areaCode);
+        if (childList != null &&childList.size()>0){
+            for (Area area : childList){
+                List<Area> childList2 = areaDao .queryByParentCode(area.getAreaCode());
+                 if (childList2 != null && childList2.size()>0){
+                      for (Area area2 : childList2){
+                           areaDao.delete(area2.getAreaCode());
+                     }
+                }
+                 areaDao.delete(area.getAreaCode());
+           }
+       }
+        areaDao.delete(areaCode);
+
+        createAreaJson(request);
+
 	}
 
 	@Override
