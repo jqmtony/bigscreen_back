@@ -123,9 +123,9 @@
 				  <label id="onlineEndTime">    ${orders.endTime}</label>日23:59:59,共<label id="onlineDay"></label>天
 				</p>
 				<div style="text-align:center">
-		    		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="changeOnlineTime();"> 修改时间 </a>
+		    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="changeOnlineTime();"> 修改时间 </a>
 		    	</div>
-			 </div><br/>
+			 </div><br/><br/>
 			 <div id="onlineDiv" class="easyui-panel" title="修改记录"  style="width:100%;height:180px;" data-options="closed:true">
 	    		<p style="font-size:18px;" id="remarkText">
 		    		订单下线时间：</br> 
@@ -143,7 +143,7 @@
    				<input type="hidden" id="aheadModifyTime" name="aheadModifyTime" value="${orders.id}"/>
    				<input type="hidden" id="auditTime" name="auditTime"/>
    				<input type="hidden" id="auditor" name="auditor" value="1"/>
-	             <div id="s" class="easyui-panel" title="广告商信息" style="width:100%;height:85px;border-bottom:0px;">
+	             <div id="s" class="easyui-panel" title="广告商信息" style="width:100%;height:78px;border-bottom:0px;">
 						<table>
 							<tr>
 								<td width="20%">广告商：
@@ -160,11 +160,11 @@
 							</tr>
 						</table>
 				</div>
-				
-				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:85px;border-bottom:0px;">
+				<br/><br/>
+				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:53px;border-bottom:0px;">
 						<table>
 							<tr>
-								<td width="20%">广告：
+								<td width="20%">广告标题：
 								</td>
 								<td id="title" width="80%">
 									${orders.title}
@@ -176,8 +176,8 @@
 			</form>
 			
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeTab();">返回</a>
-		    	<a id="btn" href="javascript:void(0)" class="easyui-linkbutton" onclick="updateOfflineTime('updateOfflineTime');">提交</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" onclick="closeTab();">返回</a>
+		    	<a id="btn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="updateOfflineTime('updateOfflineTime');">提交</a>
 		    </div>
 		</div>
 	</div>

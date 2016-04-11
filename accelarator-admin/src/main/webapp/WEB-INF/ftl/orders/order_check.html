@@ -111,7 +111,7 @@
 				</p>
 			 </div><br/><br/>
 			 <form id="modifyForm" method="post">
-	             <div id="advertiserInfo" class="easyui-panel" title="广告商信息" style="width:100%;height:95px;border-bottom:0px;">
+	             <div id="advertiserInfo" class="easyui-panel" title="广告商信息" style="width:100%;height:84px;border-bottom:0px;">
 						<table>
 							<tr >
 								<td width="20%">广告商：
@@ -123,7 +123,7 @@
 									${orders.advertiserName}
 								</td>
 								<td width="20%">
-									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');">编辑广告商信息</a>
+									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');">选择广告商</a>
 								</td>
 							</tr>
 							<tr >
@@ -136,7 +136,7 @@
 				
 				<br/><br/>
 				
-				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:85px;border-bottom:0px;">
+				<div id="advertisementInfo" class="easyui-panel" title="广告信息" style="width:100%;height:59px;border-bottom:0px;">
 						<table>
 							<tr>
 								<td width="20%">广告标题：
@@ -147,7 +147,7 @@
 									${orders.title}
 								</td>
 								<td width="20%">
-									<a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifyAdvertisement()">新增广告信息</a>
+									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="modifyAdvertisement()">选择广告</a>
 								</td>
 							</tr>
 							
@@ -155,8 +155,8 @@
 				</div>
 			</form>
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="sendBack()">退回</a>
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="checkOnline('checkOnline');">审核上线</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo"  onclick="sendBack()">退回</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"  onclick="checkOnline('checkOnline');">审核上线</a>
 		    </div>
 		</div>
 	</div>
