@@ -432,5 +432,7 @@ function openLookUpCallBack(row){
 	$('#add_lookUpId,#edit_lookUpId').val(row.id);
 	$('#add_lookUpName,#edit_lookUpName').val(row.userName);
 	$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
+	
+	$('#add_lookUpName,#edit_lookUpName').validatebox({novalidate: true});
 	lookUpWin.window('close');
 }
