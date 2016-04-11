@@ -26,12 +26,12 @@
 	
 	function checkOrderTab(ordersId){
 		var url = "${base}/orders/checkOrder?ordersId="+ordersId;
-		parent.addTab('审核订单',url,'',true);
+		parent.addTab('审核订单',url,'icon-play-order-checked',true);
 	}
 	
 	function viewOrderTab(ordersId){
 		var url = "${base}/orders/viewOrder?ordersId="+ordersId;
-		parent.addTab('查看订单',url,'',true);
+		parent.addTab('查看订单',url,'icon-play-order-detail',true);
 	}
 	
 	function cancleOrder(id){
@@ -44,7 +44,7 @@
 	
 	function aheadOffline(id){
 		var url = "${base}/orders/aheadOffline?ordersId="+id;
-		parent.addTab('订单下线',url,'',true);
+		parent.addTab('订单下线',url,'icon-play-order-offline',true);
 	}
 	
 	function formatOper(val,row,index){ 

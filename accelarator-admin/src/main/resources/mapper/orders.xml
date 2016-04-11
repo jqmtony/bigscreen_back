@@ -121,7 +121,7 @@
 	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
 	   SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
        LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm  ON adm.id=o.advertisement_id 
-       WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status IN(2,3,4) 
+       WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status IN(1,2,4) 
        AND o.end_time>now()
 	</select>
 	

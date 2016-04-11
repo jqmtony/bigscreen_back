@@ -73,6 +73,10 @@ input[type="checkbox"] { cursor: pointer;}
 .icon-play-free { background:url('../images/icons/icon-play-free.png') no-repeat center center;}
 .icon-play-play { background:url('../images/icons/icon-play-play.png') no-repeat center center;}
 .icon-play-order { background:url('../images/icons/icon-play-order.png') no-repeat center center;}
+.icon-play-order-preview { background:url('../images/icons/icon-play-order-preview.png') no-repeat center center;}
+.icon-play-order-detail { background:url('../images/icons/icon-play-order-detail.png') no-repeat center center;}
+.icon-play-order-checked { background:url('../images/icons/icon-play-order-checked.png') no-repeat center center;}
+.icon-play-order-offline { background:url('../images/icons/icon-play-order-offline.png') no-repeat center center;}
 
 .icon-application-statictics { background:url('../images/icons/icon-application-statictics.png') no-repeat center center;}
 .icon-statictics-play { background:url('../images/icons/icon-statictics-play.png') no-repeat center center;}
