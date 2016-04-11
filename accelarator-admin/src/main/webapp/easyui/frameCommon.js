@@ -15,6 +15,18 @@ $(document).ready(function() {
         height:360,
 		resizable: false
 	});
+	//新增时判断是否选择到地区
+	$("#add_cityCode").combotree({
+		onSelect: function (node) {
+			var cityCode = node.id;
+			if(cityCode != null){
+				if(cityCode.length != 8){
+					alert("请选择精确到地区！");
+					$("#add_cityCode").combotree("clear");
+				}
+			}
+		}
+	});
 });
 
 var modifyWin;
