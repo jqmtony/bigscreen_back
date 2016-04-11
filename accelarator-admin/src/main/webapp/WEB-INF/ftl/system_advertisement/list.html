@@ -28,6 +28,7 @@
 		$('#add_lookUpPlaceId,#edit_lookUpPlaceId').val(row.id);
 		$('#add_lookUpCname,#edit_lookUpCname').val(row.cname);
 		$('#edit_lookUpDeviceId,#edit_lookUpCode').val('');
+		$('#add_lookUpCname,#edit_lookUpCname').validatebox({novalidate: true});
 		lookUpWin.window('close');
 		$("#add_lookUpDeviceId").val("0");
 	}
@@ -50,6 +51,7 @@
 	function openCheckBoxLookUpCallBack(row){
 		$('#add_lookUpDeviceId,#edit_lookUpDeviceId').val(row.id);
 		$('#add_lookUpCode,#edit_lookUpCode').val(row.code);
+		//$('#add_lookUpCode,#edit_lookUpCode').validatebox({novalidate: true});
 		$("#device-lookUpSelect-window").dialogFrameWindow().window('close');
 	}
 </script>
