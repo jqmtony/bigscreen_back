@@ -33,4 +33,10 @@
 	    </foreach>
 	</insert>
 	
+	<delete id="deleteByPlayList" parameterType="map">
+	   DELETE FROM play_list_detail WHERE play_list_id IN (
+           SELECT id FROM play_list WHERE city_code=#{cityCode} and type=#{type} and start_time=#{startTime} and end_time=#{endTime}
+       )
+	</delete>
+	
 </mapper>

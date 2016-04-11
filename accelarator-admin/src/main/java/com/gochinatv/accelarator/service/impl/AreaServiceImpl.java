@@ -1,8 +1,14 @@
 package com.gochinatv.accelarator.service.impl;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
@@ -175,4 +181,80 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		}
 		return array;
 	}
+	
+	
+	/**
+	 * 创建静态json文件
+	 * @return
+	 * @throws Exception
+	 */
+	public JSONArray createAreaJson(HttpServletRequest request) throws Exception{
+		StringBuffer buffer = new StringBuffer();
+		
+		//查询country列表集合
+		List<Area> countryList = queryByLevel(1);
+		JSONArray country = new JSONArray();
+		
+		JSONArray xzqh = new JSONArray();
+		
+		FileOutputStream fos = null;
+		Writer out = null;
+		
+		for (Area area : countryList) {
+			JSONObject object = new JSONObject();
+			String areaCode = area.getAreaCode();
+			object.put("id", areaCode);
+			object.put("text", area.getName());
+			JSONArray sub = queryByParentCode(areaCode);
+			buffer.append("var _"+areaCode+"=" + sub.toJSONString() +"\n");
+			country.add(object);
+			
+			JSONObject object1 = new JSONObject();
+			object1.put("id", areaCode);
+			object1.put("text", area.getName());
+			JSONArray children = queryByParentCode(new JSONArray(),areaCode);
+			if(children.size()>0){
+				object1.put("children",children);
+			}
+			xzqh.add(object1);
+		}
+		
+		//查询city列表集合
+		List<Area> cityList = queryByLevel(2);
+		for (Area area : cityList) {
+			String areaCode = area.getAreaCode();
+			JSONArray sub = queryByParentCode(areaCode);
+			buffer.append("var _"+areaCode+"=" + sub.toJSONString() +"\n");
+		}
+		
+		buffer.append("var _country=" + country.toJSONString()+"\n");
+		
+		buffer.append("var _xzqh=" + xzqh.toJSONString()+"\n\n");
+		
+		String[] shopType = new String[]{"餐厅","大使馆","商场","美甲区","其它"};
+		JSONArray shopTypeArray = new JSONArray();
+		for(int i=0;i<shopType.length;i++){
+			JSONObject object = new JSONObject();
+			object.put("id", (i+1)+"");
+			object.put("text",shopType[i]);
+			shopTypeArray.add(object);
+		}
+		buffer.append("var _shop_type=" + shopTypeArray.toJSONString()+"\n");
+		
+		JSONObject shopTypeTree = new JSONObject();
+		shopTypeTree.put("id", "-1");
+		shopTypeTree.put("text","全部");
+		shopTypeTree.put("children", shopTypeArray);
+		
+		buffer.append("var _shop_type_tree=[" + shopTypeTree.toJSONString()+"]\n");
+		
+		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/data.js"));
+		out = new OutputStreamWriter(fos, "UTF-8");
+		out.write(buffer.toString());
+		out.flush();
+		out.close();
+		fos.close();
+		return null;
+	}
+	
 }

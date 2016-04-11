@@ -29,9 +29,9 @@ public class DictController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 	
-	@RequestMapping("/create_area")
+	@RequestMapping("/createArea")
 	@ResponseBody
-	public JSONArray create_area() throws Exception{
+	public JSONArray createArea() throws Exception{
 		StringBuffer buffer = new StringBuffer();
 		HttpServletRequest request = this.getRequest();
 		

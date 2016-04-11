@@ -61,7 +61,6 @@ public class OrdersController extends BaseController{
 		return "";
 	}
 	
-	/******************************************************************************************/
 	/**
 	 * 到在播广告列表
 	 * @param model
@@ -89,7 +88,6 @@ public class OrdersController extends BaseController{
 	}
 	
 	
-	/*****************************************************************************************************************/
 	/**
 	 * 到可用广告列表
 	 * @param model
@@ -160,7 +158,6 @@ public class OrdersController extends BaseController{
 		}
 		return result;
 	}
-	/*********************************************************************************************/
 
 	/**
 	 * 审核订单上线
@@ -261,6 +258,7 @@ public class OrdersController extends BaseController{
 			orders.setStatus(0);
 			ordersService.update(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;
@@ -281,6 +279,7 @@ public class OrdersController extends BaseController{
 		model.addAttribute("orders",orders);
 		return "orders/order_ahead_offline";
 	}
+	
 	/**
 	 * 修改提前下线时间
 	 * @param model
@@ -294,6 +293,7 @@ public class OrdersController extends BaseController{
 		try{
 			ordersService.updateOfflineTime(orders);
 		}catch(Exception e){
+			e.printStackTrace();
 			result = this.error(e.getMessage());
 		}
 		return result;

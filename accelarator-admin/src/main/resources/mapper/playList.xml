@@ -28,7 +28,7 @@
 	            )
 	</insert>
 	
-	<delete id="deleteByEntity" parameterType="Place">
-	   delete from place where id = #{id}
+	<delete id="deleteByMap" parameterType="map">
+	   delete from play_list where city_code=#{cityCode} and type=#{type} and start_time=#{startTime} and end_time=#{endTime}
 	</delete>
 </mapper>

@@ -3,6 +3,8 @@ package com.gochinatv.accelarator.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.alibaba.fastjson.JSONArray;
 import com.gochinatv.accelarator.dao.entity.Area;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
@@ -44,4 +46,13 @@ public interface AreaService  extends BaseService<Area>{
 	 * @return
 	 */
 	public JSONArray queryByParentCode(JSONArray array,String parentCode);
+	
+	
+	/**
+	 * 创建静态json文件
+	 * @return
+	 * @throws Exception
+	 */
+	public JSONArray createAreaJson(HttpServletRequest request) throws Exception;
+	
 }

@@ -220,6 +220,15 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
 				for (Entry<String, List<Integer>> entry : playSet) {
 					
+					HashMap<String,Object> params = new HashMap<String,Object>();
+					params.put("cityCode", detail.getCityCode());
+					params.put("type", detail.getType());
+					params.put("startTime", entry.getKey());
+					params.put("endTime", entry.getKey());
+					playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
+					playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
+					
+					
 					savePlayList(entry);
 					
 					playListId++;
