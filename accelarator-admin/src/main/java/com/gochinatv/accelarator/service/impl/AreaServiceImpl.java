@@ -28,8 +28,13 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	
 	@Override
 	public void save(Area area) throws Exception{
-		if(area.getParentCode().equals("-1") ){
-			super.save(area);
+		if(area.getParentCode().equals("-1") ){//国家
+			if(area.getAreaCode().length()==4){
+				super.save(area);
+			}else{
+				throw new Exception("地域区号不合法,国家区号必须4位");
+			}
+			
 		}else{
 			if(area.getAreaCode().startsWith(area.getParentCode())
 					&& area.getAreaCode().length()==area.getParentCode().length()+2){
