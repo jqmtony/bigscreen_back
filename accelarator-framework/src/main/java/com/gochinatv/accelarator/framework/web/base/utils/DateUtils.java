@@ -21,13 +21,27 @@ public class DateUtils {
 	 */
 	public static long getBetweenDays(String startTime,String endTime) throws Exception{
 		Calendar cal = Calendar.getInstance();
-        cal.setTime(DateUtils.SDF_YYYY_MM_DD.parse(startTime));    
+        cal.setTime(SDF_YYYY_MM_DD.parse(startTime));    
         long start_millis = cal.getTimeInMillis();   
         
-        cal.setTime(DateUtils.SDF_YYYY_MM_DD.parse(endTime));   
+        cal.setTime(SDF_YYYY_MM_DD.parse(endTime));   
         long end_millis = cal.getTimeInMillis();
         
         long between=(end_millis-start_millis)/(1000*3600*24);
         return between;
 	}
+	
+	
+	/**
+	 * 当前时间基础上加上天
+	 * @param amount
+	 * @return
+	 * @throws Exception
+	 */
+	public static String addDay(int amount) throws Exception{
+		Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR,amount);        
+        return SDF_YYYY_MM_DD.format(cal.getTime());
+	}
+	
 }

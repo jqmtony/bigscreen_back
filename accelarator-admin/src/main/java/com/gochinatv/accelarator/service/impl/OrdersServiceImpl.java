@@ -137,18 +137,20 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	   *     SELECT type,city_code from orders_detail where orders_id=5 <br>
 	   * 3：根据city_code,type循环查询影响到这些的记录行数
 	   *     for(){<br>
-	   *        SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od <br>
-	   *        LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) <br>
+	   *        SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od <br>
+	   *        LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(1,2,4) <br>
 	   *        and o.endTime>当前时间，否则认为是过期的<br>
 	   *     }<br>
 	   * 4： 根据每次查询循环的结果开始执行排播？按时间段进行排播还是每天进行排播？
+	   * 
+	   * type:  SX：订单审核上线     XX：提前下线
 	   */
-	public void createPlayList(Orders orders) throws Exception{
+	public void createPlayList(Orders orders,String type) throws Exception{
 		  String endTime = orders.getEndTime();
 		  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
 		  Date now = new Date();
 		  if(now.before(end)){//表示结束日期大于今天
-			 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());
+			 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
 			 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
 			 
 			 long playListId = System.currentTimeMillis();
@@ -157,13 +159,19 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				HashMap<String, Object> data = new HashMap<String, Object>();
 				data.put("type", detail.getType());
 				data.put("cityCode", detail.getCityCode());
-
+                
+				//cityCode、type 且结束时间大于当天投放的视频信息
 				List<Orders> ordersPlayList = this.getOrdersPlayList(data);//duration,advertisement_id,start_time,end_time
 
 				Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
 				for (int i = 0; i < ordersPlayList.size(); i++) {
 					Orders order = (Orders) ordersPlayList.get(i);
-					String start_time = order.getStartTime();
+					String start_time = "";
+					if(type.equals("SX")){
+						start_time = order.getStartTime();
+					}else if(type.equals("XX")){
+						start_time= DateUtils.addDay(1);//取得明天的日期，下线的开始日期必须从明天开始
+					}
 					String end_time = order.getEndTime();
 
 					long between = DateUtils.getBetweenDays(start_time, end_time);// 取得两个日期之间的天数
@@ -342,7 +350,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		ordersDao.update(orders);
 		
 		//创建排播组合
-		this.createPlayList(orders);
+		this.createPlayList(orders,"SX");
 	}
 
 	/**
@@ -352,5 +360,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 */
 	public void updateOfflineTime(Orders orders) throws Exception{
 		ordersDao.updateOfflineTime(orders);
+		
+		//修改排播组合
+		this.createPlayList(orders,"XX");
 	}
 }
