@@ -71,7 +71,9 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+		
 	</dependencies>
+	
 	<build>
 		<finalName>accelarator-admin</finalName>
 	</build>
