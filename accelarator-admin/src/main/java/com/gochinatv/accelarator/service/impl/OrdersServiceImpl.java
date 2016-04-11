@@ -130,17 +130,17 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	
 	
 	  /**
-	   * 生成排播组合
+	   * 生成排播组合<br>
 	   * 1：保存订单完成之后，首先判断订单的有效日期是否已经过期，如果过期那么不用重新排列 
-	   *     SELECT * FROM orders WHERE id=5 
+	   *     SELECT * FROM orders WHERE id=5 <br>
 	   * 2：查出orders_detail的涉及影响到哪些city_code和type 
-	   *     SELECT type,city_code from orders_detail where orders_id=5 
+	   *     SELECT type,city_code from orders_detail where orders_id=5 <br>
 	   * 3：根据city_code,type循环查询影响到这些的记录行数
-	   *     for(){
-	   *        SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
-	   *        LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) 
-	   *        and o.endTime>当前时间，否则认为是过期的
-	   *     }
+	   *     for(){<br>
+	   *        SELECT od.type,od.city_code,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od <br>
+	   *        LEFT JOIN orders o  ON od.orders_id=o.id WHERE od.type=xxx AND city_code='xxxx' AND o.status IN(2,3,4) <br>
+	   *        and o.endTime>当前时间，否则认为是过期的<br>
+	   *     }<br>
 	   * 4： 根据每次查询循环的结果开始执行排播？按时间段进行排播还是每天进行排播？
 	   */
 	public void createPlayList(Orders orders) throws Exception{
@@ -149,7 +149,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		  Date now = new Date();
 		  if(now.before(end)){//表示结束日期大于今天
 			 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());
-			 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//需要随机从自有广告中取出几个出来
+			 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
 			 
 			 long playListId = System.currentTimeMillis();
 			 

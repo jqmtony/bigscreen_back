@@ -37,10 +37,11 @@ function callback(data){
  */
 function add(){
 	addWin.window('open');
-	XFrameUtils.clearForm('addForm'); 
-	$("#add_cityCode").combotree('setValue','');
-	$("#add_status,#add_source,#add_type").combobox('setValue','1');
-	$("#add_screenNum").combobox('setValue','1');
+	//XFrameUtils.clearForm('addForm');
+	$('#addForm').form('reset');
+	//$("#add_cityCode").combotree('setValue','');
+	//$("#add_status,#add_source,#add_type").combobox('setValue','1');
+	//$("#add_screenNum").combobox('setValue','1');
 	addDefaultCheck();
 }
 
