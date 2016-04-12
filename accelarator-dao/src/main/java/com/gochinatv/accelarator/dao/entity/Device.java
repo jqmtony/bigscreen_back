@@ -36,6 +36,17 @@ public class Device extends BaseVo implements Serializable {
 	private String areaCode;// 临时，地区
 	private String cityCode;// 临时，城市
 	
+	private int screenShotInterval;//截屏时间 单位 分钟
+	
+	
+	public int getScreenShotInterval() {
+		return screenShotInterval;
+	}
+
+	public void setScreenShotInterval(int screenShotInterval) {
+		this.screenShotInterval = screenShotInterval;
+	}
+
 	public String getCountryCode() {
 		return countryCode;
 	}
