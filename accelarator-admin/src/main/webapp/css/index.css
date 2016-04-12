@@ -83,3 +83,7 @@ input[type="checkbox"] { cursor: pointer;}
 .icon-statictics-device { background:url('../images/icons/icon-statictics-device.png') no-repeat center center;}
 .icon-statictics-detail { background:url('../images/icons/icon-statictics-detail.png') no-repeat center center;}
 
+.icon-contextmenu-closeself{background:url('../images/icons/icon-contextmenu-closeself.png') no-repeat center center;}
+.icon-contextmenu-closeother{background:url('../images/icons/icon-contextmenu-closeother.png') no-repeat center center;}
+.icon-contextmenu-closeall{background:url('../images/icons/icon-contextmenu-closeall.png') no-repeat center center;}
+

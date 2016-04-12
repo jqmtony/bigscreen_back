@@ -86,80 +86,117 @@
     	&copy; 2016 东方嘉禾版权所有
     </div>
     <!-- end of footer -->
-      
-    <script type="text/javascript">
-		$(function(){
-			$('.vrs-side-tree a').bind("click",function(){
+
+	<div id="contextmenu" class="easyui-menu">
+		<div data-options="iconCls:'icon-contextmenu-closeself'" id="closeself">关闭</div>
+		<div data-options="iconCls:'icon-contextmenu-closeother'" id="closeother">关闭其他</div>
+		<div data-options="iconCls:'icon-contextmenu-closeall'" id="closeall">关闭全部</div>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			$('.vrs-side-tree a').bind("click", function() {
 				var title = $(this).text();
 				var url = $(this).attr('data-link');
 				var iconCls = $(this).attr('data-icon');
-				var iframe = $(this).attr('iframe')==1?true:false;
-				addTab(title,url,iconCls,iframe);
-			});	
-			
+				var iframe = $(this).attr('iframe') == 1 ? true : false;
+				addTab(title, url, iconCls, iframe);
+			});
+
 			//init 
-			addTab('用户列表','${base}/user/gotoList','icon-system-user',true);
-		})
-		
+			addTab('用户列表', '${base}/user/gotoList', 'icon-system-user', true);
+			
+			$("#vrs-tabs").bind('contextmenu',function(e){
+		        e.preventDefault();
+		        $('#contextmenu').menu('show', {
+		            left: e.pageX,
+		            top: e.pageY
+		        });
+		    });
+			 
+		    $("#closeself").bind("click",function(){
+		        var tab = $('#vrs-tabs').tabs('getSelected');
+		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        $('#vrs-tabs').tabs('close',index);
+		    });
+		    
+		    $("#closeother").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        var tab = $('#vrs-tabs').tabs('getSelected');
+		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        for(var i=tablist.length-1;i>index;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		        var num = index-1;
+		        for(var i=num;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',0);
+		        }
+		    });
+		    
+		    $("#closeall").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        for(var i=tablist.length-1;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		    });
+		});
+
 		/**
-		* Name 添加菜单选项
-		* Param title 名称
-		* Param href 链接
-		* Param iconCls 图标样式
-		* Param iframe 链接跳转方式（true为iframe，false为href）
-		*/	
-		function addTab(title, href, iconCls, iframe){
+		 * Name 添加菜单选项
+		 * Param title 名称
+		 * Param href 链接
+		 * Param iconCls 图标样式
+		 * Param iframe 链接跳转方式（true为iframe，false为href）
+		 */
+		function addTab(title, href, iconCls, iframe) {
 			var tabPanel = $('#vrs-tabs');
-			if(!tabPanel.tabs('exists',title)){
-				var content = '<iframe marginheight="0" marginwidth="0" frameborder="0" src="'+ href +'" height="100%" width="100%"></iframe>';
-				if(iframe){
-					tabPanel.tabs('add',{
-						title:title,
-						content:content,
-						iconCls:iconCls,
-						fit:true,
-						cls:'pd3',
-						closable:true
+			if (!tabPanel.tabs('exists', title)) {
+				var content = '<iframe marginheight="0" marginwidth="0" frameborder="0" src="'
+						+ href + '" height="100%" width="100%"></iframe>';
+				if (iframe) {
+					tabPanel.tabs('add', {
+						title : title,
+						content : content,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
+					});
+				} else {
+					tabPanel.tabs('add', {
+						title : title,
+						href : href,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
 					});
 				}
-				else{
-					tabPanel.tabs('add',{
-						title:title,
-						href:href,
-						iconCls:iconCls,
-						fit:true,
-						cls:'pd3',
-						closable:true
-					});
-				}
-			}
-			else
-			{
-				tabPanel.tabs('select',title);
+			} else {
+				tabPanel.tabs('select', title);
 			}
 		}
-		
+
 		/**
-		* Name 移除菜单选项
-		*/
-		function removeTab(){
+		 * Name 移除菜单选项
+		 */
+		function removeTab() {
 			var tabPanel = $('#vrs-tabs');
 			var tab = tabPanel.tabs('getSelected');
-			if (tab){
+			if (tab) {
 				var index = tabPanel.tabs('getTabIndex', tab);
 				tabPanel.tabs('close', index);
 			}
 		}
 		//刷新datagrid
-		function reloadTabGrid(refreshTitle,closeTitle){ 
+		function reloadTabGrid(refreshTitle, closeTitle) {
 			var tabPanel = $('#vrs-tabs');
-	    	if(tabPanel.tabs('exists', refreshTitle)) { 
-	    		tabPanel.tabs('select', refreshTitle); 
-	            window.top.reload_Abnormal_Monitor.call();
-	            tabPanel.tabs('close', closeTitle);
-	        } 
-	   }
-		
+			if (tabPanel.tabs('exists', refreshTitle)) {
+				tabPanel.tabs('select', refreshTitle);
+				window.top.reload_Abnormal_Monitor.call();
+				tabPanel.tabs('close', closeTitle);
+			}
+		}
 	</script>
 </body>
 </html>

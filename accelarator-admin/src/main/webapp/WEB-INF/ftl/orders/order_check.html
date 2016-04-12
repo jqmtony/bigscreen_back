@@ -92,7 +92,7 @@
 </head>
 <body>
    <div id="layout" class="easyui-layout" style="width:auto;height:200px;">
-		<div data-options="region:'west'" style="width:500px;border:0px;">
+		<div data-options="region:'west'" style="width:600px;border:0px;">
 		   <table class="easyui-datagrid" id="check_tab"  data-options="title:'订单号：${orders.orderNo}'">
 				<thead>
 					<tr>
@@ -119,17 +119,17 @@
 									<input id="advertiserId" name="advertiserId" type="hidden" value="${orders.advertiserId}"/>
 									<input name="endTime" type="hidden" value="${orders.endTime}"/>
 								</td>
-								<td id="advertiserName" width="60%">
+								<td id="advertiserName" width="55%">
 									${orders.advertiserName}
 								</td>
-								<td width="20%">
+								<td width="25%">
 									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="openLookUp('${base}/advertiser/gotoAdvertiserLookUp?parentMethod=openCallBack');">选择广告商</a>
 								</td>
 							</tr>
 							<tr >
-								<td bgcolor="#E0ECFF" width="20%">真实姓名：</td>
-								<td style="background-color: white;" id="realName" width="60%">${orders.realName}</td>
-								<td bgcolor="#E0ECFF" width="20%"></td>
+								<td bgcolor="#E0ECFF">真实姓名：</td>
+								<td style="background-color: white;" id="realName">${orders.realName}</td>
+								<td bgcolor="#E0ECFF"></td>
 							</tr>
 						</table>
 				</div>
@@ -143,10 +143,10 @@
 									<input id="parentId" type="hidden" value="${orders.advertiserId}"/>
 									<input id="advertisementId" name="advertisementId" type="hidden" value="${orders.advertisementId}"/>
 								</td>
-								<td id="title" width="60%">
+								<td id="title" width="55%">
 									${orders.title}
 								</td>
-								<td width="20%">
+								<td width="25%">
 									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="modifyAdvertisement()">选择广告</a>
 								</td>
 							</tr>
