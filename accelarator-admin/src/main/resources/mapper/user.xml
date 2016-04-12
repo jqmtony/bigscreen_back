@@ -60,13 +60,27 @@
 	<update id="update" parameterType="User">
 		update user
 		<set>
-			user_name=#{userName},
-            password=#{password},
-            real_name=#{realName},
-            mobile=#{mobile},
-            email=#{email},
-            remark=#{remark},
-            status=#{status}
+			<if test="userName!=null">
+				user_name=#{userName},
+			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
+			<if test="realName!=null">
+				real_name=#{realName},
+			</if>
+			<if test="mobile!=null">
+				mobile=#{mobile},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="status!=0">
+				status=#{status},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark}
+			</if>
 		</set>
 		where id = #{id}
 	</update>

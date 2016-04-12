@@ -41,11 +41,21 @@
 	<update id="update" parameterType="Menu">
 		update menu
 		<set>
-			name=#{name},
-			price=#{price},
-            image_path=#{imagePath},
-            description=#{description},
-            sort=#{sort}
+			<if test="name!=null">
+				name=#{name},
+			</if>
+			<if test="price!=null">
+				price=#{price},
+			</if>
+			<if test="sort!=0">
+				sort=#{sort},
+			</if>
+			<if test="description!=null">
+				description=#{description},
+			</if>
+			<if test="imagePath!=null">
+				image_path=#{imagePath}
+			</if>
 		</set>
 		where id = #{id}
 	</update>

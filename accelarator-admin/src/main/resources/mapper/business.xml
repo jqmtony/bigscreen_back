@@ -94,18 +94,45 @@
 	<update id="update" parameterType="Business">
 		update business
 		<set>
-			user_name=#{userName},
-            real_name=#{realName},
-            country_code=#{countryCode},
-            area_code=#{areaCode},
-            city_code=#{cityCode},
-            mobile=#{mobile},
-            email=#{email},
-            facebook=#{facebook},
-            weixin=#{weixin},
-            remark=#{remark},
-            birthday=#{birthday},
-            status=#{status}
+			<if test="userName!=null">
+				user_name=#{userName},
+			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
+			<if test="realName!=null">
+				real_name=#{realName},
+			</if>
+			<if test="mobile!=null">
+				mobile=#{mobile},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="countryCode!=null">
+				country_code=#{countryCode},
+			</if>
+			<if test="areaCode!=null">
+				area_code=#{areaCode},
+			</if>
+			<if test="cityCode!=null">
+				city_code=#{cityCode},
+			</if>
+			<if test="facebook!=null">
+				facebook=#{facebook},
+			</if>
+			<if test="weixin!=null">
+				weixin=#{weixin},
+			</if>
+			<if test="birthday!=null">
+				birthday=#{birthday},
+			</if>
+			<if test="status!=0">
+				status=#{status},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark}
+			</if>
 		</set>
 		where id = #{id}
 	</update>

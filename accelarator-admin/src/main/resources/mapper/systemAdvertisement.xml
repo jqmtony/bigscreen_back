@@ -70,17 +70,39 @@
 	<update id="update" parameterType="SystemAdvertisement">
 		update system_advertisement
 		<set>
-            type=#{type},
-            video_path=#{videoPath},
-            pic_path=#{picPath},
-            place_id=#{placeId},
-            content=#{content},
-            device_id=#{deviceId},
-            sort=#{sort},
-	        remark=#{remark},
-	        source=#{source},
-	        ad_index=#{adIndex},
-            status=#{status}
+			<if test="type!=0">
+				type=#{type},
+			</if>
+			<if test="videoPath!=null">
+				video_path=#{videoPath},
+			</if>
+			<if test="picPath!=null">
+				pic_path=#{picPath},
+			</if>
+			<if test="content!=null">
+				content=#{content},
+			</if>
+			<if test="placeId!=0">
+				place_id=#{placeId},
+			</if>
+			<if test="deviceId!=0">
+				device_id=#{deviceId},
+			</if>
+			<if test="sort!=0">
+				sort=#{sort},
+			</if>
+			<if test="source!=0">
+				source=#{source},
+			</if>
+			<if test="adIndex!=0">
+				ad_index=#{adIndex},
+			</if>
+			<if test="status!=0">
+				status=#{status},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark}
+			</if>
 		</set>
 		where id = #{id}
 	</update>

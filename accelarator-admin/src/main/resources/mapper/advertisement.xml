@@ -69,16 +69,36 @@
 	<update id="update" parameterType="Advertisement">
 		update advertisement
 		<set>
-			title=#{title},
-			resolution=#{resolution},
-			source=#{source},
-			type=#{type},
-            video_path=#{videoPath},
-            pic_path=#{picPath},
-            content=#{content},
-            advertiser_id=#{advertiserId},
-            duration=#{duration},
-            remark=#{remark}
+			<if test="title!=null">
+				title=#{title},
+			</if>
+			<if test="resolution!=null">
+				resolution=#{resolution},
+			</if>
+			<if test="type!=0">
+				type=#{type},
+			</if>
+			<if test="videoPath!=null">
+				video_path=#{videoPath},
+			</if>
+			<if test="picPath!=null">
+				pic_path=#{picPath},
+			</if>
+			<if test="content!=null">
+				content=#{content},
+			</if>
+			<if test="advertiserId!=0">
+				advertiser_id=#{advertiserId},
+			</if>
+			<if test="duration!=0">
+				duration=#{duration},
+			</if>
+			<if test="source!=0">
+				source=#{source},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark}
+			</if>
 		</set>
 		where id = #{id}
 	</update>

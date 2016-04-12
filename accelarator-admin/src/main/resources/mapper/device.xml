@@ -90,14 +90,30 @@
 	<update id="update" parameterType="Device">
 		update device
 		<set>
-			code=#{code},
-            brand=#{brand},
-            model=#{model},
-            mac=#{mac},
-            place_id=#{placeId},
-            business_id=#{businessId},
-            screen_num=#{screenNum},
-            status=#{status}
+			<if test="code!=null">
+				code=#{code},
+			</if>
+			<if test="brand!=null">
+				brand=#{brand},
+			</if>
+			<if test="model!=null">
+				model=#{model},
+			</if>
+			<if test="mac!=null">
+				mac=#{mac},
+			</if>
+			<if test="placeId!=0">
+				place_id=#{placeId},
+			</if>
+			<if test="businessId!=0">
+				business_id=#{businessId},
+			</if>
+			<if test="screenNum!=null">
+				screen_num=#{screenNum},
+			</if>
+			<if test="status!=0">
+				status=#{status}
+			</if>
 		</set>
 		where id = #{id}
 	</update>
