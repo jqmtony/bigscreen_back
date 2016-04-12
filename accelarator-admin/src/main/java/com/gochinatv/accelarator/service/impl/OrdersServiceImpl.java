@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,8 +113,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param place
 	 * @throws Exception 
 	 */
-	public void save(Orders orders) throws Exception{
-		orders.setCreater(SessionUtils.getLoginUser().getId());
+	public void save(HttpServletRequest request,Orders orders) throws Exception{
+		orders.setCreater(SessionUtils.getLoginUser(request).getId());
 		orders.setCreateTime(new Date());
 		orders.setStatus(1);
 		ordersDao.save(orders);
@@ -343,8 +346,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void updateCheckOnline(Orders orders) throws Exception{
-		orders.setAuditor(SessionUtils.getLoginUser().getId());
+	public void updateCheckOnline(HttpServletRequest request,Orders orders) throws Exception{
+		orders.setAuditor(SessionUtils.getLoginUser(request).getId());
 		orders.setAuditTime(new Date());
 		orders.setStatus(2);
 		ordersDao.update(orders);

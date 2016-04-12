@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.gochinatv.accelarator.dao.entity.User;
+import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.util.SessionUtils;
 
 
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController{
    
 	
 	@RequestMapping(value={"","/login"})
@@ -27,7 +29,6 @@ public class IndexController {
 	public String doLogin(HttpServletRequest request,Model model){
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exception = (String) request.getAttribute("shiroLoginFailure");
-		System.out.println(exception+"=============================================");
 		// 根据shiro返回的异常类路径判断，抛出指定异常信息
 		if (exception != null) {
 			if (UnknownAccountException.class.getName().equals(exception)) {
@@ -42,20 +43,20 @@ public class IndexController {
 		return "login";
 	}
 	
-	
 	 
 	@RequestMapping("index")
-	public String index(Model model){
+	public String index(){
+		HttpSession session = this.getSession();
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
-		model.addAttribute("loginUser", user);
+		session.setAttribute(SessionUtils.LOGIN_KEY, user);
 		return "index";
 	}
 	
 	
 	@RequestMapping("logout")
-	public String logout(HttpServletRequest request){
-		HttpSession session = request.getSession();
+	public String logout(){
+		HttpSession session = this.getSession();
 		session.invalidate();
 		return "redirect:login";
 	}

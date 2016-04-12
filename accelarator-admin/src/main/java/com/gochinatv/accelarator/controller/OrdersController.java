@@ -170,7 +170,7 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> checkOnline(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.updateCheckOnline(orders);
+			ordersService.updateCheckOnline(this.getRequest(),orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());

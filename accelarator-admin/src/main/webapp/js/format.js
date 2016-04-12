@@ -150,6 +150,9 @@ function dateFormat(now) {
  * @returns {String}
  */
 function formatYYYYMMDD(val, row){
+	if(val==null || val==""){
+		return "";
+	}
 	var result = dateFormat(new Date(val));
 	return result[0]+ "-" + result[1] + "-" + result[2];
 }
@@ -161,6 +164,9 @@ function formatYYYYMMDD(val, row){
  * @returns {String}
  */
 function formatYYYYMMDDHHMMSS(val, row){
+	if(val==null || val==""){
+		return "";
+	}
 	var result = dateFormat(new Date(val));
 	return result[0]+ "-" + result[1] + "-" + result[2]+ " " + result[3] + ":" + result[4] + ":" + result[5];
 }
