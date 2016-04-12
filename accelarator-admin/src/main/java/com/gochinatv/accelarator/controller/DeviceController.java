@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.Device;
+import com.gochinatv.accelarator.dao.entity.Place;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
@@ -98,6 +99,9 @@ public class DeviceController extends BaseController{
 			Integer placeId = device.getPlaceId();
 			Integer businessId = placeService.getBusinessIdById(placeId);
 			device.setBusinessId(businessId);
+			
+			Place place = placeService.getEntityById(placeId);
+			device.setCityCode(place.getCityCode());
 			deviceService.save(device);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
