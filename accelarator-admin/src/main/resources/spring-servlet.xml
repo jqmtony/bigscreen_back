@@ -18,7 +18,7 @@
 	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/easyui/" mapping="/easyui/**" />
 	<mvc:resources location="/json/" mapping="/json/**" />
-
+	
 	<!-- 配置freeMarker的模板路径 -->
 	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="WEB-INF/ftl/" />

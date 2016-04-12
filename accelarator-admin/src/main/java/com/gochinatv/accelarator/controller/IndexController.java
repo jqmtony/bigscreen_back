@@ -14,21 +14,21 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.util.SessionUtils;
 
 
-
 @Controller
 public class IndexController extends BaseController{
    
 	
-	@RequestMapping(value={"","/login"})
-	public String login(){
+	@RequestMapping("home")
+	public String home(){
 		return "login";
 	}
 	
 	
-	@RequestMapping("doLogin")
-	public String doLogin(HttpServletRequest request,Model model){
+	@RequestMapping("login")
+	public String login(HttpServletRequest request,Model model){
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exception = (String) request.getAttribute("shiroLoginFailure");
+		
 		// 根据shiro返回的异常类路径判断，抛出指定异常信息
 		if (exception != null) {
 			if (UnknownAccountException.class.getName().equals(exception)) {
@@ -39,7 +39,7 @@ public class IndexController extends BaseController{
 				model.addAttribute("error", "未知错误");
 			}
 		}
-		// 此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径，登陆失败还到login页面
+		//此方法不处理登陆成功（认证成功），shiro认证成功会自动跳转到上一个请求路径，登陆失败还到login页面
 		return "login";
 	}
 	
@@ -52,15 +52,6 @@ public class IndexController extends BaseController{
 		session.setAttribute(SessionUtils.LOGIN_KEY, user);
 		return "index";
 	}
-	
-	
-	@RequestMapping("logout")
-	public String logout(){
-		HttpSession session = this.getSession();
-		session.invalidate();
-		return "redirect:login";
-	}
-	
 	
 	/**
 	 * 无权限

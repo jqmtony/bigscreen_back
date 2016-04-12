@@ -47,6 +47,7 @@ public class ShiroRealm extends AuthorizingRealm {
 			
 			String password = user.getPassword();
 			simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, password, this.getName());
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -58,7 +59,6 @@ public class ShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		/*User user =  (User) principals.getPrimaryPrincipal();
-		
 		List<Permission> permissionList = null;
 		
 		try {
@@ -66,9 +66,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		List<String> permissions = new ArrayList<String>();
-		
 		if(permissionList!=null){
 			for(Permission ps:permissionList){
 				permissions.add(ps.getCode());
@@ -77,7 +75,6 @@ public class ShiroRealm extends AuthorizingRealm {
 		
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		simpleAuthorizationInfo.addStringPermissions(permissions);
-
 		return simpleAuthorizationInfo;*/
 		return null;
 	}

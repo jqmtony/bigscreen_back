@@ -7,7 +7,6 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<!-- <param-value>classpath:spring-dao.xml</param-value> -->
 		<param-value>classpath:spring-dao.xml,classpath:spring-shiro.xml</param-value>
 	</context-param>
 
@@ -84,10 +83,6 @@
 		<filter-name>ssoFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
-	
-	<welcome-file-list>
-	   <welcome-file>/index</welcome-file>
-	</welcome-file-list>
 	
 	<session-config>
 		<session-timeout>20</session-timeout>
