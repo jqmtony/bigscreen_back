@@ -7,20 +7,29 @@
 		<result property="mac" column="mac" />
 		<result property="imageUrl" column="image_url" />
 		<result property="createTime" column="create_time" />
+		
+		<result property="startTime" column="startTime" />
+		<result property="endTime" column="endTime" />
+		<result property="deviceName" column="deviceName" />
+		<result property="placeName" column="placeName" />
 	</resultMap>
 	
 	
 	<select id="getListByEntity" resultMap="DeviceImage" parameterType="DeviceImage">
-		select * from device_image 
+		select di.id as id,di.mac as mac,di.image_url,d.code as deviceName,p.cname as placeName,di.create_time
+		 from device_image di,device d,place p
 		<where>
-			1=1
+			1=1 and di.mac=d.mac and d.place_id=p.id
 			<if test="mac!=null and mac!=''">
-				and mac like CONCAT(CONCAT('%',#{mac}),'%')
+				and di.mac like CONCAT(CONCAT('%',#{mac}),'%')
 			</if>
-			<if test="createTime!=null and createTime!=''">
-				and create_time like CONCAT(CONCAT('%',#{createTime}),'%')
+			<if test="startTime!=null and startTime!=''">
+				and di.create_time &gt;= #{startTime} 
 			</if>
-			order by create_time desc
+			<if test="endTime!=null and endTime!=''">
+				 and  di.create_time &lt;= #{endTime}
+			</if>
+			order by di.create_time desc
 		</where>
 	</select>	
 	
