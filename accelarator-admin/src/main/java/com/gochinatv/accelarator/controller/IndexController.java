@@ -1,12 +1,15 @@
 package com.gochinatv.accelarator.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.gochinatv.accelarator.dao.entity.User;
 
 
 
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
    
 	
-	@RequestMapping("login")
-	public String login(HttpServletRequest request,Model model){
+	@RequestMapping(value={"","/login"})
+	public String login(){
 		return "login";
 	}
 	
@@ -23,7 +26,8 @@ public class IndexController {
 	@RequestMapping("doLogin")
 	public String doLogin(HttpServletRequest request,Model model){
 		// 如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
-		String exception = (String) request.getAttribute("errorCodeFailure");
+		String exception = (String) request.getAttribute("shiroLoginFailure");
+		System.out.println(exception+"=============================================");
 		// 根据shiro返回的异常类路径判断，抛出指定异常信息
 		if (exception != null) {
 			if (UnknownAccountException.class.getName().equals(exception)) {
@@ -42,12 +46,27 @@ public class IndexController {
 	 
 	@RequestMapping("index")
 	public String index(Model model){
+		Subject subject = SecurityUtils.getSubject();
+		User user = (User) subject.getPrincipal();
+		model.addAttribute("loginUser", user);
 		return "index";
 	}
 	
 	
 	@RequestMapping("logout")
-	public String logout(Model model){
+	public String logout(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		session.invalidate();
 		return "redirect:login";
+	}
+	
+	
+	/**
+	 * 无权限
+	 * @return
+	 */
+	@RequestMapping("denied")
+	public String denied(){
+		return "redirect:denied";
 	}
 }

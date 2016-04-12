@@ -7,6 +7,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -40,15 +41,12 @@ public class ShiroRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
 		try {
 			user = userService.getUserByUserName(0,userName);
-			if (user == null) {
-				return null;
-			}
+			if(user == null) {
+	            throw new UnknownAccountException();//没找到帐号
+	        }
 			
 			String password = user.getPassword();
-			//List<Permission> menuList = userService.getMenuList(user.getId());
-			//user.setMenuList(menuList);
-			
-			simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, password,this.getName());
+			simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, password, this.getName());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -59,15 +57,15 @@ public class ShiroRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		User user =  (User) principals.getPrimaryPrincipal();
+		/*User user =  (User) principals.getPrimaryPrincipal();
 		
 		List<Permission> permissionList = null;
 		
-		/*try {
+		try {
 			permissionList = userService.getPermissionList(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		List<String> permissions = new ArrayList<String>();
 		
@@ -80,7 +78,8 @@ public class ShiroRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 		simpleAuthorizationInfo.addStringPermissions(permissions);
 
-		return simpleAuthorizationInfo;
+		return simpleAuthorizationInfo;*/
+		return null;
 	}
 	
 

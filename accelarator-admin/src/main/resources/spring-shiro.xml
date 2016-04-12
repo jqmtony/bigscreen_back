@@ -12,7 +12,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/doLogin" />
 		<property name="successUrl" value="/index"/>
-		<property name="unauthorizedUrl" value="/login" />
+		<property name="unauthorizedUrl" value="/denied" />
 		<property name="filters">
 			<map>
 				<entry key="authc" value-ref="shiroFormAuthenticationFilter" />
@@ -33,10 +33,10 @@
 	</bean>
     
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="customRealm" />
+		<property name="realm" ref="shiroRealm" />
 	</bean>
 	
-    <bean id="customRealm" class="com.gochinatv.accelarator.security.ShiroRealm">
+    <bean id="shiroRealm" class="com.gochinatv.accelarator.security.ShiroRealm">
       <property name="userService" ref="userService"/>
       <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>

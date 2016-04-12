@@ -7,6 +7,7 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>classpath:spring-dao.xml</param-value> -->
 		<param-value>classpath:spring-dao.xml,classpath:spring-shiro.xml</param-value>
 	</context-param>
 
@@ -28,19 +29,6 @@
 		<servlet-name>accelarator-admin</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 	
 	<filter>
 	    <filter-name>shiroFilter</filter-name>
@@ -55,6 +43,19 @@
 	     <url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 <!-- 
 	<filter>
 		<filter-name>ssoFilter</filter-name>
@@ -83,6 +84,11 @@
 		<filter-name>ssoFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
+	
+	<welcome-file-list>
+	   <welcome-file>/index</welcome-file>
+	</welcome-file-list>
+	
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>
