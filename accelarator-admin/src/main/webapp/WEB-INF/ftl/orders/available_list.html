@@ -13,7 +13,6 @@
 <script type="text/javascript" src="${base}/js/data.js?v=${.now?long}"></script>
 <script type="text/javascript">
    $(function() {
-		
 		$('#codes').combotree('loadData',_xzqh);
 		$('#_type').combotree('loadData',_shop_type_tree);
 		
@@ -54,12 +53,14 @@
 	   var endTime= $("#endTime").datebox('getValue');//结束时间
 	   
 	   var url = '${base}/orders/createOrder?startTime='+startTime+'&endTime='+endTime+'&ids='+ids;
-	   parent.addTab('订单预览',url,'icon-play-order-preview',true);
+	   var title = '订单预览';
+	   parent.removeTab(title);//在添加tab之前先删除之前的tab因为可能选择的查询条件不同，所有先删除
+	   parent.addTab(title, url, 'icon-play-order-preview', true);
    }
    
    
    //必须精确到城市最底层
-   function available_search(){
+   function availableSearch(){
 	   var tree = $('#codes').combotree('tree');
 	   var nodes = tree.tree('getChecked');
 	   var startTime = $('#startTime').datebox('getValue');
@@ -114,6 +115,11 @@
 		   });
 	   }
    }
+   
+   function resetQueryForm(){
+	   $('#queryForm').form('reset');
+	   $(':input').val('');
+   }
 </script>
 </head>
 <body>
@@ -137,8 +143,8 @@
 		          店铺类型： <select id="_type" class="easyui-combotree" data-options="checkbox:true,cascadeCheck:true,multiple:true" style="width:120px;"></select>
 		          开始时间：  <input class="easyui-datebox" type="text" id="startTime" name="startTime" style="width:110px;"/>
 		          结束时间：  <input class="easyui-datebox" type="text" id="endTime" name="endTime" style="width:110px;"/>
-			<a href="javascript:void(0);" onclick="available_search();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
-			<a href="javascript:void(0);" onclick="available_search();" class="easyui-linkbutton" iconCls="icon-search">清空</a>
+			<a href="javascript:void(0);" onclick="availableSearch();" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 			<a href="javascript:void(0);" onclick="createOrderTab();" class="easyui-linkbutton" iconCls="icon-order">生成订单</a>
 		</form>
 	</div>

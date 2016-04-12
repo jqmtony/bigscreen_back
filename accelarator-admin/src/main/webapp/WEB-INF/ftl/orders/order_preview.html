@@ -26,6 +26,22 @@
 	   $("#realName").text(row.realName);
 	   lookUpWin.window('close');
    }
+   
+   function saveOrders(){
+	   if(addForm.form('validate')){
+			$('#icon-ok').linkbutton('disable');
+			$.post('saveOrder',$("#addForm").serializeObject(),function(data){
+				if(!data.status){
+					$.messager.alert('系统提示',data.msg,'error');
+				}else{
+					$.messager.alert('系统提示','订单生成完成，需运营审核，点击确定关闭本窗口！','info',function(){
+						parent.removeTab('订单预览');//订单保存完成关闭订单预览Tab
+					});
+				}
+			},
+			'json');	
+		}
+   }
 </script>
 </head>
 <body>
@@ -73,7 +89,7 @@
 				</form>
 			</div>
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addSave('saveOrder');">提交订单</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" id="icon-ok" iconCls="icon-ok" onclick="saveOrders();">提交订单</a>
 		    </div>
 		</div>
 	</div>
