@@ -20,6 +20,11 @@
 				and id!=#{id}
 			</if>
 	</select>
+	
+	<!-- 启用状态账号 -->
+	<select id="getLoginUser" resultMap="User" parameterType="string">
+		select * from user where user_name = #{userName} and status=1
+	</select>
 
 	<select id="getListByEntity" resultMap="User" parameterType="User">
 		select * from user

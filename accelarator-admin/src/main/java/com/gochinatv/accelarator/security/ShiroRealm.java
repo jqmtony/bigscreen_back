@@ -40,7 +40,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		User user = null;
 		SimpleAuthenticationInfo simpleAuthenticationInfo = null;
 		try {
-			user = userService.getUserByUserName(0,userName);
+			user = userService.getLoginUser(userName);
 			if(user == null) {
 	            throw new UnknownAccountException();//没找到帐号
 	        }

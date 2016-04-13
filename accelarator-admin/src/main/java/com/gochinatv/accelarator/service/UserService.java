@@ -21,5 +21,11 @@ public interface UserService  extends BaseService<User>{
 	 * @return
 	 */
 	User getUserByUserName(int id, String userName);
-
+    
+	/**
+	 * 根据用户名获取当前登录用户
+	 * @param userName
+	 * @return
+	 */
+	public User getLoginUser(String userName);
 }
