@@ -39,6 +39,7 @@
 			<input id="name" class="easyui-validatebox textbox" disabled="disabled" data-options="required:true"/>
 		    <input type="hidden" id="parentCode" name="parentCode"  />
 		    <input type="hidden" id="addlevel" name="level"  />
+		     <input type="hidden" id="addstatus" name="status" value="1" />
 		</td>
 	</tr>
 	<tr>
@@ -53,13 +54,6 @@
 		   <input id="areaCode" class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(命名规范4-6-8) 
 		</td>
 	</tr>
-		<tr>
-			<td>状态：</td>
-			<td>
-			   <input type="radio" ref="add" name="status" value="1" checked="checked">有效
-			   <input type="radio" ref="add" name="status" value="2">无效
-			</td>
-		</tr>
 		<tr>
 			<td>排序：</td>
 			<td>
