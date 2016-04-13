@@ -10,7 +10,26 @@
 		<result property="endTime" column="end_time" />
 		<result property="duration" column="duration" />
 		<result property="sort" column="sort" />
+		
+		<result property="title" column="title" />
 	</resultMap>
+	
+	<select id="getOnlineAdListByEntity" resultMap="PlayListDetail" parameterType="PlayListDetail">
+		select distinct p1.play_list_id,ad.title,p1.advertisement_id, p1.start_time
+		from play_list_detail p1,play_list_detail p2,advertisement ad
+		<where>
+			p1.play_list_id=p2.play_list_id and p1.advertisement_id=ad.id and ad.source!=1
+			<if test="advertisementId!=0">
+				and p2.advertisement_id=#{advertisementId}
+			</if>
+			<if test="startTime!=null">
+				and p2.start_time>=#{startTime}
+			</if>
+			<if test="endTime!=null">
+				and p2.end_time>=#{endTime}
+			</if>
+		</where>
+	</select>
 	
 	<insert id="saveAll" parameterType="java.util.List">
 	   insert into play_list_detail(

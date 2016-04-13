@@ -61,16 +61,12 @@
             
             <div title="统计管理" data-options="iconCls:'icon-application-statictics'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
-                	<li iconCls="icon-statictics-play"><a href="javascript:void(0)" data-icon="icon-statictics-play" data-link="${base}/orders/gotoList" iframe="1">在播广告组合</a></li>
+                	<li iconCls="icon-statictics-play"><a href="javascript:void(0)" data-icon="icon-statictics-play" data-link="${base}/play_list/gotoOnlineAdList" iframe="1">在播广告组合</a></li>
                 	<li iconCls="icon-statictics-device"><a href="javascript:void(0)" data-icon="icon-statictics-device" data-link="${base}/orders/gotoList" iframe="1">设备播放列表</a></li>
                 	<li iconCls="icon-statictics-detail"><a href="javascript:void(0)" data-icon="icon-statictics-detail" data-link="${base}/orders/gotoList" iframe="1">设备播放详情</a></li>
                 </ul>
             </div>
-  		<div title="监控管理" data-options="iconCls:'icon-application-statictics'" style="padding:5px;">  	
-    			<ul class="easyui-tree vrs-side-tree">
-                	<li iconCls="icon-statictics-detail"><a href="javascript:void(0)" data-icon="icon-statictics-detail" data-link="${base}/deviceImage/gotoList" iframe="1">设备检测</a></li>
-                </ul>
-            </div>
+
         </div>
     </div>	
     <!-- end of sidebar -->   
@@ -181,19 +177,17 @@
 			}
 		}
 
-		function isExists(title){
+		/**
+		 * Name 移除菜单选项
+		 */
+		function removeTab() {
 			var tabPanel = $('#vrs-tabs');
-			return tabPanel.tabs('exists', title);
-		}
-		
-		
-		function removeTab(title) {
-			var tabPanel = $('#vrs-tabs');
-			if (isExists(title)) {
-				tabPanel.tabs('close', title);
+			var tab = tabPanel.tabs('getSelected');
+			if (tab) {
+				var index = tabPanel.tabs('getTabIndex', tab);
+				tabPanel.tabs('close', index);
 			}
 		}
-		
 		//刷新datagrid
 		function reloadTabGrid(refreshTitle, closeTitle) {
 			var tabPanel = $('#vrs-tabs');

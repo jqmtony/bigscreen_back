@@ -1,5 +1,8 @@
 package com.gochinatv.accelarator.service;
 
+import java.util.List;
+
+import com.gochinatv.accelarator.dao.entity.OnlineAdResponse;
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -12,6 +15,13 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface PlayListDetailService  extends BaseService<PlayListDetail>{
+
+	/**
+	 * 
+	 * @param playListDetail
+	 * @return
+	 */
+	List<OnlineAdResponse> getOnlineAdListByEntity(PlayListDetail playListDetail);
    
 
 }

@@ -24,6 +24,21 @@ public class PlayListDetail extends BaseVo implements Serializable {
 	private int duration;// 视频时长
 	private int sort;// 排序
 
+	private String title;
+	
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public long getPlayListId() {
 		return playListId;
 	}
