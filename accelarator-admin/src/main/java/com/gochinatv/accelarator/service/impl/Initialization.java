@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.service.impl;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -33,9 +35,16 @@ public class Initialization implements InitializingBean{
 	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		logger.info("***加载JSON文件中，输出文件路径为：{}",JSON_PATH);
-		areaService.createAreaJson(null,JSON_PATH);
-		logger.info("***加载JSON文件完成***");
+		String[] filePaths = JSON_PATH.split(",");
+		for (String filePath : filePaths) {
+			File file = new File(filePath);
+			if(file.exists()){
+				logger.info("***加载JSON文件中，输出文件路径为：{}",JSON_PATH);
+				areaService.createAreaJson(null,filePath);
+				logger.info("***加载JSON文件完成***");
+				break;
+			}
+		}
 	}
 	
 	
