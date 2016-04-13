@@ -191,7 +191,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 							}
 							Advertisement adm = new Advertisement();
 							adm.setId(order.getAdvertisementId());
-							adm.setDuration(order.getDuration());
+							adm.setDuration(order.getDuration()==0?orders.getDuration():order.getDuration());
 							
 							values.add(adm);
 							dataMap.put(date, values);
