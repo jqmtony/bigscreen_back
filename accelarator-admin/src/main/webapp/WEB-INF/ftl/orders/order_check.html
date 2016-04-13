@@ -62,8 +62,9 @@
 		
 	function checkOnlineCallback(data){
 		if(data.status){
-			$.messager.alert('系统提示',"审核通过",'warning');
-			parent.reloadTabGrid("订单列表","审核订单");
+			$.messager.alert('系统提示',"审核通过",'warning',function(){
+				parent.reloadTabGrid("订单列表","审核订单");
+			});
 		}else{
 			$.messager.alert('系统提示',"审核失败",'error');	
 		}
