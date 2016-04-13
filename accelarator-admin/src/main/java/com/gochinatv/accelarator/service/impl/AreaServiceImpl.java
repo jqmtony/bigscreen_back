@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONArray;
@@ -54,13 +55,13 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 			}
 		}
 
-        createAreaJson(request);
+        createAreaJson(request,"");
 	}
 	
 	@Override
 	public void update(Area area,HttpServletRequest request) throws Exception{
 		super.update(area);
-        createAreaJson(request);
+        createAreaJson(request,"");
 	}
 	
 	public void delete(String areaCode,HttpServletRequest request) throws Exception{
@@ -78,7 +79,7 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
        }
         areaDao.delete(areaCode);
 
-        createAreaJson(request);
+        createAreaJson(request,"");
 
 	}
 
@@ -211,11 +212,16 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	
 	/**
 	 * 创建静态json文件
+	 * @param request     获取相对的文件路径
+	 * @param outFilePath 输出文件的路径
 	 * @return
 	 * @throws Exception
 	 */
-	public JSONArray createAreaJson(HttpServletRequest request) throws Exception{
+	public JSONArray createAreaJson(HttpServletRequest request,String outFilePath) throws Exception{
 		StringBuffer buffer = new StringBuffer();
+		if(StringUtils.isEmpty(outFilePath)){
+			outFilePath = request.getSession().getServletContext().getRealPath("/js/data.js");
+		}
 		
 		//查询country列表集合
 		List<Area> countryList = queryByLevel(1);
@@ -274,7 +280,7 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		
 		buffer.append("var _shop_type_tree=[" + shopTypeTree.toJSONString()+"]\n");
 		
-		fos = new FileOutputStream(request.getSession().getServletContext().getRealPath("/js/data.js"));
+		fos = new FileOutputStream(outFilePath);
 		out = new OutputStreamWriter(fos, "UTF-8");
 		out.write(buffer.toString());
 		out.flush();

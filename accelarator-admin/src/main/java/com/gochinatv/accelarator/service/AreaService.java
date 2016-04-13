@@ -50,10 +50,12 @@ public interface AreaService  extends BaseService<Area>{
 	
 	/**
 	 * 创建静态json文件
+	 * @param request     获取相对的文件路径
+	 * @param outFilePath 输出文件的路径
 	 * @return
 	 * @throws Exception
 	 */
-	public JSONArray createAreaJson(HttpServletRequest request) throws Exception;
+	public JSONArray createAreaJson(HttpServletRequest request,String outFilePath) throws Exception;
 	
 	
 	public void save(Area area,HttpServletRequest request) throws Exception;
