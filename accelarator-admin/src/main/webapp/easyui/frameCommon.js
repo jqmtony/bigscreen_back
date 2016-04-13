@@ -309,3 +309,8 @@ function openLookUpCallBack(row){
 	$('#add_lookUpName,#edit_lookUpName').validatebox({novalidate: true});
 	lookUpWin.window('close');
 }
+
+function resetQueryForm(){
+	   $('#queryForm').form('reset');
+	   $(':input').val('');
+}
