@@ -33,6 +33,12 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 
+
+	@RequestMapping("/gotoUpgradeIndex")
+	public String gotoUpgradeIndex(Model model) throws Exception{
+		return "upgrade/index";
+	}
+	
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
 		return "user/list";
