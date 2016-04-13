@@ -43,19 +43,16 @@
 	</delete>
 	
 	<insert id="save" parameterType="Area" useGeneratedKeys="true" keyProperty="id">
-		insert into area (id,area_code,name,parent_code,level,sort,status)
-		 values (#{id},#{areaCode},#{name},#{parentCode},#{level},#{sort},#{status})
+		insert into area (id,area_code,name,parent_code,level,sort)
+		 values (#{id},#{areaCode},#{name},#{parentCode},#{level},#{sort})
 	</insert>
 	
 	<update id="update" >
-		update area set name = #{name},level = #{level},sort = #{sort},status = #{status} where area_code=#{areaCode}
+		update area set name = #{name},level = #{level},sort = #{sort} where area_code=#{areaCode}
 	</update>
 	
 	 <!--可重用的SQL代码段-->  
    <sql id="queryWhere">
-   		<if test="status != null and status!='' and status!=0">
-			and status=#{status}
-		</if>	
 		<if test="level != null and level!='' and level!=0">
 			and level=#{level}
 		</if>
@@ -66,12 +63,12 @@
 	
 		<!-- 生成json用 -->
 	<select id="queryByLevel" resultMap="AreaResultMap" parameterType="int">
-		select * from area where level=#{level} and status=1
+		select * from area where level=#{level} 
 	</select>
 	
 	<!-- 生成json用 -->
 	<select id="queryByParentCode" resultMap="AreaResultMap" parameterType="string">
-		select * from area where status=1 and parent_code=#{parentCode}
+		select * from area where  parent_code=#{parentCode}
 	</select> 
 	
 	<!-- 生成json用 -->
