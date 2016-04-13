@@ -177,10 +177,7 @@
 			}
 		}
 
-		/**
-		 * Name 移除菜单选项
-		 */
-		function removeTab() {
+		function removeSelectedTab() {
 			var tabPanel = $('#vrs-tabs');
 			var tab = tabPanel.tabs('getSelected');
 			if (tab) {
@@ -188,6 +185,19 @@
 				tabPanel.tabs('close', index);
 			}
 		}
+		
+		function isExists(title){
+			var tabPanel = $('#vrs-tabs');
+			return tabPanel.tabs('exists', title);
+		}
+		
+		function removeTab(title) {
+			var tabPanel = $('#vrs-tabs');
+			if (isExists(title)) {
+				tabPanel.tabs('close', title);
+			}
+		}
+		
 		//刷新datagrid
 		function reloadTabGrid(refreshTitle, closeTitle) {
 			var tabPanel = $('#vrs-tabs');

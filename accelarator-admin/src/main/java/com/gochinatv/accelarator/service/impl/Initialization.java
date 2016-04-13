@@ -37,5 +37,7 @@ public class Initialization implements InitializingBean{
 		areaService.createAreaJson(null,JSON_PATH);
 		logger.info("***加载JSON文件完成***");
 	}
+	
+	
 	   
 }
