@@ -57,7 +57,7 @@
 	}
 		
 	function checkOnlineCallback(data){
-		if(data.status == 'success'){
+		if(data.status){
 			$.messager.alert('系统提示',"审核通过",'warning');
 			parent.reloadTabGrid("订单列表","审核订单");
 		}else{
@@ -74,11 +74,11 @@
 		    cache:false,    
 		    dataType:'json',    
 		    success:function(data) {   
-		        if(data.status =="success" ){    
-		            alert("审核不通过！");
+		        if(data.status ){    
+		        	alert("操作成功！");
 		            parent.reloadTabGrid("订单列表","审核订单");  
 		        }else{    
-		        	alert("退回失败！");
+		        	alert("操作失败！");
 		        }    
 		     },    
 		     error : function() {    
