@@ -31,6 +31,7 @@
    
    function openAdvertisementCallBack(row){
 	   $("#advertisementId").val(row.id);
+	   $("#duration").val(row.duration);
 	   $("#title").text(row.title);
 	   $("#lookUpSelect-advertisement-window").dialogFrameWindow().window('close');
    }
@@ -50,10 +51,13 @@
    }
    
    function checkOnline(url){
-		if($('#modifyForm').form('validate')){
-				$("#btn").linkbutton("disable");
-				$.post(url,$("#modifyForm").serializeObject(),checkOnlineCallback,'json');		
-		}
+	   var advertisementId = $("#advertisementId").val();
+	   if(advertisementId != null && advertisementId != "" && advertisementId != 0){
+			$("#btn").linkbutton("disable");
+			$.post(url,$("#modifyForm").serializeObject(),checkOnlineCallback,'json');		
+	   }else{
+		   alert("请先选择广告！");
+	   }
 	}
 		
 	function checkOnlineCallback(data){
@@ -73,12 +77,12 @@
 		    type:'post',    
 		    cache:false,    
 		    dataType:'json',    
-		    success:function(data) {   
-		        if(data.status ){    
-		        	alert("操作成功！");
+		    success:function(data) { 
+		        if(data.status){    
+		            alert("审核成功！");
 		            parent.reloadTabGrid("订单列表","审核订单");  
 		        }else{    
-		        	alert("操作失败！");
+		        	alert("审核失败！"+data.msg);
 		        }    
 		     },    
 		     error : function() {    
@@ -142,6 +146,7 @@
 							<tr>
 								<td width="20%">广告标题：
 									<input id="parentId" type="hidden" value="${orders.advertiserId}"/>
+									<input id="duration" name="duration" type="hidden"/>
 									<input id="advertisementId" name="advertisementId" type="hidden" value="${orders.advertisementId}"/>
 								</td>
 								<td id="title" width="55%">
@@ -156,7 +161,7 @@
 				</div>
 			</form>
 			 <div style="text-align:center;padding:5px">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo"  onclick="sendBack()">退回</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo"  onclick="sendBack()">审核不通过</a>
 		    	<a id="btn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"  onclick="checkOnline('checkOnline');">审核上线</a>
 		    </div>
 		</div>
