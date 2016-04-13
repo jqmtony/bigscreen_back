@@ -3,7 +3,7 @@ package com.gochinatv.accelarator.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.dao.entity.OrdersDetail;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
@@ -150,8 +149,9 @@ public class OrdersController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> saveOrder(Orders orders){
 		Map<String,Object> result = this.success(null);
+		HttpServletRequest request = this.getRequest();
 		try{
-			ordersService.save(orders);
+			ordersService.save(request,orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
