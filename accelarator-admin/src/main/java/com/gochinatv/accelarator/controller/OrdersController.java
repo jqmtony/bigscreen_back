@@ -172,7 +172,14 @@ public class OrdersController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
-			ordersService.auditOrders(orders);
+			orders.setAuditTime(new Date());
+			orders.setStatus(2);
+			ordersService.updateAuditOrders(orders);
+			boolean b = ordersService.XXX();
+			if(!b){
+				xxxxxx
+			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
@@ -292,9 +299,17 @@ public class OrdersController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> updateOfflineTime(Orders orders){
 		Map<String,Object> result = this.success(null);
+		xxxxx
 		try{
 			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
-			ordersService.offlineOrders(orders);
+			 ahead_modify_time=#{aheadModifyTime},
+	            auditor=#{auditor},
+	            audit_time=#{auditTime},
+	            end_time=#{endTime},
+	            remark=#{remark},
+	            original_end_time=#{originalEndTime}
+	            
+			ordersService.updateOfflineOrders(orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());

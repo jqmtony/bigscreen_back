@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.AdvertisementDao;
@@ -37,7 +39,9 @@ import com.gochinatv.accelarator.util.GlobalUtils;
  */
 @Service
 public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements OrdersService {
-
+    
+	protected Logger logger = LoggerFactory.getLogger(OrdersServiceImpl.class);
+	
 	@Autowired
 	private OrdersDao ordersDao;
 	
@@ -144,14 +148,19 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	   * type:  SX：订单审核上线     XX：提前下线
 	   */
 	public boolean createPlayList(Orders orders,String type) throws Exception{
+	      logger.info("*********************执行创建排播组合Orders（endTime={},id={}）",orders.getEndTime(),orders.getId());
 		  boolean result = true;
 		  try{
 			  String endTime = orders.getEndTime();
 			  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
 			  Date now = new Date();
-			  if(now.before(end)){//表示结束日期大于今天
+			  if(now.before(end)){//表示结束日期大于今天，才可进入排播
+				 
+				  //SELECT * from orders_detail where orders_id=orders.getId()
 				 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
 				 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
+				 
+				 logger.info("*********************执行本订单影响的城市和店铺类型OrdersDetail个数为：{}，自有广告个数为：{}",ordersDetails.size(),ownAdvertisementList.size());
 				 
 				 long playListId = System.currentTimeMillis();
 				 
@@ -162,6 +171,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	                
 					//cityCode、type 且结束时间大于当天投放的视频信息
 					List<Orders> ordersPlayList = this.getOrdersPlayList(data);//duration,advertisement_id,start_time,end_time
+					
+					logger.info("*********************正在执行 type为：{}，cityCode为：{}，排播个数为：{}",detail.getType(),detail.getCityCode(),ordersPlayList.size());
 
 					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
 					for (int i = 0; i < ordersPlayList.size(); i++) {
@@ -205,6 +216,9 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 							List<Advertisement> randomAdvertisementList = getRandomAdvertisementList(ownAdvertisementList,minus);
 							values.addAll(randomAdvertisementList);//添加自有广告至排播组合广告集合中
 						}
+						if(values.size()<10){
+							throw new Exception("*****************当前排播视频小于10个****************");
+						}
 					}
 					
 					Map<String,List<Integer>> playMap = new HashMap<String,List<Integer>>();
@@ -214,6 +228,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						
 						List<Integer> valuesList = new ArrayList<Integer>();
 						List<Advertisement> values = entry.getValue();
+						
 						for (Advertisement adm : values) {//这里目前只能10个广告
 							int duration = adm.getDuration();
 							int play_count = GlobalUtils.ADS_EACH_PLAY_TIME/duration;//当前视频播放的次数
@@ -224,10 +239,12 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						}
 					}
 					
+					logger.info("*********************循环playMap开始排播组合*********************************");
+					
 					//循环playMap 开始排播组合
 					Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
 					for (Entry<String, List<Integer>> entry : playSet) {
-						
+						logger.info("*********************执行排播type为：{}，cityCode为：{}，time为{}",detail.getType(),detail.getCityCode(),entry.getKey());
 						HashMap<String,Object> params = new HashMap<String,Object>();
 						params.put("cityCode", detail.getCityCode());
 						params.put("type", detail.getType());
@@ -304,6 +321,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		List<Integer> repeat = new ArrayList<Integer>();
 
 		int temp = -1;
+		int loop = 0;
 		while (values.size() > 0) {
 			int index = (int) (Math.random() * values.size());
 			int value = values.get(index);
@@ -330,6 +348,15 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 					result.add(resultIndex, repeatValue);
 				}
 			}
+			loop++;
+			if(loop>200){
+				try {
+					repeat.clear();
+					throw new Exception("排播进行了无限循环，请检查排播的视频的id，是否有问题！");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		entry.setValue(result);
 	}
@@ -347,11 +374,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void auditOrders(Orders orders) throws Exception{
-		orders.setAuditTime(new Date());
-		orders.setStatus(2);
+	public void updateAuditOrders(Orders orders) throws Exception{
 		ordersDao.update(orders);
-		
 		//创建排播组合
 		this.createPlayList(orders,"SX");
 	}
@@ -362,10 +386,21 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void offlineOrders(Orders orders) throws Exception{
+	public void updateOfflineOrders(Orders orders) throws Exception{
 		ordersDao.updateOfflineTime(orders);
-		
 		//修改排播组合
 		this.createPlayList(orders,"XX");
 	}
+	
+	
+	public static void main(String[] args) throws Exception {
+		for(int i=0;i<100;i++){
+			if(i==10){
+				
+				throw new Exception("*****************当前排播视频小于10个****************");
+			}
+			System.out.println(i);
+		}
+	}
+		
 }

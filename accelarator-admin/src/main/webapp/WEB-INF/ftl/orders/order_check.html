@@ -31,7 +31,7 @@
    
    function openAdvertisementCallBack(row){
 	   $("#advertisementId").val(row.id);
-	   $("#duration").val(row.duration);
+	   //$("#duration").val(row.duration);
 	   $("#title").text(row.title);
 	   $("#lookUpSelect-advertisement-window").dialogFrameWindow().window('close');
    }
@@ -43,7 +43,7 @@
 	   if(parentId != advertiserId){
 		   $("#parentId").val(row.id);
 		   $("#title").text('请重新选择');
-		   $("#advertisementId").val('');
+		   $("#advertisementId").val(0);
 	   }
 	   $("#advertiserName").text(row.userName);
 	   $("#realName").text(row.realName);
@@ -73,25 +73,28 @@
 		$.ajax({
 			url :'${base}/orders/sendBack',
 		    data:{    
-		             id : $("#id").val()
+		             id : $("#id").val(),
+		             advertisementId : $("#advertisementId").val(),
+		             advertiserId : $("#advertiserId").val()
+		             
 		    },    
 		    type:'post',    
 		    cache:false,    
 		    dataType:'json',    
 		    success:function(data) { 
 		        if(data.status){    
-		            alert("审核成功！");
-		            parent.reloadTabGrid("订单列表","审核订单");  
+		        	$.messager.alert('系统提示',"操作成功",'warning',function(){
+		        		parent.reloadTabGrid("订单列表","审核订单");
+		        	});	
+		              
 		        }else{    
-		        	alert("审核失败！"+data.msg);
+		        	$.messager.alert('系统提示',"操作失败"+data.msg,'error');	
 		        }    
 		     },    
 		     error : function() {    
-		          alert("异常！" + data.msg);    
+		          $.messager.alert('系统提示',"操作失败"+data.msg,'error');	
 		     } 
-			
 		});
-		
 	}
    
 </script>
@@ -147,7 +150,6 @@
 							<tr>
 								<td width="20%">广告标题：
 									<input id="parentId" type="hidden" value="${orders.advertiserId}"/>
-									<input id="duration" name="duration" type="hidden"/>
 									<input id="advertisementId" name="advertisementId" type="hidden" value="${orders.advertisementId}"/>
 								</td>
 								<td id="title" width="55%">

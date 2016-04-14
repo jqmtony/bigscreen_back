@@ -67,7 +67,7 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void auditOrders(Orders orders) throws Exception;
+	public void updateAuditOrders(Orders orders) throws Exception;
 
 
 	/**
@@ -75,5 +75,5 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void offlineOrders(Orders orders) throws Exception;
+	public void updateOfflineOrders(Orders orders) throws Exception;
 }
