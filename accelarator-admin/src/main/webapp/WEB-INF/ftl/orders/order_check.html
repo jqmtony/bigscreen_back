@@ -80,14 +80,14 @@
 		    dataType:'json',    
 		    success:function(data) { 
 		        if(data.status){    
-		            alert("审核成功！");
+		        	$.messager.alert('系统提示',"操作成功",'warning');	
 		            parent.reloadTabGrid("订单列表","审核订单");  
 		        }else{    
-		        	alert("审核失败！"+data.msg);
+		        	$.messager.alert('系统提示',"操作失败"+data.msg,'error');	
 		        }    
 		     },    
 		     error : function() {    
-		          alert("异常！" + data.msg);    
+		          $.messager.alert('系统提示',"操作失败"+data.msg,'error');	
 		     } 
 			
 		});
