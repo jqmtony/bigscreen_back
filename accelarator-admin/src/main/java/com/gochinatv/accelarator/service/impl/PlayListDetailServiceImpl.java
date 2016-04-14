@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gochinatv.accelarator.dao.PlayListDetailDao;
-import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.dao.entity.OnlineAd;
 import com.gochinatv.accelarator.dao.entity.OnlineAdResponse;
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;

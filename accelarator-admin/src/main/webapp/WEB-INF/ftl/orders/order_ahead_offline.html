@@ -93,10 +93,10 @@
 		
 	function updateOfflineTimeCallback(data){
 		if(data.status){
-			$.messager.alert('系统提示',"编辑成功",'warning');
+			$.messager.alert('系统提示',"下线成功",'warning');
 			parent.reloadTabGrid("订单列表","提前下线");
 		}else{
-			$.messager.alert('系统提示',"提前下线失败"+data.data,'error');	
+			$.messager.alert('系统提示',"下线失败"+data.data,'error');	
 		}
 	}
    
