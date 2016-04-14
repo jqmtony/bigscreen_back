@@ -268,15 +268,14 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	                    
 						List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
 						List<Integer> values = entry.getValue();
-						
-						for (Integer advertisementId : values) {
+						for(int i=0;i<values.size();i++){
 							PlayListDetail details = new PlayListDetail();
 				            details.setPlayListId(playList.getId());
-							details.setAdvertisementId(advertisementId);
+							details.setAdvertisementId(values.get(i));
 							details.setStartTime(entry.getKey());
 							details.setEndTime(entry.getKey());
 							//details.setDuration(duration);
-							details.setSort((int)System.currentTimeMillis());
+							details.setSort(i+1);
 							detailList.add(details);
 						}
 						playListDetailDao.saveAll(detailList);
