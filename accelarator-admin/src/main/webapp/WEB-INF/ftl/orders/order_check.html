@@ -80,8 +80,10 @@
 		    dataType:'json',    
 		    success:function(data) { 
 		        if(data.status){    
-		        	$.messager.alert('系统提示',"操作成功",'warning');	
-		            parent.reloadTabGrid("订单列表","审核订单");  
+		        	$.messager.alert('系统提示',"操作成功",'warning',function(){
+		        		parent.reloadTabGrid("订单列表","审核订单");
+		        	});	
+		              
 		        }else{    
 		        	$.messager.alert('系统提示',"操作失败"+data.msg,'error');	
 		        }    
