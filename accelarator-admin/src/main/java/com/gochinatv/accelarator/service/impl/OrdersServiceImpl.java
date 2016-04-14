@@ -148,129 +148,135 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	   * 
 	   * type:  SX：订单审核上线     XX：提前下线
 	   */
-	public void createPlayList(Orders orders,String type) throws Exception{
-		  String endTime = orders.getEndTime();
-		  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
-		  Date now = new Date();
-		  if(now.before(end)){//表示结束日期大于今天
-			 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
-			 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
-			 
-			 long playListId = System.currentTimeMillis();
-			 
-			for (OrdersDetail detail : ordersDetails) {
-				HashMap<String, Object> data = new HashMap<String, Object>();
-				data.put("type", detail.getType());
-				data.put("cityCode", detail.getCityCode());
-                
-				//cityCode、type 且结束时间大于当天投放的视频信息
-				List<Orders> ordersPlayList = this.getOrdersPlayList(data);//duration,advertisement_id,start_time,end_time
+	public boolean createPlayList(Orders orders,String type) throws Exception{
+		  boolean result = true;
+		  try{
+			  String endTime = orders.getEndTime();
+			  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
+			  Date now = new Date();
+			  if(now.before(end)){//表示结束日期大于今天
+				 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
+				 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
+				 
+				 long playListId = System.currentTimeMillis();
+				 
+				 for (OrdersDetail detail : ordersDetails) {
+					HashMap<String, Object> data = new HashMap<String, Object>();
+					data.put("type", detail.getType());
+					data.put("cityCode", detail.getCityCode());
+	                
+					//cityCode、type 且结束时间大于当天投放的视频信息
+					List<Orders> ordersPlayList = this.getOrdersPlayList(data);//duration,advertisement_id,start_time,end_time
 
-				Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
-				for (int i = 0; i < ordersPlayList.size(); i++) {
-					Orders order = (Orders) ordersPlayList.get(i);
-					String start_time = "";
-					if(type.equals("SX")){
-						start_time = order.getStartTime();
-					}else if(type.equals("XX")){
-						start_time= DateUtils.addDay(1);//取得明天的日期，下线的开始日期必须从明天开始
-					}
-					String end_time = order.getEndTime();
+					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
+					for (int i = 0; i < ordersPlayList.size(); i++) {
+						Orders order = (Orders) ordersPlayList.get(i);
+						String start_time = "";
+						if(type.equals("SX")){
+							start_time = order.getStartTime();
+						}else if(type.equals("XX")){
+							start_time= DateUtils.addDay(1);//取得明天的日期，下线的开始日期必须从明天开始
+						}
+						String end_time = order.getEndTime();
 
-					long between = DateUtils.getBetweenDays(start_time, end_time);// 取得两个日期之间的天数
+						long between = DateUtils.getBetweenDays(start_time, end_time);// 取得两个日期之间的天数
 
-					Calendar instance = Calendar.getInstance();
-					instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(start_time));
-					for (int j = 0; j <= between; j++) {
-						instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
-						String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
-						if(now.before(instance.getTime())){//表示只能对订单中的大于今天的日期进行排播，如果小于等于当天不能进行其排播
-							List<Advertisement> values = dataMap.get(date);
-							if (values == null) {
-								values = new ArrayList<Advertisement>();
+						Calendar instance = Calendar.getInstance();
+						instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(start_time));
+						for (int j = 0; j <= between; j++) {
+							instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
+							String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
+							if(now.before(instance.getTime())){//表示只能对订单中的大于今天的日期进行排播，如果小于等于当天不能进行其排播
+								List<Advertisement> values = dataMap.get(date);
+								if (values == null) {
+									values = new ArrayList<Advertisement>();
+								}
+								Advertisement adm = new Advertisement();
+								adm.setId(order.getAdvertisementId());
+								adm.setDuration(order.getDuration());
+								
+								values.add(adm);
+								dataMap.put(date, values);
 							}
-							Advertisement adm = new Advertisement();
-							adm.setId(order.getAdvertisementId());
-							adm.setDuration(order.getDuration()==0?orders.getDuration():order.getDuration());
-							
-							values.add(adm);
-							dataMap.put(date, values);
 						}
 					}
-				}
-				
-				//dataMap中放入的以  日期为key，  广告为 value
-				Set<Entry<String, List<Advertisement>>> entrySet = dataMap.entrySet();
-				for (Entry<String, List<Advertisement>> entry : entrySet) {
-					List<Advertisement> values = entry.getValue();
-					int minus = GlobalUtils.ADS_VIDEO_COUNT-values.size();
-					if(minus>0){//广告商的广告数量小于总数量，那么需要从自有广告中取出一定的数量进行补充
-						List<Advertisement> randomAdvertisementList = getRandomAdvertisementList(ownAdvertisementList,minus);
-						values.addAll(randomAdvertisementList);//添加自有广告至排播组合广告集合中
-					}
-				}
-				
-				Map<String,List<Integer>> playMap = new HashMap<String,List<Integer>>();
-				//广告总数量添加完成，需要对每个广告的循环次数进行计算
-				for (Entry<String, List<Advertisement>> entry : entrySet) {
-					String key = entry.getKey();
 					
-					List<Integer> valuesList = new ArrayList<Integer>();
-					List<Advertisement> values = entry.getValue();
-					for (Advertisement adm : values) {//这里目前只能10个广告
-						int duration = adm.getDuration();
-						int play_count = GlobalUtils.ADS_EACH_PLAY_TIME/duration;//当前视频播放的次数
-						for(int i=0;i<play_count;i++){//需要向集合中添加循环多少次的广告
-							valuesList.add(adm.getId());//把广告id添加至集合中
-							playMap.put(key, valuesList);
+					//dataMap中放入的以  日期为key，  广告为 value
+					Set<Entry<String, List<Advertisement>>> entrySet = dataMap.entrySet();
+					for (Entry<String, List<Advertisement>> entry : entrySet) {
+						List<Advertisement> values = entry.getValue();
+						int minus = GlobalUtils.ADS_VIDEO_COUNT-values.size();
+						if(minus>0){//广告商的广告数量小于总数量，那么需要从自有广告中取出一定的数量进行补充
+							List<Advertisement> randomAdvertisementList = getRandomAdvertisementList(ownAdvertisementList,minus);
+							values.addAll(randomAdvertisementList);//添加自有广告至排播组合广告集合中
 						}
 					}
-				}
-				
-				//循环playMap 开始排播组合
-				Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
-				for (Entry<String, List<Integer>> entry : playSet) {
 					
-					HashMap<String,Object> params = new HashMap<String,Object>();
-					params.put("cityCode", detail.getCityCode());
-					params.put("type", detail.getType());
-					params.put("startTime", entry.getKey());
-					params.put("endTime", entry.getKey());
-					playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
-					playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
-					
-					
-					savePlayList(entry);
-					
-					playListId++;
-                    PlayList playList = new PlayList();
-                    playList.setId(playListId);
-                    playList.setCityCode(detail.getCityCode());
-                    playList.setType(detail.getType());
-                    playList.setStartTime(entry.getKey());
-                    playList.setEndTime(entry.getKey());
-                    playListDao.save(playList);
-                    
-					List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
-					List<Integer> values = entry.getValue();
-					
-					for (Integer advertisementId : values) {
-						PlayListDetail details = new PlayListDetail();
-			            details.setPlayListId(playList.getId());
-						details.setAdvertisementId(advertisementId);
-						details.setStartTime(entry.getKey());
-						details.setEndTime(entry.getKey());
-						//details.setDuration(duration);
-						details.setSort((int)System.currentTimeMillis());
-						detailList.add(details);
+					Map<String,List<Integer>> playMap = new HashMap<String,List<Integer>>();
+					//广告总数量添加完成，需要对每个广告的循环次数进行计算
+					for (Entry<String, List<Advertisement>> entry : entrySet) {
+						String key = entry.getKey();
+						
+						List<Integer> valuesList = new ArrayList<Integer>();
+						List<Advertisement> values = entry.getValue();
+						for (Advertisement adm : values) {//这里目前只能10个广告
+							int duration = adm.getDuration();
+							int play_count = GlobalUtils.ADS_EACH_PLAY_TIME/duration;//当前视频播放的次数
+							for(int i=0;i<play_count;i++){//需要向集合中添加循环多少次的广告
+								valuesList.add(adm.getId());//把广告id添加至集合中
+								playMap.put(key, valuesList);
+							}
+						}
 					}
-					playListDetailDao.saveAll(detailList);
-				}
-			} 
-		  }else{
-			  //结束时间必须大于当天
-			  //TODO
+					
+					//循环playMap 开始排播组合
+					Set<Entry<String, List<Integer>>> playSet = playMap.entrySet();
+					for (Entry<String, List<Integer>> entry : playSet) {
+						
+						HashMap<String,Object> params = new HashMap<String,Object>();
+						params.put("cityCode", detail.getCityCode());
+						params.put("type", detail.getType());
+						params.put("startTime", entry.getKey());
+						params.put("endTime", entry.getKey());
+						playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
+						playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
+						
+						
+						savePlayList(entry);
+						
+						playListId++;
+	                    PlayList playList = new PlayList();
+	                    playList.setId(playListId);
+	                    playList.setCityCode(detail.getCityCode());
+	                    playList.setType(detail.getType());
+	                    playList.setStartTime(entry.getKey());
+	                    playList.setEndTime(entry.getKey());
+	                    playListDao.save(playList);
+	                    
+						List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
+						List<Integer> values = entry.getValue();
+						
+						for (Integer advertisementId : values) {
+							PlayListDetail details = new PlayListDetail();
+				            details.setPlayListId(playList.getId());
+							details.setAdvertisementId(advertisementId);
+							details.setStartTime(entry.getKey());
+							details.setEndTime(entry.getKey());
+							//details.setDuration(duration);
+							details.setSort((int)System.currentTimeMillis());
+							detailList.add(details);
+						}
+						playListDetailDao.saveAll(detailList);
+					}
+				} 
+			  }else{
+				  //TODO 结束时间必须大于当天，否则不予处理
+			  }
+		  }catch(Exception e){
+			  e.printStackTrace();
+			  result = false; 
 		  }
+		  return result;
 	}
 	
 	
@@ -346,7 +352,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void updateCheckOnline(HttpServletRequest request,Orders orders) throws Exception{
+	public void auditOrders(HttpServletRequest request,Orders orders) throws Exception{
 		orders.setAuditor(SessionUtils.getLoginUser(request).getId());
 		orders.setAuditTime(new Date());
 		orders.setStatus(2);
@@ -356,12 +362,13 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		this.createPlayList(orders,"SX");
 	}
 
+	
 	/**
 	 * 提前下线
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void updateOfflineTime(Orders orders) throws Exception{
+	public void offlineOrders(Orders orders) throws Exception{
 		ordersDao.updateOfflineTime(orders);
 		
 		//修改排播组合

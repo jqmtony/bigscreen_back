@@ -127,7 +127,7 @@ public class OrdersController extends BaseController{
 	
 	
 	/**
-	 * 订单详情
+	 * 订单详情预览功能
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -170,7 +170,7 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> checkOnline(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.updateCheckOnline(this.getRequest(),orders);
+			ordersService.auditOrders(this.getRequest(),orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
@@ -224,7 +224,7 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/checkOrderDetail")
 	@ResponseBody
-	public List<OrdersDetail> checkOrderDetail(@RequestParam(value="id",defaultValue="0")int id) throws Exception{
+	public List<OrdersDetail> checkOrderDetail(@RequestParam(value="id",defaultValue="0") int id) throws Exception{
 		List<OrdersDetail> list = ordersDetailService.getOrdersDetailList(id);
 		return list;
 	}
@@ -291,7 +291,7 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> updateOfflineTime(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.updateOfflineTime(orders);
+			ordersService.offlineOrders(orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());

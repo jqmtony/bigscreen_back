@@ -5,6 +5,9 @@
  */
 function formatCountry(val, row) {
 	var text='暂无';
+	/*if(_country!=undefined){
+		
+	}*/
 	for(var i=0;i<_country.length;i++){
 		if(_country[i].id==val){
 			text = _country[i].text;

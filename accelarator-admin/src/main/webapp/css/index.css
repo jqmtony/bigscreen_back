@@ -58,6 +58,7 @@ input[type="checkbox"] { cursor: pointer;}
 .icon-application-system { background:url('../images/icons/icon-application-system.png') no-repeat center center;}
 .icon-system-user { background:url('../images/icons/icon-system-user.png') no-repeat center center;}
 .icon-system-area { background:url('../images/icons/icon-system-area.png') no-repeat center center;}
+.icon-system-help { background:url('../images/icons/icon-system-help.png') no-repeat center center;}
 
 .icon-application-business { background:url('../images/icons/icon-application-business.png') no-repeat center center;}
 .icon-business-user { background:url('../images/icons/icon-business-user.png') no-repeat center center;}

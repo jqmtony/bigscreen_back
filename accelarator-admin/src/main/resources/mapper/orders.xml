@@ -42,32 +42,33 @@
         <where>
 			1=1
 			<if test="orderNo!=null and orderNo!=''">
-				and o.order_no like '%#{orderNo}%'
+				and o.order_no like CONCAT('%',#{orderNo},'%' )
 			</if>
 			<if test="realName!=null and realName!=''">
-				and a.real_name like '%#{realName}%'
+				and a.real_name like CONCAT('%',#{realName},'%' )
 			</if>
 		</where>
 	</select>
 	
 	<!-- 在播广告列表 -->
-	<select id="queryPlayList" parameterType="Orders" resultType="Orders">
-        SELECT am.id,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
+	<select id="queryPlayList" resultMap="Orders" resultType="Orders">
+        SELECT am.id advertisementId,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
         o.end_time,o.status FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
         LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
-        ON a.id=am.advertiser_id 
-        <where>
-			1=1
-			<if test="countryCode!=null and countryCode!=''">
-				and od.country_code = #{countryCode}
-			</if>
-			<if test="areaCode!=null and areaCode!=''">
-				and od.area_code = #{areaCode}
-			</if>
-			<if test="cityCode!=null and cityCode!=''">
-				and od.city_code = #{cityCode}
-			</if>
-		</where>
+        ON a.id=am.advertiser_id where o.status in (2,4)
+        
+		<if test="countryCode!=null and countryCode!=''">
+			AND od.country_code = #{countryCode}
+		</if>
+		<if test="areaCode!=null and areaCode!=''">
+			AND od.area_code = #{areaCode}
+		</if>
+		<if test="cityCode!=null and cityCode!=''">
+			AND od.city_code = #{cityCode}
+		</if>
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND (o.start_time &gt;=#{startTime} OR o.end_time &lt;=#{endTime})
+		</if>
 	</select>
 	
 	<!-- 可用广告列表 -->
@@ -118,10 +119,11 @@
         )
 	</insert>
 	
+	<!-- WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status IN(1,2,4)  -->
 	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
 	   SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
        LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm  ON adm.id=o.advertisement_id 
-       WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status IN(1,2,4) 
+       WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status=2 
        AND o.end_time>now()
 	</select>
 	

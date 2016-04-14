@@ -70,7 +70,7 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void updateCheckOnline(HttpServletRequest request,Orders orders) throws Exception;
+	public void auditOrders(HttpServletRequest request,Orders orders) throws Exception;
 
 
 	/**
@@ -78,5 +78,5 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void updateOfflineTime(Orders orders) throws Exception;
+	public void offlineOrders(Orders orders) throws Exception;
 }
