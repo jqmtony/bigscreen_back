@@ -1,8 +1,6 @@
 package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
-import java.util.List;
-
 import com.gochinatv.accelarator.framework.web.base.vo.BaseVo;
 
 

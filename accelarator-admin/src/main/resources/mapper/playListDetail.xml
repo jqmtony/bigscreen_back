@@ -23,10 +23,10 @@
 				and p2.advertisement_id=#{advertisementId}
 			</if>
 			<if test="startTime!=null">
-				and p2.start_time>=#{startTime}
+				and p2.start_time &gt;= #{startTime}
 			</if>
 			<if test="endTime!=null">
-				and p2.end_time>=#{endTime}
+				and p2.end_time &lt;= #{endTime}
 			</if>
 		</where>
 	</select>

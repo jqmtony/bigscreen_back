@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.gochinatv.accelarator.dao.entity.PlayList;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
@@ -20,4 +21,12 @@ public interface PlayListDao  extends BaseDao<PlayList>{
 	 * @param params
 	 */
     public void deleteByMap(HashMap<String,Object> params);
+
+    /**
+	 * 得到设备的在播广告
+	 * @param playList
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PlayList> getOnlineAdForDevice(PlayList playList);
 }

@@ -1,12 +1,16 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.gochinatv.accelarator.dao.PlayListDao;
 import com.gochinatv.accelarator.dao.entity.PlayList;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
+import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.PlayListService;
 
 
@@ -27,6 +31,11 @@ public class PlayListServiceImpl extends BaseServiceImpl<PlayList> implements Pl
 	protected BaseDao<PlayList> getDao() {
 		return playListDao;
 	}
-	
-	
+
+	public List<PlayList> getOnlineAdForDevice(PlayList pl) throws Exception {
+		//昨天
+		pl.setYesterdayTime(DateUtils.addDay(-1));
+		return playListDao.getOnlineAdForDevice(pl);
+	}
+
 }

@@ -36,5 +36,4 @@ public class DeviceServiceImpl extends BaseServiceImpl<Device> implements Device
 		return deviceDao.getDeviceByCode(device);
 	}
 	
-	
 }

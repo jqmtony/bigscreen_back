@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gochinatv.accelarator.dao.PlayListDetailDao;
+import com.gochinatv.accelarator.dao.entity.Advertisement;
 import com.gochinatv.accelarator.dao.entity.OnlineAd;
 import com.gochinatv.accelarator.dao.entity.OnlineAdResponse;
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;
@@ -38,7 +39,6 @@ public class PlayListDetailServiceImpl extends BaseServiceImpl<PlayListDetail> i
 
 	public List<OnlineAdResponse> getOnlineAdListByEntity(
 			PlayListDetail playListDetail) {
-		
 		List<OnlineAd> list = new ArrayList<OnlineAd>();
 		List<PlayListDetail> playDetailList = playListDetailDao.getOnlineAdListByEntity(playListDetail);
 		
@@ -111,6 +111,5 @@ public class PlayListDetailServiceImpl extends BaseServiceImpl<PlayListDetail> i
 		 }
 		return onlineAdResponseList;
 	}
-	
 	
 }

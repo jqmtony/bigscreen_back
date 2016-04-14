@@ -25,7 +25,7 @@ public class Device extends BaseVo implements Serializable {
 	private String mac;// 设备mac
 	private int placeId;// 区域id
 	private int businessId;// 商家id
-	private String screenNum;// 分屏数量
+	private int screenNum;// 分屏数量
 	private Date createTime; // 创建时间
 	private int status;// 状态
 
@@ -137,11 +137,11 @@ public class Device extends BaseVo implements Serializable {
 		this.businessId = businessId;
 	}
 
-	public String getScreenNum() {
+	public int getScreenNum() {
 		return screenNum;
 	}
 
-	public void setScreenNum(String screenNum) {
+	public void setScreenNum(int screenNum) {
 		this.screenNum = screenNum;
 	}
 

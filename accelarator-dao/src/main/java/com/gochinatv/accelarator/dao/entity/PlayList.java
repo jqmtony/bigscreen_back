@@ -25,6 +25,28 @@ public class PlayList implements Serializable {
 	private String endTime;// 结束时间
 
 	
+	private String title;//临时 广告标题
+
+	private String yesterdayTime;// 临时时间
+	
+	
+	
+	public String getYesterdayTime() {
+		return yesterdayTime;
+	}
+
+	public void setYesterdayTime(String yesterdayTime) {
+		this.yesterdayTime = yesterdayTime;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public long getId() {
 		return id;
 	}

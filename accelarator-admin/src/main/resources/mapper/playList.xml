@@ -10,7 +10,27 @@
 		<result property="type" column="type" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
+		
+		<result property="yesterdayTime" column="yesterdayTime" />
+		<result property="title" column="title" />
 	</resultMap>
+	
+	<select id="getOnlineAdForDevice" resultMap="PlayList" parameterType="PlayList">
+		select distinct ad.title as title, p.start_time as start_time
+		 from play_list p,play_list_detail pl,advertisement ad,place pp,device d
+		<where>
+			p.id=pl.play_list_id and pl.advertisement_id=ad.id
+			and pp.city_code=p.city_code
+			and d.place_id=pp.id
+			 and p.type=pp.type
+			 and d.id=#{deviceId} 
+			<if test="startTime != null and startTime != ''">
+				and p.start_time=#{startTime}
+			</if>
+		and p.start_time &gt;#{yesterdayTime}
+		</where>
+		order by p.start_time asc
+	</select>
 	
 	<insert id="save" parameterType="PlayList">
 	   insert into play_list(

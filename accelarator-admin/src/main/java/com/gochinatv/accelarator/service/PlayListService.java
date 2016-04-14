@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.service;
 
+import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.PlayList;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -12,6 +14,14 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface PlayListService  extends BaseService<PlayList>{
+
+	/**
+	 * 得到设备的在播广告
+	 * @param pl
+	 * @return
+	 * @throws Exception
+	 */
+	List<PlayList> getOnlineAdForDevice(PlayList pl) throws Exception;
    
 
 }

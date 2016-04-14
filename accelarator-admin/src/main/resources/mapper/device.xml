@@ -30,6 +30,13 @@
 			</if>
 	</select>
 	
+	<select id="getEntityById" resultMap="Device" parameterType="int">
+		select d.*, p.cname as cname, p.country_code as country_code, p.area_code as area_code, p.city_code as city_code, b.user_name as user_name from device d 
+		left join place p on d.place_id=p.id
+		left join business b on d.business_id=b.id
+		where d.id = #{id}
+	</select>
+	
 	<select id="getListByEntity" resultMap="Device" parameterType="Device">
 		select d.*, p.cname as cname, p.country_code as country_code, p.area_code as area_code, p.city_code as city_code, b.user_name as user_name from device d 
 		left join place p on d.place_id=p.id

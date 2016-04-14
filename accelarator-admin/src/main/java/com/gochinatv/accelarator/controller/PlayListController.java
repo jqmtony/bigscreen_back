@@ -2,6 +2,8 @@ package com.gochinatv.accelarator.controller;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gochinatv.accelarator.dao.entity.Device;
 import com.gochinatv.accelarator.dao.entity.OnlineAdResponse;
+import com.gochinatv.accelarator.dao.entity.PlayList;
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.service.DeviceService;
 import com.gochinatv.accelarator.service.PlayListDetailService;
 import com.gochinatv.accelarator.service.PlayListService;
 
@@ -32,23 +37,69 @@ public class PlayListController extends BaseController{
 	private PlayListService playListService;
 	@Autowired
 	private PlayListDetailService playListDetailService;
+	@Autowired
+	private DeviceService deviceService;
 
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
 		playListService.getList();
 		return "orders/list";
 	}
-	
+	/**
+	 * 跳转到在播广告组合列表
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/gotoOnlineAdList")
-	public String gotoOnlineAdList(Model model) throws Exception{
+	public String gotoOnlineAdList() throws Exception{
 		//playListService.getList();
 		return "orders/onlineAdvertisement";
 	}
-	
+	/**
+	 * 在播广告组合列表
+	 * @param playListDetail
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/onlineAdList")
 	@ResponseBody
 	public List<OnlineAdResponse> onlineAdList(PlayListDetail playListDetail) throws Exception{
 		List<OnlineAdResponse> list = playListDetailService.getOnlineAdListByEntity(playListDetail);
+		return list;
+	}
+	/**
+	 * 跳转到在播设备列表
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoDeviceList")
+	public String gotoDeviceList() throws Exception{
+		//playListService.getList();
+		return "orders/device_list";
+	}
+	/**
+	 * 查看在播设备详情
+	 * @param deviceId
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/viewDevice")
+	public String viewDevice(int deviceId, Model model) throws Exception{
+		Device device = deviceService.getEntityById(deviceId);
+		model.addAttribute("device",device);
+		return "orders/device_view";
+	}
+	/**
+	 * 得到设备的在播广告
+	 * @param device
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/onlineAdForDevice")
+	@ResponseBody
+	public List<PlayList> onlineAdForDevice(PlayList playList) throws Exception{
+		List<PlayList> list = playListService.getOnlineAdForDevice(playList);
 		return list;
 	}
 	
