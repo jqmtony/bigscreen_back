@@ -74,7 +74,7 @@
 			$("#newEndTime1").text(newEndTime);
 			$("#newEndTime2").text(newEndTime);
 			$("#pageAheadModifyTime").text(modifyTime);
-			$("#modifyer").text("admin");
+			$("#modifyer").text('${loginUser.userName}');
 			$("#remark").val($("#remarkText").text());
 			
 			getDays('${orders.startTime}',newEndTime);
@@ -132,7 +132,7 @@
 	    		<p style="font-size:18px;" id="remarkText">
 		    		订单下线时间：</br> 
 					由<label id="oldEndTime"></label>    修改至     <label id="newEndTime1"> </label><br/>
-					修改记录01：<label id="pageAheadModifyTime"></label><br/>
+					修改记录：<label id="pageAheadModifyTime"></label><br/>
 					<label id="modifyer"></label>修改该片将于<label id="newEndTime2"></label>日23：59：59   下线
 				</p>
 	    	 </div>

@@ -43,7 +43,7 @@
 	   if(parentId != advertiserId){
 		   $("#parentId").val(row.id);
 		   $("#title").text('请重新选择');
-		   $("#advertisementId").val('');
+		   $("#advertisementId").val(0);
 	   }
 	   $("#advertiserName").text(row.userName);
 	   $("#realName").text(row.realName);
@@ -73,7 +73,10 @@
 		$.ajax({
 			url :'${base}/orders/sendBack',
 		    data:{    
-		             id : $("#id").val()
+		             id : $("#id").val(),
+		             advertisementId : $("#advertisementId").val(),
+		             advertiserId : $("#advertiserId").val()
+		             
 		    },    
 		    type:'post',    
 		    cache:false,    
