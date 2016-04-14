@@ -3,22 +3,11 @@ package com.gochinatv.accelarator.framework.web.base.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import com.gochinatv.accelarator.framework.web.base.BaseServlet;
 
-public class BaseController {
+
+public class BaseController extends BaseServlet{
    
-	protected HttpServletRequest getRequest() {
-		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-		return ((ServletRequestAttributes)ra).getRequest();
-	}
-	
-	protected HttpSession getSession() {
-		return getRequest().getSession();
-	}
 	
 	public Map<String,Object> success(Object data){
 		Map<String,Object> datas=new HashMap<String, Object>();

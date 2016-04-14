@@ -1,9 +1,9 @@
 package com.gochinatv.accelarator.controller;
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +19,7 @@ import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.OrdersDetailService;
 import com.gochinatv.accelarator.service.OrdersService;
+import com.gochinatv.accelarator.util.SessionUtils;
 
 
 /**
@@ -149,9 +150,9 @@ public class OrdersController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> saveOrder(Orders orders){
 		Map<String,Object> result = this.success(null);
-		HttpServletRequest request = this.getRequest();
 		try{
-			ordersService.save(request,orders);
+			orders.setCreater(SessionUtils.getLoginUser(getRequest()).getId());
+			ordersService.save(orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
@@ -170,7 +171,8 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> checkOnline(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			ordersService.auditOrders(this.getRequest(),orders);
+			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
+			ordersService.auditOrders(orders);
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
@@ -291,6 +293,7 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> updateOfflineTime(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
+			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
 			ordersService.offlineOrders(orders);
 		}catch(Exception e){
 			e.printStackTrace();

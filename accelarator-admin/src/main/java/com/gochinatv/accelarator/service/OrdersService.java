@@ -3,9 +3,6 @@ package com.gochinatv.accelarator.service;
 
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.gochinatv.accelarator.dao.entity.Orders;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
@@ -62,7 +59,7 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param place
 	 * @throws Exception 
 	 */
-	public void save(HttpServletRequest request,Orders orders) throws Exception;
+	public void save(Orders orders) throws Exception;
 
 
 	/**
@@ -70,7 +67,7 @@ public interface OrdersService  extends BaseService<Orders>{
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void auditOrders(HttpServletRequest request,Orders orders) throws Exception;
+	public void auditOrders(Orders orders) throws Exception;
 
 
 	/**

@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.servlet.http.HttpServletRequest;
-
 import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +27,9 @@ import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.OrdersService;
 import com.gochinatv.accelarator.util.GlobalUtils;
-import com.gochinatv.accelarator.util.SessionUtils;
+
 
 /**
- * 
  * @作者 zhuhh
  * @描述    订单业务层接口实现
  * @创建时间 2016年3月14日 下午12:55:23
@@ -113,8 +109,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param place
 	 * @throws Exception 
 	 */
-	public void save(HttpServletRequest request,Orders orders) throws Exception{
-		orders.setCreater(SessionUtils.getLoginUser(request).getId());
+	public void save(Orders orders) throws Exception{
 		orders.setCreateTime(new Date());
 		orders.setStatus(1);
 		ordersDao.save(orders);
@@ -352,8 +347,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 * @param orders
 	 * @throws Exception 
 	 */
-	public void auditOrders(HttpServletRequest request,Orders orders) throws Exception{
-		orders.setAuditor(SessionUtils.getLoginUser(request).getId());
+	public void auditOrders(Orders orders) throws Exception{
 		orders.setAuditTime(new Date());
 		orders.setStatus(2);
 		ordersDao.update(orders);
