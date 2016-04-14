@@ -195,12 +195,16 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/sendBack")
 	@ResponseBody
-	public Map<String,Object> sendBack(int id){
+	public Map<String,Object> sendBack(int id, int advertisementId, int advertiserId){
 		Map<String,Object> result = this.success(null);
 		try{
 			Orders orders = ordersService.getEntityById(id);
 			//审核不通过
 			orders.setStatus(3);
+			orders.setAdvertisementId(advertisementId);
+			orders.setAdvertiserId(advertiserId);
+			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
+			orders.setAuditTime(new Date());
 			ordersService.update(orders);
 		}catch(Exception e){
 			e.printStackTrace();

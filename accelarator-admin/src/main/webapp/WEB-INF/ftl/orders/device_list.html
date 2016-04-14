@@ -25,7 +25,7 @@
 		var row = grid.datagrid('getSelected');
 		if (row){
 			var url = "${base}/play_list/viewDevice?deviceId="+row.id;
-			parent.addTab('设备详情',url,'icon-statictics-device',true);
+			parent.addTab('设备播放详情',url,'icon-statictics-device',true);
 		} else {
 			$.messager.show({
 				title:'系统提示', 

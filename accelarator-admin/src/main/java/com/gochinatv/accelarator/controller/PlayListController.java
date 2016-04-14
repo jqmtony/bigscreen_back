@@ -11,6 +11,8 @@ import com.gochinatv.accelarator.dao.entity.OnlineAdResponse;
 import com.gochinatv.accelarator.dao.entity.PlayList;
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
+import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.DeviceService;
 import com.gochinatv.accelarator.service.PlayListDetailService;
 import com.gochinatv.accelarator.service.PlayListService;
@@ -92,9 +94,11 @@ public class PlayListController extends BaseController{
 	 */
 	@RequestMapping("/onlineAdForDevice")
 	@ResponseBody
-	public List<PlayList> onlineAdForDevice(PlayList playList) throws Exception{
+	public PageInfo<PlayList> onlineAdForDevice(int page, int rows,PlayList playList) throws Exception{
+		PageInterceptor.startPage(page, rows);
 		List<PlayList> list = playListService.getOnlineAdForDevice(playList);
-		return list;
+		PageInfo<PlayList> pageInfo = new PageInfo<PlayList>(list);
+		return pageInfo;
 	}
 	
 }
