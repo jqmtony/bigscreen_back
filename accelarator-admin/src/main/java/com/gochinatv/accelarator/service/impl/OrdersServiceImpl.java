@@ -148,8 +148,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	   * type:  SX：订单审核上线     XX：提前下线
 	   */
 	public boolean createPlayList(Orders orders,String type) throws Exception{
-	      logger.info("*********************执行创建排播组合Orders（endTime={},id={}）",orders.getEndTime(),orders.getId());
 		  boolean result = true;
+	      logger.info("*********************执行创建排播组合Orders（endTime={},id={}）",orders.getEndTime(),orders.getId());
 		  try{
 			  String endTime = orders.getEndTime();
 			  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
@@ -217,7 +217,8 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 							values.addAll(randomAdvertisementList);//添加自有广告至排播组合广告集合中
 						}
 						if(values.size()<10){
-							throw new Exception("*****************当前排播视频小于10个****************");
+							result = false;
+							logger.error("*********************当前排播视频小于10个************************");
 						}
 					}
 					
@@ -349,10 +350,11 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				}
 			}
 			loop++;
-			if(loop>200){
+			if(loop>250){
 				try {
 					repeat.clear();
-					throw new Exception("排播进行了无限循环，请检查排播的视频的id，是否有问题！");
+					//logger.error("*********************排播进行了无限循环，请检查排播的视频的id，现在已经强制退出！************************");
+					throw new Exception("排播进行了无限循环，请检查排播的视频的id，现在已经强制退出！");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -376,8 +378,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 */
 	public void updateAuditOrders(Orders orders) throws Exception{
 		ordersDao.update(orders);
-		//创建排播组合
-		this.createPlayList(orders,"SX");
 	}
 
 	
@@ -388,19 +388,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	 */
 	public void updateOfflineOrders(Orders orders) throws Exception{
 		ordersDao.updateOfflineTime(orders);
-		//修改排播组合
-		this.createPlayList(orders,"XX");
 	}
 	
-	
-	public static void main(String[] args) throws Exception {
-		for(int i=0;i<100;i++){
-			if(i==10){
-				
-				throw new Exception("*****************当前排播视频小于10个****************");
-			}
-			System.out.println(i);
-		}
-	}
-		
 }

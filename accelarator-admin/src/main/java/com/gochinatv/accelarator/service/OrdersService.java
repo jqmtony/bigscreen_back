@@ -55,6 +55,16 @@ public interface OrdersService  extends BaseService<Orders>{
 	
 	
 	/**
+	 * 创建排播组合
+	 * @param orders
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean createPlayList(Orders orders,String type) throws Exception;
+	
+	
+	/**
 	 * 保存订单，保存订单详情
 	 * @param place
 	 * @throws Exception 

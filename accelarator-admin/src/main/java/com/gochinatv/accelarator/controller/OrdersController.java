@@ -160,6 +160,7 @@ public class OrdersController extends BaseController{
 		return result;
 	}
 
+	
 	/**
 	 * 审核订单上线
 	 * @param model
@@ -175,14 +176,18 @@ public class OrdersController extends BaseController{
 			orders.setAuditTime(new Date());
 			orders.setStatus(2);
 			ordersService.updateAuditOrders(orders);
-			boolean b = ordersService.XXX();
-			if(!b){
-				xxxxxx
-			}
 			
+			boolean op = ordersService.createPlayList(orders, "SX");
+			if(!op){
+				orders.setAuditor(0);
+				orders.setAuditTime(null);
+				orders.setStatus(1);
+				ordersService.updateAuditOrders(orders);
+				result = error("查看系统日志");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
-			result = this.error(e.getMessage());
+			result = error(e.getMessage());
 		}
 		return result;
 	}
@@ -303,17 +308,16 @@ public class OrdersController extends BaseController{
 	@ResponseBody
 	public Map<String,Object> updateOfflineTime(Orders orders){
 		Map<String,Object> result = this.success(null);
-		xxxxx
 		try{
+			Orders history = ordersService.getEntityById(orders.getId());
 			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
-			 ahead_modify_time=#{aheadModifyTime},
-	            auditor=#{auditor},
-	            audit_time=#{auditTime},
-	            end_time=#{endTime},
-	            remark=#{remark},
-	            original_end_time=#{originalEndTime}
-	            
 			ordersService.updateOfflineOrders(orders);
+			
+			boolean op = ordersService.createPlayList(orders,"XX");//排播组合
+			if(!op){
+				ordersService.updateOfflineOrders(history);
+				result = error("查看系统日志");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			result = this.error(e.getMessage());
