@@ -16,13 +16,13 @@
 			toolbar:'#toolbar',
 			fitColumns:true,
 			onDblClickRow:function(index,row){
-				modifyRow(row);
+				viewDevice(row);
 			} 
 		});
 		
 	});
 	function viewDevice(){
-		var row = grid.datagrid('getSelected');
+		row = grid.datagrid('getSelected');
 		if (row){
 			var url = "${base}/play_list/viewDevice?deviceId="+row.id;
 			parent.addTab('设备播放详情',url,'icon-statictics-device',true);

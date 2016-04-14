@@ -59,9 +59,11 @@ public class PlayListController extends BaseController{
 	 */
 	@RequestMapping("/onlineAdList")
 	@ResponseBody
-	public List<OnlineAdResponse> onlineAdList(PlayListDetail playListDetail) throws Exception{
+	public PageInfo<OnlineAdResponse> onlineAdList(int page, int rows,PlayListDetail playListDetail) throws Exception{
+		PageInterceptor.startPage(page, rows);
 		List<OnlineAdResponse> list = playListDetailService.getOnlineAdListByEntity(playListDetail);
-		return list;
+		PageInfo<OnlineAdResponse> pageInfo = new PageInfo<OnlineAdResponse>(list);
+		return pageInfo;
 	}
 	/**
 	 * 跳转到在播设备列表

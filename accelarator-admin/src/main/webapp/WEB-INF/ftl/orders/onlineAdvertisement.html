@@ -10,14 +10,14 @@
 			queryParams:$("#queryForm").serializeObject(),
 			pagination : true,
 			rownumbers : true,
+			pagination:true,
+            pageSize: 50,
+            pageList: [50, 100, 150, 200],
 			singleSelect : true,
 			striped:true,
 			fit:true,
 			toolbar:'#toolbar',
-			fitColumns:true,
-			onDblClickRow:function(index,row){
-				modifyRow(row);
-			} 
+			fitColumns:true
 		});
 		$('#endTime').datebox().datebox('calendar').calendar({
 	        validator: function(date){
