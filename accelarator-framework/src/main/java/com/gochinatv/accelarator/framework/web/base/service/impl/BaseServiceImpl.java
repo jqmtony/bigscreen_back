@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.gochinatv.accelarator.framework.web.base.BaseServlet;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
 
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<T> extends BaseServlet implements BaseService<T> {
 	
 	/**
 	 * 
