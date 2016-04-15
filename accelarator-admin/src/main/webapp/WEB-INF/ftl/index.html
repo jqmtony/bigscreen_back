@@ -4,12 +4,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>东方嘉禾-Accelarator管理系统</title>
-<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="${base}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="${base}/css/form.css" />
 <link rel="stylesheet" type="text/css" href="${base}/easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/default/easyui.css" />
 <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
 </head>
 <body class="easyui-layout">
 
@@ -19,7 +21,7 @@
         	<h1>GoChinaTV Accelarator Administrator</h1>
         </div>
         <div class="vrs-header-right">
-        	<p><strong class="easyui-tooltip"></strong>${(loginUser.userName)!""}，欢迎您！</p>
+        	<p><strong class="easyui-tooltip"></strong><a href="javascript:void(0);" onclick="updatePwd();">${(loginUser.userName)!""}</a>，欢迎您！</p>
             <p><a href="logout">安全退出</a></p>
         </div>
     </div>
@@ -97,9 +99,10 @@
 		<div data-options="iconCls:'icon-contextmenu-closeother'" id="closeother">关闭其他</div>
 		<div data-options="iconCls:'icon-contextmenu-closeall'" id="closeall">关闭全部</div>
 	</div>
-
+	<#include "/user/updatePwd.html">
 	<script type="text/javascript">
 		$(function() {
+			$("#updatePwdWindow").window('close');
 			$('.vrs-side-tree a').bind("click", function() {
 				var title = $(this).text();
 				var url = $(this).attr('data-link');
@@ -144,6 +147,13 @@
 		            $('#vrs-tabs').tabs('close',i);
 		        }
 		    });
+		    
+		    $("table","#addForm,#modifyForm").attr("class","table-bordered");
+			var table = "table[class='table-bordered']";
+			$("tr:eq(0) > td",table).attr("style","border-top:0px");
+			$("tr > td:even",table).attr("bgcolor","#E0ECFF");
+			$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
+			$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
 		});
 
 		/**
@@ -211,6 +221,13 @@
 				window.top.reload_Abnormal_Monitor.call();
 				tabPanel.tabs('close', closeTitle);
 			}
+		}
+		//修改密码
+		function updatePwd(){
+			$('#updatePwdWindow').window('open');
+			$('#modifyForm').form('clear');
+			$('#userId').val('${loginUser.id}');
+			
 		}
 	</script>
 </body>

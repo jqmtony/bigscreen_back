@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -41,6 +44,7 @@ public class UserController extends BaseController{
 	public String gotoList(Model model) throws Exception{
 		return "user/list";
 	}
+	
 	/**
 	 * 检验用户名的唯一性
 	 * @author limr
@@ -56,6 +60,24 @@ public class UserController extends BaseController{
 		User user = userService.getUserByUserName(id, userName);
 		if(user == null){
 			data = "true";
+		}
+		return data;
+	}
+	/**
+	 * 检验输入的旧密码是否正确
+	 * @param id
+	 * @param oldPwd
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkOldPwd")
+	@ResponseBody
+	public boolean checkOldPwd(int id, String oldPwd) throws Exception{
+		boolean data = false;
+		User user = userService.getEntityById(id);
+		String pwd = user.getPassword();
+		if(pwd.equals(Md5Util.md5(oldPwd))){
+			data = true;
 		}
 		return data;
 	}
@@ -92,6 +114,10 @@ public class UserController extends BaseController{
 	public Map<String,Object> update(User user){
 		Map<String,Object> result = this.success(null);
 		try{
+			String pwd = user.getPassword();
+			if(StringUtils.isNotBlank(pwd)){
+				user.setPassword(Md5Util.md5(user.getPassword()));
+			}
 			userService.update(user);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
@@ -111,5 +137,4 @@ public class UserController extends BaseController{
 		}
 		return result;
 	}
-	
 }

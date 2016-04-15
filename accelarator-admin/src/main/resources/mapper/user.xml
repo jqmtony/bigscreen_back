@@ -14,6 +14,9 @@
 		<result property="status" column="status" />
 	</resultMap>
 
+	<select id="getEntityById" resultMap="User" parameterType="int">
+		select * from user where id=#{id}
+	</select>
 	<select id="getUserByUserName" resultMap="User" parameterType="User">
 		select * from user where user_name = #{userName}
 			<if test="id!=0">
