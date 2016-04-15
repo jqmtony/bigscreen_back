@@ -52,7 +52,7 @@
 	
 	<!-- 在播广告列表 -->
 	<select id="queryPlayList" resultMap="Orders" resultType="Orders">
-        SELECT am.id advertisementId,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
+        SELECT am.title,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
         o.end_time,o.status FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
         LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
         ON a.id=am.advertiser_id where o.status in (2,4)
