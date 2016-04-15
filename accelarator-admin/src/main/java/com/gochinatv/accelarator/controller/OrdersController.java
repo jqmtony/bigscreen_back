@@ -274,6 +274,8 @@ public class OrdersController extends BaseController{
 		try{
 			Orders orders = ordersService.getEntityById(id);
 			orders.setStatus(0);
+			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
+			orders.setAuditTime(new Date());
 			ordersService.update(orders);
 		}catch(Exception e){
 			e.printStackTrace();
