@@ -80,9 +80,9 @@ function formatStatus(val, row) {
  */
 function formatScreenNum(val, row) {
 	if (val == 4) {
-		return '大屏';
+		return '4屏';
 	} else if(val == 1) {
-		return '小屏';
+		return '1屏';
 	}
 }
 /**

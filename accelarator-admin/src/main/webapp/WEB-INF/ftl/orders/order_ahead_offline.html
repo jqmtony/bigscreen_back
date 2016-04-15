@@ -24,11 +24,11 @@
 		getDays('${orders.startTime}','${orders.endTime}');
    });
    function getDays(start,end){
-	   var startTime = new Date(start);
+		var startTime = new Date(start);
 		var endTime = new Date(end);
-		var timing=endTime-startTime  //时间差的毫秒数 
+		var timing = endTime-startTime  //时间差的毫秒数 
 		//计算出相差天数  
-		var days=Math.floor(timing/(24*3600*1000));
+		var days=Math.floor(timing/(24*3600*1000))+1;
 		$("#onlineDay").text(days);
    }
    function closeTab(){
@@ -42,16 +42,21 @@
 	   $('#offlineTime').datebox().datebox('calendar').calendar({
 	        validator: function(date){
 	        	var startTimeStr = $("#onlineStartTime").text();
-	        	var endTimeStr = $("#onlineEndTime").text();
+	        	//$("#onlineEndTime").text()
+	        	var endTimeStr = '${orders.endTime}';
 	            var startTime = new Date(startTimeStr);
 	            var nowTime = new Date();
+	            var startDate = "";
 	            if(nowTime > startTime){
-	            	startTime = nowTime;
+	            	//startTime = nowTime;
+	            	startDate = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate());
+	            }else{
+	            	//可以选择开始时间当天的日期
+	            	startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate()-1);
 	            }
 	            var endTime = new Date(endTimeStr);
-	            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
 	            var endDate = new Date(endTime.getFullYear(), endTime.getMonth(), endTime.getDate());
-	            return  date>startDate && endDate>date;
+	            return  date > startDate && endDate > date;
 	        }
 	    });
 	   

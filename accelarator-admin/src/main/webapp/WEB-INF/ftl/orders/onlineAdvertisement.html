@@ -19,20 +19,22 @@
 			toolbar:'#toolbar',
 			fitColumns:true
 		});
-		$('#endTime').datebox().datebox('calendar').calendar({
-	        validator: function(date){
-	        	var startTimeStr = $("#startTime").datebox('getValue');
-	            var startTime = new Date(startTimeStr);
-	            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
-	            return  date>=startDate;
-	        }
-	    });
+		
 		$("#startTime").datebox({  
 		    onChange:function(startTime){
-				var endTime = $("#endTime").datebox('getValue');
+		    	var endTime = $("#endTime").datebox('getValue');
 				if(endTime != null && startTime>endTime){
 					$("#endTime").datebox('setValue','');
 				}
+		    	$('#endTime').datebox().datebox('calendar').calendar({
+			        validator: function(date){
+			        	var startTimeStr = $("#startTime").datebox('getValue');
+				            var startTime = new Date(startTimeStr);
+				            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+				            return  date>=startDate;
+			        	}
+			    }); 
+				
 		    }
 		});
 		
