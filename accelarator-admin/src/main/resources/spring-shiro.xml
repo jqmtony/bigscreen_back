@@ -16,6 +16,7 @@
 		<property name="filters">
 			<map>
 				<entry key="authc" value-ref="shiroFormAuthenticationFilter" />
+				<entry key="authUser" value-ref="userInvalidFilter" />
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -28,6 +29,8 @@
 				/home = anon
 				/logout = logout
 				/** = authc
+				<!--/login = authc
+				 /** = authUser,user -->
 			</value>
 		</property>
 	</bean>
@@ -61,4 +64,5 @@
         <property name="redirectUrl" value="/home" /> 
      </bean> 
    
+     <bean id="userInvalidFilter" class="com.gochinatv.accelarator.security.UserInvalidFilter"/>
 </beans>

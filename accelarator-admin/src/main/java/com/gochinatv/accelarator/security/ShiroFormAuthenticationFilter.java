@@ -3,7 +3,6 @@ package com.gochinatv.accelarator.security;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
