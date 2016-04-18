@@ -99,10 +99,15 @@ public class UserController extends BaseController{
 	public Map<String,Object> save(User user){
 		Map<String,Object> result = this.success(null);
 		try{
-			user.setCreateTime(new Date());
-			user.setPassword(Md5Util.md5(user.getPassword()));
-//			user.setStatus(1);
-			userService.save(user);
+			User u = userService.getUserByUserName(user.getId(), user.getUserName());
+			if(u == null || "".equals(u)){
+				user.setCreateTime(new Date());
+				user.setPassword(Md5Util.md5(user.getPassword()));
+//				user.setStatus(1);
+				userService.save(user);
+			}else{
+				result = this.error("用户名已存在！");
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -114,11 +119,16 @@ public class UserController extends BaseController{
 	public Map<String,Object> update(User user){
 		Map<String,Object> result = this.success(null);
 		try{
-			String pwd = user.getPassword();
-			if(StringUtils.isNotBlank(pwd)){
-				user.setPassword(Md5Util.md5(user.getPassword()));
+			User u = userService.getUserByUserName(user.getId(), user.getUserName());
+			if(u == null || "".equals(u)){
+				String pwd = user.getPassword();
+				if(StringUtils.isNotBlank(pwd)){
+					user.setPassword(Md5Util.md5(user.getPassword()));
+				}
+				userService.update(user);
+			}else{
+				result = this.error("用户名已存在！");
 			}
-			userService.update(user);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

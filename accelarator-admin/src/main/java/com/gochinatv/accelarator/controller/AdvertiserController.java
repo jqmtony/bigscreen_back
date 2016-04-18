@@ -85,10 +85,16 @@ public class AdvertiserController extends BaseController{
 	public Map<String,Object> save(Advertiser advertiser){
 		Map<String,Object> result = this.success(null);
 		try{
-			advertiser.setCreateTime(new Date());
-			advertiser.setPassword(Md5Util.md5(advertiser.getPassword()));
-//			advertiser.setStatus(1);
-			advertiserService.save(advertiser);
+			Advertiser at = advertiserService.getBusinessByUserName(advertiser.getId(), advertiser.getUserName());
+			if(at == null || "".equals(at)){
+				advertiser.setCreateTime(new Date());
+				advertiser.setPassword(Md5Util.md5(advertiser.getPassword()));
+//				advertiser.setStatus(1);
+				advertiserService.save(advertiser);
+			}else{
+				result = this.error("用户名已存在！");
+			}
+			
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -100,7 +106,12 @@ public class AdvertiserController extends BaseController{
 	public Map<String,Object> update(Advertiser advertiser){
 		Map<String,Object> result = this.success(null);
 		try{
-			advertiserService.update(advertiser);
+			Advertiser at = advertiserService.getBusinessByUserName(advertiser.getId(), advertiser.getUserName());
+			if(at == null || "".equals(at)){
+				advertiserService.update(advertiser);
+			}else{
+				result = this.error("用户名已存在！");
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

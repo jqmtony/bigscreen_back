@@ -180,13 +180,15 @@ function addCallback(data){
 		$.messager.alert('系统提示',data.msg,'warning');
 	}else{
 		addWin.window('close');
-		grid.datagrid('reload',$("#queryForm").serializeObject());	
+		grid.datagrid('reload',$("#queryForm").serializeObject());
+		$("#add_save").linkbutton("enable");
 	}
 }
 
 
 function addSave(url){
 	if(addForm.form('validate')){
+		$("#add_save").linkbutton("disable");
 		$.post( url,$("#addForm").serializeObject(),addCallback,'json');		
 	}
 }
@@ -200,7 +202,8 @@ function cancel(){
 
 function modifySave(url){
 	if(modifyForm.form('validate')){
-			$.post(url,$("#modifyForm").serializeObject(),modifyCallback,'json');		
+		$("#update_save").linkbutton("disable");
+		$.post(url,$("#modifyForm").serializeObject(),modifyCallback,'json');		
 	}
 }
 	
@@ -210,6 +213,7 @@ function modifyCallback(data){
 	}else{
 		modifyWin.window('close');
 		grid.datagrid('reload',$("#queryForm").serializeObject());	
+		$("#update_save").linkbutton("enable");
 	}
 }
 

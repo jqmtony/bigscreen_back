@@ -86,10 +86,15 @@ public class BusinessController extends BaseController{
 	public Map<String,Object> save(Business business){
 		Map<String,Object> result = this.success(null);
 		try{
-			business.setCreateTime(new Date());
-			business.setPassword(Md5Util.md5(business.getPassword()));
-//			business.setStatus(1);
-			businessService.save(business);
+			Business u = businessService.getBusinessByUserName(business.getId(), business.getUserName());
+			if(u == null || "".equals(u)){
+				business.setCreateTime(new Date());
+				business.setPassword(Md5Util.md5(business.getPassword()));
+//				business.setStatus(1);
+				businessService.save(business);
+			}else{
+				result = this.error("用户名已存在！");
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -110,7 +115,12 @@ public class BusinessController extends BaseController{
 	public Map<String,Object> update(Business business){
 		Map<String,Object> result = this.success(null);
 		try{
-			businessService.update(business);
+			Business u = businessService.getBusinessByUserName(business.getId(), business.getUserName());
+			if(u == null || "".equals(u)){
+				businessService.update(business);
+			}else{
+				result = this.error("用户名已存在！");
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
