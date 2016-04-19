@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.api.dao.DeviceDao">
+
+	<resultMap type="com.gochinatv.accelarator.api.bean.Device" id="Device">
+		<id property="id" column="id" />
+		<result property="mac" column="mac" />
+		<result property="imageUrl" column="image_url" />
+		<result property="placeId" column="place_id" />
+		<result property="cityCode" column="city_code" />
+		<result property="screenNum" column="screen_num" />
+		<result property="createTime" column="create_time" />
+		<result property="screenShotInterval" column="screenShotInterval" />
+		<result property="type" column="type" />
+		
+	</resultMap>
+	
+	<insert id="saveDeviceImage" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
+	   insert into device_image(mac,image_url) values ( #{mac}, #{imageUrl})
+	</insert>
+	
+		
+	<select id="queryDeviceByMac" resultMap="Device" >
+		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60 as screenShotInterval,p.type as type 
+		
+		from device d,place p
+		
+		where d.place_id=p.id and d.mac=#{mac} 
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<resultMap type="com.gochinatv.accelarator.api.bean.ImageAdInfo" id="ImageAdInfo">
+		<id property="adImgId" column="id" />
+		<result property="adImgIndex" column="sort" />
+		<result property="adImgUrl" column="image_path" />
+		<result property="adImgName" column="name" />
+		<result property="adImgPrice" column="price" />
+	</resultMap>
+	
+	
+	<select id="queryImageAdInfoList" resultMap="ImageAdInfo" >
+		select * from menu 
+	</select>
+	
+	
+	
+	<resultMap type="com.gochinatv.accelarator.api.bean.AdInfo" id="AdInfo">
+		<id property="adVideoId" column="adVideoId" />
+		<result property="adVideoName" column="adVideoName" />
+		<result property="adVideoIndex" column="adVideoIndex" />
+		<result property="adVideoUrl" column="adVideoUrl" />
+	</resultMap>
+	
+	
+	<select id="getAdInfoByDeviceId" resultMap="AdInfo" >
+		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://vod.vegocdn.com',ad.video_path) as adVideoUrl
+			from play_list p,play_list_detail pl,advertisement ad
+			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
+		   		 and p.device_id=#{deviceId} and p.type=#{type}  and p.start_time=#{time}
+	</select>
+	
+	<select id="getAdInfoByPlaceId" resultMap="AdInfo" >
+			select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://vod.vegocdn.com',ad.video_path) as adVideoUrl
+			from play_list p,play_list_detail pl,advertisement ad
+			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
+		   		 and p.place_id=#{placeId} and p.type=#{type}   and p.start_time=#{time}
+	</select>
+	
+	<select id="getAdInfoByCityCode" resultMap="AdInfo" >
+		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://vod.vegocdn.com',ad.video_path) as adVideoUrl
+			from play_list p,play_list_detail pl,advertisement ad
+			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
+		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time}
+	</select>
+	
+</mapper>
