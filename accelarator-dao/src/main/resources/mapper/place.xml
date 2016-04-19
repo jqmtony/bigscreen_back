@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.PlaceDao">
+
+	<resultMap type="Place" id="Place">
+		<id property="id" column="id" />
+		<result property="cname" column="cname" />
+		<result property="ename" column="ename" />
+		<result property="type" column="type" />
+		<result property="scale" column="scale" />
+		<result property="averageDailyFlow" column="average_daily_flow" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
+		<result property="address" column="address" />
+		<result property="zipCode" column="zip_code" />
+		<result property="businessId" column="business_id" />
+		<result property="createTime" column="create_time" />
+		
+		<result property="userName" column="user_name" />
+		<result property="realName" column="real_name" />
+	</resultMap>
+	
+	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
+		select business_id from place where id=#{id}
+	</select>
+	
+	<select id="getListByEntity" resultMap="Place" parameterType="Place">
+		select p.*, b.user_name, b.real_name from place p left join business b on p.business_id=b.id
+		<where>
+			1=1
+			<if test="cname!=null">
+				and p.cname like CONCAT(CONCAT('%',#{cname}),'%')
+			</if>
+			<if test="ename!=null">
+				and p.ename like CONCAT(CONCAT('%',#{ename}),'%')
+			</if>
+			<if test="type!=null and type!=0">
+				and p.type = #{type}
+			</if>
+			<if test="countryCode!=null and countryCode!=''">
+				and p.country_code = #{countryCode}
+			</if>
+			<if test="areaCode!=null and areaCode!=''">
+				and p.area_code = #{areaCode}
+			</if>
+			<if test="cityCode!=null and cityCode!=''">
+				and p.city_code = #{cityCode}
+			</if>
+			order by p.create_time desc
+		</where>
+	</select>
+	
+	<select id="getEntityById" resultMap="Place" parameterType="int">
+		select * from place where id=#{id}
+	</select>
+	
+	<insert id="save" parameterType="Place">
+	   insert into place(
+	            cname,
+	            ename,
+	            type,
+	            scale,
+	            average_daily_flow,
+	            country_code,
+	            area_code,
+	            city_code,
+	            address,
+	            zip_code,
+	            business_id,
+	            create_time
+	            ) values (
+	            #{cname},
+	            #{ename},
+	            #{type},
+	            #{scale},
+	            #{averageDailyFlow},
+	            #{countryCode},
+	            #{areaCode},
+	            #{cityCode},
+	            #{address},
+	            #{zipCode},
+	            #{businessId},
+	            #{createTime}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="Place">
+		update place
+		<set>
+			<if test="cname!=null">
+				cname=#{cname},
+			</if>
+			<if test="ename!=null">
+				ename=#{ename},
+			</if>
+			<if test="type!=0">
+				type=#{type},
+			</if>
+			<if test="scale!=null">
+				scale=#{scale},
+			</if>
+			<if test="averageDailyFlow!=null">
+				average_daily_flow=#{averageDailyFlow},
+			</if>
+			<if test="countryCode!=null">
+				country_code=#{countryCode},
+			</if>
+			<if test="areaCode!=null">
+				area_code=#{areaCode},
+			</if>
+			<if test="cityCode!=null">
+				city_code=#{cityCode},
+			</if>
+			<if test="address!=null">
+				address=#{address},
+			</if>
+			<if test="zipCode!=null">
+				zip_code=#{zipCode},
+			</if>
+			<if test="businessId!=0">
+				business_id=#{businessId}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="Place">
+	  delete from place where id = #{id}
+	</delete>
+	
+</mapper>
+
