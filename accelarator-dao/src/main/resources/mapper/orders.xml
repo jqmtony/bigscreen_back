@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.OrdersDao">
+
+	<resultMap type="Orders" id="Orders">
+		<id property="id" column="id" />
+		<result property="orderNo" column="order_no" />
+		<result property="creater" column="creater" />
+		<result property="createTime" column="create_time" />
+		<result property="auditor" column="auditor" />
+		<result property="auditTime" column="audit_time" />
+		<result property="advertiserId" column="advertiser_id" />
+		<result property="advertisementId" column="advertisement_id" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+		<result property="aheadModifyTime" column="ahead_modify_time" />
+		<result property="originalEndTime" column="original_end_time" />
+		<result property="remark" column="remark" />
+		<result property="status" column="status" />
+		
+		
+		<result property="realName" column="real_name" />
+		<result property="advertiserName" column="user_name" />
+		<result property="title" column="title" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
+		<result property="createrName" column="createrName" />
+		<result property="auditorName" column="auditorName" />
+		<result property="duration" column="duration" />
+		
+		<result property="cname" column="cname" />
+		<result property="type" column="type" />
+	</resultMap>
+	
+	<!-- 订单列表 -->
+	<select id="getOrdersList" resultMap="Orders" parameterType="Orders">
+		SELECT o.id, o.order_no,o.create_time,o.status,o.audit_time,o.ahead_modify_time,o.original_end_time,o.end_time,o.remark,
+		uc.id,uc.real_name AS createrName,a.real_name,oa.real_name AS auditorName FROM orders o 
+   	    LEFT JOIN advertiser a ON a.id=o.advertiser_id  LEFT JOIN advertisement am ON am.id=o.advertisement_id 
+        LEFT JOIN user uc ON o.creater=uc.id LEFT JOIN user oa ON oa.id=o.auditor  
+        <where>
+			1=1
+			<if test="orderNo!=null and orderNo!=''">
+				and o.order_no like CONCAT('%',#{orderNo},'%' )
+			</if>
+			<if test="realName!=null and realName!=''">
+				and a.real_name like CONCAT('%',#{realName},'%' )
+			</if>
+		</where>
+	</select>
+	
+	<!-- 在播广告列表 -->
+	<select id="queryPlayList" resultMap="Orders" resultType="Orders">
+        SELECT am.title,a.real_name,od.country_code,od.area_code,od.city_code,o.start_time,
+        o.end_time,o.status FROM orders o LEFT JOIN orders_detail od ON o.id=od.orders_id 
+        LEFT JOIN advertisement am ON am.id=o.advertisement_id LEFT JOIN advertiser a 
+        ON a.id=am.advertiser_id where o.status in (2,4)
+        
+		<if test="countryCode!=null and countryCode!=''">
+			AND od.country_code = #{countryCode}
+		</if>
+		<if test="areaCode!=null and areaCode!=''">
+			AND od.area_code = #{areaCode}
+		</if>
+		<if test="cityCode!=null and cityCode!=''">
+			AND od.city_code = #{cityCode}
+		</if>
+		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
+			AND ((o.start_time &gt;=#{startTime} AND o.start_time &lt;=#{endTime}) OR(o.end_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime})
+			  OR (o.start_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}) OR (o.start_time &lt;=#{startTime} AND o.end_time &gt;=#{endTime})
+			)
+		</if>
+	</select>
+	
+	<!-- 可用广告列表 -->
+	<select id="getAvailableList" resultMap="Orders" parameterType="Orders">
+       SELECT distinct p.type, p.country_code, p.area_code, p.city_code FROM place p 
+       WHERE 10 > (
+            SELECT count(*) FROM orders_detail od LEFT JOIN orders o ON od.orders_id = o.id WHERE p.city_code = od.city_code AND p.type = od.type 
+            <if test="startTime!=null and endTime!=null">
+			  AND ((o.start_time &gt;=#{startTime} AND o.start_time &lt;= #{endTime}) OR (o.end_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}))
+			</if>
+        )
+		<if test="types!=null and types!=''">
+			AND p.type in(${types})
+		</if>
+		<if test="cityCode!=null and cityCode!=''">
+			AND p.city_code in(${cityCode})
+		</if>
+	</select>
+	
+	<!-- 生成订单列表 -->
+	<select id="getRetryOrdersList" resultMap="Orders" parameterType="Orders">
+       SELECT distinct type, country_code, area_code, city_code FROM place 
+        <where>
+             1=1 
+             <if test="ids!=null and ids!=''">
+				 AND CONCAT(type,'-',city_code) IN (${ids})
+			 </if>
+        </where>
+	</select>
+	
+	<insert id="save" parameterType="Orders" keyProperty="id">
+	   insert into orders (
+			order_no,
+			creater,
+			create_time,
+			advertiser_id,
+			start_time,
+			end_time,
+			status
+		) values (
+	        #{orderNo},
+	        #{creater},
+	        #{createTime},
+	        #{advertiserId},
+	        #{startTime},
+	        #{endTime},
+	        #{status}
+        )
+	</insert>
+	
+	<!-- WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status IN(1,2,4)  -->
+	<select id="getOrdersPlayList" parameterType="Orders" resultMap="Orders">
+	   SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od 
+       LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm  ON adm.id=o.advertisement_id 
+       WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status=2 
+       AND o.end_time>now()
+	</select>
+	
+	
+	<select id="getEntityById" resultMap="Orders" parameterType="int">
+		select am.title as title,o.id,o.advertiser_id,o.auditor,o.order_no,o.audit_time,o.advertisement_id,o.start_time,o.end_time,o.status,a.real_name as realName,a.user_name as advertiserName from orders o
+		LEFT JOIN advertiser a ON o.advertiser_id=a.id
+		LEFT JOIN advertisement am ON o.advertisement_id=am.id
+		where o.id=#{id}
+	</select>
+	
+	<update id="update" parameterType="Orders">
+		update orders
+		<set>
+			advertiser_id=#{advertiserId},
+            advertisement_id=#{advertisementId},
+            auditor=#{auditor},
+            audit_time=#{auditTime},
+            status=#{status}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateOfflineTime" parameterType="Orders">
+		update orders
+		<set>
+            ahead_modify_time=#{aheadModifyTime},
+            auditor=#{auditor},
+            audit_time=#{auditTime},
+            end_time=#{endTime},
+            remark=#{remark},
+            original_end_time=#{originalEndTime}
+		</set>
+		where id = #{id}
+	</update>
+	
+</mapper>
