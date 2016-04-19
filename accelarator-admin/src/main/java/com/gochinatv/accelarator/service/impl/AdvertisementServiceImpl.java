@@ -2,7 +2,6 @@ package com.gochinatv.accelarator.service.impl;
 
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.AdvertisementDao;
@@ -23,11 +22,11 @@ import com.gochinatv.accelarator.service.AdvertisementService;
 public class AdvertisementServiceImpl extends BaseServiceImpl<Advertisement> implements AdvertisementService {
 
 	@Autowired
-	private AdvertisementDao advertiseMentDao;
+	private AdvertisementDao advertisementDao;
 	
 	@Override
 	protected BaseDao<Advertisement> getDao() {
-		return advertiseMentDao;
+		return advertisementDao;
 	}
 	
 	
@@ -36,6 +35,7 @@ public class AdvertisementServiceImpl extends BaseServiceImpl<Advertisement> imp
 	 * @return
 	 */
 	public List<Advertisement> getOwnAdvertisement(){
-		return advertiseMentDao.getOwnAdvertisement();
+		return advertisementDao.getOwnAdvertisement();
 	}
+	
 }

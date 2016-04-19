@@ -3,13 +3,17 @@ package com.gochinatv.accelarator.framework.web.base.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateUtils {
    
 	public final static String YYYY_MM_DD = "yyyy-MM-dd"; 
-	public final static String YYYY_MM_DD_HH_MM_SS_SSS = "yyyyMMddHHmmssSSS"; 
+	public final static String YYYYMMDDHHMMSSSSS = "yyyyMMddHHmmssSSS"; 
+	public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
+	
 	
 	public static SimpleDateFormat SDF_YYYY_MM_DD = new SimpleDateFormat(YYYY_MM_DD);
+	public static SimpleDateFormat SDF_YYYY_MM_DD_HH_MM_SS = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
 	
 	
 	/**
@@ -43,5 +47,30 @@ public class DateUtils {
         cal.add(Calendar.DAY_OF_YEAR,amount);        
         return SDF_YYYY_MM_DD.format(cal.getTime());
 	}
+	
+	
+	/**
+	 * 时间基础上添加秒数
+	 * @param amount
+	 * @return
+	 * @throws Exception
+	 */
+	public static String addSecond(String date,int amount) throws Exception{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(SDF_YYYY_MM_DD_HH_MM_SS.parse(date));
+        cal.add(Calendar.SECOND,amount);    
+        return SDF_YYYY_MM_DD_HH_MM_SS.format(cal.getTime());
+	}
+	
+	/**
+	 * 格式化日期时间格式为：yyyy-MM-dd hh:mm:ss
+	 * @param date
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static Date formatDate(String date) throws ParseException{
+		return SDF_YYYY_MM_DD_HH_MM_SS.parse(date);
+	}
+	
 	
 }

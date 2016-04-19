@@ -159,6 +159,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				  //SELECT * from orders_detail where orders_id=orders.getId()
 				 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
 				 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
+				 HashMap<Integer, Integer> durationMap = getDurationList();
 				 
 				 logger.info("*********************执行本订单影响的城市和店铺类型OrdersDetail个数为：{}，自有广告个数为：{}",ordersDetails.size(),ownAdvertisementList.size());
 				 
@@ -266,17 +267,26 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	                    playList.setEndTime(entry.getKey());
 	                    playListDao.save(playList);
 	                    
+	                    String playStartTime = entry.getKey()+" 10:00:00";
+	                    
 						List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
 						List<Integer> values = entry.getValue();
 						for(int i=0;i<values.size();i++){
 							PlayListDetail details = new PlayListDetail();
+							
+							Integer advertisementId = values.get(i);
+							Integer duration = durationMap.get(advertisementId);//从map中获取时长
+							String playEndTime = DateUtils.addSecond(playStartTime, duration);
+							
 				            details.setPlayListId(playList.getId());
-							details.setAdvertisementId(values.get(i));
-							details.setStartTime(entry.getKey());
-							details.setEndTime(entry.getKey());
-							//details.setDuration(duration);
+							details.setAdvertisementId(advertisementId);
+							details.setStartTime(playStartTime);
+							details.setEndTime(playEndTime);
+							details.setDuration(duration);
 							details.setSort(i+1);
 							detailList.add(details);
+							
+							playStartTime = playEndTime;
 						}
 						playListDetailDao.saveAll(detailList);
 					}
@@ -310,6 +320,19 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		return randomList;
 	}
 	
+	
+	/**
+	 * 获取所有的广告 id、duration时长
+	 * @return
+	 */
+	public HashMap<Integer, Integer> getDurationList(){
+		HashMap<Integer, Integer> duration = new HashMap<Integer, Integer>();
+		List<Advertisement> durationList = advertisementDao.getDurationList();
+		for (Advertisement advertisement : durationList) {
+			duration.put(advertisement.getId(), advertisement.getDuration());
+		}
+		return duration;
+	}
 	
 	/**
 	 * 保存排播
@@ -388,5 +411,5 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	public void updateOfflineOrders(Orders orders) throws Exception{
 		ordersDao.updateOfflineTime(orders);
 	}
-	
+
 }

@@ -121,7 +121,7 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/createOrder")
 	public String createOrder(Orders orders,Model model) throws Exception{
-		orders.setOrderNo(DateFormatUtils.format(new Date(),DateUtils.YYYY_MM_DD_HH_MM_SS_SSS));
+		orders.setOrderNo(DateFormatUtils.format(new Date(),DateUtils.YYYYMMDDHHMMSSSSS));
 		model.addAttribute("orders",orders);
 		return "orders/order_preview";
 	}

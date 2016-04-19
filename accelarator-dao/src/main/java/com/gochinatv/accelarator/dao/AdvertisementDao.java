@@ -21,5 +21,12 @@ public interface AdvertisementDao  extends BaseDao<Advertisement>{
 	 * @return
 	 */
 	public List<Advertisement> getOwnAdvertisement();
+	
+	
+	/**
+	 * 获取所有的广告 id、duration时长
+	 * @return
+	 */
+	public List<Advertisement> getDurationList();
 
 }

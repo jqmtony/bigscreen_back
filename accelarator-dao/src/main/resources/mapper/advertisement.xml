@@ -112,4 +112,10 @@
 	   SELECT * FROM advertisement WHERE source =1 order by id desc limit 0,10
 	</select>
 	
+	
+	<!-- 自有广告查询 -->
+	<select id="getDurationList" resultMap="Advertisement">
+	   SELECT id,duration FROM advertisement 
+	</select>
+	
 </mapper>
