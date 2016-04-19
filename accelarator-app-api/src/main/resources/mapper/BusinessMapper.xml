@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.api.dao.BusinessDao">
+
+	<resultMap type="com.gochinatv.accelarator.api.bean.Business" id="Business">
+		<id property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="realName" column="real_name" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
+		<result property="email" column="email" />
+		<result property="mobile" column="mobile" />
+		<result property="facebook" column="facebook" />
+		<result property="weixin" column="weixin" />
+		<result property="remark" column="remark" />
+		<result property="birthday" column="birthday" />
+		<result property="createTime" column="create_time" />
+		<result property="status" column="status" />
+	</resultMap>
+	
+	<select id="queryList" resultMap="Business" >
+		select * from business 
+	</select>
+	
+</mapper>
