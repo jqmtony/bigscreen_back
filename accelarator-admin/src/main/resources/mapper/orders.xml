@@ -67,7 +67,9 @@
 			AND od.city_code = #{cityCode}
 		</if>
 		<if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">
-			AND (o.start_time &gt;=#{startTime} OR o.end_time &lt;=#{endTime})
+			AND ((o.start_time &gt;=#{startTime} AND o.start_time &lt;=#{endTime}) OR(o.end_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime})
+			  OR (o.start_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}) OR (o.start_time &lt;=#{startTime} AND o.end_time &gt;=#{endTime})
+			)
 		</if>
 	</select>
 	
