@@ -9,7 +9,9 @@
 		    			data-options="required:true" type="text" name="userName"></input><label style="color: red"> *</label>
 		    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
 	    			</td>
-	    			<td>类型：</td>
+	    			<td>规模大小：</td>
+	    			<td><input id="_scale_" class="easyui-validatebox textbox" type="text" name="scale"></input></td>
+	    			<!-- <td>类型：</td>
 	    			<td><select id="_type_" name="type" class="easyui-combobox" data-options="required:true,editable:false"style="width:171px;">
 		    				<option value="1">餐厅</option>
 		    				<option value="2">大使馆</option>
@@ -17,7 +19,7 @@
 		    				<option value="4">美甲区</option>
 		    				<option value="5">其他</option>
 		    			</select>
-		    		</td>
+		    		</td> -->
 	    		</tr>
 	    		<tr>
 	    			<td>中文名称：</td>
@@ -28,15 +30,10 @@
 	    		</tr>
 	    		
 	    		<tr>
-	    			<td>规模大小：</td>
-	    			<td><input id="_scale_" class="easyui-validatebox textbox" type="text" name="scale"></input></td>
 	    			<td>日均人流量：</td>
 	    			<td><input id="_averageDailyFlow_" class="easyui-validatebox textbox" type="text" name="averageDailyFlow"></input></td>
-	    		</tr>
-	    		<tr>
-	    			
 	    			<td>邮编：</td>
-	    			<td colspan="3"><input id="_zipCode_" class="easyui-validatebox textbox" type="text" name="zipCode" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="_zipCode_" class="easyui-validatebox textbox" type="text" name="zipCode" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    		<tr>
 	    			<td>详细地址：</td>
