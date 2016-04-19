@@ -38,11 +38,11 @@
    <!-- mis SessionFactory文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 	<mvc:annotation-driven />
 	<aop:aspectj-autoproxy />
-	<context:component-scan base-package="com.gochinatv.accelarator.api.*" />
+	<context:component-scan base-package="com.gochinatv.accelarator.bmapi.*" />
 	
 	<mvc:resources mapping="/api-doc/**" location="/api-doc/" />
 		
@@ -67,17 +67,17 @@
        <property name="defaultContentType" value="application/json"></property>
         <property name="defaultViews">
            			<list>
-				<bean class="com.gochinatv.accelarator.api.util.CustomMappingJacksonJsonView">
+				<bean class="com.gochinatv.accelarator.bmapi.util.CustomMappingJacksonJsonView">
 					<property name="disableCaching" value="false" />
 				</bean>
-				<bean class="com.gochinatv.accelarator.api.util.CustomMappingJacksonJsonpView" />
+				<bean class="com.gochinatv.accelarator.bmapi.util.CustomMappingJacksonJsonpView" />
 			</list>
         </property>
     </bean>
     
 	<!--MapperScanner-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.gochinatv.accelarator.api.dao"/>
+        <property name="basePackage" value="com.gochinatv.accelarator.bmapi.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>	
 	
@@ -87,5 +87,5 @@
 		<property name="maxUploadSize" value="6000000000" />
 	</bean>
 	<!--swagger-->
-	<bean class="com.gochinatv.accelarator.api.util.SwaggerConfig"/> 
+	<bean class="com.gochinatv.accelarator.bmapi.util.SwaggerConfig"/> 
 </beans>

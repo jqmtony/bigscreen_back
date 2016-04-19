@@ -31,7 +31,7 @@ import com.wordnik.swagger.annotations.ApiParam;
  *
  */
 @Controller
-@RequestMapping("bm_v1")
+@RequestMapping("ba_v1")
 public class BusinessAdController  extends BaseController{
 
 
@@ -50,6 +50,7 @@ public class BusinessAdController  extends BaseController{
 		String imageUrl = "";
 		try {
 			imageUrl = upload(file);
+			baseVo.setMessage(imageUrl);
 		} catch (Exception e) {
 			logger.info("===upload.error:"
 					+ e.getMessage());

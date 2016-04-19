@@ -18,30 +18,40 @@
 		<result property="placeId" column="place_id" />
 	</resultMap>
 	
-	<select id="queryList" resultMap="BusinessAd" parameterType="BusinessAd">
+	<select id="queryList" resultMap="BusinessAd" parameterType="com.gochinatv.accelarator.bmapi.bean.BusinessAd">
 		select * from system_advertisement where device_id=#{deviceId} order by create_time asc
 	</select>
 	
 	
-	<insert id="save" parameterType="BusinessAd">
+	<insert id="save" parameterType="com.gochinatv.accelarator.bmapi.bean.BusinessAd">
 	   insert into system_advertisement(
 	            name,
 	            price,
 	            image_path,
 	            description,
 	            sort,
-	            create_time
+	            create_time,
+	            ename,
+	            refresh_time,
+	            device_id,
+	            business_id,
+	            place_id
 	            ) values (
 	            #{name},
 	            #{price},
 	            #{imagePath},
 	            #{description},
 	            #{sort},
-	            #{createTime}
+	            #{createTime},
+	            #{ename},
+	            #{refreshTime},
+	            #{deviceId},
+	            #{businessId},
+	            #{placeId}
 	            )
 	</insert>
 	
-	<update id="update" parameterType="BusinessAd">
+	<update id="update" parameterType="com.gochinatv.accelarator.bmapi.bean.BusinessAd">
 		update system_advertisement
 		<set>
 			<if test="name!=null">

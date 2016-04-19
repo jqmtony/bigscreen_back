@@ -35,8 +35,16 @@ public class DeviceServiceImpl  implements DeviceService{
 	}
 
 	@Override
-	public List<ImageAdInfo> queryImageAdInfoList() {
-		return deviceDao.queryImageAdInfoList();
+	public ResponseImageAdInfo queryImageAdInfoList(String mac) {
+		ResponseImageAdInfo responseImageAdInfo  = new ResponseImageAdInfo();
+		Device device = queryDeviceByMac(mac);
+		
+		List<ImageAdInfo> data =deviceDao.queryImageAdInfoList(device.getId());
+		if(data !=null && data.size()>0){
+			responseImageAdInfo.setAdImgInterval(data.get(0).getRefreshTime());
+		}
+		responseImageAdInfo.setData(data);
+		return responseImageAdInfo;
 	}
 
 	@Override
