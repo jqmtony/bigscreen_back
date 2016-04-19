@@ -33,7 +33,6 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		return areaDao;
 	}
 	
-	@Override
 	public void save(Area area,HttpServletRequest request) throws Exception{
 		Area area2 = areaDao.queryByAreaCode(area.getAreaCode().trim());
 		if(area2 !=null ){
@@ -58,7 +57,6 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
         createAreaJson(request,"");
 	}
 	
-	@Override
 	public void update(Area area,HttpServletRequest request) throws Exception{
 		super.update(area);
         createAreaJson(request,"");
@@ -83,12 +81,10 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 
 	}
 
-	@Override
 	public List<Area> queryListByPid(int parentId) {
 		return areaDao.queryListByPid(parentId);
 	}
 
-	@Override
 	public Area queryById(long areaId) {
 		return areaDao.queryById(areaId);
 	}
@@ -136,7 +132,6 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 	/**
 	 * 一级一级树
 	 */
-	@Override
 	public List<Map<String,Object>> queryChildrenAreaList(String areaCode) throws Exception {
 		List<Area> areaList = new ArrayList<Area>();	
 		String areaCODE = "0";//根地域（全国）的parentCode
@@ -153,7 +148,6 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		return items;
 	}
 
-	@Override
 	public Area queryBycq(long areaId) {
 		 return areaDao.queryBycq(areaId);
 	}

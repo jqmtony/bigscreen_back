@@ -103,5 +103,6 @@
   	<module>accelarator-admin</module>
     <module>accelarator-dao</module>
     <module>accelarator-app-api</module>
+    <module>accelarator-bm-api</module>
   </modules>
 </project>

@@ -33,7 +33,6 @@ public class Initialization implements InitializingBean{
 	/**
 	 * 系统
 	 */
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		String[] filePaths = JSON_PATH.split(",");
 		for (String filePath : filePaths) {
