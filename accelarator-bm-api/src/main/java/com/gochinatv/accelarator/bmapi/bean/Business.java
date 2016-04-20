@@ -50,6 +50,17 @@ public class Business implements Serializable {
 	private Date createTime; // 创建日期
 	@ApiModelProperty(value = "是否启用")
 	private int status;// 是否启用   (1：启用 2：禁用)
+	@ApiModelProperty(value = "token")
+	private String token;
+
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	public long getId() {
 		return id;

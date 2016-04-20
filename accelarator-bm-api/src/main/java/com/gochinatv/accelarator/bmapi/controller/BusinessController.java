@@ -2,6 +2,7 @@ package com.gochinatv.accelarator.bmapi.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,7 @@ public class BusinessController extends BaseController{
 				result = this.error("用户名/密码错误");
 			}else{
 				business.setPassword("");
+				business.setToken(UUID.randomUUID().toString());
 				result = this.success(business);
 			}
 		}
