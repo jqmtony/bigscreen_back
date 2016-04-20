@@ -3,21 +3,34 @@ package com.gochinatv.accelarator.bmapi.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 public class BusinessAd implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@ApiModelProperty(value = "Id")
 	private long id;
+	@ApiModelProperty(value = "名称")
 	private String name;
+	@ApiModelProperty(value = "价格")
 	private String price;
+	@ApiModelProperty(value = "排序")
 	private int sort;
+	@ApiModelProperty(value = "描述")
 	private String description;
+	@ApiModelProperty(value = "图片地址")
 	private String imagePath;
+	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
-	
+	@ApiModelProperty(value = "英文名称")
 	private String ename;
+	@ApiModelProperty(value = "设备ID")
 	private int deviceId;
+	@ApiModelProperty(value = "商家ID")
 	private int businessId;
+	@ApiModelProperty(value = "商铺ID")
 	private int placeId;
+	@ApiModelProperty(value = "截屏时间")
 	private int refreshTime;
 	
 	public String getEname() {

@@ -116,7 +116,7 @@ public class BusinessAdController  extends BaseController{
 	@ApiOperation(value = "删除商家图片信息", httpMethod = "GET", notes = "删除商家图片信息")
 	@RequestMapping(value = "/delete", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public Map<String,Object> delete(int businessAdId){
+	public Map<String,Object> delete( @ApiParam(value = "商家图片ID", required = true)int businessAdId){
 		Map<String,Object> result = this.success(null);
 		try{
 			businessAdService.delete(businessAdId);
