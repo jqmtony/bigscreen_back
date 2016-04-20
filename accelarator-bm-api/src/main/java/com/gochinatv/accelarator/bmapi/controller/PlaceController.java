@@ -14,6 +14,7 @@ import com.gochinatv.accelarator.bmapi.bean.Device;
 import com.gochinatv.accelarator.bmapi.bean.Place;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
 import com.gochinatv.accelarator.bmapi.service.PlaceService;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
  * 
@@ -35,6 +36,7 @@ public class PlaceController extends BaseController{
 	 * @param businessId
 	 * @return
 	 */
+	@ApiOperation(value = "根据商户id得到商铺列表", httpMethod = "GET", notes = "根据商户id得到商铺列表")
 	@RequestMapping("/getByBusinessId")
 	@ResponseBody
 	public Map<String,Object> getByBusinessId(int businessId){

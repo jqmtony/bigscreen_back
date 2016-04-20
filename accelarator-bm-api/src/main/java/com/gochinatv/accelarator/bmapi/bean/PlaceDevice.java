@@ -1,8 +1,9 @@
 package com.gochinatv.accelarator.bmapi.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
+
+import com.wordnik.swagger.annotations.ApiModelProperty;
 
 /**
  * 店铺设备列表
@@ -16,7 +17,9 @@ public class PlaceDevice extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(value = "商铺")
 	private Place place;
+	@ApiModelProperty(value = "商铺下的设备列表")
 	private List<Device> deviceList;
 	
 	public Place getPlace() {

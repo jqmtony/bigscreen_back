@@ -3,6 +3,8 @@ package com.gochinatv.accelarator.bmapi.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 /**
  * @作者 zhuhh
  * @描述    投放区域表
@@ -16,18 +18,31 @@ public class Place extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(value = "id")
 	private long id;
+	@ApiModelProperty(value = "中文名称")
 	private String cname;// 中文名称
+	@ApiModelProperty(value = "英文名称")
 	private String ename;// 英文名称
+	@ApiModelProperty(value = "类型（1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）")
 	private int type; // 类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
+	@ApiModelProperty(value = "规模大小")
 	private String scale;// 规模大小
+	@ApiModelProperty(value = "日均人流量")
 	private String averageDailyFlow;// 日均人流量
+	@ApiModelProperty(value = "国家")
 	private String countryCode;// 国家
+	@ApiModelProperty(value = "地区")
 	private String areaCode;// 地区
+	@ApiModelProperty(value = "城市")
 	private String cityCode;// 城市
+	@ApiModelProperty(value = "地址")
 	private String address;// 地址
+	@ApiModelProperty(value = "邮编")
 	private String zipCode;// 邮编
+	@ApiModelProperty(value = "商家id")
 	private int businessId;// 商家id
+	@ApiModelProperty(value = "创建日期")
 	private Date createTime;// 创建日期
 	
 	public long getId() {

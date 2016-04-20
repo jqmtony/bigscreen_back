@@ -3,6 +3,8 @@ package com.gochinatv.accelarator.bmapi.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 /**
  * @作者 zhuhh
  * @描述 设备信息表
@@ -16,17 +18,29 @@ public class Device extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(value = "id")
 	private long id;
+	@ApiModelProperty(value = "设备编码")
 	private String code;// 设备编码
+	@ApiModelProperty(value = "设备品牌")
 	private String brand;// 设备品牌
+	@ApiModelProperty(value = "设备型号")
 	private String model;// 设备型号
+	@ApiModelProperty(value = "设备mac")
 	private String mac;// 设备mac
+	@ApiModelProperty(value = "商铺id")
 	private int placeId;// 区域id
+	@ApiModelProperty(value = "商家id")
 	private int businessId;// 商家id
+	@ApiModelProperty(value = "分屏数量")
 	private int screenNum;// 分屏数量
+	@ApiModelProperty(value = "创建时间")
 	private Date createTime; // 创建时间
+	@ApiModelProperty(value = "状态")
 	private int status;// 状态
+	@ApiModelProperty(value = "城市")
 	private String cityCode;// 
+	@ApiModelProperty(value = "截屏时间 单位 分钟")
 	private int screenShotInterval;//截屏时间 单位 分钟
 	
 	public long getId() {

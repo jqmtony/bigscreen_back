@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.bmapi.bean.Business;
 import com.gochinatv.accelarator.bmapi.service.BusinessService;
 import com.gochinatv.accelarator.bmapi.util.Md5Util;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
  * 商家
@@ -29,6 +30,7 @@ public class BusinessController extends BaseController{
 	 * @param password
 	 * @return
 	 */
+	@ApiOperation(value = "登陆", httpMethod = "GET", notes = "登陆")
 	@RequestMapping("login")
 	@ResponseBody
 	public Map<String,Object> login(String userName, String password){

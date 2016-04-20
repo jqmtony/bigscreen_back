@@ -3,6 +3,8 @@ package com.gochinatv.accelarator.bmapi.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 
 /**
  * 
@@ -18,20 +20,35 @@ public class Business implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(value = "id")
 	private long id;
+	@ApiModelProperty(value = "账号")
 	private String userName;// 账号
+	@ApiModelProperty(value = "密码")
 	private String password;// 密码
+	@ApiModelProperty(value = "真实姓名")
 	private String realName;// 真实姓名
+	@ApiModelProperty(value = "国家")
 	private String countryCode;// 国家
+	@ApiModelProperty(value = "地区")
 	private String areaCode;// 地区
+	@ApiModelProperty(value = "城市")
 	private String cityCode;// 城市
+	@ApiModelProperty(value = "手机")
 	private String mobile;// 手机
+	@ApiModelProperty(value = "电子邮箱")
 	private String email;// 电子邮箱
+	@ApiModelProperty(value = "FaceBook")
 	private String facebook;// FaceBook
+	@ApiModelProperty(value = "微信号")
 	private String weixin;// 微信号
+	@ApiModelProperty(value = "备注")
 	private String remark;// 备注
+	@ApiModelProperty(value = "生日")
 	private String birthday;// 生日
+	@ApiModelProperty(value = "创建日期")
 	private Date createTime; // 创建日期
+	@ApiModelProperty(value = "是否启用")
 	private int status;// 是否启用   (1：启用 2：禁用)
 
 	public long getId() {

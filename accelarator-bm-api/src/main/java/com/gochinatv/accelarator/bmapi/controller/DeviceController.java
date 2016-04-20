@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.bmapi.bean.Device;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
  * 
@@ -30,6 +31,7 @@ public class DeviceController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
+	@ApiOperation(value = "根据设备id得到设备详情", httpMethod = "GET", notes = "根据设备id得到设备详情")
 	@RequestMapping("/getDeviceDetal")
 	@ResponseBody
 	public Map<String, Object> getDeviceDetal(int deviceId){
