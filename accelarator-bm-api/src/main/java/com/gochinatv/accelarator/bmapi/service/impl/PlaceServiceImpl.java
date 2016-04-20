@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.gochinatv.accelarator.bmapi.bean.Device;
 import com.gochinatv.accelarator.bmapi.bean.Place;
+import com.gochinatv.accelarator.bmapi.bean.PlaceDevice;
 import com.gochinatv.accelarator.bmapi.dao.DeviceDao;
 import com.gochinatv.accelarator.bmapi.dao.PlaceDao;
 import com.gochinatv.accelarator.bmapi.service.PlaceService;
@@ -35,24 +36,12 @@ public class PlaceServiceImpl implements PlaceService {
 		List<Place> list = placeDao.getListByBusinessId(businessId);
 		List<Object> resultList = new ArrayList<Object>();
 		for(Place p : list){
-			Map<String,Object> placeResult = new HashMap<String,Object>();
 			List<Device> dList = deviceDao.getListByPlaceId(p.getId());
-			placeResult.put("deviceList", dList);
-			placeResult.put("id", p.getId());
-			placeResult.put("message", p.getMessage());
-			placeResult.put("currentTime", p.getCurrentTime());
-			placeResult.put("cname", p.getCname());
-			placeResult.put("ename", p.getEname());
-			placeResult.put("type", p.getType());
-			placeResult.put("scale", p.getScale());
-			placeResult.put("averageDailyFlow", p.getAverageDailyFlow());
-			placeResult.put("countryCode", p.getCountryCode());
-			placeResult.put("areaCode", p.getAreaCode());
-			placeResult.put("cityCode", p.getCityCode());
-			placeResult.put("businessId", p.getBusinessId());
-			placeResult.put("createTime", p.getCreateTime());
+			PlaceDevice pd = new PlaceDevice();
+			pd.setPlace(p);
+			pd.setDeviceList(dList);
 			
-			resultList.add(placeResult);
+			resultList.add(pd);
 		}
 			
 		return resultList;
