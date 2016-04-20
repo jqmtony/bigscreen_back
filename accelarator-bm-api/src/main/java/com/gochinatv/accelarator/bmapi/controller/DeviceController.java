@@ -25,7 +25,7 @@ public class DeviceController extends BaseController{
 	private DeviceService deviceService;
 	
 	/**
-	 * 设备详情
+	 * 根据设备id得到设备详情
 	 * @param deviceId
 	 * @return
 	 * @throws Exception

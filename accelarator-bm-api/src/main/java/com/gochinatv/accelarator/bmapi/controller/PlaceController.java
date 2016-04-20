@@ -30,7 +30,11 @@ public class PlaceController extends BaseController{
 	private PlaceService placeService;
 	@Autowired
 	private DeviceService deviceService;
-	
+	/**
+	 * 根据商户id得到商铺列表
+	 * @param businessId
+	 * @return
+	 */
 	@RequestMapping("/getByBusinessId")
 	@ResponseBody
 	public Map<String,Object> getByBusinessId(int businessId){
