@@ -79,16 +79,16 @@ public class BusinessAdController  extends BaseController{
 		return statuString;
 	}
 	
-	
-	@RequestMapping("/queryList")
+	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
+	@RequestMapping(value = "/queryList", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public List<BusinessAd> queryList(
 			BusinessAd businessAd) throws Exception{
 		List<BusinessAd> list = businessAdService.queryList(businessAd);
 		return list;
 	}
-	
-	@RequestMapping("/save")
+	@ApiOperation(value = "保存商家图片", httpMethod = "GET", notes = "保存商家图片")
+	@RequestMapping(value = "/save", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String,Object> save(BusinessAd businessAd){
 		Map<String,Object> result = this.success(null);
@@ -100,8 +100,8 @@ public class BusinessAdController  extends BaseController{
 		return result;
 	}
 	
-	
-	@RequestMapping("/update")
+	@ApiOperation(value = "更新商家图片", httpMethod = "GET", notes = "更新商家图片")
+	@RequestMapping(value = "/update", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String,Object> update(BusinessAd businessAd){
 		Map<String,Object> result = this.success(null);
@@ -113,8 +113,8 @@ public class BusinessAdController  extends BaseController{
 		return result;
 	}
 	
-	
-	@RequestMapping("/delete")
+	@ApiOperation(value = "删除商家图片信息", httpMethod = "GET", notes = "删除商家图片信息")
+	@RequestMapping(value = "/delete", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String,Object> delete(int businessAdId){
 		Map<String,Object> result = this.success(null);
