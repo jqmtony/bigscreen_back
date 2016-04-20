@@ -13,11 +13,11 @@ import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.bean.Layout;
 import com.gochinatv.accelarator.api.bean.ScreenShot;
-import com.gochinatv.accelarator.api.controller.AdController;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.AccelaratorConfig;
 import com.gochinatv.accelarator.api.vo.ResponseDeviceInfo;
+import com.gochinatv.accelarator.api.vo.ResponseImageAdInfo;
 
 @Service
 public class DeviceServiceImpl  implements DeviceService{

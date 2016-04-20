@@ -51,7 +51,7 @@
 	
 	
 	<select id="queryImageAdInfoList" resultMap="ImageAdInfo" >
-		select * from system_advertisement where device_id=#{deviceId}
+		select id,sort,image_path,name,price,ename,device_id,business_id,place_id,refresh_time*1000 as refresh_time from system_advertisement where device_id=#{deviceId}
 	</select>
 	
 	
