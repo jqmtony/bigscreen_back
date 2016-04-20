@@ -13,6 +13,8 @@ public final class AccelaratorConfig {
 			
 	public static final int DEVICE_FOUR_SCREEN = 4;//屏幕数为4
 	
+
+	public static final int DEVICE_DEFAULT_PLLLINTERVAL =  Integer.parseInt(PropertiesUtil.getInstance().getProperty("device.default.pollInterval"));
 	
 	public static final String DEVICE_DEFAULT_MAC = PropertiesUtil.getInstance().getProperty("device.default.mac");
 	public static final String DEVICE_DEFAULT_TIME = PropertiesUtil.getInstance().getProperty("device.default.time");

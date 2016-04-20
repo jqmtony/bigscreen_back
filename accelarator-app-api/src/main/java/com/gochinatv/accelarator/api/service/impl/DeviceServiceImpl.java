@@ -54,7 +54,7 @@ public class DeviceServiceImpl  implements DeviceService{
 		Device device = queryDeviceByMac(mac);
 		
 		responseDeviceInfo.setAdStruct(device.getScreenNum());
-		
+		responseDeviceInfo.setPollInterval(AccelaratorConfig.DEVICE_DEFAULT_PLLLINTERVAL);
 		ScreenShot screenShot = getScreenShot();
 		if(device.getScreenShotInterval()>0){
 			screenShot.setScreenShotInterval(device.getScreenShotInterval());

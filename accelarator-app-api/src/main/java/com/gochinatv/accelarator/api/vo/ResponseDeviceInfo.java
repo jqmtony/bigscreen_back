@@ -11,14 +11,26 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
  */
 public class ResponseDeviceInfo  extends BaseVo {
 	
-	@ApiModelProperty(value = "广告展现形式0:只有视频；1:4个广告位", required = true)
+	@ApiModelProperty(value = "广告展现形式1:4个广告位", required = true)
     private int adStruct;
 
+	@ApiModelProperty(value = "接口轮询时间,单位毫秒", required = true)
+	private int pollInterval;
+	
 	@ApiModelProperty(value = "截屏参数对象")
 	private ScreenShot screenShot;
 	
 	@ApiModelProperty(value = "布局结构对象")
 	private List<Layout> layout;
+	
+	
+	public int getPollInterval() {
+		return pollInterval;
+	}
+
+	public void setPollInterval(int pollInterval) {
+		this.pollInterval = pollInterval;
+	}
 
 	public int getAdStruct() {
 		return adStruct;
