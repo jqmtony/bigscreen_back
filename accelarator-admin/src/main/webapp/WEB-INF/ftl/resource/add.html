@@ -1,0 +1,52 @@
+<div id="add-window" title="新增资源信息" class="easyui-window">
+	     <form id="addForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>父级资源：
+	    			  <input type="hidden" id="parentId" name="parentId"/>
+	    			</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="parentResourceName" readonly="readonly"/></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源名称：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="resourceName" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源地址：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="url" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否菜单显示：</td>
+	    			<td>
+	    			   <input type="radio" name="isMenu" value="1" />是
+	    			   <input type="radio" name="isMenu" value="2" checked="checked"/>否
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>菜单样式：</td>
+	    			<td>
+	    			  <select id="menuCls" name="menuCls" class="easyui-combobox" data-options="required:true,editable:false"  style="width:171px;">
+			           		<option value="icon-application-system" selected="selected">系统蓝色</option>
+			           		<option value="icon-system-user">用户经典</option>
+		    				<option value="icon-system-area">地区</option>
+		    		   </select>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td colspan="3">
+	    			    <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px"/>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>
