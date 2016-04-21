@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,21 +71,16 @@ public class AdController {
 	@RequestMapping(value = "getAdList",produces = "application/json;charset=utf-8")
 	public ResponseAdInfo getAdInfo(
 			   @RequestParam(required = true, defaultValue = "gochinatv")
-	           @ApiParam(value = "设备MAC地址", required = true) String mac) {
+	           @ApiParam(value = "设备MAC地址", required = true) String mac,
+	           @RequestParam(required = false)
+	           @ApiParam(value = "时间,格式2016-04-23", required = false) String time) {
 		ResponseAdInfo responseAdInfo = new ResponseAdInfo();
 		try {
-			/*List<AdInfo> current = new ArrayList<AdInfo>();
-			List<Business>  list = businessService.queryList();
-			for(Business business : list){
-				AdInfo adInfo = new AdInfo();
-				adInfo.setAdVideoId(business.getId());
-				adInfo.setAdVideoIndex(business.getId());
-				adInfo.setAdVideoName(business.getUserName());
-				adInfo.setAdVideoUrl("/2016/03/15/A96969F3000048C1.mp4");
-				current.add(adInfo);
-			}*/
-			
 			String now = DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
+			if(StringUtils.isNotBlank(time)){
+				now = time;
+			}
+		
 			List<AdInfo> current = deviceService.getAdInfo(mac,now);
 			List<AdInfo> next = new ArrayList<AdInfo>();
 			if(current==null || current.size()==0){
