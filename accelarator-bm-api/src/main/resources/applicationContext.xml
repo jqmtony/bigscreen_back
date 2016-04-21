@@ -40,6 +40,9 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
+    <mvc:interceptors>
+		<bean class="com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptor" />
+	</mvc:interceptors>
 	<mvc:annotation-driven />
 	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="com.gochinatv.accelarator.bmapi.*" />
