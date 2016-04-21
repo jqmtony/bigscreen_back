@@ -1,8 +1,12 @@
 package com.gochinatv.accelarator.api.bean;
 
+import java.io.Serializable;
+
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-public class ScreenShot {
+public class ScreenShot  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "截屏时间间隔(以秒为单位)", required = true)
     private int screenShotInterval;

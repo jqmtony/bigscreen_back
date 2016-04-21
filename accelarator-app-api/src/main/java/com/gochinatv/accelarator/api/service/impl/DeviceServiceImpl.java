@@ -13,11 +13,11 @@ import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.bean.Layout;
 import com.gochinatv.accelarator.api.bean.ScreenShot;
-import com.gochinatv.accelarator.api.controller.AdController;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.AccelaratorConfig;
 import com.gochinatv.accelarator.api.vo.ResponseDeviceInfo;
+import com.gochinatv.accelarator.api.vo.ResponseImageAdInfo;
 
 @Service
 public class DeviceServiceImpl  implements DeviceService{
@@ -35,8 +35,16 @@ public class DeviceServiceImpl  implements DeviceService{
 	}
 
 	@Override
-	public List<ImageAdInfo> queryImageAdInfoList() {
-		return deviceDao.queryImageAdInfoList();
+	public ResponseImageAdInfo queryImageAdInfoList(String mac) {
+		ResponseImageAdInfo responseImageAdInfo  = new ResponseImageAdInfo();
+		Device device = queryDeviceByMac(mac);
+		
+		List<ImageAdInfo> data =deviceDao.queryImageAdInfoList(device.getId());
+		if(data !=null && data.size()>0){
+			responseImageAdInfo.setAdImgInterval(data.get(0).getRefreshTime());
+		}
+		responseImageAdInfo.setData(data);
+		return responseImageAdInfo;
 	}
 
 	@Override
@@ -46,7 +54,7 @@ public class DeviceServiceImpl  implements DeviceService{
 		Device device = queryDeviceByMac(mac);
 		
 		responseDeviceInfo.setAdStruct(device.getScreenNum());
-		
+		responseDeviceInfo.setPollInterval(AccelaratorConfig.DEVICE_DEFAULT_PLLLINTERVAL);
 		ScreenShot screenShot = getScreenShot();
 		if(device.getScreenShotInterval()>0){
 			screenShot.setScreenShotInterval(device.getScreenShotInterval());
@@ -131,7 +139,7 @@ public class DeviceServiceImpl  implements DeviceService{
 			layout.setAdTop(AccelaratorConfig.DEVICE_SCREEN1_ADTOP);
 			layout.setAdWidth(AccelaratorConfig.DEVICE_SCREEN1_ADWIDTH);
 			layoutList.add(layout);
-		}else if(device.getScreenNum() == AccelaratorConfig.DEVICE_FOUR_SCREEN){
+		}else/* if(device.getScreenNum() == AccelaratorConfig.DEVICE_FOUR_SCREEN)*/{
 			
 			Layout layout1 = new Layout();
 			layout1.setAdType(AccelaratorConfig.DEVICE_SCREEN1_ADTYPE);

@@ -1,6 +1,10 @@
 package com.gochinatv.accelarator.api.bean;
 
-public class ErrorMsg {
+import java.io.Serializable;
+
+public class ErrorMsg  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	/**
 		 * 

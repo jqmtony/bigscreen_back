@@ -1,8 +1,12 @@
 package com.gochinatv.accelarator.api.bean;
 
+import java.io.Serializable;
+
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-public class ImageAdInfo {
+public class ImageAdInfo  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "图片ID")
 	private int adImgId;
@@ -14,8 +18,47 @@ public class ImageAdInfo {
 	private String adImgName;
 	@ApiModelProperty(value = "菜单价格")
 	private String adImgPrice;
+	@ApiModelProperty(value = "refreshTime")
+	private int refreshTime;
+	
+	@ApiModelProperty(value = "英文名称")
+	private String adImagEName;
+	
+	private int deviceId;
+	private int businessId;
+	private int placeId;
 	
 	
+	public int getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(int deviceId) {
+		this.deviceId = deviceId;
+	}
+	public int getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
+	}
+	public int getPlaceId() {
+		return placeId;
+	}
+	public void setPlaceId(int placeId) {
+		this.placeId = placeId;
+	}
+	public String getAdImagEName() {
+		return adImagEName;
+	}
+	public void setAdImagEName(String adImagEName) {
+		this.adImagEName = adImagEName;
+	}
+	public int getRefreshTime() {
+		return refreshTime;
+	}
+	public void setRefreshTime(int refreshTime) {
+		this.refreshTime = refreshTime;
+	}
 	public int getAdImgId() {
 		return adImgId;
 	}

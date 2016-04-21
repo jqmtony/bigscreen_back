@@ -15,7 +15,7 @@ public interface DeviceDao {
 	
 	public Device queryDeviceByMac(String mac);
 	
-	public List<ImageAdInfo> queryImageAdInfoList() ;
+	public List<ImageAdInfo> queryImageAdInfoList(@Param(value="deviceId")long deviceId) ;
 	
 	
 	public List<AdInfo> getAdInfoByDeviceId(@Param(value="deviceId")long deviceId, @Param(value="type")int type,@Param(value="time")String time);

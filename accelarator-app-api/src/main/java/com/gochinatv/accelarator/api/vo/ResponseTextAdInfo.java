@@ -1,12 +1,15 @@
 package com.gochinatv.accelarator.api.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.TextAdInfo;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 
-public class ResponseTextAdInfo  extends BaseVo {
+public class ResponseTextAdInfo  extends BaseVo  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "文字轮播时间间隔")
 	private int adTextInterval;//轮播时间间隔，以秒为单位

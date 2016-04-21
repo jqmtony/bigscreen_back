@@ -4,14 +4,14 @@ import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.AdInfo;
 import com.gochinatv.accelarator.api.bean.Device;
-import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.vo.ResponseDeviceInfo;
+import com.gochinatv.accelarator.api.vo.ResponseImageAdInfo;
 
 public interface DeviceService {
 
 	public void  saveDeviceImage(Device device);
 	
-	public List<ImageAdInfo> queryImageAdInfoList();
+	public ResponseImageAdInfo queryImageAdInfoList(String mac);
 	
 	public ResponseDeviceInfo getDeviceInfo(String mac)  throws Exception ;
 	

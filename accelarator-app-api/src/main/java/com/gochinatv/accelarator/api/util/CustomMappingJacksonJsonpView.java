@@ -21,7 +21,6 @@ public class CustomMappingJacksonJsonpView extends CustomMappingJacksonJsonView 
 	@Override
 	public void render(Map<String, ?> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		System.out.println("=============jsonp===========");
 		if ("GET".equals(request.getMethod().toUpperCase())) {
 			@SuppressWarnings("unchecked")
 			Map<String, String[]> params = request.getParameterMap();

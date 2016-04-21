@@ -58,10 +58,10 @@ public class DeviceController extends BaseController{
     }
 	
 	/**
-	 * 检验用户名的唯一性
+	 * 检验用编码的唯一性
 	 * @author limr
 	 * @param id
-	 * @param userName
+	 * @param code
 	 * @return
 	 * @throws Exception
 	 */

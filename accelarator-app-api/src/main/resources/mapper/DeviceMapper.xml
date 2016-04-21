@@ -42,11 +42,16 @@
 		<result property="adImgUrl" column="image_path" />
 		<result property="adImgName" column="name" />
 		<result property="adImgPrice" column="price" />
+		<result property="adImagEName" column="ename" />
+		<result property="refreshTime" column="refresh_time" />
+		<result property="deviceId" column="device_id" />
+		<result property="businessId" column="business_id" />
+		<result property="placeId" column="place_id" />
 	</resultMap>
 	
 	
 	<select id="queryImageAdInfoList" resultMap="ImageAdInfo" >
-		select * from menu 
+		select id,sort,image_path,name,price,ename,device_id,business_id,place_id,refresh_time*1000 as refresh_time from system_advertisement where device_id=#{deviceId}
 	</select>
 	
 	
