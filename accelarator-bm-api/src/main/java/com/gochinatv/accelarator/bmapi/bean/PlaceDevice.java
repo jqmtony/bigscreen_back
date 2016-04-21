@@ -21,7 +21,7 @@ public class PlaceDevice extends BaseVo implements Serializable {
 	private Place place;
 	@ApiModelProperty(value = "商铺下的设备列表")
 	private List<Device> deviceList;
-	
+
 	public Place getPlace() {
 		return place;
 	}

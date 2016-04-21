@@ -1,6 +1,5 @@
 package com.gochinatv.accelarator.bmapi.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gochinatv.accelarator.bmapi.bean.Device;
-import com.gochinatv.accelarator.bmapi.bean.Place;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
 import com.gochinatv.accelarator.bmapi.service.PlaceService;
 import com.wordnik.swagger.annotations.ApiOperation;

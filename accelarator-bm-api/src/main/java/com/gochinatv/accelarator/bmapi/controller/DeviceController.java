@@ -8,8 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import redis.clients.jedis.Jedis;
+
 import com.gochinatv.accelarator.bmapi.bean.Device;
+import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
+import com.gochinatv.accelarator.bmapi.util.redis.RedisUtil;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
@@ -32,11 +36,14 @@ public class DeviceController extends BaseController{
 	 * @throws Exception
 	 */
 	@ApiOperation(value = "根据设备id得到设备详情", httpMethod = "GET", notes = "根据设备id得到设备详情")
+	@CheckLoginInterceptorAnnotation
 	@RequestMapping("/getDeviceDetal")
 	@ResponseBody
 	public Map<String, Object> getDeviceDetal(int deviceId){
 		Map<String, Object> data = new HashMap<String, Object>();
 		try {
+			String token = (String) RedisUtil.get("token");
+			System.out.println(token);
 			Device device = deviceService.getEntityById(deviceId);
 			data = this.success(device);
 		} catch (Exception e) {

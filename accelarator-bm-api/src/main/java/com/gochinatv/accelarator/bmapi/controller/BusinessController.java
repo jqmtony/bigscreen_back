@@ -9,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import redis.clients.jedis.Jedis;
+
 import com.gochinatv.accelarator.bmapi.bean.Business;
 import com.gochinatv.accelarator.bmapi.service.BusinessService;
 import com.gochinatv.accelarator.bmapi.util.Md5Util;
+import com.gochinatv.accelarator.bmapi.util.redis.RedisUtil;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 /**
@@ -47,7 +50,9 @@ public class BusinessController extends BaseController{
 				result = this.error("用户名/密码错误");
 			}else{
 				business.setPassword("");
-				business.setToken(UUID.randomUUID().toString());
+				String token = UUID.randomUUID().toString();
+				business.setToken(token);
+				RedisUtil.set("token", token, 1*60);
 				result = this.success(business);
 			}
 		}

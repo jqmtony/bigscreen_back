@@ -45,6 +45,38 @@ public class Place extends BaseVo implements Serializable {
 	@ApiModelProperty(value = "创建日期")
 	private Date createTime;// 创建日期
 	
+	//前端需要
+	@ApiModelProperty(value = "国家")
+	private String countryName;
+	@ApiModelProperty(value = "地区")
+	private String areaName;
+	@ApiModelProperty(value = "城市")
+	private String cityName;
+	
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	public long getId() {
 		return id;
 	}
