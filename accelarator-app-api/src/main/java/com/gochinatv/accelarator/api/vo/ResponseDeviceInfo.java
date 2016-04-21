@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.api.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.Layout;
@@ -9,8 +10,10 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 /**
  *广告体接口响应参数
  */
-public class ResponseDeviceInfo  extends BaseVo {
+public class ResponseDeviceInfo  extends BaseVo implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@ApiModelProperty(value = "广告展现形式1:4个广告位", required = true)
     private int adStruct;
 

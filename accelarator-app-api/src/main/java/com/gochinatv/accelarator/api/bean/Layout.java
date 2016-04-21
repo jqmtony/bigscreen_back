@@ -1,8 +1,12 @@
 package com.gochinatv.accelarator.api.bean;
 
+import java.io.Serializable;
+
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
-public class Layout {
+public class Layout  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "广告类型 1 video 2 image 3 text  ")
 	private int adType;

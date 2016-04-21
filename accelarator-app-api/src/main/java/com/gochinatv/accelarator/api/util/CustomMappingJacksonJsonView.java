@@ -11,7 +11,6 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 public class CustomMappingJacksonJsonView extends MappingJacksonJsonView {
 
 	protected Object filterModel(Map<String, Object> model) {
-		System.out.println("=========json============");
 		Map<?, ?> result = (Map<?, ?>) super.filterModel(model);
 		if (result.size() == 3) {
 			Map<String, Object> map = new HashMap<String, Object>();

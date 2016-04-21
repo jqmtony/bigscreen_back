@@ -1,12 +1,15 @@
 package com.gochinatv.accelarator.api.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.wordnik.swagger.annotations.ApiModelProperty;
 
 
-public class ResponseImageAdInfo  extends BaseVo {
+public class ResponseImageAdInfo  extends BaseVo  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 
 	@ApiModelProperty(value = "图片轮播时间间隔，以秒为单位")

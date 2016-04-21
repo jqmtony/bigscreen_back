@@ -139,7 +139,7 @@ public class DeviceServiceImpl  implements DeviceService{
 			layout.setAdTop(AccelaratorConfig.DEVICE_SCREEN1_ADTOP);
 			layout.setAdWidth(AccelaratorConfig.DEVICE_SCREEN1_ADWIDTH);
 			layoutList.add(layout);
-		}else if(device.getScreenNum() == AccelaratorConfig.DEVICE_FOUR_SCREEN){
+		}else/* if(device.getScreenNum() == AccelaratorConfig.DEVICE_FOUR_SCREEN)*/{
 			
 			Layout layout1 = new Layout();
 			layout1.setAdType(AccelaratorConfig.DEVICE_SCREEN1_ADTYPE);

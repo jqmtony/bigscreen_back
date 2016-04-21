@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.api.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.AdInfo;
@@ -8,7 +9,9 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 /**
  *视频列表
  */
-public class ResponseAdInfo  extends BaseVo {
+public class ResponseAdInfo  extends BaseVo  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@ApiModelProperty(value = "当前视频广告列表")
 	private List<AdInfo> current;

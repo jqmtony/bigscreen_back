@@ -1,6 +1,10 @@
 package com.gochinatv.accelarator.api.bean;
 
-public class Device {
+import java.io.Serializable;
+
+public class Device  implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private long id;
 	private String mac;//mac地址
