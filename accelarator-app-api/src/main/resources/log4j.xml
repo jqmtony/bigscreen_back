@@ -9,7 +9,7 @@
 
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
 			<param name="levelMax" value="fatal" />
-			<param name="levelMin" value="debug" />
+			<param name="levelMin" value="info" />
 		</filter>
 	</appender>
 
@@ -55,39 +55,31 @@
 			<param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n" />
 		</layout>
 		<filter class="org.apache.log4j.varia.LevelRangeFilter">
-			<param name="LevelMin" value="DEBUG" />
-			<param name="LevelMax" value="DEBUG" />
+			<param name="LevelMin" value="info" />
+			<param name="LevelMax" value="info" />
 		</filter>
 	</appender>
 	<logger name="com.ibatis" additivity="true">
-		<level value="DEBUG" />
+		<level value="info" />
 	</logger>
 	<logger name="java.sql.Connection" additivity="true">
-		<level value="DEBUG" />
+		<level value="info" />
 	</logger>
 	<logger name="java.sql.Statement" additivity="true">
-		<level value="DEBUG" />
+		<level value="info" />
 	</logger>
 	<logger name="java.sql.PreparedStatement" additivity="true">
-		<level value="DEBUG" />
+		<level value="info" />
 		<appender-ref ref="IBatis" />
 	</logger>
 	<logger name="java.sql.ResultSet" additivity="true">
-		<level value="DEBUG" />
+		<level value="info" />
 		<appender-ref ref="IBatis" />
 	</logger>
 
 
-	<logger name="com.gochina.mis">
-		<level value="debug" />
-	</logger>
-
-	<logger name="com.gochina.mis">
-		<level value="debug" />
-	</logger>
-
 	<logger name="org.springframework.core">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 
 	<root>

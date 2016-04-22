@@ -13,6 +13,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import com.gochinatv.accelarator.api.util.AccelaratorConfig;
 import com.gochinatv.accelarator.api.util.SerializeUtil;
 import com.gochinatv.accelarator.api.util.StringUtil;
 
@@ -25,7 +26,7 @@ public class WriteTmpData {
     private static JedisPool pool;
     static Logger logger = LoggerFactory.getLogger(WriteTmpData.class);
     static int writeDB = 0;
-    static int expireTime = 60 * 60;//60分钟
+    static int expireTime = AccelaratorConfig.EXPIRETIME;//60分钟
 
     private static void createJedisPool() {
 
