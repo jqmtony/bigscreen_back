@@ -24,7 +24,7 @@ public class SwaggerConfig {
 	@Bean
     public SwaggerSpringMvcPlugin customImplementation()
     {
-        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns("/ba_v1/.*?","/device_v1/.*?");
+        return new SwaggerSpringMvcPlugin(this.springSwaggerConfig).apiInfo(apiInfo()).includePatterns("/ba_v1/.*?","/business/.*?","/device/.*?","/place/.*?");
     }
 
 	private ApiInfo apiInfo() {

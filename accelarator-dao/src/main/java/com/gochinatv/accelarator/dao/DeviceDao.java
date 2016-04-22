@@ -14,12 +14,12 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 public interface DeviceDao extends BaseDao<Device>{
 
 	/**
-	 * 校验编码唯一性
+	 * 校验编码或mac唯一性
 	 * @author limr
 	 * @param device
 	 * @return
 	 */
-	Device getDeviceByCode(Device device);
+	Device getDeviceByCodeOrMac(Device device);
 	   
 
 }

@@ -2,7 +2,16 @@
 //校验设备编码的唯一性
 function checkUpdateCode(id, code, url){
 	var deviceId = $("#id").val();
-	checkCode(id, deviceId, code, url);
+	if(code != null && code != ""){
+		checkCode(id, deviceId, code, url);
+	}
+}
+//校验设备mac的唯一性
+function checkUpdateMac(id, mac, url){
+	var deviceId = $("#id").val();
+	if(mac != null && mac != ""){
+		checkMac(id, deviceId, mac, url);
+	}
 }
 </script>
 <div id="modify-window" title="编辑设备信息" class="easyui-window">
@@ -32,7 +41,7 @@ function checkUpdateCode(id, code, url){
 	    		</tr>
 	    		<tr>
 	    			<td>设备MAC：</td>
-	    			<td><input id="mac" class="easyui-validatebox textbox" type="text" name="mac" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			<td><input id="update_mac" class="easyui-validatebox textbox" type="text" name="mac" data-options="required:true" onblur="checkUpdateMac(this.id, this.value, '${base}/device/checkMac');"></input><label style="color: red"> *</label></td>
 	    		</tr>
 	    			<tr>
 	    			<td>截屏时间：</td>

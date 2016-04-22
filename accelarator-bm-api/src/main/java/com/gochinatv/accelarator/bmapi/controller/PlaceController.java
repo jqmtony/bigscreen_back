@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
 import com.gochinatv.accelarator.bmapi.service.PlaceService;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -34,6 +35,7 @@ public class PlaceController extends BaseController{
 	 * @return
 	 */
 	@ApiOperation(value = "根据商户id得到商铺列表", httpMethod = "GET", notes = "根据商户id得到商铺列表")
+	@CheckLoginInterceptorAnnotation
 	@RequestMapping("/getByBusinessId")
 	@ResponseBody
 	public Map<String,Object> getByBusinessId(int businessId){

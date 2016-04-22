@@ -21,6 +21,15 @@ public interface DeviceService extends BaseService<Device>{
 	 * @return
 	 */
 	Device getDeviceByCode(int id, String code);
+
+	/**
+	 * 检验mac唯一性
+	 * @author limr
+	 * @param id
+	 * @param mac
+	 * @return
+	 */
+	Device getDeviceByMac(int id, String mac);
 	   
 
 }

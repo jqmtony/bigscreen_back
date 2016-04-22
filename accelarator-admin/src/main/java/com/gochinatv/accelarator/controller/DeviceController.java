@@ -67,11 +67,29 @@ public class DeviceController extends BaseController{
 	 */
 	@RequestMapping("/checkCode")
 	@ResponseBody
-	public String checkCode(int id, String code) throws Exception{
-		String data = "false";
+	public boolean checkCode(int id, String code) throws Exception{
+		boolean data = false;
 		Device device = deviceService.getDeviceByCode(id, code);
 		if(device == null){
-			data = "true";
+			data = true;
+		}
+		return data;
+	}
+	/**
+	 * 检验mac的唯一性
+	 * @author limr
+	 * @param id
+	 * @param mac
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/checkMac")
+	@ResponseBody
+	public boolean checkMac(int id, String mac) throws Exception{
+		boolean data = false;
+		Device device = deviceService.getDeviceByMac(id, mac);
+		if(device == null){
+			data = true;
 		}
 		return data;
 	}

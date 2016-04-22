@@ -2,6 +2,8 @@ package com.gochinatv.accelarator.bmapi.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gochinatv.accelarator.bmapi.bean.Device;
 
 
@@ -27,5 +29,6 @@ public interface DeviceDao{
 	 */
 	List<Device> getListByPlaceId(long placeId);
 	   
+	public void update(@Param(value="deviceId")int deviceId, @Param(value="refreshTime")int refreshTime);
 
 }

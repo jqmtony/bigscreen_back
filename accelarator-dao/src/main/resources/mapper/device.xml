@@ -23,11 +23,21 @@
 		<result property="screenShotInterval" column="screenShotInterval" />
 	</resultMap>
 	
-	<select id="getDeviceByCode" resultMap="Device" parameterType="Device">
-		select * from device where code = #{code}
+	<select id="getDeviceByCodeOrMac" resultMap="Device" parameterType="Device">
+		select * from device 
+		<where>
+			status=1
+			<if test="code != null and code != ''">
+				and code=#{code}
+			</if>
+			<if test="mac != null and mac != ''">
+				and mac=#{mac}
+			</if>
 			<if test="id!=0">
 				and id!=#{id}
 			</if>
+		</where>
+			
 	</select>
 	
 	<select id="getEntityById" resultMap="Device" parameterType="int">

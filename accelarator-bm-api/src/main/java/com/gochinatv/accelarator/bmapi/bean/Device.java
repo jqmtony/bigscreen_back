@@ -43,6 +43,18 @@ public class Device extends BaseVo implements Serializable {
 	@ApiModelProperty(value = "截屏时间 单位 分钟")
 	private int screenShotInterval;//截屏时间 单位 分钟
 	
+	@ApiModelProperty(value = "截屏时间,单位秒")
+	private int refreshTime;
+	
+	
+	public int getRefreshTime() {
+		return refreshTime;
+	}
+
+	public void setRefreshTime(int refreshTime) {
+		this.refreshTime = refreshTime;
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -27,5 +27,10 @@ public interface DeviceService{
 	 */
 	List<Device> getListByPlaceId(long placeId);
 	   
-
+	/**
+	 * 更新设备轮询时长
+	 * @param placeId
+	 * @return
+	 */
+	public void update(int deviceId,int refreshTime);
 }

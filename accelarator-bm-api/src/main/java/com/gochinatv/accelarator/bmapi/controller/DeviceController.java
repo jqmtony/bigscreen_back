@@ -8,13 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import redis.clients.jedis.Jedis;
-
+import com.gochinatv.accelarator.bmapi.bean.BusinessAd;
 import com.gochinatv.accelarator.bmapi.bean.Device;
 import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;
-import com.gochinatv.accelarator.bmapi.util.redis.RedisUtil;
 import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 
 /**
  * 
@@ -42,8 +41,6 @@ public class DeviceController extends BaseController{
 	public Map<String, Object> getDeviceDetal(int deviceId){
 		Map<String, Object> data = new HashMap<String, Object>();
 		try {
-			String token = (String) RedisUtil.get("token");
-			System.out.println(token);
 			Device device = deviceService.getEntityById(deviceId);
 			data = this.success(device);
 		} catch (Exception e) {
@@ -51,5 +48,19 @@ public class DeviceController extends BaseController{
 		}
 		
 		return data;
+	}
+	
+	@ApiOperation(value = "更新商家设备3号位时间", httpMethod = "GET", notes = "更新商家设备3号位时间")
+	@RequestMapping(value = "/update", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String,Object> update( @ApiParam(value = "设备ID", required = true)int deviceId,
+			 @ApiParam(value = "轮询时间", required = true)int refreshTime){
+		Map<String,Object> result = this.success(null);
+		try{
+			deviceService.update(deviceId,refreshTime);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
 	}
 }
