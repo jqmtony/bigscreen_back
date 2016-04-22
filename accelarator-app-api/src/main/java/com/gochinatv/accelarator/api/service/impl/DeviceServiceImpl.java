@@ -38,11 +38,8 @@ public class DeviceServiceImpl  implements DeviceService{
 	public ResponseImageAdInfo queryImageAdInfoList(String mac) {
 		ResponseImageAdInfo responseImageAdInfo  = new ResponseImageAdInfo();
 		Device device = queryDeviceByMac(mac);
-		
+		responseImageAdInfo.setAdImgInterval(device.getRefreshTime());
 		List<ImageAdInfo> data =deviceDao.queryImageAdInfoList(device.getId());
-		if(data !=null && data.size()>0){
-			responseImageAdInfo.setAdImgInterval(data.get(0).getRefreshTime());
-		}
 		responseImageAdInfo.setData(data);
 		return responseImageAdInfo;
 	}

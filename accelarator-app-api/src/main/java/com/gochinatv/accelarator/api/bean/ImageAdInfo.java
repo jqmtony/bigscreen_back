@@ -18,8 +18,6 @@ public class ImageAdInfo  implements Serializable {
 	private String adImgName;
 	@ApiModelProperty(value = "菜单价格")
 	private String adImgPrice;
-	@ApiModelProperty(value = "refreshTime")
-	private int refreshTime;
 	
 	@ApiModelProperty(value = "英文名称")
 	private String adImagEName;
@@ -52,12 +50,6 @@ public class ImageAdInfo  implements Serializable {
 	}
 	public void setAdImagEName(String adImagEName) {
 		this.adImagEName = adImagEName;
-	}
-	public int getRefreshTime() {
-		return refreshTime;
-	}
-	public void setRefreshTime(int refreshTime) {
-		this.refreshTime = refreshTime;
 	}
 	public int getAdImgId() {
 		return adImgId;
