@@ -49,6 +49,7 @@ function callback(data){
  */
 function add(){
 	addWin.window('open');
+	$("#add_save").linkbutton("enable");
 	//XFrameUtils.clearForm('addForm');
 	$('#addForm').form('reset');
 	//$("#add_cityCode").combotree('setValue','');
@@ -110,6 +111,7 @@ function checkUpdateUserName(id, userName, url){
 }
 //添加时
 function checkUserName(id, userId, userName, url){
+	alert(userName);
 	$.ajax({  
 		    url:url,   
 		    data:{  
@@ -181,8 +183,8 @@ function addCallback(data){
 	}else{
 		addWin.window('close');
 		grid.datagrid('reload',$("#queryForm").serializeObject());
-		$("#add_save").linkbutton("enable");
 	}
+	$("#add_save").linkbutton("enable");
 }
 
 
