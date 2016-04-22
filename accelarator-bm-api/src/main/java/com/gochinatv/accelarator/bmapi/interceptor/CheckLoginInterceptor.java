@@ -27,7 +27,7 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
 			//从 request header获取 token
 			//如果无 则不通过，如果有并且redis也有通过，否则不通过
 			String token  = request.getParameter("token");
-			if(token != null || !"".equals(token)){
+			if(token != null && !"".equals(token)){
 				if(!RedisUtil.notTTL(token)){
 					logger.error("参数错误 ");
 					response.getWriter().write("参数错误");
