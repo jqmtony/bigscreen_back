@@ -71,6 +71,9 @@
 			  OR (o.start_time &gt;=#{startTime} AND o.end_time &lt;=#{endTime}) OR (o.start_time &lt;=#{startTime} AND o.end_time &gt;=#{endTime})
 			)
 		</if>
+		<if test="title!=null and title!=''">
+			AND am.title like CONCAT('%',#{title},'%' )
+		</if>
 	</select>
 	
 	<!-- 可用广告列表 -->
