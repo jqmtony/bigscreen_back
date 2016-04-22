@@ -28,25 +28,52 @@
 	});
 	//保证设备编码的唯一性
 	function checkCode(id, deviceId, code, url){
-		$.ajax({  
-			    url:url,   
-			    data:{  
-			    	id : deviceId,
-			    	code : code
-			    },  
-			    type:'post',  
-			    dataType:'json',  
-			    success:function(data) { 
-			        if(data == false ){
-			        	alert("编码已存在，请重新输入！");
-			            $("#"+id).val(''); 
-			            $("#"+id).focus();
-			        } 
-			     },  
-			     error : function() {  
-			          alert("异常！");  
-			     }  
-			});
+		if(code != null && code != ""){
+			$.ajax({  
+				    url:url,   
+				    data:{  
+				    	id : deviceId,
+				    	code : code
+				    },  
+				    type:'post',  
+				    dataType:'json',  
+				    success:function(data) { 
+				        if(!data){
+				        	alert("编码已存在，请重新输入！");
+				            $("#"+id).val(''); 
+				            $("#"+id).focus();
+				        } 
+				     },  
+				     error : function() {  
+				          alert("异常！");  
+				     }  
+				});
+		}
+	}
+	
+	//保证设备mac的唯一性
+	function checkMac(id, deviceId, mac, url){
+		if(mac != null && mac != ""){
+			$.ajax({  
+				    url:url,   
+				    data:{  
+				    	id : deviceId,
+				    	mac : mac
+				    },  
+				    type:'post',  
+				    dataType:'json',  
+				    success:function(data) { 
+				        if(!data){
+				        	alert("mac已存在，请重新输入！");
+				            $("#"+id).val(''); 
+				            $("#"+id).focus();
+				        } 
+				     },  
+				     error : function() {  
+				          alert("异常！");  
+				     }  
+				});
+		}
 	}
 	
 </script>

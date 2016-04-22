@@ -33,7 +33,14 @@ public class DeviceServiceImpl extends BaseServiceImpl<Device> implements Device
 		Device device = new Device();
 		device.setId(id);
 		device.setCode(code);
-		return deviceDao.getDeviceByCode(device);
+		return deviceDao.getDeviceByCodeOrMac(device);
+	}
+	
+	public Device getDeviceByMac(int id, String mac) {
+		Device device = new Device();
+		device.setId(id);
+		device.setMac(mac);
+		return deviceDao.getDeviceByCodeOrMac(device);
 	}
 	
 }
