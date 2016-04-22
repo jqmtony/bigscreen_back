@@ -19,132 +19,111 @@ public class SystemAdvertisement extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int type; // 广告类型   (1:视频   2：图片   3：文字内容)
-	private String videoPath;// 视频地址
-	private String picPath;// 图片地址
-	private String content;// 文字内容
-	private int placeId;// 区域id
-	private int deviceId;// 设备id
-	private int sort;// 排序
-	private String remark;// 描述
-	private int status;// 状态  (1：上线    2：下线)
-	private int source;// 广告来源   (1：自有   2：商家)
-	private int adIndex;// 广告位置
-	private Date createTime;// 创建日期
-
+	//广告名
+	private String name;
+	//商品价格
+	private String price;
+	//描述
+	private String description;
+	//图片地址
+	private String imagePath;
+	// 创建时间
+	private Date createTime;
+	//排序
+	private int sort;
+	//商铺id
+	private int placeId;
+	//设备id
+	private int deviceId;
+	//商家id
+	private int businessId;
+	//英文名称
+	private String ename;
+	
+	//商家名称
+	private String userName;
+	//临时 商铺名
 	private String cname;
+	//临时 设备编码
 	private String code;
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getCname() {
 		return cname;
 	}
-
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
-
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-	public int getType() {
-		return type;
+	public int getBusinessId() {
+		return businessId;
 	}
-
-	public void setType(int type) {
-		this.type = type;
+	public void setBusinessId(int businessId) {
+		this.businessId = businessId;
 	}
-
-	public String getVideoPath() {
-		return videoPath;
+	public String getName() {
+		return name;
 	}
-
-	public void setVideoPath(String videoPath) {
-		this.videoPath = videoPath;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getPicPath() {
-		return picPath;
+	public String getPrice() {
+		return price;
 	}
-
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
+	public void setPrice(String price) {
+		this.price = price;
 	}
-
-	public String getContent() {
-		return content;
+	public String getDescription() {
+		return description;
 	}
-
-	public void setContent(String content) {
-		this.content = content;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-	public int getPlaceId() {
-		return placeId;
+	public String getImagePath() {
+		return imagePath;
 	}
-
-	public void setPlaceId(int placeId) {
-		this.placeId = placeId;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
-
-	public int getDeviceId() {
-		return deviceId;
-	}
-
-	public void setDeviceId(int deviceId) {
-		this.deviceId = deviceId;
-	}
-
-	public int getSort() {
-		return sort;
-	}
-
-	public void setSort(int sort) {
-		this.sort = sort;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public int getSource() {
-		return source;
-	}
-
-	public void setSource(int source) {
-		this.source = source;
-	}
-
-	public int getAdIndex() {
-		return adIndex;
-	}
-
-	public void setAdIndex(int adIndex) {
-		this.adIndex = adIndex;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
-
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public int getSort() {
+		return sort;
+	}
+	public void setSort(int sort) {
+		this.sort = sort;
+	}
+	public int getPlaceId() {
+		return placeId;
+	}
+	public void setPlaceId(int placeId) {
+		this.placeId = placeId;
+	}
+	public int getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(int deviceId) {
+		this.deviceId = deviceId;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
 }
