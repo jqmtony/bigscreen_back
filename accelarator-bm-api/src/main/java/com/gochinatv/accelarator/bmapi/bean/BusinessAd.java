@@ -30,8 +30,6 @@ public class BusinessAd implements Serializable {
 	private int businessId;
 	@ApiModelProperty(value = "商铺ID")
 	private int placeId;
-	@ApiModelProperty(value = "截屏时间")
-	private int refreshTime;
 	
 	public String getEname() {
 		return ename;
@@ -56,12 +54,6 @@ public class BusinessAd implements Serializable {
 	}
 	public void setPlaceId(int placeId) {
 		this.placeId = placeId;
-	}
-	public int getRefreshTime() {
-		return refreshTime;
-	}
-	public void setRefreshTime(int refreshTime) {
-		this.refreshTime = refreshTime;
 	}
 	public long getId() {
 		return id;

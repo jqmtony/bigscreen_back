@@ -12,7 +12,6 @@
 		<result property="createTime" column="create_time" />
 		
 		<result property="ename" column="ename" />
-		<result property="refreshTime" column="refresh_time" />
 		<result property="deviceId" column="device_id" />
 		<result property="businessId" column="business_id" />
 		<result property="placeId" column="place_id" />
@@ -32,7 +31,6 @@
 	            sort,
 	            create_time,
 	            ename,
-	            refresh_time,
 	            device_id,
 	            business_id,
 	            place_id
@@ -44,7 +42,6 @@
 	            #{sort},
 	            #{createTime},
 	            #{ename},
-	            #{refreshTime},
 	            #{deviceId},
 	            #{businessId},
 	            #{placeId}

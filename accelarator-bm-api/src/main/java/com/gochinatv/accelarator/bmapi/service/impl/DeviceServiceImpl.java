@@ -33,4 +33,9 @@ public class DeviceServiceImpl implements DeviceService {
 		return deviceDao.getListByPlaceId(placeId);
 	}
 
+	@Override
+	public void update(int deviceId, int refreshTime) {
+		deviceDao.update(deviceId,refreshTime);
+	}
+
 }

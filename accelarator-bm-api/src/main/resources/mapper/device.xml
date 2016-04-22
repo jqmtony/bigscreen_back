@@ -15,6 +15,7 @@
 		<result property="status" column="status" />
 		<result property="cityCode" column="city_code" />
 		<result property="screenShotInterval" column="screenShotInterval" />
+		<result property="refreshTime" column="refresh_time" />
 	</resultMap>
 	
 	<select id="getEntityById" resultMap="Device" parameterType="int">
@@ -26,5 +27,7 @@
 		select * from device where place_id=#{placeId}
 		order by create_time desc
 	</select>
-
+	<update id="update" >
+		update device set refresh_time = #{refreshTime} where id=#{deviceId}
+	</update>
 </mapper>
