@@ -133,9 +133,6 @@ public class AdController {
 	           @ApiParam(value = "设备MAC地址", required = true) String mac) {
 		ResponseImageAdInfo responseImageAdInfo = new ResponseImageAdInfo();
 		try {
-			/*responseImageAdInfo.setAdImgInterval(100);
-			List<ImageAdInfo> data = deviceService.queryImageAdInfoList();
-			responseImageAdInfo.setData(data);*/
 			responseImageAdInfo = deviceService.queryImageAdInfoList(mac);
 		} catch (Exception e) {
 			responseImageAdInfo.setStatus(1);

@@ -2,6 +2,8 @@ package com.gochinatv.accelarator.api.bean;
 
 import java.io.Serializable;
 
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 public class Device  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -18,8 +20,16 @@ public class Device  implements Serializable {
 	private int screenShotInterval;
 	
 	private int type;//商铺type
+	private int refreshTime;
 	
-	
+	public int getRefreshTime() {
+		return refreshTime;
+	}
+
+	public void setRefreshTime(int refreshTime) {
+		this.refreshTime = refreshTime;
+	}
+
 	public int getType() {
 		return type;
 	}

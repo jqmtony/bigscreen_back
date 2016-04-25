@@ -12,6 +12,7 @@
 		<result property="createTime" column="create_time" />
 		<result property="screenShotInterval" column="screenShotInterval" />
 		<result property="type" column="type" />
+		<result property="refreshTime" column="refresh_time" />
 		
 	</resultMap>
 	
@@ -21,7 +22,7 @@
 	
 		
 	<select id="queryDeviceByMac" resultMap="Device" >
-		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60 as screenShotInterval,p.type as type 
+		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60*1000 as screenShotInterval,p.type as type,d.refresh_time*1000 as refresh_time
 		
 		from device d,place p
 		
@@ -43,7 +44,6 @@
 		<result property="adImgName" column="name" />
 		<result property="adImgPrice" column="price" />
 		<result property="adImagEName" column="ename" />
-		<result property="refreshTime" column="refresh_time" />
 		<result property="deviceId" column="device_id" />
 		<result property="businessId" column="business_id" />
 		<result property="placeId" column="place_id" />
@@ -51,7 +51,7 @@
 	
 	
 	<select id="queryImageAdInfoList" resultMap="ImageAdInfo" >
-		select id,sort,image_path,name,price,ename,device_id,business_id,place_id,refresh_time*1000 as refresh_time from system_advertisement where device_id=#{deviceId}
+		select id,sort,image_path,name,price,ename,device_id,business_id,place_id from system_advertisement where device_id=#{deviceId}
 	</select>
 	
 	
