@@ -1,7 +1,7 @@
 package com.gochinatv.accelarator.dao;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -29,5 +29,14 @@ public interface UserDao  extends BaseDao<User>{
 	 * @return
 	 */
 	public User getLoginUser(@Param("userName") String userName);
+	
+	
+	/**
+	 * 根据角色id查询角色所拥有的用户
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> getUsers()throws Exception;
 
 }

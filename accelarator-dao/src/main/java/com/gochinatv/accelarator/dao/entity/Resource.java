@@ -19,7 +19,7 @@ public class Resource extends BaseVo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// Fields
 
-	private String resourceName;// 资源名称
+	private String text;// 资源名称
 	private String url;// 资源url
 	private String remark;// 备注
 	private String parentId;// 父级ID
@@ -29,14 +29,17 @@ public class Resource extends BaseVo implements Serializable {
 	
 	
 	
+	private int roleId;//临时，角色id
+	
 	private List<Resource> children;
 
-	public String getResourceName() {
-		return resourceName;
+
+	public String getText() {
+		return text;
 	}
 
-	public void setResourceName(String resourceName) {
-		this.resourceName = resourceName;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public String getUrl() {
@@ -85,6 +88,14 @@ public class Resource extends BaseVo implements Serializable {
 
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public List<Resource> getChildren() {

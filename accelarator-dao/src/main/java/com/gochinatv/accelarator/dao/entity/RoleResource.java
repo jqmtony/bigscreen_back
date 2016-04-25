@@ -15,23 +15,22 @@ public class RoleResource extends BaseVo implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String roleId;
-	private String resourceId;
+	private int roleId;//角色id
+	private int resourceId;//资源id
 
-	public String getRoleId() {
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getResourceId() {
+	public int getResourceId() {
 		return resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
+	public void setResourceId(int resourceId) {
 		this.resourceId = resourceId;
 	}
-
 }

@@ -20,5 +20,14 @@ public interface ResourceDao  extends BaseDao<Resource>{
 	 * 资源管理 json 集合
 	 */
 	public List<Resource> getTreeList(@Param("parentId") int parentId) throws Exception;
-
+    
+	
+	/**
+	 * 根据角色id查询角色所拥有的资源
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Resource> getSelectedResourceByRoleId(@Param("roleId") int roleId)throws Exception;
+	
 }

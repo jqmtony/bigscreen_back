@@ -27,6 +27,9 @@ public class User extends BaseVo implements Serializable {
 	private Date createTime;// 创建日期
 	private int status;// 是否启用 (1：启用 2：禁用)
 
+	
+	private int roleId;//角色id
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -89,6 +92,14 @@ public class User extends BaseVo implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 }

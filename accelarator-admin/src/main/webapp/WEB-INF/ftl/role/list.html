@@ -3,30 +3,46 @@
 <head>
 <#include "/frame/pageInclude.html">
 <script type="text/javascript">
-	$(document).ready(function() {
-		grid = $('#tab').datagrid( {
-			//title : '角色列表',			
-			url :'${base}/role/queryList',
-			queryParams:$("#queryForm").serializeObject(),
-			pagination : true,
-			rownumbers : true,
-			singleSelect : true,
-			striped:true,
-			fit:true,
-			toolbar:'#toolbar',
-			fitColumns:true,
-			onDblClickRow:function(index,row){
-				modifyRow(row);
-			} 
-		});
-		
-		$("#add-window, #modify-window").window({ 
-	        width:400,
-	        height:260
-		});
-		
+ var lookup_Win;
+ $(document).ready(function() {
+	grid = $('#tab').datagrid({
+		//title : '角色列表',			
+		url : '${base}/role/queryList',
+		queryParams : $("#queryForm").serializeObject(),
+		pagination : true,
+		rownumbers : true,
+		singleSelect : true,
+		striped : true,
+		fit : true,
+		toolbar : '#toolbar',
+		fitColumns : true,
+		onDblClickRow : function(index, row) {
+			modifyRow(row);
+		}
 	});
-	
+ });
+ 
+ function formatOper(val,row){ 
+	var operateStr ='<a href="javascript:void(0);" onclick="selectUser('+row.id+')">分配用户</a>&nbsp;'+
+                    '<a href="javascript:void(0);" onclick="selectResource('+row.id+')">分配资源</a>&nbsp;'
+    return operateStr;
+ }
+ 
+ 
+ function selectUser(roleId){
+	 lookup_Win = $("#lookup-user-window").dialogFrameWindow();
+	 lookup_Win.dialogFrameHtml('gotoSelectedUserByRoleId?roleId='+roleId);
+ }
+ 
+ 
+ function closeWin(){
+	 lookup_Win.window('close');
+ }
+ 
+ function selectResource(roleId){
+	 lookup_Win = $("#lookup-resource-window").dialogFrameWindow();
+	 lookup_Win.dialogFrameHtml('gotoSelectedResourceByRoleId?roleId='+roleId);
+ }
 </script>
 </head>
 <body>
@@ -37,6 +53,7 @@
 				<th data-options="field:'id',width:100">ID</th>
 				<th data-options="field:'roleName',width:150">角色名称</th>
 				<th data-options="field:'remark',width:200">备注</th>
+				<th data-options="field:'_operate',width:150,formatter:formatOper">操作</th>
 			</tr>
 		</thead>
 	</table>
@@ -56,5 +73,7 @@
 	
    <#include "./add.html">
    <#include "./update.html">
+   <div id="lookup-user-window" title="分配用户"></div>
+   <div id="lookup-resource-window" title="分配资源"></div>
 </body>
 </html>

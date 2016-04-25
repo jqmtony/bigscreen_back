@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.gochinatv.accelarator.dao.entity.Role;
+import com.gochinatv.accelarator.dao.entity.RoleResource;
+import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
@@ -81,4 +83,91 @@ public class RoleController extends BaseController{
 		return result;
 	}
 	
+	
+	/************************************************分配用户、资源************************************************/
+	
+	/**
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoSelectedUserByRoleId")
+	public String gotoSelectedUserByRoleId(Model model,int roleId)throws Exception{
+		model.addAttribute("roleId",roleId);
+		return "role/selectUser";
+	}
+	
+	/**
+	 * 根据角色id查询角色所拥有的用户
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getSelectedUserByRoleId")
+	@ResponseBody
+	public List<User> getSelectedUserByRoleId(int roleId)throws Exception{
+		return roleService.getSelectedUserByRoleId(roleId);
+	}
+	
+	
+	/**
+	 * 根据角色id查询角色所拥有的用户
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/saveRoleUser")
+	@ResponseBody
+	public Map<String,Object> saveRoleUser(String userIds,int roleId)throws Exception{
+		Map<String,Object> result = this.success(null);
+		try{
+			roleService.saveRoleUser(userIds,roleId);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/gotoSelectedResourceByRoleId")
+	public String gotoSelectedResourceByRoleId(Model model,int roleId)throws Exception{
+		model.addAttribute("roleId",roleId);
+		return "role/selectResource";
+	}
+	
+	
+	/**
+	 * 根据角色id查询角色所拥有的资源
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getSelectedResourceByRoleId")
+	@ResponseBody
+	public List<RoleResource> getSelectedResourceByRoleId(int roleId)throws Exception{
+		return roleService.getSelectedResourceByRoleId(roleId);
+	} 
+	
+	
+	/**
+	 * 根据角色id查询角色所拥有的用户
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/saveRoleResource")
+	@ResponseBody
+	public Map<String,Object> saveRoleResource(String resourceIds,int roleId)throws Exception{
+		Map<String,Object> result = this.success(null);
+		try{
+			roleService.saveRoleResource(resourceIds,roleId);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
 }

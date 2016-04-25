@@ -13,22 +13,22 @@ public class RoleUser extends BaseVo implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String roleId;
-	private String userId;
+	private int roleId;//角色id
+	private int userId;//用户id
 
-	public String getRoleId() {
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

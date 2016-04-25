@@ -4,13 +4,15 @@
 
 	<resultMap type="Resource" id="Resource">
 		<id property="id" column="id" />
-		<result property="resourceName" column="resource_name" />
+		<result property="text" column="text" />
 		<result property="url" column="url" />
 		<result property="remark" column="remark" />
 		<result property="parentId" column="parent_id" />
 		<result property="isMenu" column="is_menu" />
 		<result property="menuCls" column="menu_cls" />
 		<result property="sort" column="sort" />
+		
+		<result property="roleId" column="role_id" />
 	</resultMap>
 
 	<select id="getTreeList" resultMap="Resource" parameterType="int">
@@ -23,14 +25,14 @@
 	
 	<insert id="save" parameterType="Resource">
 	   insert into resource(
-	            resource_name,
+	            text,
 	            url,
 	            remark,
 	            parent_id,
 	            is_menu,
 	            menu_cls
 	            ) values (
-	            #{resourceName},
+	            #{text},
 	            #{url},
 	            #{remark},
 	            #{parentId},
@@ -40,10 +42,11 @@
 	</insert>
 	
 	<update id="update" parameterType="Resource">
-		update resource set resource_name=#{resourceName},url=#{url},parent_id=#{parentId},is_menu=#{isMenu},menu_cls=#{menuCls} where id = #{id}
+		update resource set text=#{text},url=#{url},parent_id=#{parentId},is_menu=#{isMenu},menu_cls=#{menuCls} where id = #{id}
 	</update>
 	
 	<delete id="deleteByEntity" parameterType="Resource">
 	  delete from resource where id = #{id}
 	</delete>
+	
 </mapper>

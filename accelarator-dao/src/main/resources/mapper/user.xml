@@ -12,11 +12,14 @@
 		<result property="remark" column="remark" />
 		<result property="createTime" column="create_time" />
 		<result property="status" column="status" />
+		
+		<result property="roleId" column="role_id" />
 	</resultMap>
 
 	<select id="getEntityById" resultMap="User" parameterType="int">
 		select * from user where id=#{id}
 	</select>
+	
 	<select id="getUserByUserName" resultMap="User" parameterType="User">
 		select * from user where user_name = #{userName}
 			<if test="id!=0">
@@ -97,4 +100,8 @@
 	  delete from user where id = #{id}
 	</delete>
 
+    <select id="getUsers" resultMap="User">
+		SELECT * FROM USER WHERE status=1 
+	</select>
+    
 </mapper>
