@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gochinatv.accelarator.api.bean.AdInfo;
-import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.bean.TextAdInfo;
-import com.gochinatv.accelarator.api.service.BusinessService;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.AccelaratorConfig;
 import com.gochinatv.accelarator.api.util.DateUtils;
@@ -32,9 +30,6 @@ import com.wordnik.swagger.annotations.ApiParam;
 public class AdController {
 
 	private static Logger logger = LoggerFactory.getLogger(AdController.class);
-	
-	@Autowired
-	private BusinessService businessService;
 	
 	@Autowired
 	private DeviceService deviceService;
