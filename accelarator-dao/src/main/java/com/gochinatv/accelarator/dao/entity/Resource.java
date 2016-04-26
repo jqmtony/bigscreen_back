@@ -22,7 +22,7 @@ public class Resource extends BaseVo implements Serializable {
 	private String text;// 资源名称
 	private String url;// 资源url
 	private String remark;// 备注
-	private String parentId;// 父级ID
+	private int parentId;// 父级ID
 	private int isMenu;// 是否菜单显示
 	private String menuCls;// 菜单样式（图片）
 	private int sort;// 排序值 
@@ -58,11 +58,11 @@ public class Resource extends BaseVo implements Serializable {
 		this.remark = remark;
 	}
 
-	public String getParentId() {
+	public int getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(String parentId) {
+	public void setParentId(int parentId) {
 		this.parentId = parentId;
 	}
 

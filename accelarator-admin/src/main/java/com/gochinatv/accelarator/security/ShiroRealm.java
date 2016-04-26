@@ -2,10 +2,12 @@ package com.gochinatv.accelarator.security;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -15,6 +17,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.gochinatv.accelarator.dao.entity.Permission;
+import com.gochinatv.accelarator.dao.entity.Resource;
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.service.UserService;
 
@@ -43,6 +46,8 @@ public class ShiroRealm extends AuthorizingRealm {
 			user = userService.getLoginUser(userName);
 			if(user == null) {
 	            throw new UnknownAccountException();//没找到帐号
+	        }else if(user.getStatus()==2){
+	        	throw new LockedAccountException();
 	        }
 			
 			String password = user.getPassword();
@@ -54,28 +59,24 @@ public class ShiroRealm extends AuthorizingRealm {
 		return simpleAuthenticationInfo;
 	}
 	
-	
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		/*User user =  (User) principals.getPrimaryPrincipal();
-		List<Permission> permissionList = null;
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		
+		List<String> permissions = new ArrayList<String>();
+		List<Resource> resourceList = null;
 		try {
-			permissionList = userService.getPermissionList(user.getId());
+			resourceList = resourceService.getUserResourceList(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<String> permissions = new ArrayList<String>();
-		if(permissionList!=null){
-			for(Permission ps:permissionList){
-				permissions.add(ps.getCode());
-			}
+		for (Resource resource : resourceList) {
+			permissions.add(resource.getUrl());
 		}
-		
-		SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-		simpleAuthorizationInfo.addStringPermissions(permissions);
-		return simpleAuthorizationInfo;*/
+		info.addStringPermissions(permissions);
+		return info;*/
 		return null;
 	}
 	

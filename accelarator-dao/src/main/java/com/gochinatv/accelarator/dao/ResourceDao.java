@@ -30,4 +30,13 @@ public interface ResourceDao  extends BaseDao<Resource>{
 	 */
 	public List<Resource> getSelectedResourceByRoleId(@Param("roleId") int roleId)throws Exception;
 	
+	
+	/**
+	 * 根据登录人的id查询所拥有的资源信息 
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Resource> getUserResourceList(@Param("userId") int userId)throws Exception;
+	
 }

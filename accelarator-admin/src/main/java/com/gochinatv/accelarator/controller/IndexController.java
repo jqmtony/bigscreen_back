@@ -1,22 +1,30 @@
 package com.gochinatv.accelarator.controller;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.gochinatv.accelarator.dao.entity.Resource;
 import com.gochinatv.accelarator.dao.entity.User;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
+import com.gochinatv.accelarator.service.ResourceService;
 import com.gochinatv.accelarator.util.SessionUtils;
 
 
 @Controller
 public class IndexController extends BaseController{
    
+	@Autowired
+	private ResourceService resourceService;
 	
 	@RequestMapping("home")
 	public String home(){
@@ -45,11 +53,19 @@ public class IndexController extends BaseController{
 	
 	 
 	@RequestMapping("index")
-	public String index(){
+	public String index() throws Exception{
 		HttpSession session = this.getSession();
 		Subject subject = SecurityUtils.getSubject();
 		User user = (User) subject.getPrincipal();
 		session.setAttribute(SessionUtils.LOGIN_KEY, user);
+		
+		if(session.getAttribute("resources")==null){
+			List<Resource> resourceList = resourceService.getUserResourceList(user.getId());
+			if(resourceList.size()>0){//表示有访问的资源
+				Collection<Resource> resources = resourceService.getResourceList(user.getId());
+				session.setAttribute("resources", resources);
+			}
+		}
 		return "index";
 	}
 	

@@ -2,7 +2,10 @@ package com.gochinatv.accelarator.service.impl;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.ResourceDao;
@@ -46,6 +49,43 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource> implements Re
 			treeList.add(resource);
 		}
 		return treeList;
+	}
+	
+	
+	/**
+	 * 根据登录人的id查询所拥有的资源信息 
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Resource> getUserResourceList(int userId)throws Exception{
+		return resourceDao.getUserResourceList(userId);
+	}
+	
+	/**
+	 * 根据登录人的id查询所拥有的资源信息 
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public Collection<Resource> getResourceList(int userId)throws Exception{
+		Map<Integer,Resource> treeMap = new HashMap<Integer,Resource>();
+		List<Resource> resourceList = resourceDao.getUserResourceList(userId);
+		for (Resource resource : resourceList) {
+			if(resource.getParentId()==-1){
+				treeMap.put(resource.getId(), resource);
+			}else{
+				Resource res = treeMap.get(resource.getParentId());
+				List<Resource> children = res.getChildren();
+				if(null==children){
+					children = new ArrayList<Resource>();
+				}
+				children.add(resource);
+				res.setChildren(children);
+			}
+		}
+		Collection<Resource> values = treeMap.values();
+		return values;
 	}
 	
 }
