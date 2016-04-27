@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gochinatv.accelarator.bmapi.bean.BaseVo;
 import com.gochinatv.accelarator.bmapi.bean.BusinessAd;
+import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.BusinessAdService;
 import com.gochinatv.accelarator.bmapi.util.FileChangeLocal;
 import com.gochinatv.accelarator.bmapi.util.HttpClientTools;
@@ -40,6 +41,7 @@ public class BusinessAdController  extends BaseController{
 	
 	private static Logger logger = LoggerFactory.getLogger(BusinessAdController.class);
 	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "上传图片", httpMethod = "GET", notes = "上传图片")
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	public BaseVo uploadImage(
@@ -78,7 +80,7 @@ public class BusinessAdController  extends BaseController{
 		String statuString = jsonObject.getString("msg");
 		return statuString;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
 	@RequestMapping(value = "/queryList", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -87,6 +89,7 @@ public class BusinessAdController  extends BaseController{
 		List<BusinessAd> list = businessAdService.queryList(businessAd);
 		return list;
 	}
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "保存商家图片", httpMethod = "GET", notes = "保存商家图片")
 	@RequestMapping(value = "/save", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -99,7 +102,7 @@ public class BusinessAdController  extends BaseController{
 		}
 		return result;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "更新商家图片", httpMethod = "GET", notes = "更新商家图片")
 	@RequestMapping(value = "/update", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -112,7 +115,7 @@ public class BusinessAdController  extends BaseController{
 		}
 		return result;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "删除商家图片信息", httpMethod = "GET", notes = "删除商家图片信息")
 	@RequestMapping(value = "/delete", produces = "application/json;charset=utf-8")
 	@ResponseBody
