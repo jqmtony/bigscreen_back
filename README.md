@@ -8,12 +8,16 @@ mvn clean package -Pdev
 
 TRUNCATE TABLE `advertisement`;
 TRUNCATE TABLE `advertiser`;
+TRUNCATE TABLE `business`;
 TRUNCATE TABLE `device`;
+TRUNCATE TABLE `device_image`;
 TRUNCATE TABLE `orders`;
 TRUNCATE TABLE `orders_detail`;
 TRUNCATE TABLE `place`;
 TRUNCATE TABLE `play_list`;
 TRUNCATE TABLE `play_list_detail`;
+TRUNCATE TABLE `system_advertisement`;
+
 
 ALTER TABLE `user` MODIFY COLUMN `create_time` DATETIME;
 ALTER TABLE `system_advertisement` MODIFY COLUMN `create_time` DATETIME;

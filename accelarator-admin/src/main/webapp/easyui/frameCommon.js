@@ -111,7 +111,6 @@ function checkUpdateUserName(id, userName, url){
 }
 //添加时
 function checkUserName(id, userId, userName, url){
-	alert(userName);
 	$.ajax({  
 		    url:url,   
 		    data:{  
