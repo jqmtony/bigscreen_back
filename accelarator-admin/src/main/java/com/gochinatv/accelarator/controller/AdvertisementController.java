@@ -21,7 +21,6 @@ import com.gochinatv.accelarator.service.AdvertisementService;
  * 
  * @作者 zhuhh
  * @描述  广告控制层  
- * asdjfalskdjflakdsjflkasjflkasdjflsajdf
  * @创建时间 2016年3月14日 下午1:24:13
  * @修改时间
  */
