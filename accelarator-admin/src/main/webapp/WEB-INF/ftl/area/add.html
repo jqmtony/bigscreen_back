@@ -4,6 +4,7 @@
 		var row = grid.treegrid('getSelected');
 		if(row){
 			addWin.window('open');
+			$("#add_save").linkbutton("enable");
 			//XFrameUtils.clearForm('addForm'); 
 			$("#name").val(row.name);
 			$("#addsort").val(1);
