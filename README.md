@@ -1,6 +1,9 @@
 accelarator
 ===============
 
+mvn clean package -Pprod
+mvn clean package -Pdev
+
 公众空间accelarator 项目初始化
 
 TRUNCATE TABLE `advertisement`;
