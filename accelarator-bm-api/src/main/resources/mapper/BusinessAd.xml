@@ -57,6 +57,9 @@
 			<if test="price!=null">
 				price=#{price},
 			</if>
+			<if test="ename!=null">
+				ename=#{ename},
+			</if>
 			<if test="sort!=0">
 				sort=#{sort},
 			</if>
