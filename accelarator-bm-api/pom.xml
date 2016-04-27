@@ -25,6 +25,21 @@
 		<javax.servlet.jstl>1.2</javax.servlet.jstl>
 	</properties>
 	<dependencies> 
+	<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.7.9</version>
+		</dependency>
 		<!-- Spring Start -->
 		<dependency>
 			<groupId>org.springframework</groupId>
