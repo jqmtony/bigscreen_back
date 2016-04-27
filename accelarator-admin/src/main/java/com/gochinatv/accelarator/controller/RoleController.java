@@ -128,17 +128,6 @@ public class RoleController extends BaseController{
 		return result;
 	}
 	
-	/**
-	 * @param roleId
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/gotoSelectedResourceByRoleId")
-	public String gotoSelectedResourceByRoleId(Model model,int roleId)throws Exception{
-		model.addAttribute("roleId",roleId);
-		return "role/selectResource";
-	}
-	
 	
 	/**
 	 * 根据角色id查询角色所拥有的资源

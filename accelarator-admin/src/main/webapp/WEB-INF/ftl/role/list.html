@@ -39,9 +39,64 @@
 	 lookup_Win.window('close');
  }
  
+ var sel_roleId=0;
  function selectResource(roleId){
-	 lookup_Win = $("#lookup-resource-window").dialogFrameWindow();
-	 lookup_Win.dialogFrameHtml('gotoSelectedResourceByRoleId?roleId='+roleId);
+	 //lookup_Win = $("#lookup-resource-window").dialogFrameWindow();
+	 //lookup_Win.dialogFrameHtml('gotoSelectedResourceByRoleId?roleId='+roleId);
+	 sel_roleId = roleId;
+	 $('#resource_tree').tree({
+		 url:'${base}/resource/queryList',
+		 onLoadSuccess: function(node, data){
+			  $.ajax({  
+				    url:'getSelectedResourceByRoleId',   
+				    data:{
+				    	roleId:roleId
+				    },  
+				    type:'post',  
+				    dataType:'json',  
+				    success:function(data) { 
+				        var len = data.length;
+				        for(i=0;i<len;i++){
+				        	var node = $('#resource_tree').tree('find',data[i].resourceId);
+				        	$('#resource_tree').tree('check', node.target);
+				        }
+				    } 
+			   });
+		  }
+	 });
+	 $('#lookup-resource-window').window('open');
+ }
+ 
+ function saveResource(){
+	 var nodes = $('#resource_tree').tree('getChecked');
+		var resourceIds="";
+	    for(i=0;i<nodes.length;i++){
+	    	resourceIds+=","+nodes[i].id;
+	    }
+	    resourceIds = resourceIds.replace(",","");//已经勾选的id字符串
+		$.ajax({  
+		    url:'saveRoleResource',   
+		    data:
+		    {
+		    	roleId:sel_roleId,
+		    	resourceIds:resourceIds
+		    },  
+		    type:'post',  
+		    dataType:'json',  
+		    success:function(data) { 
+		    	if(data.status){
+		        	$.messager.alert('系统提示',"操作成功",'warning',function(){
+		        		closeResource();
+					});
+		        }else{
+		        	$.messager.alert('系统提示',"操作失败"+data.data,'error');
+		        } 
+		     }
+		});
+ }
+ 
+ function closeResource(){
+	 $('#lookup-resource-window').window('close');
  }
 </script>
 </head>
@@ -74,6 +129,16 @@
    <#include "./add.html">
    <#include "./update.html">
    <div id="lookup-user-window" title="分配用户"></div>
-   <div id="lookup-resource-window" title="分配资源"></div>
+   <div id="lookup-resource-window" class="easyui-window" title="分配资源" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:350px;height:500px;padding:3px;">
+		<div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'center'" style="padding:10px;">
+                <ul id="resource_tree" class="easyui-tree" data-options="method:'get',checkbox:true,cascadeCheck:false"></ul>
+            </div>
+            <div data-options="region:'south',border:false" style="padding:3px 80px 0;">
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="saveResource();" style="width:80px">确定</a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="closeResource();" style="width:80px">关闭</a>
+            </div>
+        </div>
+   </div>
 </body>
 </html>
