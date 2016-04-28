@@ -38,6 +38,8 @@ public class DeviceController {
 
 			   @RequestParam(required = true, defaultValue = "gochinatv")
 	           @ApiParam(value = "设备MAC地址", required = true) String mac,
+	           @RequestParam(required = true, defaultValue = "name")
+	           @ApiParam(value = "name", required = true) String name,
 			@ApiParam(value = "图片文件", required = true) @RequestParam("file") MultipartFile file)
 			throws Exception {
 		BaseVo baseVo = new BaseVo();
@@ -46,6 +48,7 @@ public class DeviceController {
 		try {
 			imageUrl = uploadImage(file);
 			Device device = new Device();
+			device.setName(name);
 			device.setMac(mac);
 			device.setImageUrl(imageUrl);
 			logger.info("====mac:" + mac + "==url:" + imageUrl);

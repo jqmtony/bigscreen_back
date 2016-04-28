@@ -18,15 +18,17 @@
 						{field:'placeName',title:'商铺名称',width:180},
 						{field:'deviceName',title:'设备标识',width:180},
 						{field:'mac',title:'设备mac',width:140},
-						{field:'createTime',title:'截图时间',width:100},
+						{field:'name',title:'广告名称',width:240},
+						{field:'createTime',title:'截图时间',width:200},
 						{field:'imageUrl',title:'图片',width:300,
 					    	formatter:function(value,row,index){
 									return "<img width=400 height=80 src=\""+row.imageUrl+"\">"; 
 						}}, 
-						{field:'image',title:'原图预览',width:300,
+						{field:'image',title:'原图预览',width:100,
 					    	formatter:function(value,row,index){
 									return "<a target=\"_blank\" href=\""+row.imageUrl+"\">预览原图</a>"; 
 						}}, 
+						
 						]]
 		});
 	});
@@ -80,8 +82,10 @@
 	    	设备：<input id="add_lookUpCode" class="easyui-validatebox textbox" onclick="openDeviceLookUp('#add_lookUpPlaceId');" 
 		    			data-options="editable:false" type="text" name="code"></input>
 		    			<input type="hidden" id="add_lookUpMac" name="mac"/>
+		     广告： <input type="text" class="easyui-validatebox textbox" name="name" id="name" style="width:110px"></input>
 		        开始时间：  <input class="easyui-datetimebox" type="text" id="startTime" name="startTime" style="width:180px;"/>
 		          结束时间：  <input class="easyui-datetimebox" type="text" id="endTime" name="endTime" style="width:180px;"/>
+	
 			<a href="javascript:void(0);" onclick="query()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 							<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 		</form>	

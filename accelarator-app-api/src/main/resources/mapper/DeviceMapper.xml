@@ -13,11 +13,12 @@
 		<result property="screenShotInterval" column="screenShotInterval" />
 		<result property="type" column="type" />
 		<result property="refreshTime" column="refresh_time" />
+		<result property="name" column="name" />
 		
 	</resultMap>
 	
 	<insert id="saveDeviceImage" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
-	   insert into device_image(mac,image_url) values ( #{mac}, #{imageUrl})
+	   insert into device_image(mac,name,image_url) values ( #{mac},#{name}, #{imageUrl})
 	</insert>
 	
 		
