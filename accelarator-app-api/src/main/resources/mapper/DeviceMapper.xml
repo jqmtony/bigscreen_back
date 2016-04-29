@@ -82,21 +82,21 @@
 		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.device_id=#{deviceId} and p.type=#{type}  and p.start_time=#{time}
+		   		 and p.device_id=#{deviceId} and p.type=#{type}  and p.start_time=#{time}  order by pl.sort asc
 	</select>
 	
 	<select id="getAdInfoByPlaceId" resultMap="AdInfo" >
 			select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.place_id=#{placeId} and p.type=#{type}   and p.start_time=#{time}
+		   		 and p.place_id=#{placeId} and p.type=#{type}   and p.start_time=#{time}  order by pl.sort asc
 	</select>
 	
 	<select id="getAdInfoByCityCode" resultMap="AdInfo" >
 		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time}
+		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time} order by pl.sort asc
 	</select>
 	
 </mapper>
