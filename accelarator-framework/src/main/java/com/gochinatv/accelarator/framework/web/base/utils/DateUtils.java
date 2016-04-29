@@ -9,7 +9,7 @@ public class DateUtils {
    
 	public final static String YYYY_MM_DD = "yyyy-MM-dd"; 
 	public final static String YYYYMMDDHHMMSSSSS = "yyyyMMddHHmmssSSS"; 
-	public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
+	public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 	
 	
 	public static SimpleDateFormat SDF_YYYY_MM_DD = new SimpleDateFormat(YYYY_MM_DD);
@@ -61,6 +61,7 @@ public class DateUtils {
         cal.add(Calendar.SECOND,amount);    
         return SDF_YYYY_MM_DD_HH_MM_SS.format(cal.getTime());
 	}
+	
 	
 	/**
 	 * 格式化日期时间格式为：yyyy-MM-dd hh:mm:ss
