@@ -18,7 +18,7 @@ public class Place extends BaseVo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String cname;// 中文名称
+	private String cname;// 中文名称  改成 商铺编号
 	private String ename;// 英文名称
 	private int type; // 类型       （1：餐厅  2：大使馆   3：商场   4：美甲区    5：其它）
 	private String scale;// 规模大小

@@ -2,6 +2,8 @@
 <html>
 <head>
 <#include "/frame/pageInclude.html">
+<link rel="stylesheet" type="text/css" href="${base}/css/index.css" />
+<script type="text/javascript" src="${base}/js/static.js"></script>
 <script type="text/javascript">
 	$(function() {
         
@@ -27,6 +29,8 @@
 			width : 400,
 			height : 360
 		});
+		
+		$('#menuCls,#up_menuCls').combotree('loadData',res_tree);
 
 	});
 	

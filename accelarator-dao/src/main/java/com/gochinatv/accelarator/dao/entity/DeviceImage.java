@@ -12,7 +12,15 @@ public class DeviceImage {
 	private String endTime;
 	private String placeName;
 	private String deviceName;
+	private String name;
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public long getId() {
 		return id;
 	}

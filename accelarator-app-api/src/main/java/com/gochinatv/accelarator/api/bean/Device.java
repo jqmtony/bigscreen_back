@@ -22,6 +22,16 @@ public class Device  implements Serializable {
 	private int type;//商铺type
 	private int refreshTime;
 	
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getRefreshTime() {
 		return refreshTime;
 	}

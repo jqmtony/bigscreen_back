@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gochinatv.accelarator.api.bean.Device;
+import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.FileChangeLocal;
 import com.gochinatv.accelarator.api.util.HttpClientTools;
@@ -38,6 +39,8 @@ public class DeviceController {
 
 			   @RequestParam(required = true, defaultValue = "gochinatv")
 	           @ApiParam(value = "设备MAC地址", required = true) String mac,
+	           @RequestParam(required = true, defaultValue = "name")
+	           @ApiParam(value = "name", required = true) String name,
 			@ApiParam(value = "图片文件", required = true) @RequestParam("file") MultipartFile file)
 			throws Exception {
 		BaseVo baseVo = new BaseVo();
@@ -46,6 +49,7 @@ public class DeviceController {
 		try {
 			imageUrl = uploadImage(file);
 			Device device = new Device();
+			device.setName(name);
 			device.setMac(mac);
 			device.setImageUrl(imageUrl);
 			logger.info("====mac:" + mac + "==url:" + imageUrl);
@@ -76,5 +80,31 @@ public class DeviceController {
 		JSONObject jsonObject = JSONObject.fromObject(result);
 		String statuString = jsonObject.getString("msg");
 		return statuString;
+	}
+	
+	
+	@ApiOperation(value = "上传日志", httpMethod = "GET", notes = "上传日志")
+	@RequestMapping(value = "uploadLog", produces = "application/json;charset=utf-8")
+	public BaseVo uploadLog(
+
+			   @RequestParam(required = true, defaultValue = "gochinatv")
+	           @ApiParam(value = "设备MAC地址", required = true) String mac,
+	           @RequestParam(required = true, defaultValue = "msg")
+	           @ApiParam(value = "msg", required = true) String msg)
+			throws Exception {
+		BaseVo baseVo = new BaseVo();
+		try {
+			UploadLog uploadLog = new UploadLog();
+			uploadLog.setMsg(msg);
+			uploadLog.setMac(mac);
+			logger.error("====mac:" + mac + "==msg:" + msg);
+			deviceService.uploadLog(uploadLog);
+		} catch (Exception e) {
+			logger.info("=====mac:" + mac + "===upload.error:"
+					+ e.getMessage());
+			baseVo.setStatus(1);
+			baseVo.setMessage("上传日志失败");
+		}
+		return baseVo;
 	}
 }

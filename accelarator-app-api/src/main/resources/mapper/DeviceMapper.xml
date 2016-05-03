@@ -13,12 +13,26 @@
 		<result property="screenShotInterval" column="screenShotInterval" />
 		<result property="type" column="type" />
 		<result property="refreshTime" column="refresh_time" />
+		<result property="name" column="name" />
 		
 	</resultMap>
 	
+	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
+		<id property="id" column="id" />
+		<result property="mac" column="mac" />
+		<result property="msg" column="msg" />
+	</resultMap>
+	
+	
 	<insert id="saveDeviceImage" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
-	   insert into device_image(mac,image_url) values ( #{mac}, #{imageUrl})
+	   insert into device_image(mac,name,image_url) values ( #{mac},#{name}, #{imageUrl})
 	</insert>
+	
+	
+	<insert id="uploadLog" parameterType="com.gochinatv.accelarator.api.bean.UploadLog" keyProperty="id" useGeneratedKeys="true">
+	   insert into device_log(mac,msg) values ( #{mac},#{msg})
+	</insert>
+	
 	
 		
 	<select id="queryDeviceByMac" resultMap="Device" >
@@ -68,21 +82,21 @@
 		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.device_id=#{deviceId} and p.type=#{type}  and p.start_time=#{time}
+		   		 and p.device_id=#{deviceId} and p.type=#{type}  and p.start_time=#{time}  order by pl.sort asc
 	</select>
 	
 	<select id="getAdInfoByPlaceId" resultMap="AdInfo" >
 			select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.place_id=#{placeId} and p.type=#{type}   and p.start_time=#{time}
+		   		 and p.place_id=#{placeId} and p.type=#{type}   and p.start_time=#{time}  order by pl.sort asc
 	</select>
 	
 	<select id="getAdInfoByCityCode" resultMap="AdInfo" >
 		select pl.advertisement_id as adVideoId,pl.sort as adVideoIndex,ad.title as adVideoName, concat('http://video.ottcloud.tv',ad.video_path) as adVideoUrl
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
-		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time}
+		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time} order by pl.sort asc
 	</select>
 	
 </mapper>

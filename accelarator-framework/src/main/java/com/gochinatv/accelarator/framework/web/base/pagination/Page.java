@@ -29,11 +29,11 @@ import java.util.List;
 
 /**
  * Mybatis - 分页对象
- *
  * @author liuzh/abel533/isea533
  * @version 3.6.0
- *          项目地址 : http://git.oschina.net/free/Mybatis_PageHelper
+ * 项目地址 : http://git.oschina.net/free/Mybatis_PageHelper
  */
+@SuppressWarnings("all")
 public class Page<E> extends ArrayList<E> {
     private static final long serialVersionUID = 1L;
 

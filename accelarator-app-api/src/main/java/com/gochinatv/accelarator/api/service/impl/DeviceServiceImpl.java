@@ -13,6 +13,7 @@ import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.bean.Layout;
 import com.gochinatv.accelarator.api.bean.ScreenShot;
+import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.AccelaratorConfig;
@@ -34,6 +35,11 @@ public class DeviceServiceImpl  implements DeviceService{
 		deviceDao.saveDeviceImage(device);		
 	}
 
+	@Override
+	public void  uploadLog(UploadLog uploadLog){
+		deviceDao.uploadLog(uploadLog);		
+	}
+	
 	@Override
 	public ResponseImageAdInfo queryImageAdInfoList(String mac) {
 		ResponseImageAdInfo responseImageAdInfo  = new ResponseImageAdInfo();
