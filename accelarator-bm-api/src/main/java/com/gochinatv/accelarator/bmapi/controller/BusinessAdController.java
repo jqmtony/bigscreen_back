@@ -1,7 +1,6 @@
 package com.gochinatv.accelarator.bmapi.controller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gochinatv.accelarator.bmapi.bean.BaseVo;
 import com.gochinatv.accelarator.bmapi.bean.BusinessAd;
+import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.BusinessAdService;
 import com.gochinatv.accelarator.bmapi.util.FileChangeLocal;
-import com.gochinatv.accelarator.bmapi.util.HttpClientTools;
 import com.gochinatv.accelarator.bmapi.util.PropertiesUtil;
+import com.gochinatv.accelarator.bmapi.util.imageUpload.AmazonS3Tools;
+import com.gochinatv.accelarator.bmapi.util.imageUpload.ImageTool;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
@@ -40,6 +41,7 @@ public class BusinessAdController  extends BaseController{
 	
 	private static Logger logger = LoggerFactory.getLogger(BusinessAdController.class);
 	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "上传图片", httpMethod = "GET", notes = "上传图片")
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	public BaseVo uploadImage(
@@ -64,21 +66,27 @@ public class BusinessAdController  extends BaseController{
 		String result;
 		FileChangeLocal fcl = new FileChangeLocal();
 		File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
+//		File localFile = new File("/data/1111.jpg");
 		String url = PropertiesUtil.getInstance().getProperty(
 				"gochinatv.syncimage.process.url");
-		Map<String, String> heads = new HashMap<String, String>();
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("fileType", "VRS");
-		params.put("markId", "");
-		params.put("realId", "");
-		params.put("source", "");
-		heads.put("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
-		result = HttpClientTools.Upload(url, localFile, heads, params);
-		JSONObject jsonObject = JSONObject.fromObject(result);
-		String statuString = jsonObject.getString("msg");
+		ImageTool it = new ImageTool();
+		String fileName = localFile.getName();
+		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
+		logger.info("url======"+url+",fileName======"+fileName+",suffix==="+suffix);
+		File reproduceFile;
+		String statuString = "";
+		try {
+			reproduceFile = it.createThumbnailNew(localFile, suffix, 100, 100);
+			result = AmazonS3Tools.uploadFileToAmazon(url, reproduceFile);
+			JSONObject jsonObject = JSONObject.fromObject(result);
+			statuString = jsonObject.getString("msg");
+			logger.info("statuString============"+statuString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return statuString;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
 	@RequestMapping(value = "/queryList", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -87,6 +95,7 @@ public class BusinessAdController  extends BaseController{
 		List<BusinessAd> list = businessAdService.queryList(businessAd);
 		return list;
 	}
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "保存商家图片", httpMethod = "GET", notes = "保存商家图片")
 	@RequestMapping(value = "/save", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -99,7 +108,7 @@ public class BusinessAdController  extends BaseController{
 		}
 		return result;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "更新商家图片", httpMethod = "GET", notes = "更新商家图片")
 	@RequestMapping(value = "/update", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -112,7 +121,7 @@ public class BusinessAdController  extends BaseController{
 		}
 		return result;
 	}
-	
+	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "删除商家图片信息", httpMethod = "GET", notes = "删除商家图片信息")
 	@RequestMapping(value = "/delete", produces = "application/json;charset=utf-8")
 	@ResponseBody
