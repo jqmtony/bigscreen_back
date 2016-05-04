@@ -107,7 +107,7 @@ public class ImageTool
     try {
       BufferedImage img = ImageIO.read(f);
       BufferedImage scaledImg = Scalr.resize(img, Scalr.Method.ULTRA_QUALITY, Scalr.Mode.FIT_EXACT, width, heigth, new BufferedImageOp[0]);
-      Scalr.resize(img, Scalr.Method.QUALITY, Scalr.Mode.FIT_EXACT, 360, 480, new BufferedImageOp[0]);
+      //Scalr.resize(img, Scalr.Method.QUALITY, Scalr.Mode.FIT_EXACT, 360, 480, new BufferedImageOp[0]);
       File destFile = new File(dst);
       ImageIO.write(scaledImg, suffix, destFile);
     }

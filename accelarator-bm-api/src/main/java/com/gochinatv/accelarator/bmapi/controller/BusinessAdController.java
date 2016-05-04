@@ -66,17 +66,17 @@ public class BusinessAdController  extends BaseController{
 		FileChangeLocal fcl = new FileChangeLocal();
 		File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
 //		File localFile = new File("/data/1111.jpg");
-		String url = PropertiesUtil.getInstance().getProperty(
-				"gochinatv.syncimage.process.url");
+//		String url = PropertiesUtil.getInstance().getProperty(
+//				"gochinatv.syncimage.process.url");
 		ImageTool it = new ImageTool();
 		String fileName = localFile.getName();
 		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
-		logger.info("url======"+url+",fileName======"+fileName+",suffix==="+suffix);
+		logger.info("fileName======"+fileName+",suffix==="+suffix);
 		File reproduceFile;
 		String statuString = "";
 		try {
 			reproduceFile = it.createThumbnailNew(localFile, suffix, 100, 100);
-			result = AmazonS3Tools.uploadFileToAmazon(url, reproduceFile);
+			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile);
 			JSONObject jsonObject = JSONObject.fromObject(result);
 			statuString = jsonObject.getString("msg");
 			logger.info("statuString============"+statuString);

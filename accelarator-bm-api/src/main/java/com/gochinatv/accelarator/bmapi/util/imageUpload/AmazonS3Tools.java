@@ -3,6 +3,7 @@ package com.gochinatv.accelarator.bmapi.util.imageUpload;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,10 +47,11 @@ public class AmazonS3Tools {
 
 			om.setContentLength(file.length());
 			InputStream fileInputStream = new FileInputStream(file);
-			PutObjectRequest por = new PutObjectRequest("img.vego.tv", "cp/" + file.getName(), fileInputStream, om);
+			PutObjectRequest por = new PutObjectRequest("img.vego.tv", "/" + file.getName(), fileInputStream, om);
 			s3.putObject(por);
 			fileInputStream.close();
-			returnFileName = "http://" + "img0.gochinatv.com" + "/cp/" + file.getName();
+			Random random = new Random();
+			returnFileName = "http://" + "img" + random.nextInt(10) +".gochinatv.com" + "/" + file.getName();
 			logger.info("success:" + returnFileName);
 		} catch (Exception e) {
 			logger.error("上传图片至亚马逊出错,错误信息:", e);
