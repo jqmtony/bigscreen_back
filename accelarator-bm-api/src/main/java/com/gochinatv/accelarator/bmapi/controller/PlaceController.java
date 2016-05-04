@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
-import com.gochinatv.accelarator.bmapi.service.DeviceService;
 import com.gochinatv.accelarator.bmapi.service.PlaceService;
 import com.wordnik.swagger.annotations.ApiOperation;
 
@@ -27,8 +26,6 @@ public class PlaceController extends BaseController{
     
 	@Autowired
 	private PlaceService placeService;
-	@Autowired
-	private DeviceService deviceService;
 	/**
 	 * 根据商户id得到商铺列表
 	 * @param businessId

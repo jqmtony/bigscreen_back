@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import com.gochinatv.accelarator.bmapi.bean.BusinessAd;
 import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.BusinessAdService;
 import com.gochinatv.accelarator.bmapi.util.FileChangeLocal;
-import com.gochinatv.accelarator.bmapi.util.PropertiesUtil;
 import com.gochinatv.accelarator.bmapi.util.imageUpload.AmazonS3Tools;
 import com.gochinatv.accelarator.bmapi.util.imageUpload.ImageTool;
 import com.wordnik.swagger.annotations.ApiOperation;

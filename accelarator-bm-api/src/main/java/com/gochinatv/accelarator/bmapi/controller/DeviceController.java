@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gochinatv.accelarator.bmapi.bean.BusinessAd;
 import com.gochinatv.accelarator.bmapi.bean.Device;
 import com.gochinatv.accelarator.bmapi.interceptor.CheckLoginInterceptorAnnotation;
 import com.gochinatv.accelarator.bmapi.service.DeviceService;

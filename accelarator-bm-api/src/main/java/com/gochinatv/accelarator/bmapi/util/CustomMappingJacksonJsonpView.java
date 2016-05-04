@@ -23,7 +23,6 @@ public class CustomMappingJacksonJsonpView extends CustomMappingJacksonJsonView 
 			HttpServletResponse response) throws Exception {
 		System.out.println("=============jsonp===========");
 		if ("GET".equals(request.getMethod().toUpperCase())) {
-			@SuppressWarnings("unchecked")
 			Map<String, String[]> params = request.getParameterMap();
 
 			if (params.containsKey("callback")) {

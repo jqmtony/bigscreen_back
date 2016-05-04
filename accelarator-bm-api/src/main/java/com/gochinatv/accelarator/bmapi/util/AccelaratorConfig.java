@@ -1,8 +1,5 @@
 package com.gochinatv.accelarator.bmapi.util;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
-
 public final class AccelaratorConfig {
 	
 	
