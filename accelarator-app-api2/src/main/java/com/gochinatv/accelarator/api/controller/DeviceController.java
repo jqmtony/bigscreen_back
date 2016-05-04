@@ -123,7 +123,7 @@ public class DeviceController extends BaseController {
 	@ApiOperation(value = "更新设备mac信息", httpMethod = "GET", notes = "更新设备mac信息")
 	@RequestMapping("/updateDevice")
 	@ResponseBody
-	public Map<String, Object> updateMac(@ApiParam(value = "mac", required = true)String mac,
+	public Map<String, Object> updateDevice(@ApiParam(value = "mac", required = true)String mac,
 										 @ApiParam(value = "versionNum", required = true)String versionNum,
 										 @ApiParam(value = "versionName", required = true)String versionName){
 		Map<String, Object> data = new HashMap<String, Object>();
