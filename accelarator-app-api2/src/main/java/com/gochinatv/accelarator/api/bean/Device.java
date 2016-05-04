@@ -14,7 +14,7 @@ public class Device  implements Serializable {
 	private int placeId;//商铺id
 	private String cityCode;//城市code
 	private int screenNum;//该设备屏幕数
-	
+	private int duration;
 	private String createTime;
 	
 	private int screenShotInterval;
@@ -22,6 +22,25 @@ public class Device  implements Serializable {
 	private int type;//商铺type
 	private int refreshTime;
 	
+	private String name;
+	
+	
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getRefreshTime() {
 		return refreshTime;
 	}

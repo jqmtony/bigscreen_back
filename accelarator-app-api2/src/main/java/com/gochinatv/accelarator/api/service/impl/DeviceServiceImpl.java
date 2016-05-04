@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gochinatv.accelarator.api.bean.Device;
+import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 
@@ -17,9 +18,13 @@ public class DeviceServiceImpl  implements DeviceService{
 	
 	@Autowired
 	private DeviceDao deviceDao;
-	
 	@Override
 	public void saveDeviceImage(Device device) {
 		deviceDao.saveDeviceImage(device);		
+	}
+
+	@Override
+	public void  uploadLog(UploadLog uploadLog){
+		deviceDao.uploadLog(uploadLog);		
 	}
 }

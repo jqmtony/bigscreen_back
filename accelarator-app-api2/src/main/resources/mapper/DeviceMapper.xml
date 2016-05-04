@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gochinatv.accelarator.api.dao.DeviceDao">
 
+
 	<resultMap type="com.gochinatv.accelarator.api.bean.Device" id="Device">
 		<id property="id" column="id" />
 		<result property="mac" column="mac" />
@@ -13,11 +14,23 @@
 		<result property="screenShotInterval" column="screenShotInterval" />
 		<result property="type" column="type" />
 		<result property="refreshTime" column="refresh_time" />
-		
+		<result property="name" column="name" />
+		<result property="duration" column="duration" />
+	</resultMap>
+	
+	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
+		<id property="id" column="id" />
+		<result property="mac" column="mac" />
+		<result property="msg" column="msg" />
+		<result property="type" column="type" />
 	</resultMap>
 	
 	<insert id="saveDeviceImage" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
-	   insert into device_image(mac,image_url) values ( #{mac}, #{imageUrl})
+	   insert into device_image(mac,name,duration,image_url) values ( #{mac},#{name},#{duration}, #{imageUrl})
 	</insert>
 	
+	
+	<insert id="uploadLog" parameterType="com.gochinatv.accelarator.api.bean.UploadLog" keyProperty="id" useGeneratedKeys="true">
+	   insert into device_log(mac,type,msg) values ( #{mac},#{type},#{msg})
+	</insert>
 </mapper>
