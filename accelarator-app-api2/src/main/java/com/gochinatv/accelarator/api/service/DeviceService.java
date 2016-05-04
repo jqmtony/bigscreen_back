@@ -9,4 +9,17 @@ public interface DeviceService {
 	
 
 	public void  uploadLog(UploadLog uploadLog);
+	
+	/**
+	 * 根据mac地址得到设备
+	 * @param mac
+	 * @return
+	 */
+	Device getEntityByMac(String mac);
+
+	/**
+	 * 新增或更新设备信息
+	 * @param device
+	 */
+	public void saveOrUpdateDevice(String mac, String versionNum, String versionName);
 }

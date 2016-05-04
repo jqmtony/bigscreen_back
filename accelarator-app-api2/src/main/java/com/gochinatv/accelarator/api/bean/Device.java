@@ -1,8 +1,7 @@
 package com.gochinatv.accelarator.api.bean;
 
 import java.io.Serializable;
-
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 
 public class Device  implements Serializable {
 	
@@ -15,7 +14,10 @@ public class Device  implements Serializable {
 	private String cityCode;//城市code
 	private int screenNum;//该设备屏幕数
 	private int duration;
-	private String createTime;
+	private Date createTime;
+	private String versionNum;// 版本号
+	private String versionName;// 版本名
+	private Date bootTime;//开机时间
 	
 	private int screenShotInterval;
 	
@@ -25,6 +27,30 @@ public class Device  implements Serializable {
 	private String name;
 	
 	
+	public String getVersionNum() {
+		return versionNum;
+	}
+
+	public void setVersionNum(String versionNum) {
+		this.versionNum = versionNum;
+	}
+
+	public String getVersionName() {
+		return versionName;
+	}
+
+	public void setVersionName(String versionName) {
+		this.versionName = versionName;
+	}
+
+	public Date getBootTime() {
+		return bootTime;
+	}
+
+	public void setBootTime(Date bootTime) {
+		this.bootTime = bootTime;
+	}
+
 	public int getDuration() {
 		return duration;
 	}
@@ -97,11 +123,11 @@ public class Device  implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 

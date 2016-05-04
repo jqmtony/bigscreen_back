@@ -7,7 +7,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>//disk01/log/api/app-api.log</file>
+		<file>/disk01/log/api/app-api.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>/disk01/log/api/app-api.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
 		</rollingPolicy>

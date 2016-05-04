@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gochinatv.accelarator.api.bean.Device;
@@ -26,7 +27,7 @@ import com.wordnik.swagger.annotations.ApiParam;
 
 @Controller
 @RequestMapping("device_v1")
-public class DeviceController {
+public class DeviceController extends BaseController {
 
 	private static Logger logger = LoggerFactory.getLogger(DeviceController.class);
 	
@@ -111,5 +112,28 @@ public class DeviceController {
 			baseVo.setMessage("上传日志失败");
 		}
 		return baseVo;
+	}
+	/**
+	 * 更新设备mac信息
+	 * @param mac
+	 * @param versionNum
+	 * @param versionName
+	 * @return
+	 */
+	@ApiOperation(value = "更新设备mac信息", httpMethod = "GET", notes = "更新设备mac信息")
+	@RequestMapping("/updateDevice")
+	@ResponseBody
+	public Map<String, Object> updateMac(@ApiParam(value = "mac", required = true)String mac,
+										 @ApiParam(value = "versionNum", required = true)String versionNum,
+										 @ApiParam(value = "versionName", required = true)String versionName){
+		Map<String, Object> data = new HashMap<String, Object>();
+		try {
+			deviceService.saveOrUpdateDevice(mac, versionNum, versionName);
+			data = this.success("success");
+		} catch (Exception e) {
+			data = this.error(e.getMessage());
+		}
+		
+		return data;
 	}
 }

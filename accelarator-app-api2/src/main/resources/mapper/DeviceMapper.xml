@@ -16,6 +16,9 @@
 		<result property="refreshTime" column="refresh_time" />
 		<result property="name" column="name" />
 		<result property="duration" column="duration" />
+		<result property="versionNum" column="version_num" />
+		<result property="versionName" column="version_name" />
+		<result property="bootTime" column="boot_time" />
 	</resultMap>
 	
 	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
@@ -33,4 +36,40 @@
 	<insert id="uploadLog" parameterType="com.gochinatv.accelarator.api.bean.UploadLog" keyProperty="id" useGeneratedKeys="true">
 	   insert into device_log(mac,type,msg) values ( #{mac},#{type},#{msg})
 	</insert>
+	
+	<select id="getEntityByMac" resultMap="Device" parameterType="string">
+		select * from device
+		where mac = #{mac}
+	</select>
+	<insert id="save" parameterType="com.gochinatv.accelarator.api.bean.Device">
+	   insert into device(
+	            mac,
+	            version_num,
+	            version_name,
+	            boot_time,
+	            create_time
+	            ) values (
+	            #{mac},
+	            #{versionNum},
+	            #{versionName},
+	            #{bootTime},
+	            #{createTime}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="com.gochinatv.accelarator.api.bean.Device">
+		update device
+		<set>
+			<if test="versionNum!=null">
+				version_num=#{versionNum},
+			</if>
+			<if test="versionName!=null">
+				version_name=#{versionName},
+			</if>
+			<if test="bootTime!=null">
+				boot_time=#{bootTime},
+			</if>
+		</set>
+		where mac = #{mac}
+	</update>
 </mapper>
