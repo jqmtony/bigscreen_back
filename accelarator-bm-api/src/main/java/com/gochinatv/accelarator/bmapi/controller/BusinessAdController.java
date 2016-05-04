@@ -75,10 +75,11 @@ public class BusinessAdController  extends BaseController{
 		File reproduceFile;
 		String statuString = "";
 		try {
-			reproduceFile = it.createThumbnailNew(localFile, suffix, 100, 100);
+			reproduceFile = it.createThumbnailNew(localFile, suffix, 324, 243);
 			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile);
 			JSONObject jsonObject = JSONObject.fromObject(result);
 			statuString = jsonObject.getString("msg");
+			
 			logger.info("statuString============"+statuString);
 		} catch (Exception e) {
 			e.printStackTrace();
