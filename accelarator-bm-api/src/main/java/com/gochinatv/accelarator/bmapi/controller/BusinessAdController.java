@@ -62,29 +62,21 @@ public class BusinessAdController  extends BaseController{
 	}
 
 	private String upload(MultipartFile file) {
-		String result;
+		String result="";
 		FileChangeLocal fcl = new FileChangeLocal();
 		File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
-//		File localFile = new File("/data/1111.jpg");
-//		String url = PropertiesUtil.getInstance().getProperty(
-//				"gochinatv.syncimage.process.url");
 		ImageTool it = new ImageTool();
 		String fileName = localFile.getName();
 		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
 		logger.info("fileName======"+fileName+",suffix==="+suffix);
 		File reproduceFile;
-		String statuString = "";
 		try {
 			reproduceFile = it.createThumbnailNew(localFile, suffix, 324, 243);
 			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile);
-			JSONObject jsonObject = JSONObject.fromObject(result);
-			statuString = jsonObject.getString("msg");
-			
-			logger.info("statuString============"+statuString);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return statuString;
+		return result;
 	}
 	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
