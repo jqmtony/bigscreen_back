@@ -13,6 +13,9 @@
 		<result property="screenNum" column="screen_num" />
 		<result property="createTime" column="create_time" />
 		<result property="status" column="status" />
+		<result property="versionNum" column="version_num" />
+		<result property="versionName" column="version_name" />
+		<result property="bootTime" column="boot_time" />
 		
 		<result property="cname" column="cname" />
 		<result property="userName" column="user_name" />
