@@ -56,10 +56,10 @@
 		left join business b on d.business_id=b.id
 		<where>
 			1=1
-			<if test="code!=null">
+			<if test="code!=null and code!=''">
 				and d.code like CONCAT(CONCAT('%',#{code}),'%')
 			</if>
-			<if test="mac!=null">
+			<if test="mac!=null and mac!=''">
 				and d.mac like CONCAT(CONCAT('%',#{mac}),'%')
 			</if>
 			<if test="screenNum!=0">
