@@ -18,6 +18,7 @@ public class Device  implements Serializable {
 	private String versionNum;// 版本号
 	private String versionName;// 版本名
 	private Date bootTime;//开机时间
+	private int status;// 状态
 	
 	private int screenShotInterval;
 	
@@ -27,6 +28,14 @@ public class Device  implements Serializable {
 	private String name;
 	
 	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public String getVersionNum() {
 		return versionNum;
 	}

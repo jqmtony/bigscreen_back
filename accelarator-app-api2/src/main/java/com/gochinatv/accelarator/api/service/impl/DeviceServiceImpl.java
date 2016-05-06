@@ -44,6 +44,7 @@ public class DeviceServiceImpl implements DeviceService{
 		}else{
 			device = new Device();
 			device.setMac(mac);
+			device.setStatus(1);
 			device.setVersionNum(versionNum);
 			device.setVersionName(versionName);
 			device.setBootTime(new Date());

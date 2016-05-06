@@ -19,6 +19,7 @@
 		<result property="versionNum" column="version_num" />
 		<result property="versionName" column="version_name" />
 		<result property="bootTime" column="boot_time" />
+		<result property="status" column="status" />
 	</resultMap>
 	
 	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
@@ -47,13 +48,15 @@
 	            version_num,
 	            version_name,
 	            boot_time,
-	            create_time
+	            create_time,
+	            status
 	            ) values (
 	            #{mac},
 	            #{versionNum},
 	            #{versionName},
 	            #{bootTime},
-	            #{createTime}
+	            #{createTime},
+	            #{status}
 	            )
 	</insert>
 	

@@ -1,3 +1,21 @@
+<script type="text/javascript">
+function addCallback(data){
+	if(!data.status){
+		var mes = data.msg;
+		if(mes == "code"){//code为空
+			$("#add_code").val(''); 
+		}else if(mes == "mac"){//mac为空
+			$("#add_mac").val(''); 
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
+		}
+	}else{
+		addWin.window('close');
+		grid.datagrid('reload',$("#queryForm").serializeObject());
+	}
+	$("#add_save").linkbutton("enable");
+}
+</script>
 <div id="add-window" title="新增设备信息" class="easyui-window">
 	     <form id="addForm" method="post" >
 	    	<table>

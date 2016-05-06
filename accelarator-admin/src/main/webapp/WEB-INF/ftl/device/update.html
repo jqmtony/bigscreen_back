@@ -13,6 +13,22 @@ function checkUpdateMac(id, mac, url){
 		checkMac(id, deviceId, mac, url);
 	}
 }
+function modifyCallback(data){
+	if(!data.status){
+		var mes = data.msg;
+		if(mes == "code"){//code为空
+			$("#edit_code").val(''); 
+		}else if(mes == "mac"){//mac为空
+			$("#edit_mac").val(''); 
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
+		}
+	}else{
+		modifyWin.window('close');
+		grid.datagrid('reload',$("#queryForm").serializeObject());	
+		$("#update_save").linkbutton("enable");
+	}
+}
 </script>
 <div id="modify-window" title="编辑设备信息" class="easyui-window">
 	     <form id="modifyForm" method="post" >

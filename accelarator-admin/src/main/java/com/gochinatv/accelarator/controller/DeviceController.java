@@ -112,15 +112,23 @@ public class DeviceController extends BaseController{
 	public Map<String,Object> save(Device device){
 		Map<String,Object> result = this.success(null);
 		try{
-			device.setCreateTime(new Date());
-//			device.setStatus(1);
-			Integer placeId = device.getPlaceId();
-			Integer businessId = placeService.getBusinessIdById(placeId);
-			device.setBusinessId(businessId);
-			
-			Place place = placeService.getEntityById(placeId);
-			device.setCityCode(place.getCityCode());
-			deviceService.save(device);
+			boolean checkCode = checkCode(device.getId(), device.getCode());
+			boolean checkMac = checkMac(device.getId(), device.getMac());
+			if(!checkCode){
+				result = this.error("code");
+			}else if(!checkMac){
+				result = this.error("mac");
+			}else{
+				device.setCreateTime(new Date());
+//				device.setStatus(1);
+				Integer placeId = device.getPlaceId();
+				Integer businessId = placeService.getBusinessIdById(placeId);
+				device.setBusinessId(businessId);
+				
+				Place place = placeService.getEntityById(placeId);
+				device.setCityCode(place.getCityCode());
+				deviceService.save(device);
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
@@ -141,10 +149,18 @@ public class DeviceController extends BaseController{
 	public Map<String,Object> update(Device device){
 		Map<String,Object> result = this.success(null);
 		try{
-			Integer placeId = device.getPlaceId();
-			Integer businessId = placeService.getBusinessIdById(placeId);
-			device.setBusinessId(businessId);
-			deviceService.update(device);
+			boolean checkCode = checkCode(device.getId(), device.getCode());
+			boolean checkMac = checkMac(device.getId(), device.getMac());
+			if(!checkCode){
+				result = this.error("code");
+			}else if(!checkMac){
+				result = this.error("mac");
+			}else{
+				Integer placeId = device.getPlaceId();
+				Integer businessId = placeService.getBusinessIdById(placeId);
+				device.setBusinessId(businessId);
+				deviceService.update(device);
+			}
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}
