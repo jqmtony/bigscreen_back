@@ -75,6 +75,11 @@ public class HttpClientTools {
 		}
 		return content;
 	}
+	
+	public static void main(String[] args) {
+		getContentByPost("http://api.bm.gochinatv.com/app-api2/device_v1/uploadLog?mac=pooooooo&msg=错误日志信息&type=1");
+	
+	}
 
 	@SuppressWarnings("unchecked")
 	public static List<String> getContentByPost(String url) {
@@ -292,4 +297,17 @@ public class HttpClientTools {
 
 		return list;
 	}
+	 public static String getBodyString(BufferedReader br) {
+		  String inputLine;
+		       String str = "";
+		     try {
+		       while ((inputLine = br.readLine()) != null) {
+		        str += inputLine;
+		       }
+		       br.close();
+		     } catch (IOException e) {
+		       System.out.println("IOException: " + e);
+		     }
+		     return str;
+		 }
 }

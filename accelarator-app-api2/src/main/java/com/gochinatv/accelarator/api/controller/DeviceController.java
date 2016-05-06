@@ -1,10 +1,12 @@
 package com.gochinatv.accelarator.api.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +27,13 @@ import com.gochinatv.accelarator.api.vo.BaseVo;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
+import net.sf.json.JSONObject;
+
 @Controller
 @RequestMapping("device_v1")
 public class DeviceController extends BaseController {
 
 	private static Logger logger = LoggerFactory.getLogger(DeviceController.class);
-	
 	@Autowired
 	private DeviceService deviceService;
 
@@ -90,7 +93,7 @@ public class DeviceController extends BaseController {
 	@ApiOperation(value = "上传日志", httpMethod = "GET", notes = "上传日志")
 	@RequestMapping(value = "uploadLog", produces = "application/json;charset=utf-8")
 	public BaseVo uploadLog(
-
+			HttpServletRequest request,
 			   @RequestParam(required = true, defaultValue = "gochinatv")
 	           @ApiParam(value = "设备MAC地址", required = true) String mac,
 	           @RequestParam(required = true, defaultValue = "msg")
@@ -99,6 +102,12 @@ public class DeviceController extends BaseController {
 			throws Exception {
 		BaseVo baseVo = new BaseVo();
 		try {
+			BufferedReader bReader = request.getReader();
+			String content = HttpClientTools.getBodyString(bReader);
+			JSONObject jsonObject = JSONObject.fromObject(content);
+			msg = jsonObject.getString("msg");
+			mac = jsonObject.getString("mac");
+			type = jsonObject.getInt("type");
 			UploadLog uploadLog = new UploadLog();
 			uploadLog.setMsg(msg);
 			uploadLog.setType(type);
@@ -113,6 +122,8 @@ public class DeviceController extends BaseController {
 		}
 		return baseVo;
 	}
+	
+	
 	/**
 	 * 更新设备mac信息
 	 * @param mac
