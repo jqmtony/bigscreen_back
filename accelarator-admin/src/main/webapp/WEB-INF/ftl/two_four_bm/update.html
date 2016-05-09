@@ -1,0 +1,56 @@
+
+<div id="modify-window" title="编辑2-4号位管理" class="easyui-window" >
+	     <form id="modifyForm" method="post" >
+	    	<table>
+	    		<tr>
+	    			<td>名称：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="name" name="name" data-options="required:true"/><label style="color: red"> *</label>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>状态：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="status" name="status"/>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>播放时间：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="playTime" name="playTime"/>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>开始时间：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="startTime" name="startTime" data-options="required:true"/><label style="color: red"> *</label>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>结束时间：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="endTime" name="endTime" data-options="required:true"/><label style="color: red"> *</label>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>创建时间：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="createTime" name="createTime"/>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>类型：</td>
+	    			<td>
+	    			       <input class="easyui-validatebox textbox" id="type" name="type"/>
+	    			</td>
+	    		</tr>
+	    		<tr style="display:none;">
+	    		  <td colspan="2"><input type="hidden" name="id" id="id"/></td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a id="update_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+		    </div>
+    </div>
