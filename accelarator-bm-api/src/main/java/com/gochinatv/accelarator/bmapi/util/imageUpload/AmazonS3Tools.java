@@ -38,7 +38,7 @@ public class AmazonS3Tools {
 	    try {
 	      String fileName = "common/";
 
-	      fileName = fileName + sdf.format(new Date()) + "/";
+	      fileName = fileName + sdf.format(new Date()) + "/"+file.getName();
 	      fileName = fileName + "_" + size + "." + suffix;
 	      ObjectMetadata om = new ObjectMetadata();
 	      if (suffix.equalsIgnoreCase("jpg"))
