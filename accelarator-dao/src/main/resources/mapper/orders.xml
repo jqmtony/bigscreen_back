@@ -35,7 +35,7 @@
 	
 	<!-- 订单列表 -->
 	<select id="getOrdersList" resultMap="Orders" parameterType="Orders">
-		SELECT o.id, o.order_no,o.create_time,o.status,o.audit_time,o.ahead_modify_time,o.original_end_time,o.end_time,o.remark,
+		SELECT o.id, o.order_no,o.create_time,o.status,o.audit_time,o.ahead_modify_time,o.original_end_time,o.end_time,o.remark,o.start_time,
 		uc.id,uc.real_name AS createrName,a.real_name,oa.real_name AS auditorName FROM orders o 
    	    LEFT JOIN advertiser a ON a.id=o.advertiser_id  LEFT JOIN advertisement am ON am.id=o.advertisement_id 
         LEFT JOIN user uc ON o.creater=uc.id LEFT JOIN user oa ON oa.id=o.auditor  
@@ -47,7 +47,11 @@
 			<if test="realName!=null and realName!=''">
 				and a.real_name like CONCAT('%',#{realName},'%' )
 			</if>
+			<if test="status!=null and status!=-1">
+				and o.status =#{status}
+			</if>
 		</where>
+		order by  o.order_no desc
 	</select>
 	
 	<!-- 在播广告列表 -->
