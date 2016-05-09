@@ -147,4 +147,5 @@ public class DeviceController extends BaseController {
 		
 		return data;
 	}
+
 }
