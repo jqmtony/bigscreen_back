@@ -37,7 +37,6 @@ public class AmazonS3Tools {
 	    s3.setRegion(usWest2);
 	    try {
 	      String fileName = "common/";
-
 	      fileName = fileName + sdf.format(new Date()) + "/"+file.getName();
 	      fileName = fileName + "_" + size + "." + suffix;
 	      ObjectMetadata om = new ObjectMetadata();
