@@ -27,14 +27,40 @@
 	   openAdvertisementLookUp(url);
    }
    function openAdvertisementLookUp(url) {
-		$("#lookUpSelect-advertisement-window").dialogFrameWindow().dialogFrameHtml(url);
+		$("#lookUpSelect-advertisement-window").dialogFrameWindow(950,400).dialogFrameHtml(url);
 	}
-   
-   function openAdvertisementCallBack(row){
+   function callBackSuccess(row){
 	   $("#advertisementId").val(row.id);
 	   //$("#duration").val(row.duration);
 	   $("#title").text(row.title);
 	   $("#lookUpSelect-advertisement-window").dialogFrameWindow().window('close');
+   }
+   function openAdvertisementCallBack(row){
+	   if(row.isApply != 1){//1是适用
+		   $.ajax({  
+			    url:'${base}/orders/getOrdersByPlaceType',   
+			    data:{  
+			    	id:${orders.id}
+			    },  
+			    type:'post',  
+			    dataType:'json',  
+			    success:function(data) { 
+			        if(!data.status){
+			        	$.messager.confirm('系统提示', '此广告不适用于清真餐厅，在订单中存在清真店铺，是否继续投放此广告？', function(r){
+			    			if (r){
+			    				callBackSuccess(row);
+			    			}
+			    		});
+			        	
+			        } 
+			     },  
+			     error : function() {  
+			          alert("异常！");  
+			     }
+	           });
+	   }else{
+		   callBackSuccess(row);
+	   }
    }
    
    function openCallBack(row){

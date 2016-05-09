@@ -14,6 +14,7 @@
 		<result property="advertiserId" column="advertiser_id" />
 		<result property="duration" column="duration" />
 		<result property="remark" column="remark" />
+		<result property="isApply" column="is_apply" />
 		
 		<result property="userName" column="user_name" />
 		<result property="realName" column="real_name" />
@@ -51,7 +52,8 @@
 	            content,
 	            advertiser_id,
 	            duration,
-	            remark
+	            remark,
+	            is_apply
 	            ) values (
 	            #{title},
 	            #{resolution},
@@ -62,7 +64,8 @@
 	            #{content},
 	            #{advertiserId},
 	            #{duration},
-	            #{remark}
+	            #{remark},
+	            #{isApply}
 	            )
 	</insert>
 	
@@ -97,7 +100,10 @@
 				source=#{source},
 			</if>
 			<if test="remark!=null">
-				remark=#{remark}
+				remark=#{remark},
+			</if>
+			<if test="isApply!=0">
+				is_apply=#{isApply}
 			</if>
 		</set>
 		where id = #{id}

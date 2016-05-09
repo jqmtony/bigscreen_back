@@ -32,6 +32,11 @@ public class OrdersDetailServiceImpl extends BaseServiceImpl<OrdersDetail> imple
 	public List<OrdersDetail> getOrdersDetailList(int ordersId) {
 		return ordersDetailDao.getOrdersDetailByOrdersId(ordersId);
 	}
+
+	@Override
+	public List<OrdersDetail> getOrdersByPlaceType(int ordersId) {
+		return ordersDetailDao.getOrdersDetailByPlaceType(ordersId);
+	}
 	
 	
 }

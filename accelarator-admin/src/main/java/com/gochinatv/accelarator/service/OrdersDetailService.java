@@ -21,6 +21,14 @@ public interface OrdersDetailService  extends BaseService<OrdersDetail>{
 	 * @return
 	 */
 	List<OrdersDetail> getOrdersDetailList(int ordersId);
+
+	/**
+	 * 根据订单id得到清真列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	List<OrdersDetail> getOrdersByPlaceType(int id);
    
 
 }
