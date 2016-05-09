@@ -73,6 +73,19 @@ function formatStatus(val, row) {
 	}
 }
 /**
+ * 适用状态
+ * @param val
+ * @param row
+ * @returns {String}
+ */
+function formatIsApply(val, row) {
+	if (val == 1) {
+		return '适用';
+	} else {
+		return '不适用';
+	}
+}
+/**
  * 分屏数量
  * @param val
  * @param row
@@ -182,7 +195,7 @@ function formatYYYYMMDDHHMMSS(val, row){
  */
 function formatPlaceType(val, row) {
 	if (val == 1) {
-		return '餐厅';
+		return '非清真餐厅';
 	} else if(val == 2){
 		return '大使馆';
 	}else if(val == 3){
@@ -191,6 +204,8 @@ function formatPlaceType(val, row) {
 		return '美甲区';
 	}else if(val == 5){
 		return '其他';
+	} else if(val == 6){
+		return '清真餐厅';
 	}
 }
 

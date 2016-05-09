@@ -31,4 +31,7 @@
 	   SELECT * from orders_detail where orders_id=#{ordersId}
 	</select>
 	
+	<select id="getOrdersDetailByPlaceType" resultMap="OrdersDetail" parameterType="int">
+	   SELECT * from orders_detail where orders_id=#{ordersId} and type=6
+	</select>
 </mapper>

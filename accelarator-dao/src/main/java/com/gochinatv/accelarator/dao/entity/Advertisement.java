@@ -27,12 +27,19 @@ public class Advertisement extends BaseVo implements Serializable {
 	private int duration;// 广告时长(秒)
 	private String remark;// 描述
 	private int source;// 广告来源   (1：自有   2：商家)
-	
+	private int isApply;// 是否适用清真餐厅  (1：适用2：不适用)
 	
 	private String userName;//临时变量，广告商用户名
 	private String realName;//临时变量，广告商昵称
 
-	
+	public int getIsApply() {
+		return isApply;
+	}
+
+	public void setIsApply(int isApply) {
+		this.isApply = isApply;
+	}
+
 	public String getTitle() {
 		return title;
 	}

@@ -23,4 +23,12 @@ public interface OrdersDetailDao  extends BaseDao<OrdersDetail>{
     */
    public List<OrdersDetail> getOrdersDetailByOrdersId(@Param(value="ordersId") int ordersId);
 
+   /**
+	 * 根据订单id得到清真列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+   public List<OrdersDetail> getOrdersDetailByPlaceType(int ordersId);
+
 }

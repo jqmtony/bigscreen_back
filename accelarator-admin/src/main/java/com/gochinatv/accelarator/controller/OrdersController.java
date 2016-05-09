@@ -235,6 +235,27 @@ public class OrdersController extends BaseController{
 	}
 	
 	/**
+	 * 根据订单id得到清真列表
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getOrdersByPlaceType")
+	@ResponseBody
+	public	Map<String,Object> getOrdersByPlaceType(@RequestParam(value="id",defaultValue="0") int id) throws Exception{
+		Map<String,Object> result = this.success(null);
+		try{
+			List<OrdersDetail> list = ordersDetailService.getOrdersByPlaceType(id);
+			if(list != null){
+				result = this.error("存在清真餐厅！");
+			}
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
 	 * 审核订单详情
 	 * @param model
 	 * @return
