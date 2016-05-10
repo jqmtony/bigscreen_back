@@ -44,7 +44,7 @@ public class DeviceController {
 			@ApiParam(value = "图片文件", required = true) @RequestParam("file") MultipartFile file*/)
 			throws Exception {
 		BaseVo baseVo = new BaseVo();
-
+		long start = System.currentTimeMillis();
 		String imageUrl = "";
 		try {
 			/*imageUrl = uploadImage(file);*/
@@ -60,6 +60,8 @@ public class DeviceController {
 			baseVo.setStatus(1);
 			baseVo.setMessage("上传图片失败");
 		}
+		long end = System.currentTimeMillis();
+		System.out.println("===uploadImage===mac:"+mac+"=time:"+(end-start) );
 		return baseVo;
 	}
 
@@ -92,6 +94,7 @@ public class DeviceController {
 	           @RequestParam(required = true, defaultValue = "msg")
 	           @ApiParam(value = "msg", required = true) String msg)
 			throws Exception {
+		long start = System.currentTimeMillis();
 		BaseVo baseVo = new BaseVo();
 		try {
 			UploadLog uploadLog = new UploadLog();
@@ -105,6 +108,8 @@ public class DeviceController {
 			baseVo.setStatus(1);
 			baseVo.setMessage("上传日志失败");
 		}
+		long end = System.currentTimeMillis();
+		System.out.println("===uploadLog===mac:"+mac+"=time:"+(end-start) );
 		return baseVo;
 	}
 }

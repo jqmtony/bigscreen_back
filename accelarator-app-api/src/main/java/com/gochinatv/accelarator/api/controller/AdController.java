@@ -45,6 +45,7 @@ public class AdController {
 	public ResponseDeviceInfo getDeviceInfo(
 			   @RequestParam(required = true, defaultValue = "gochinatv")
 	           @ApiParam(value = "设备MAC地址", required = true) String mac) {
+		long start = System.currentTimeMillis();
 		ResponseDeviceInfo responseDeviceInfo = new ResponseDeviceInfo();
 		try {
 			responseDeviceInfo = deviceService.getDeviceInfo(mac);
@@ -53,6 +54,8 @@ public class AdController {
 			responseDeviceInfo.setStatus(AccelaratorConfig.API_STATUS_ERROR);
 			responseDeviceInfo.setMessage("getDeviceInfo error");
 		}
+		long end = System.currentTimeMillis();
+		System.out.println("===getDeviceInfo===mac:"+mac+"==time:"+(end-start) );
 		return responseDeviceInfo;
 	}
 	
@@ -69,9 +72,11 @@ public class AdController {
 	           @ApiParam(value = "设备MAC地址", required = true) String mac,
 	           @RequestParam(required = false)
 	           @ApiParam(value = "时间,格式2016-04-23", required = false) String time) {
+		long start = System.currentTimeMillis();
 		ResponseAdInfo responseAdInfo = new ResponseAdInfo();
+		String now ="";
 		try {
-			String now = DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
+		    now = DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
 			if(StringUtils.isNotBlank(time)){
 				now = time;
 			}
@@ -91,6 +96,8 @@ public class AdController {
 			responseAdInfo.setStatus(AccelaratorConfig.API_STATUS_ERROR);
 			responseAdInfo.setMessage("getAdInfo error");
 		}
+		long end = System.currentTimeMillis();
+		System.out.println("===getAdInfo===mac:"+mac+"===now:"+now+"=time:"+(end-start) );
 		return responseAdInfo;
 	}
 	
