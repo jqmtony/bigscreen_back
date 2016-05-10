@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,8 +140,12 @@ public class DeviceController extends BaseController {
 										 @ApiParam(value = "versionName", required = true)String versionName){
 		Map<String, Object> data = new HashMap<String, Object>();
 		try {
-			deviceService.saveOrUpdateDevice(mac, versionNum, versionName);
-			data = this.success("success");
+			if(StringUtils.isNotBlank(mac)){
+				deviceService.saveOrUpdateDevice(mac, versionNum, versionName);
+				data = this.success("success");
+			}else{
+				data = this.error("mac为空");
+			}
 		} catch (Exception e) {
 			data = this.error(e.getMessage());
 		}
