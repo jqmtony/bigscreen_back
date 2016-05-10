@@ -118,6 +118,9 @@
 			<if test="code!=null">
 				code=#{code},
 			</if>
+			<if test="cityCode!=null">
+				city_code=#{cityCode},
+			</if>
 			<if test="brand!=null">
 				brand=#{brand},
 			</if>
