@@ -48,4 +48,11 @@ public interface AreaDao extends BaseDao<Area>{
 	
 	
 	public Area queryByAreaCode(@Param(value="areaCode") String areaCode);
+
+	/**
+	 * 根据code得到name
+	 * @param code
+	 * @return
+	 */
+	public String getNameByCode(String areaCode);
 }

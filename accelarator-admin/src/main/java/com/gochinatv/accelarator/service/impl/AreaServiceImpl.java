@@ -283,4 +283,11 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		return null;
 	}
 	
+	public String getNameByCode(String areaCode){
+		if(StringUtils.isNotBlank(areaCode)){
+			return areaDao.getNameByCode(areaCode);
+		}else{
+			return "";
+		}
+	}
 }

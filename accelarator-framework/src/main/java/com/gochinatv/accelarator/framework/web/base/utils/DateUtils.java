@@ -72,6 +72,15 @@ public class DateUtils {
 	public static Date formatDate(String date) throws ParseException{
 		return SDF_YYYY_MM_DD_HH_MM_SS.parse(date);
 	}
-	
+	/**
+	 * 格式化日期时间格式为：yyyy-MM-dd hh:mm:ss
+	 * @param date
+	 * @return
+	 * @throws ParseException 
+	 */
+	public static String formatDateString(Date date) throws ParseException{
+		SimpleDateFormat dateFormater = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
+		return dateFormater.format(date);
+	}
 	
 }

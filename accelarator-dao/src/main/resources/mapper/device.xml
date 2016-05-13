@@ -84,6 +84,14 @@
 		order by create_time desc
 	</select>
 	
+	<select id="getList" resultMap="Device">
+		select d.*, p.cname as cname, p.country_code as country_code, p.area_code as area_code, p.city_code as city_code, b.user_name as user_name from device d 
+		left join place p on d.place_id=p.id
+		left join business b on d.business_id=b.id
+		
+		order by create_time desc
+	</select>
+	
 	<insert id="save" parameterType="Device">
 	   insert into device(
 	            code,

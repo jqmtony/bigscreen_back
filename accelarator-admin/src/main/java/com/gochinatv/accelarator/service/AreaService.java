@@ -61,5 +61,12 @@ public interface AreaService  extends BaseService<Area>{
 	public void save(Area area,HttpServletRequest request) throws Exception;
 	
 	public void update(Area area,HttpServletRequest request) throws Exception;
+
+	/**
+	 * 根据code得到name
+	 * @param areaCode
+	 * @return
+	 */
+	public String getNameByCode(String areaCode);
 	
 }
