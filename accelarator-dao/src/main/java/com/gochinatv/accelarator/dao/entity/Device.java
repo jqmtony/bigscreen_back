@@ -40,7 +40,16 @@ public class Device extends BaseVo implements Serializable {
 	private String cityCode;// 临时，城市
 	
 	private int screenShotInterval;//截屏时间 单位 分钟
-	
+	public Device(){
+		
+	}
+	public Device(String code, String brand, String mac, Date createTime) {
+		this.code = code;
+		this.brand = brand;
+		this.mac = mac;
+		this.createTime = createTime;
+	}
+
 	public String getVersionNum() {
 		return versionNum;
 	}

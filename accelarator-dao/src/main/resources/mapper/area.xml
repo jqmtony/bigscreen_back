@@ -75,4 +75,8 @@
 	<select id="queryByAreaCode" resultMap="AreaResultMap" parameterType="string">
 		select * from area where area_code=#{areaCode}
 	</select> 
+	<!-- 根据code得到name -->
+	<select id="getNameByCode" resultType="string" parameterType="string">
+		select name from area where area_code=#{areaCode}
+	</select>
 </mapper>
