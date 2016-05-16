@@ -23,13 +23,13 @@ public class Resource extends BaseVo implements Serializable {
 	private String url;// 资源url
 	private String remark;// 备注
 	private int parentId;// 父级ID
-	private int isMenu;// 是否菜单显示
+	private int isMenu;// 是否菜单显示  1：显示   2：隐藏
+	private int isVirtual;// 是否虚拟  1：虚拟   2：否虚拟
 	private String menuCls;// 菜单样式（图片）
 	private int sort;// 排序值 
 	
-	
-	
 	private int roleId;//临时，角色id
+	private int userId;//临时，用户id
 	
 	private List<Resource> children;
 
@@ -82,6 +82,14 @@ public class Resource extends BaseVo implements Serializable {
 		this.menuCls = menuCls;
 	}
 
+	public int getIsVirtual() {
+		return isVirtual;
+	}
+
+	public void setIsVirtual(int isVirtual) {
+		this.isVirtual = isVirtual;
+	}
+
 	public int getSort() {
 		return sort;
 	}
@@ -96,6 +104,14 @@ public class Resource extends BaseVo implements Serializable {
 
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public List<Resource> getChildren() {

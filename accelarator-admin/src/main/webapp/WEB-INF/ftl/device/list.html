@@ -77,7 +77,9 @@
 				});
 		}
 	}
-	
+	function exportAll(){
+		window.location.href="${base}/device/excel/export";
+	}
 </script>
 </head>
 <body>
@@ -125,7 +127,10 @@
 		<div style="margin:5px">
 			<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>
 			<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">编辑</a>
+			<@shiro.hasPermission name="/device/delete">
 			<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+		    </@shiro.hasPermission>
+			<a href="javascript:void(0);" onclick="exportAll();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">全量导出</a>
 		</div>
 	</div>
 	

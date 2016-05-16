@@ -39,5 +39,5 @@ public interface ResourceService extends BaseService<Resource>{
 	 * @return
 	 * @throws Exception
 	 */
-	public Collection<Resource> getResourceList(int userId)throws Exception;
+	public Collection<Resource> getUserMenuResourceList(int userId)throws Exception;
 }

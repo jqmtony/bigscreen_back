@@ -89,11 +89,7 @@ function modifyDefaultCheck(row){
 }
 //模块名称
 function removeModule(){
-	$.messager.show({
-		title:'系统提示', 
-		msg:'对不起,删除功能暂未开放'
-	});
-	/*var row = grid.datagrid('getSelected');
+	var row = grid.datagrid('getSelected');
 	if (row){
 		$.messager.confirm('系统提示', '确定要删除这条记录吗？', function(r){
 			if (r){
@@ -105,7 +101,7 @@ function removeModule(){
 			title:'系统提示', 
 			msg:'请先选择信息'
 		});
-	}*/
+	}
 }
 //校验用户名的唯一性
 //修改时

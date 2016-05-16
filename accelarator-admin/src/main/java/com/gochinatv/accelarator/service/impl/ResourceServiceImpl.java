@@ -3,9 +3,10 @@ package com.gochinatv.accelarator.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gochinatv.accelarator.dao.ResourceDao;
@@ -63,26 +64,49 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource> implements Re
 	}
 	
 	/**
-	 * 根据登录人的id查询所拥有的资源信息 
+	 * 根据登录人的id查询所拥有的左侧菜单
 	 * @param roleId
 	 * @return
 	 * @throws Exception
 	 */
-	public Collection<Resource> getResourceList(int userId)throws Exception{
-		Map<Integer,Resource> treeMap = new HashMap<Integer,Resource>();
-		List<Resource> resourceList = resourceDao.getUserResourceList(userId);
+	public Collection<Resource> getUserMenuResourceList(int userId)throws Exception{
+		LinkedHashMap<Integer,Resource> treeMap = new LinkedHashMap<Integer,Resource>();
+		LinkedHashMap<Integer,Resource> modelMap = new LinkedHashMap<Integer,Resource>();
+		//左侧菜单的权限
+		List<Resource> resourceList = resourceDao.getUserMenuResourceList(userId);
 		for (Resource resource : resourceList) {
 			if(resource.getParentId()==-1){
 				treeMap.put(resource.getId(), resource);
 			}else{
-				Resource res = treeMap.get(resource.getParentId());
-				List<Resource> children = res.getChildren();
-				if(null==children){
-					children = new ArrayList<Resource>();
+				if(resource.getIsVirtual()==1){//虚拟模块
+					modelMap.put(resource.getId(), resource);					
+				}else{
+					Resource res = modelMap.get(resource.getParentId());
+					if(res==null){
+						res= treeMap.get(resource.getParentId());
+					}
+					List<Resource> children = res.getChildren();
+					if(null==children){
+						children = new ArrayList<Resource>();
+					}
+					children.add(resource);
+					res.setChildren(children);
 				}
-				children.add(resource);
-				res.setChildren(children);
 			}
+		}
+		Iterator<Entry<Integer, Resource>> iterator = modelMap.entrySet().iterator();
+		while(iterator.hasNext()){
+			Entry<Integer, Resource> next = iterator.next();
+			Resource value = next.getValue();
+			int parentId = value.getParentId();
+			Resource resource = treeMap.get(parentId);
+			List<Resource> children = resource.getChildren();
+			if(null==children){
+				children = value.getChildren();
+			}else{
+				children.addAll(value.getChildren());;
+			}
+			resource.setChildren(children);
 		}
 		Collection<Resource> values = treeMap.values();
 		return values;
