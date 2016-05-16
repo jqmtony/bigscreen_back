@@ -1,12 +1,14 @@
 package com.gochinatv.accelarator.controller;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.TwoFourBm;
@@ -50,6 +52,7 @@ public class TwoFourBmController extends BaseController{
 	public Map<String,Object> save(TwoFourBm twoFourBm){
 		Map<String,Object> result = this.success(null);
 		try{
+			twoFourBm.setCreateTime(new Date());
 			twoFourBmService.save(twoFourBm);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
@@ -82,5 +85,16 @@ public class TwoFourBmController extends BaseController{
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * @param parentMethod
+	 * @return
+	 */
+	@RequestMapping(value = "/gotoTwoFourBmLookUp")
+    public String gotoTwoFourBmLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+		model.addAttribute("parentMethod", parentMethod);
+		return "two_four_bm/lookUpForContent";
+    }
 	
 }

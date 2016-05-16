@@ -11,12 +11,17 @@
 	    <result property="playTime" column="play_time" />
 	    <result property="sort" column="sort" />
 	    <result property="createTime" column="create_time" />
+	    
+	    <result property="twoFourBmName" column="two_four_bm_name" />
 	</resultMap>
 
 	<select id="getListByEntity" resultMap="TwoFourContent" parameterType="TwoFourContent">
-		select * from two_four_content where 1=1 
-		  <if test="name!=null">
-				and name like CONCAT('%',#{name},'%' )
+		select tfc.*,tfb.name two_four_bm_name from two_four_content tfc left join two_four_bm tfb on tfc.two_four_bm_id=tfb.id where 1=1 
+		  <if test="twoFourBmName!=null and twoFourBmName!=''">
+				and tfb.name like CONCAT('%',#{twoFourBmName},'%' )
+		  </if>
+		  <if test="name!=null and name!=''">
+				and tfc.name like CONCAT('%',#{name},'%' )
 		  </if>
 	</select>
 	
