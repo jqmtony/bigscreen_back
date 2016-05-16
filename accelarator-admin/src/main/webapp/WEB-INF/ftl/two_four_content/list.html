@@ -26,6 +26,28 @@
 	$("#twoFourBmName,#u_twoFourBmName").validatebox({novalidate: true});
 	lookUpWin.window('close');
  }
+ 
+	function uploadPic(form,id,idFileId,urlTmp){
+		var reg = /(jpg|gif|bmp|png)/i;
+		if(!reg.test($(idFileId).val())){
+			$.messager.alert("提示","请选择图片");
+			return ;
+		}
+		
+		$('#'+form).form('submit',{
+			url:urlTmp,
+			success:function(data){
+				var datas = eval("("+data+")");
+			 	if(datas.code=='200'){
+			   		$(id).val(datas.data);
+			   		$("#add_image").attr("src",datas.data);
+			   		$("#add_image").show();
+			   	}else{
+			   	    $.messager.alert("提示","上传失败:"+datas.msg);
+			   	}
+			}
+		});
+	}
 </script>
 </head>
 <body>

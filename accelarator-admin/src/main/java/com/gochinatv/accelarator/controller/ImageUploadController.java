@@ -3,17 +3,16 @@ package com.gochinatv.accelarator.controller;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
+import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.util.upload.FileChangeLocal;
 import com.gochinatv.accelarator.util.upload.HttpClientTools;
 import com.gochinatv.accelarator.util.upload.PropertiesUtil;
@@ -21,16 +20,15 @@ import com.gochinatv.accelarator.util.upload.PropertiesUtil;
 
 @Controller
 @RequestMapping("/imagecallback")
-public class ImageUploadController {
+public class ImageUploadController extends BaseController{
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(ImageUploadController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ImageUploadController.class);
 	
 	
 	@RequestMapping("/upload")
-    public void upload(HttpServletRequest request,
-			HttpServletResponse response,@RequestParam("file") MultipartFile file) throws Exception {
-		String wq ="";
+	@ResponseBody
+    public Map<String, Object> upload(@RequestParam("file") MultipartFile file) throws Exception {
+		Map<String,Object> result = null;
 		try {
 			 FileChangeLocal fcl = new FileChangeLocal();
 			 File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
@@ -42,15 +40,14 @@ public class ImageUploadController {
 			params.put("realId", "");
 			params.put("source", "");
 			heads.put("Content-Type", "	application/x-www-form-urlencoded; charset=UTF-8");
-		    wq = HttpClientTools.Upload(url, localFile, heads,params);
-			logger.info(wq);
+		    String backUrl = HttpClientTools.Upload(url, localFile, heads,params);
+		    JSONObject back = JSONObject.parseObject(backUrl);
+		    result = this.success(back.get("msg"));
+			logger.info(backUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
+			result = this.error(e.getMessage());
 		}
-		response.setContentType("text/html; charset=utf-8");
-		
-		response.getWriter().write(wq);
-		response.getWriter().close();
-		response.getWriter().flush();
+		return result;
 	}
 }
