@@ -105,7 +105,7 @@ public class TwoFourBmController extends BaseController{
 		return result;
 	}
 	/**
-	 * 校验选中地区是否已发布
+	 * 校验选中地区是否已有发布且时间冲突
 	 * @param twoFourBmArea
 	 * @return
 	 */
