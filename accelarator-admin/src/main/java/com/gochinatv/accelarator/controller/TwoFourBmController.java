@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.TwoFourBm;
+import com.gochinatv.accelarator.dao.entity.TwoFourBmArea;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
@@ -80,6 +81,39 @@ public class TwoFourBmController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			twoFourBmService.deleteByEntity(twoFourBm);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	/**
+	 * 发放
+	 * @param twoFourBmArea
+	 * @return
+	 */
+	@RequestMapping("/delivery")
+	@ResponseBody
+	public Map<String,Object> delivery(TwoFourBmArea twoFourBmArea){
+		Map<String, Object> result = this.success(null);
+		try{
+			twoFourBmService.delivery(twoFourBmArea);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	/**
+	 * 校验选中地区是否已发放
+	 * @param twoFourBmArea
+	 * @return
+	 */
+	@RequestMapping("/checkCode")
+	@ResponseBody
+	public Map<String,Object> checkCode(TwoFourBmArea twoFourBmArea){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			List<TwoFourBmArea> tList = twoFourBmService.checkCode(twoFourBmArea);
+			result = this.success(tList);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

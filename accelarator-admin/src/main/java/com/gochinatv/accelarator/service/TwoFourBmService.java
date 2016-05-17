@@ -1,6 +1,10 @@
 package com.gochinatv.accelarator.service;
 
+import java.text.ParseException;
+import java.util.List;
+
 import com.gochinatv.accelarator.dao.entity.TwoFourBm;
+import com.gochinatv.accelarator.dao.entity.TwoFourBmArea;
 import com.gochinatv.accelarator.framework.web.base.service.BaseService;
 
 /**
@@ -10,6 +14,21 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  * @修改时间
  */
 public interface TwoFourBmService extends BaseService<TwoFourBm>{
+
+	/**
+	 * 发放区域
+	 * @param twoFourBmArea
+	 * @throws Exception
+	 */
+	void delivery(TwoFourBmArea twoFourBmArea) throws Exception;
+
+	/**
+	 * 校验选中地区是否已发放
+	 * @param twoFourBmArea
+	 * @return
+	 * @throws ParseException 
+	 */
+	List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws ParseException;
 
 
 }

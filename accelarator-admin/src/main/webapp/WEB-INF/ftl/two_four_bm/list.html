@@ -98,6 +98,43 @@
 			});
 		}
  }
+ 
+  function delivery(){
+	 var row = grid.datagrid('getSelected');
+		if (row){
+			$('#delivery_tree').tree({
+				url:'${base}/area/areaStaticTree',
+				method:'get',
+				checkbox:true,
+				cascadeCheck:true,
+				multiple:true,
+				onCheck:function(node, checked){
+					alert(node.id);
+					$.ajax({
+			             type: "GET",
+			             url: "${base}/two_four_bm/checkCode",
+			             data: {cityCode:node.id},
+			             dataType: "json",
+			             success: function(data){
+			                 if(data){
+			                	 $('#delivery_tree').tree(checked, 'uncheck');
+			                 }
+			             },
+			             error : function() {  
+					          alert("异常！");  
+					     } 
+			         });
+				}
+			});
+			$("#delivery-window").window('open');
+			$("#twoFourBmId").val(row.id);
+		} else {
+			$.messager.show({
+				title:'系统提示', 
+				msg:'请先选择信息。'
+			});
+		}
+ }
 </script>
 </head>
 <body>
