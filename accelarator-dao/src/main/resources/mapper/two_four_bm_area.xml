@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.TwoFourBmAreaDao">
+
+	<resultMap type="TwoFourBmArea" id="TwoFourBmArea">
+	    <id property="id" column="id" />
+	    <result property="twoFourBmId" column="two_four_bm_id" />
+	    <result property="cityCode" column="city_code" />
+	    <result property="createTime" column="create_time" />
+	    
+	    <result property="currentTime" column="current_time" />
+	</resultMap>
+
+	<select id="getCheckNodes" resultType="String" parameterType="int">
+		select distinct city_code from two_four_bm_area where two_four_bm_id = #{twoFourBmId}
+	</select>
+	
+	<select id="getEntityByTbId" resultMap="TwoFourBmArea" parameterType="int">
+		select * from two_four_bm_area where two_four_bm_id = #{twoFourBmId}
+	</select>
+	
+	<select id="getListByCodeAndTime" resultMap="TwoFourBmArea" parameterType="TwoFourBmArea">
+		select tba.* from two_four_bm_area tba,two_four_bm tb 
+		where tba.city_code like CONCAT(#{cityCode},'%') and tba.two_four_bm_id != #{twoFourBmId} and tb.id=tba.two_four_bm_id
+		and tb.start_time &lt;= #{currentTime} and tb.end_time &gt;= #{currentTime}
+	</select>
+	
+	<insert id="save" parameterType="TwoFourBmArea">
+	   insert into two_four_bm_area(
+	            id,
+	            two_four_bm_id,
+	            city_code,
+	            create_time
+	            ) values (
+	            #{id},
+	            #{twoFourBmId},
+	            #{cityCode},
+	            #{createTime}
+	            )
+	</insert>
+	
+	<delete id="deleteByEntity" parameterType="TwoFourBmArea">
+	  delete from two_four_bm_area where id = #{id}
+	</delete>
+</mapper>

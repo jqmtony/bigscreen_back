@@ -2,6 +2,7 @@ package com.gochinatv.accelarator.service.impl;
 
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,15 +41,27 @@ public class TwoFourBmServiceImpl extends BaseServiceImpl<TwoFourBm> implements 
 
 	@Override
 	public void delivery(TwoFourBmArea twoFourBmArea) throws Exception {
+		//先删除
+		List<TwoFourBmArea> originalList = twoFourBmAreaDao.getEntityByTbId(twoFourBmArea.getTwoFourBmId());
+		if(originalList != null && originalList.size() > 0){
+			for(TwoFourBmArea tbBmArea : originalList){
+				twoFourBmAreaDao.deleteByEntity(tbBmArea);
+			}
+		}
 		String cityCodes = twoFourBmArea.getCityCode();
-		if(StringUtils.isNotBlank(cityCodes) && cityCodes.contains(",")){
-			String[] cityCodeArr = cityCodes.split(",");
-			for (int i = 0; i < cityCodeArr.length; i++) {
-				TwoFourBmArea tbArea = new TwoFourBmArea();
-				tbArea.setCityCode(cityCodeArr[i]);
-				tbArea.setTwoFourBmId(twoFourBmArea.getTwoFourBmId());
-				tbArea.setCreateTime(new Date());
-				twoFourBmAreaDao.save(tbArea);
+		if(StringUtils.isNotBlank(cityCodes)){
+			if(cityCodes.contains(",")){
+				String[] cityCodeArr = cityCodes.split(",");
+				for (int i = 0; i < cityCodeArr.length; i++) {
+					TwoFourBmArea tbArea = new TwoFourBmArea();
+					tbArea.setCityCode(cityCodeArr[i]);
+					tbArea.setTwoFourBmId(twoFourBmArea.getTwoFourBmId());
+					tbArea.setCreateTime(new Date());
+					twoFourBmAreaDao.save(tbArea);
+				}
+			}else{
+				twoFourBmArea.setCreateTime(new Date());
+				twoFourBmAreaDao.save(twoFourBmArea);
 			}
 		}
 		
@@ -62,5 +75,21 @@ public class TwoFourBmServiceImpl extends BaseServiceImpl<TwoFourBm> implements 
 			return tList;
 		}
 		return null;
+	}
+	@Override
+	public String getCheckNodes(int twoFourBmId){
+		List<String> checkNodesList = twoFourBmAreaDao.getCheckNodes(twoFourBmId);
+		StringBuffer sb=new StringBuffer();
+	    if (checkNodesList != null && checkNodesList.size() > 0) {  
+	        for (int i = 0; i < checkNodesList.size(); i++) {  
+	            if (i < checkNodesList.size() - 1) {  
+	                sb.append(checkNodesList.get(i) + ",");  
+	            } else {  
+	                sb.append(checkNodesList.get(i));  
+	            }  
+	        }  
+	    }  
+		String checkNodes =sb.toString();
+		return checkNodes;
 	}
 }

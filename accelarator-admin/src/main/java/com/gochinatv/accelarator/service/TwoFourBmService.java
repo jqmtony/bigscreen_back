@@ -30,5 +30,12 @@ public interface TwoFourBmService extends BaseService<TwoFourBm>{
 	 */
 	List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws ParseException;
 
+	/**
+	 * 得到选中的地区
+	 * @param twoFourBmId
+	 * @return
+	 */
+	String getCheckNodes(int twoFourBmId);
+
 
 }

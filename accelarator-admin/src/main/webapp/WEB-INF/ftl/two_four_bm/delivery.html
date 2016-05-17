@@ -1,0 +1,54 @@
+<script type="text/javascript">
+ $(document).ready(function() {
+	$("#delivery-window").window({
+		width : 400,
+		height : 400,
+		left : 200,
+		top : 50
+	});
+ });
+ function submitPlace(){
+	var twoFourBmId = $("#twoFourBmId").val();
+	var nodes = $('#delivery_tree').tree('getChecked');
+	if(nodes.length > 0){
+		var codes = "";
+		for(var i = 0 ; i < nodes.length ; i ++){
+			var node = nodes[i];
+			if(node.id.length == 8){
+				if(codes != ""){
+					codes = codes + "," + node.id;
+				}else{
+					codes = node.id;
+				}
+			}
+		}
+		$.post('${base}/two_four_bm/delivery',{ twoFourBmId: twoFourBmId,cityCode: codes},submitCallback,'json');
+	}else{
+		alert("请选择发布区域");
+	}
+ }
+ function submitCallback(data){
+		if(!data.status){
+			$.messager.alert('系统提示',data.msg,'warning');
+		}else{
+			$("#delivery-window").window("close");
+			$('#delivery_tree').tree('reload');
+			grid.datagrid('reload',$("#queryForm").serializeObject());	
+			//$("#update_save").linkbutton("enable");
+		}
+	}
+ function cancle(){
+	 $("#delivery-window").window("close");
+ }
+</script>
+
+<!-- 发布 -->
+<div id="delivery-window" title="投放区域" class="easyui-window" data-options="collapsible:false,minimizable:false,maximizable:false,closed:true">
+    <ul id="delivery_tree" class="easyui-tree"  style="width:90%;">
+    </ul>
+    <input id="twoFourBmId" type="hidden"/>
+    <div style="text-align:center;padding:5px">
+		<a  href="javascript:void(0)" class="easyui-linkbutton" onclick="submitPlace();">投放</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancle()">关闭</a>
+	</div>
+</div>

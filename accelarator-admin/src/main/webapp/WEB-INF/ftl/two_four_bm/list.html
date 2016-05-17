@@ -65,65 +65,61 @@
   function delivery(){
 	 var row = grid.datagrid('getSelected');
 		if (row){
+			var on_off = true;//开关，on_off为false时不执行onCheck事件，
 			$('#delivery_tree').tree({
 				url:'${base}/area/areaStaticTree',
 				method:'get',
 				checkbox:true,
 				cascadeCheck:true,
 				multiple:true,
-				onCheck:function(node, checked){
-					alert(node.id);
+				onLoadSuccess:function(node, data){
 					$.ajax({
 			             type: "GET",
-			             url: "${base}/two_four_bm/checkCode",
-			             data: {cityCode:node.id},
+			             url: "${base}/two_four_bm/getCheckNodes",
+			             data: {twoFourBmId:row.id},
 			             dataType: "json",
 			             success: function(data){
-			                 if(data){
-			                	 $('#delivery_tree').tree(checked, 'uncheck');
-			                 }
+			            	 if(data.status){
+			            		 data = data.data;
+			            		 if(data != "" && data != null){
+			            			 
+					           	 	 var array = data.split(','); 
+					           	 	 alert(array);
+			                         for(var i=0;i<array.length;i++)  
+			                         {  
+			                           on_off = false;
+			                           var node = $('#delivery_tree').tree('find',array[i]);  
+			                           $('#delivery_tree').tree('check',node.target); 
+			                         }
+			                         on_off = true;//加载完成，正常开启onCheck事件 ，
+			            		 }
+			            	 }
 			             },
 			             error : function() {  
 					          alert("异常！");  
 					     } 
 			         });
-				}
-			});
-			$("#delivery-window").window('open');
-			$("#twoFourBmId").val(row.id);
-		} else {
-			$.messager.show({
-				title:'系统提示', 
-				msg:'请先选择信息。'
-			});
-		}
- }
- 
-  function delivery(){
-	 var row = grid.datagrid('getSelected');
-		if (row){
-			$('#delivery_tree').tree({
-				url:'${base}/area/areaStaticTree',
-				method:'get',
-				checkbox:true,
-				cascadeCheck:true,
-				multiple:true,
+				},
 				onCheck:function(node, checked){
-					alert(node.id);
-					$.ajax({
-			             type: "GET",
-			             url: "${base}/two_four_bm/checkCode",
-			             data: {cityCode:node.id},
-			             dataType: "json",
-			             success: function(data){
-			                 if(data){
-			                	 $('#delivery_tree').tree(checked, 'uncheck');
-			                 }
-			             },
-			             error : function() {  
-					          alert("异常！");  
-					     } 
-			         });
+					if(on_off){
+						$.ajax({
+				             type: "POST",
+				             url: "${base}/two_four_bm/checkCode",
+				             data: {cityCode:node.id,twoFourBmId:row.id},
+				             dataType: "json",
+				             success: function(data){
+				                 if(data.status){
+				                	 if(data.data != null){
+				                		 alert("所选区域今天已发布");
+					                	 $('#delivery_tree').tree(checked, 'uncheck');
+				                	 }
+				                 }
+				             },
+				             error : function() {  
+						          alert("异常！");  
+						     } 
+				         });
+					}
 				}
 			});
 			$("#delivery-window").window('open');

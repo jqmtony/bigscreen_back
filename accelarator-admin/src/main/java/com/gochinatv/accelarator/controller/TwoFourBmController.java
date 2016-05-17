@@ -2,8 +2,10 @@ package com.gochinatv.accelarator.controller;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,7 +105,7 @@ public class TwoFourBmController extends BaseController{
 		return result;
 	}
 	/**
-	 * 校验选中地区是否已发放
+	 * 校验选中地区是否已发布
 	 * @param twoFourBmArea
 	 * @return
 	 */
@@ -119,7 +121,23 @@ public class TwoFourBmController extends BaseController{
 		}
 		return result;
 	}
-	
+	/**
+	 * 得到选中的地区
+	 * @param twoFourBmId
+	 * @return
+	 */
+	@RequestMapping("/getCheckNodes")
+	@ResponseBody
+	public Map<String,Object> getCheckNodes(int twoFourBmId){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			String checkNodes = twoFourBmService.getCheckNodes(twoFourBmId);
+			result = this.success(checkNodes);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	/**
 	 * @param parentMethod
