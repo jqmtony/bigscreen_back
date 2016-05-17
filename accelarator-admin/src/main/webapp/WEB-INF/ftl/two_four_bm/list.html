@@ -109,7 +109,7 @@
 				             success: function(data){
 				                 if(data.status){
 				                	 if(data.data != null){
-				                		 alert("所选区域今天已发布");
+				                		 alert("所选区域时间有冲突");
 					                	 $('#delivery_tree').tree(checked, 'uncheck');
 				                	 }
 				                 }
@@ -139,7 +139,6 @@
 			<tr>
 			      <th data-options="field:'name',width:100">图集名称</th>
 			      <th data-options="field:'status',width:100,formatter:formatOnlineStatus">状态</th>
-			      <th data-options="field:'playTime',width:100">播放时间（秒）</th>
 			      <th data-options="field:'startTime',width:100">开始时间</th>
 			      <th data-options="field:'endTime',width:100">结束时间</th>
 			      <th data-options="field:'createTime',width:100,formatter:formatYYYYMMDDHHMMSS">创建时间</th>

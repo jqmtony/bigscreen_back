@@ -22,7 +22,6 @@ public class TwoFourBm extends BaseVo implements Serializable {
 	private int id; //ID
 	private String name; //名称
 	private int status; //状态      1：上线      2：下线
-	private int playTime; //播放时间
 	private String startTime; //开始时间
 	private String endTime; //结束时间
 	private Date createTime; //创建时间
@@ -51,13 +50,7 @@ public class TwoFourBm extends BaseVo implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getPlayTime() {
-		return playTime;
-	}
-
-	public void setPlayTime(int playTime) {
-		this.playTime = playTime;
-	}
+	
 	public String getStartTime() {
 		return startTime;
 	}

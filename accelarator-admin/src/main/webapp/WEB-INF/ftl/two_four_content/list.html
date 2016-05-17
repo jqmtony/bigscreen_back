@@ -43,13 +43,16 @@
  
 	function uploadPic(form,srcId,fileId,imgId,url){
 		var reg = /(jpg|gif|bmp|png)/i;
-		if(!reg.test($(fileId).val())){
+		if(!reg.test($('#'+fileId).val())){
 			$.messager.alert("提示","请选择图片");
 			return ;
 		}
 		
 		$('#'+form).form('submit',{
 			url:url,
+			onSubmit: function(){
+				$('#'+form).form('disableValidation');
+			},
 			success:function(data){
 				var datas = eval("("+data+")");
 				if(datas.success==' true'){
@@ -58,7 +61,8 @@
 				}else{
 			   	    $.messager.alert("提示","上传失败！");
 			   	}
-			}
+				$('#'+form).form('enableValidation');
+		   }
 		});
 	}
 </script>

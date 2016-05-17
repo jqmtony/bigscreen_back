@@ -10,13 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.gochinatv.accelarator.dao.entity.TwoFourBm;
 import com.gochinatv.accelarator.dao.entity.TwoFourContent;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
-import com.gochinatv.accelarator.service.TwoFourBmService;
 import com.gochinatv.accelarator.service.TwoFourContentService;
 
 /**
@@ -32,9 +29,6 @@ public class TwoFourContentController extends BaseController{
     
 	@Autowired
 	private TwoFourContentService twoFourContentService;
-	
-	@Autowired
-	private TwoFourBmService twoFourBmService;
 	
 	@RequestMapping("/gotoList")
 	public String gotoList(@RequestParam(name="id",defaultValue="0") int id,String name,Model model) throws Exception{
@@ -60,11 +54,6 @@ public class TwoFourContentController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			twoFourContent.setCreateTime(new Date());
-			if(twoFourContent.getPlayTime()==0){
-				int twoFourBmId = twoFourContent.getTwoFourBmId();
-				TwoFourBm fourBm = twoFourBmService.getEntityById(twoFourBmId);
-				twoFourContent.setPlayTime(fourBm.getPlayTime());
-			}
 			twoFourContentService.save(twoFourContent);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
@@ -78,11 +67,6 @@ public class TwoFourContentController extends BaseController{
 	public Map<String,Object> update(TwoFourContent twoFourContent){
 		Map<String,Object> result = this.success(null);
 		try{
-			if(twoFourContent.getPlayTime()==0){
-				int twoFourBmId = twoFourContent.getTwoFourBmId();
-				TwoFourBm fourBm = twoFourBmService.getEntityById(twoFourBmId);
-				twoFourContent.setPlayTime(fourBm.getPlayTime());
-			}
 			twoFourContentService.update(twoFourContent);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
