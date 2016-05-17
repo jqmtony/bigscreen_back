@@ -27,8 +27,9 @@ public interface TwoFourBmService extends BaseService<TwoFourBm>{
 	 * @param twoFourBmArea
 	 * @return
 	 * @throws ParseException 
+	 * @throws Exception 
 	 */
-	List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws ParseException;
+	List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws ParseException, Exception;
 
 	/**
 	 * 得到选中的地区

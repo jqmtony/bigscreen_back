@@ -25,12 +25,27 @@ public class TwoFourBmArea extends BaseVo implements Serializable {
 	private Date createTime; //创建时间
 	
 	//查询使用
-	private String currentTime;
-	public String getCurrentTime() {
-		return currentTime;
+	private String startTime;
+	private String endTime;
+	private int type;
+	
+	public int getType() {
+		return type;
 	}
-	public void setCurrentTime(String currentTime) {
-		this.currentTime = currentTime;
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 	public int getId() {
 		return id;

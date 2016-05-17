@@ -8,7 +8,9 @@
 	    <result property="cityCode" column="city_code" />
 	    <result property="createTime" column="create_time" />
 	    
-	    <result property="currentTime" column="current_time" />
+	    <result property="startTime" column="start_time" />
+	    <result property="endTime" column="end_time" />
+	    <result property="type" column="type" />
 	</resultMap>
 
 	<select id="getCheckNodes" resultType="String" parameterType="int">
@@ -21,8 +23,14 @@
 	
 	<select id="getListByCodeAndTime" resultMap="TwoFourBmArea" parameterType="TwoFourBmArea">
 		select tba.* from two_four_bm_area tba,two_four_bm tb 
-		where tba.city_code like CONCAT(#{cityCode},'%') and tba.two_four_bm_id != #{twoFourBmId} and tb.id=tba.two_four_bm_id
-		and tb.start_time &gt;= #{currentTime} &lt;= tb.end_time
+		where tba.city_code like CONCAT(#{cityCode},'%') and tba.two_four_bm_id != #{twoFourBmId} 
+		and tb.id=tba.two_four_bm_id and tb.type=#{type}
+		<if test="startTime!=null and startTime!=''">
+			 and (tb.start_time &gt;= #{startTime} or tb.end_time &gt;= #{startTime})
+		</if>
+		<if test="endTime!=null and endTime!=''">
+			 and (tb.start_time &lt;= #{endTime} or tb.end_time &lt;= #{endTime})
+		</if>
 	</select>
 	
 	<insert id="save" parameterType="TwoFourBmArea">

@@ -67,9 +67,12 @@ public class TwoFourBmServiceImpl extends BaseServiceImpl<TwoFourBm> implements 
 		
 	}
 	@Override
-	public List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws ParseException{
-		String dateString = DateUtils.formatDateStringWithOutHMS(new Date());
-		twoFourBmArea.setCurrentTime(dateString);
+	public List<TwoFourBmArea> checkCode(TwoFourBmArea twoFourBmArea) throws Exception{
+		//得到广告位
+		TwoFourBm tBm = twoFourBmDao.getEntityById(twoFourBmArea.getTwoFourBmId());
+		twoFourBmArea.setStartTime(tBm.getStartTime());
+		twoFourBmArea.setEndTime(tBm.getEndTime());
+		twoFourBmArea.setType(tBm.getType());
 		List<TwoFourBmArea> tList = twoFourBmAreaDao.getListByCodeAndTime(twoFourBmArea);
 		if(tList != null && tList.size() > 0){//已存在
 			return tList;
