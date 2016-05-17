@@ -119,8 +119,5 @@ public class DateUtils {
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
 		return calendar.getTime();
 	}
-	public static void main(String[] args) {
-		String now = DateUtils.convert(getNextDate(new Date()), DateUtils.DATE_FORMAT);
-		System.out.println(getNextDate(new Date()));
-	}
+	
 }

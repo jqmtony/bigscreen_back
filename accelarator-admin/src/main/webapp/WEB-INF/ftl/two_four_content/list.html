@@ -3,7 +3,7 @@
 <head>
 <#include "/frame/pageInclude.html">
 <script type="text/javascript">
- $(document).ready(function() {
+ $(function() {
 	grid = $('#tab').datagrid({	
 		url : '${base}/two_four_content/queryList',
 		queryParams : $("#queryForm").serializeObject(),
@@ -17,8 +17,22 @@
 		onDblClickRow : function(index, row) {
 			modifyRow(row);
 		}
-	});
+  });
+	
+	 $("#add-window, #modify-window").window({ 
+	     width:500,
+	     height:400
+	 });
  });
+ 
+ function modifyRow(row){
+	modifyWin.window('open');
+	$('#modifyForm').form('clear');
+	$('#modifyForm').form('load',row);
+	if(row.name!=null && row.name!=''){
+		$("#update_image").attr("src",row.name);
+	}
+ }
  
  function openLookUpCallBack(row){
 	$("#twoFourBmId,#u_twoFourBmId").val(row.id);
@@ -27,23 +41,22 @@
 	lookUpWin.window('close');
  }
  
-	function uploadPic(form,id,idFileId,urlTmp){
+	function uploadPic(form,srcId,fileId,imgId,url){
 		var reg = /(jpg|gif|bmp|png)/i;
-		if(!reg.test($(idFileId).val())){
+		if(!reg.test($(fileId).val())){
 			$.messager.alert("提示","请选择图片");
 			return ;
 		}
 		
 		$('#'+form).form('submit',{
-			url:urlTmp,
+			url:url,
 			success:function(data){
 				var datas = eval("("+data+")");
-			 	if(datas.code=='200'){
-			   		$(id).val(datas.data);
-			   		$("#add_image").attr("src",datas.data);
-			   		$("#add_image").show();
-			   	}else{
-			   	    $.messager.alert("提示","上传失败:"+datas.msg);
+				if(datas.success==' true'){
+					$('#'+srcId).val(datas.msg);
+			   		$('#'+imgId).attr("src",datas.msg).show();
+				}else{
+			   	    $.messager.alert("提示","上传失败！");
 			   	}
 			}
 		});
@@ -56,7 +69,7 @@
 		<thead>
 			<tr>
 			      <th data-options="field:'twoFourBmName',width:100">图集名称</th>
-			      <th data-options="field:'name',width:150">图片名称</th>
+			      <th data-options="field:'name',width:90,formatter:formatImage">图片名称</th>
 			      <th data-options="field:'content',width:200">内容</th>
 			      <th data-options="field:'status',width:100,formatter:formatOnlineStatus">状态</th>
 			      <th data-options="field:'playTime',width:100">播放时间（秒）</th>

@@ -8,11 +8,8 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
@@ -24,7 +21,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class AmazonS3Tools {
-	private static Logger logger = LoggerFactory.getLogger(AmazonS3Tools.class);
+	  private static Logger logger = LoggerFactory.getLogger(AmazonS3Tools.class);
 
 	  public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 

@@ -227,3 +227,7 @@ function formatOrderStatus(val,row){
 	}
 	return text;
 }
+
+function formatImage(val,row){
+	return '<img src="' + val + '" style="width:80px;height:80px">';
+}

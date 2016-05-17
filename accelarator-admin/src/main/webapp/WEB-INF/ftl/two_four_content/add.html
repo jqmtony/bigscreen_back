@@ -8,7 +8,7 @@
 	    			    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpCallBack');" >选择</a>
 	    			</td>
 	    		</tr>
-	       	<!-- 	<tr>
+	       	<!-- <tr>
 	    			<td>图片名称：</td>
 	    			<td>
 	    			    <input class="easyui-validatebox textbox" id="name" name="name"/>
@@ -18,7 +18,7 @@
 	    		<tr>
 	    			<td>图片上传：</td>
 	    			<td><input type="file" id="add_file" name="file"  style="width:171px;"/>
-						<input type="button" value="上传" id="add_uploadBtn" 	onclick="uploadPic('addForm','#add_name','#add_file','${base}/imagecallback/upload');">
+						<input type="button" value="上传" onclick="uploadPic('addForm','add_name','add_file','add_image','${base}/imagecallback/upload');">
 						<input type="hidden" id="add_name" name="name"/>
 						<img width=100 height=100 id="add_image" style="display: none;">
 					</td>
@@ -27,7 +27,7 @@
 	    		<tr>
 	    			<td>内容：</td>
 	    			<td>
-	    			    <input class="easyui-textbox" name="content" data-options="multiline:true" style="height:70px"/>
+	    			    <input class="easyui-textbox" name="content" data-options="multiline:true" style="height:70px;width:171px;"/>
 	    			</td>
 	    		</tr>
 	    		<tr>
