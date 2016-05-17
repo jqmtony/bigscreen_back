@@ -71,6 +71,8 @@ input[type="checkbox"] { cursor: pointer;}
 .icon-application-ads { background:url('../images/icons/icon-application-ads.png') no-repeat center center;}
 .icon-ads-user { background:url('../images/icons/icon-ads-user.png') no-repeat center center;}
 .icon-ads-video { background:url('../images/icons/icon-ads-video.png') no-repeat center center;}
+.icon-ads-24-content { background:url('../images/icons/icon-ads-24-content.png') no-repeat center center;}
+.icon-ads-24 { background:url('../images/icons/icon-ads-24.png') no-repeat center center;}
 
 .icon-application-play { background:url('../images/icons/icon-application-play.png') no-repeat center center;}
 .icon-play-free { background:url('../images/icons/icon-play-free.png') no-repeat center center;}

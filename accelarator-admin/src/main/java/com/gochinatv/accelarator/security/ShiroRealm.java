@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.gochinatv.accelarator.dao.entity.Permission;
 import com.gochinatv.accelarator.dao.entity.Resource;
 import com.gochinatv.accelarator.dao.entity.User;
+import com.gochinatv.accelarator.service.ResourceService;
 import com.gochinatv.accelarator.service.UserService;
 
 @SuppressWarnings("all")
@@ -28,8 +29,15 @@ public class ShiroRealm extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ResourceService resourceService;
+	
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
 	}
 
 	@Override
@@ -62,22 +70,28 @@ public class ShiroRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		/*User user =  (User) principals.getPrimaryPrincipal();
+		// 因为非正常退出，即没有显式调用 SecurityUtils.getSubject().logout()
+		// (可能是关闭浏览器，或超时)，但此时缓存依旧存在(principals)，所以会自己跑到授权方法里。
+		if (!SecurityUtils.getSubject().isAuthenticated()) {
+			doClearCache(principals);
+			SecurityUtils.getSubject().logout();
+			return null;
+		}
+		User user =  (User) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		
-		List<String> permissions = new ArrayList<String>();
 		List<Resource> resourceList = null;
 		try {
 			resourceList = resourceService.getUserResourceList(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		List<String> permissions = new ArrayList<String>();
 		for (Resource resource : resourceList) {
 			permissions.add(resource.getUrl());
 		}
 		info.addStringPermissions(permissions);
-		return info;*/
-		return null;
+		return info;
 	}
 	
 
@@ -85,5 +99,5 @@ public class ShiroRealm extends AuthorizingRealm {
 		PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
 		super.clearCache(principals);
 	}
-
+   
 }

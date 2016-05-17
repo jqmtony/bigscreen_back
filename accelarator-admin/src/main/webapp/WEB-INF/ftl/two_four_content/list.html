@@ -3,8 +3,7 @@
 <head>
 <#include "/frame/pageInclude.html">
 <script type="text/javascript">
- var lookup_Win;
- $(document).ready(function() {
+ $(function() {
 	grid = $('#tab').datagrid({	
 		url : '${base}/two_four_content/queryList',
 		queryParams : $("#queryForm").serializeObject(),
@@ -18,8 +17,50 @@
 		onDblClickRow : function(index, row) {
 			modifyRow(row);
 		}
-	});
+  });
+	
+	 $("#add-window, #modify-window").window({ 
+	     width:500,
+	     height:400
+	 });
  });
+ 
+ function modifyRow(row){
+	modifyWin.window('open');
+	$('#modifyForm').form('clear');
+	$('#modifyForm').form('load',row);
+	if(row.name!=null && row.name!=''){
+		$("#update_image").attr("src",row.name);
+	}
+ }
+ 
+ function openLookUpCallBack(row){
+	$("#twoFourBmId,#u_twoFourBmId").val(row.id);
+	$("#twoFourBmName,#u_twoFourBmName").val(row.name);
+	$("#twoFourBmName,#u_twoFourBmName").validatebox({novalidate: true});
+	lookUpWin.window('close');
+ }
+ 
+	function uploadPic(form,srcId,fileId,imgId,url){
+		var reg = /(jpg|gif|bmp|png)/i;
+		if(!reg.test($(fileId).val())){
+			$.messager.alert("提示","请选择图片");
+			return ;
+		}
+		
+		$('#'+form).form('submit',{
+			url:url,
+			success:function(data){
+				var datas = eval("("+data+")");
+				if(datas.success==' true'){
+					$('#'+srcId).val(datas.msg);
+			   		$('#'+imgId).attr("src",datas.msg).show();
+				}else{
+			   	    $.messager.alert("提示","上传失败！");
+			   	}
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -27,19 +68,21 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-			      <th data-options="field:'twoFourBmId',width:100">2-4号位ID</th>
-			      <th data-options="field:'name',width:100">图片名称</th>
-			      <th data-options="field:'content',width:100">内容</th>
-			      <th data-options="field:'status',width:100">状态</th>
-			      <th data-options="field:'playTime',width:100">播放时间</th>
+			      <th data-options="field:'twoFourBmName',width:100">图集名称</th>
+			      <th data-options="field:'name',width:90,formatter:formatImage">图片名称</th>
+			      <th data-options="field:'content',width:200">内容</th>
+			      <th data-options="field:'status',width:100,formatter:formatOnlineStatus">状态</th>
+			      <th data-options="field:'playTime',width:100">播放时间（秒）</th>
 			      <th data-options="field:'sort',width:100">排序</th>
-			      <th data-options="field:'createTime',width:100">创建时间</th>
+			      <th data-options="field:'createTime',width:100,formatter:formatYYYYMMDDHHMMSS">创建时间</th>
 			</tr>
 		</thead>
 	</table>
 	
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
+		           <input type="hidden" name="twoFourBmId" value="${twoFourBmId}"/>
+		            图集名称： <input type="text" class="easyui-validatebox textbox" name="twoFourBmName" value="${twoFourBmName!''}" style="width:110px"/>
 		            图片名称： <input type="text" class="easyui-validatebox textbox" name="name" style="width:110px"/>
 			<a href="javascript:void(0);" onclick="query();"class="easyui-linkbutton" iconCls="icon-search">查询</a>
 			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
@@ -53,5 +96,6 @@
 	
    <#include "./add.html">
    <#include "./update.html">
+   <div id="lookUpSelect-window" title="选择图集"></div>
 </body>
 </html>

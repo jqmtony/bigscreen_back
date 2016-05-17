@@ -112,36 +112,6 @@ function formatSource(val, row) {
 	}
 }
 
-/*
-function createCountryOptions(combobox_id) {
-	var country_json = [ { 'id' : '', 'text' : '--请选择--' } ]; 
-	for (i = 0; i < _country.length; i++) {
-		var country = {};
-		country.id = _country[i].id;
-		country.text = _country[i].text;
-		country_json.push(country);
-	}
-	createOption(combobox_id,country_json);
-}
-
-function createAreaOptions(combobox_id) {
-	var default_option = [ { 'id' : '', 'text' : '--请选择--' } ];
-	createOption(combobox_id,default_option);
-}
-
-function createCityOptions(combobox_id) {
-	var default_option = [ { 'id' : '', 'text' : '--请选择--' } ];
-	createOption(combobox_id,default_option);
-}
-
-function createOption(combobox_id,json_data){
-	$('#'+combobox_id).combobox({
-	    valueField:'id',
-	    textField:'text',
-	    data:json_data
-	});
-}*/
-
 function dateFormat(now) {
 	var result=[];
 	var year = now.getFullYear();
@@ -256,4 +226,8 @@ function formatOrderStatus(val,row){
 		text = '已过期';
 	}
 	return text;
+}
+
+function formatImage(val,row){
+	return '<img src="' + val + '" style="width:80px;height:80px">';
 }

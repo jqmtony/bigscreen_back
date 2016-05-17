@@ -1,8 +1,8 @@
-<div id="add-window" title="新增2-4号位管理" class="easyui-window">
+<div id="add-window" title="新增2-4号位图集管理" class="easyui-window">
 	     <form id="addForm" method="post" >
 	    	<table cellpadding="5">
 	    		<tr>
-	    			<td>名称：</td>
+	    			<td>图集名称：</td>
 	    			<td>
 	    			       <input class="easyui-validatebox textbox" id="name" name="name" data-options="required:true"/><label style="color: red"> *</label>
 	    			</td>
@@ -10,37 +10,37 @@
 	    		<tr>
 	    			<td>状态：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="status" name="status"/>
+	    			    <select id="status" class="easyui-combobox" data-options="required:true,editable:false" name="status" style="width:171px;">
+			           		<option value="1" selected>上线</option>
+		    				<option value="2">下线</option>
+		    			</select>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>播放时间：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="playTime" name="playTime"/>
+	    			     <input class="easyui-numberbox" id="playTime" name="playTime" data-options="min:5,max:100"/>（5-100 秒）
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>开始时间：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="startTime" name="startTime" data-options="required:true"/><label style="color: red"> *</label>
+	    			       <input class="easyui-datebox" id="startTime" name="startTime" data-options="required:true"/><label style="color: red"> *</label>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>结束时间：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="endTime" name="endTime" data-options="required:true"/><label style="color: red"> *</label>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td>创建时间：</td>
-	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="createTime" name="createTime"/>
+	    			       <input class="easyui-datebox" id="endTime" name="endTime" data-options="required:true"/><label style="color: red"> *</label>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>类型：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="type" name="type"/>
+	    			    <select id="type" class="easyui-combobox" data-options="required:true,editable:false" name="type" style="width:171px;">
+			           		<option value="1" selected>图片</option>
+		    				<option value="2">文字</option>
+		    			</select>
 	    			</td>
 	    		</tr>
                </table>

@@ -37,14 +37,21 @@
     
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="shiroRealm" />
+		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	
     <bean id="shiroRealm" class="com.gochinatv.accelarator.security.ShiroRealm">
       <property name="userService" ref="userService"/>
+      <property name="resourceService" ref="resourceService"/>
       <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+       <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/> 
+    </bean>
+    
    <bean id="userService" class="com.gochinatv.accelarator.service.impl.UserServiceImpl"/>
+   <bean id="resourceService" class="com.gochinatv.accelarator.service.impl.ResourceServiceImpl"/>
     
     <!-- 凭证匹配器 -->
 	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">

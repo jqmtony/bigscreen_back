@@ -4,6 +4,13 @@ accelarator
 mvn clean package -Pprod
 mvn clean package -Pdev
 
+shiro 控制权限
+<@shiro.hasPermission name="/user/save"></@shiro.hasPermission>
+
+mysql 
+service mysqld restart
+
+
 公众空间accelarator 项目初始化
 
 TRUNCATE TABLE `advertisement`;
@@ -60,3 +67,11 @@ INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES 
 
 INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES (6,'监控管理',NULL,'监控管理',-1,1,'icon-application-monitor',6);
  INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES (22,'设备实时监控','/deviceImage/gotoList','设备实时监控',6,1,'icon-monitor-list',22);
+ 
+ 
+//2016-05-13
+
+ALTER TABLE `resource` ADD COLUMN is_virtual INT;
+UPDATE `resource` SET is_virtual=2;
+ 
+

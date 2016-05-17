@@ -62,7 +62,7 @@ public class IndexController extends BaseController{
 		if(session.getAttribute("resources")==null){
 			List<Resource> resourceList = resourceService.getUserResourceList(user.getId());
 			if(resourceList.size()>0){//表示有访问的资源
-				Collection<Resource> resources = resourceService.getResourceList(user.getId());
+				Collection<Resource> resources = resourceService.getUserMenuResourceList(user.getId());
 				session.setAttribute("resources", resources);
 			}
 		}

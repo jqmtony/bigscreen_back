@@ -39,4 +39,14 @@ public interface ResourceDao  extends BaseDao<Resource>{
 	 */
 	public List<Resource> getUserResourceList(@Param("userId") int userId)throws Exception;
 	
+	
+	/**
+	 * 根据登录人的id查询所拥有的左侧菜单信息
+	 * @param roleId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Resource> getUserMenuResourceList(@Param("userId") int userId)throws Exception;
+	
+	
 }

@@ -1,46 +1,54 @@
 <div id="add-window" title="新增2-4号位内容" class="easyui-window">
-	     <form id="addForm" method="post" >
+	     <form id="addForm" method="post" enctype="multipart/form-data">
 	    	<table cellpadding="5">
-	    		<tr>
-	    			<td>2-4号位ID：</td>
+	    	    <tr>
+	    			<td>图集名称：<input type="hidden" name="twoFourBmId" id="u_twoFourBmId" value="${twoFourBmId}"/></td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="twoFourBmId" name="twoFourBmId"/>
+	    			    <input class="easyui-validatebox textbox" id="u_twoFourBmName" name="twoFourBmName" value="${twoFourBmName!''}" readonly="readonly" data-options="required:true"/><label style="color: red"> *</label>
+	    			    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpCallBack');" >选择</a>
 	    			</td>
 	    		</tr>
-	    		<tr>
+	       	<!-- <tr>
 	    			<td>图片名称：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="name" name="name" data-options="required:true"/><label style="color: red"> *</label>
+	    			    <input class="easyui-validatebox textbox" id="name" name="name"/>
 	    			</td>
 	    		</tr>
+	    		 -->
+	    		<tr>
+	    			<td>图片上传：</td>
+	    			<td><input type="file" id="add_file" name="file"  style="width:171px;"/>
+						<input type="button" value="上传" onclick="uploadPic('addForm','add_name','add_file','add_image','${base}/imagecallback/upload');">
+						<input type="hidden" id="add_name" name="name"/>
+						<img width=100 height=100 id="add_image" style="display: none;">
+					</td>
+	    		</tr>
+	    		
 	    		<tr>
 	    			<td>内容：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="content" name="content"/>
+	    			    <input class="easyui-textbox" name="content" data-options="multiline:true" style="height:70px;width:171px;"/>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>状态：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="status" name="status"/>
+	    			   <select id="status" class="easyui-combobox" data-options="required:true,editable:false" name="status" style="width:171px;">
+			           		<option value="1" selected>上线</option>
+		    				<option value="2">下线</option>
+		    		   </select>
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>播放时间：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="playTime" name="playTime"/>
+	    			    <input class="easyui-numberbox" data-options="min:0,max:100" id="playTime" name="playTime"/>（秒）
 	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>排序：</td>
 	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="sort" name="sort"/>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td>创建时间：</td>
-	    			<td>
-	    			       <input class="easyui-validatebox textbox" id="createTime" name="createTime"/>
+	    			    <input class="easyui-numberbox" data-options="min:0,max:100" id="sort" name="sort"/>
 	    			</td>
 	    		</tr>
                </table>

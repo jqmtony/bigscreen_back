@@ -23,12 +23,13 @@ public class TwoFourContent extends BaseVo implements Serializable {
 	private int twoFourBmId; //2-4号位ID
 	private String name; //图片名称
 	private String content; //内容
-	private int status; //状态
+	private int status; //状态        1：上线    2：下线
 	private int playTime; //播放时间
 	private int sort; //排序
 	private Date createTime; //创建时间
 
-
+    
+	private String twoFourBmName;//图集名称
 
 	public int getId() {
 		return id;
@@ -85,6 +86,14 @@ public class TwoFourContent extends BaseVo implements Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getTwoFourBmName() {
+		return twoFourBmName;
+	}
+
+	public void setTwoFourBmName(String twoFourBmName) {
+		this.twoFourBmName = twoFourBmName;
 	}
 
 }

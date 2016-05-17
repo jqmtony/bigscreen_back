@@ -21,12 +21,12 @@ public class TwoFourBm extends BaseVo implements Serializable {
 	
 	private int id; //ID
 	private String name; //名称
-	private int status; //状态
+	private int status; //状态      1：上线      2：下线
 	private int playTime; //播放时间
 	private String startTime; //开始时间
 	private String endTime; //结束时间
 	private Date createTime; //创建时间
-	private int type; //类型
+	private int type; //类型        1：图片    2：文字
 
 
 

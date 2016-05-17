@@ -27,15 +27,42 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>2.3.23</version>
+		</dependency>
+		<dependency>
+			<groupId>net.mingsoft</groupId>
+			<artifactId>shiro-freemarker-tags</artifactId>
+			<version>0.1</version>
+			<exclusions>
+			  <exclusion>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-context</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <groupId>org.springframework.integration</groupId>
+			    <artifactId>spring-integration-mail</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <groupId>net.sourceforge.jexcelapi</groupId>
+			    <artifactId>jxl</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <groupId>com.sun.mail</groupId>
+			    <artifactId>javax.mail</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <groupId>com.mortennobel</groupId>
+			    <artifactId>java-image-scaling</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>quartz</artifactId>
+			  </exclusion>
+			  <exclusion>
+			    <artifactId>javase</artifactId>
+			  </exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- HTTP Client Start-->
@@ -76,8 +103,35 @@
 			<artifactId>poi</artifactId>
 			<version>3.5-FINAL</version>
 		</dependency>
-
-		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+			<exclusions>
+			   <exclusion>
+			      <groupId>org.slf4j</groupId>
+			      <artifactId>slf4j-api</artifactId>
+			   </exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 截图 -->
+		<dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.9.16</version>
+		</dependency>
+		<dependency>
+			<groupId>jmagick</groupId>
+			<artifactId>jmagick</artifactId>
+			<version>6.2.4</version>
+		</dependency>
 	</dependencies>
 	
 	<profiles>
