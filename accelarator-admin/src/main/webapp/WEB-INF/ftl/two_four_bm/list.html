@@ -19,7 +19,29 @@
 			modifyRow(row);
 		}
 	});
+	
+	validateTime("startTime","endTime");
+	validateTime("update_startTime","update_endTime");
  });
+ 
+ function validateTime(start,end){
+	 $("#"+start).datebox({  
+		    onChange:function(startTime){
+		    	var endTime = $("#"+end).datebox('getValue');
+				if(endTime != null && startTime>endTime){
+					$("#"+end).datebox("setValue","");
+				}
+		    	$("#"+end).datebox().datebox('calendar').calendar({
+			        validator: function(date){
+			        	    var startTimeStr = $("#"+start).datebox('getValue');
+				            var startTime = new Date(startTimeStr);
+				            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+				            return  date>=startDate;
+			        	}
+			    }); 
+		    }
+	 });
+ }
  
  function adsType(val, row){
 	 if (val == 1) {
@@ -38,6 +60,43 @@
     var title = '2-4广告内容列表';
     parent.removeTab(title);
     parent.addTab(title, url, 'icon-monitor-list', true);
+ }
+ 
+  function delivery(){
+	 var row = grid.datagrid('getSelected');
+		if (row){
+			$('#delivery_tree').tree({
+				url:'${base}/area/areaStaticTree',
+				method:'get',
+				checkbox:true,
+				cascadeCheck:true,
+				multiple:true,
+				onCheck:function(node, checked){
+					alert(node.id);
+					$.ajax({
+			             type: "GET",
+			             url: "${base}/two_four_bm/checkCode",
+			             data: {cityCode:node.id},
+			             dataType: "json",
+			             success: function(data){
+			                 if(data){
+			                	 $('#delivery_tree').tree(checked, 'uncheck');
+			                 }
+			             },
+			             error : function() {  
+					          alert("异常！");  
+					     } 
+			         });
+				}
+			});
+			$("#delivery-window").window('open');
+			$("#twoFourBmId").val(row.id);
+		} else {
+			$.messager.show({
+				title:'系统提示', 
+				msg:'请先选择信息。'
+			});
+		}
  }
 </script>
 </head>
@@ -68,10 +127,11 @@
 		    <a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>
 			<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">编辑</a>
 			<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+			<a href="javascript:void(0);" onclick="delivery();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">发布</a>
 		</div>
 	</div>
-	
    <#include "./add.html">
    <#include "./update.html">
+   <#include "./delivery.html">
 </body>
 </html>
