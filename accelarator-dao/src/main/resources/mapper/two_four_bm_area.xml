@@ -22,7 +22,7 @@
 	<select id="getListByCodeAndTime" resultMap="TwoFourBmArea" parameterType="TwoFourBmArea">
 		select tba.* from two_four_bm_area tba,two_four_bm tb 
 		where tba.city_code like CONCAT(#{cityCode},'%') and tba.two_four_bm_id != #{twoFourBmId} and tb.id=tba.two_four_bm_id
-		and tb.start_time &lt;= #{currentTime} and tb.end_time &gt;= #{currentTime}
+		and tb.start_time &gt;= #{currentTime} &lt;= tb.end_time
 	</select>
 	
 	<insert id="save" parameterType="TwoFourBmArea">
