@@ -1,15 +1,19 @@
 package com.gochinatv.accelarator.controller;
 
 
+import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.TwoFourBm;
+import com.gochinatv.accelarator.dao.entity.TwoFourBmArea;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
@@ -50,6 +54,7 @@ public class TwoFourBmController extends BaseController{
 	public Map<String,Object> save(TwoFourBm twoFourBm){
 		Map<String,Object> result = this.success(null);
 		try{
+			twoFourBm.setCreateTime(new Date());
 			twoFourBmService.save(twoFourBm);
 		}catch(Exception e){
 			result = this.error(e.getMessage());
@@ -82,5 +87,49 @@ public class TwoFourBmController extends BaseController{
 		}
 		return result;
 	}
+	/**
+	 * 发放
+	 * @param twoFourBmArea
+	 * @return
+	 */
+	@RequestMapping("/delivery")
+	@ResponseBody
+	public Map<String,Object> delivery(TwoFourBmArea twoFourBmArea){
+		Map<String, Object> result = this.success(null);
+		try{
+			twoFourBmService.delivery(twoFourBmArea);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	/**
+	 * 校验选中地区是否已发放
+	 * @param twoFourBmArea
+	 * @return
+	 */
+	@RequestMapping("/checkCode")
+	@ResponseBody
+	public Map<String,Object> checkCode(TwoFourBmArea twoFourBmArea){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			List<TwoFourBmArea> tList = twoFourBmService.checkCode(twoFourBmArea);
+			result = this.success(tList);
+		}catch(Exception e){
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * @param parentMethod
+	 * @return
+	 */
+	@RequestMapping(value = "/gotoTwoFourBmLookUp")
+    public String gotoTwoFourBmLookUp(Model model,@RequestParam(value = "parentMethod") String parentMethod){
+		model.addAttribute("parentMethod", parentMethod);
+		return "two_four_bm/lookUpForContent";
+    }
 	
 }

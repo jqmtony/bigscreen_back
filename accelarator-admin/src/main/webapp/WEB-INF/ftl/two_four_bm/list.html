@@ -20,6 +20,63 @@
 		}
 	});
  });
+ 
+ function adsType(val, row){
+	 if (val == 1) {
+		return '图片';
+	 } else {
+		return '文字';
+	 }
+ }
+ 
+ function formatOper(val,row){ 
+	 return '<a href="javascript:void(0);" onclick="createContent('+row.id+',\''+row.name+'\')">子集管理</a>'
+ }
+ 
+ function createContent(id,name){
+    var url = '${base}/two_four_content/gotoList?id='+id+'&name='+name;
+    var title = '2-4广告内容列表';
+    parent.removeTab(title);
+    parent.addTab(title, url, 'icon-monitor-list', true);
+ }
+ 
+ function delivery(){
+	 var row = grid.datagrid('getSelected');
+		if (row){
+			$('#delivery_tree').tree({
+				url:'${base}/area/areaStaticTree',
+				method:'get',
+				checkbox:true,
+				cascadeCheck:true,
+				multiple:true,
+				onCheck:function(node, checked){
+					alert(node.id);
+					$.ajax({
+			             type: "GET",
+			             url: "${base}/two_four_bm/checkCode",
+			             data: {cityCode:node.id},
+			             dataType: "json",
+			             success: function(data){
+			                 if(data){
+			                	 $('#delivery_tree').tree(checked, 'uncheck');
+			                 }
+			             },
+			             error : function() {  
+					          alert("异常！");  
+					     } 
+			         });
+				}
+			});
+			$("#delivery-window").window('open');
+			$("#twoFourBmId").val(row.id);
+		} else {
+			$.messager.show({
+				title:'系统提示', 
+				msg:'请先选择信息。'
+			});
+		}
+ }
+ 
 </script>
 </head>
 <body>
@@ -27,20 +84,21 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-			      <th data-options="field:'name',width:100">名称</th>
-			      <th data-options="field:'status',width:100">状态</th>
-			      <th data-options="field:'playTime',width:100">播放时间</th>
+			      <th data-options="field:'name',width:100">图集名称</th>
+			      <th data-options="field:'status',width:100,formatter:formatOnlineStatus">状态</th>
+			      <th data-options="field:'playTime',width:100">播放时间（秒）</th>
 			      <th data-options="field:'startTime',width:100">开始时间</th>
 			      <th data-options="field:'endTime',width:100">结束时间</th>
-			      <th data-options="field:'createTime',width:100">创建时间</th>
-			      <th data-options="field:'type',width:100">类型</th>
+			      <th data-options="field:'createTime',width:100,formatter:formatYYYYMMDDHHMMSS">创建时间</th>
+			      <th data-options="field:'type',width:100,formatter:adsType">类型</th>
+			      <th data-options="field:'_operate',width:100,formatter:formatOper">操作</th>
 			</tr>
 		</thead>
 	</table>
 	
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
-		           名称： <input type="text" class="easyui-validatebox textbox" name="name" style="width:110px"/>
+		           图集名称： <input type="text" class="easyui-validatebox textbox" name="name" style="width:110px"/>
 			<a href="javascript:void(0);" onclick="query();"class="easyui-linkbutton" iconCls="icon-search">查询</a>
 			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 		</form>
@@ -48,10 +106,11 @@
 		    <a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>
 			<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">编辑</a>
 			<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+			<a href="javascript:void(0);" onclick="delivery();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">发布</a>
 		</div>
 	</div>
-	
    <#include "./add.html">
    <#include "./update.html">
+   <#include "./delivery.html">
 </body>
 </html>
