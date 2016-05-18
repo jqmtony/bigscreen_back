@@ -2,8 +2,6 @@ package com.gochinatv.accelarator.api.bean;
 
 import java.io.Serializable;
 
-import com.wordnik.swagger.annotations.ApiModelProperty;
-
 public class Device  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

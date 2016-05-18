@@ -54,6 +54,8 @@
 				$('#'+form).form('disableValidation');
 			},
 			success:function(data){
+				end = data.indexOf("}")+1;
+				data = data.substring(0,end);
 				var datas = eval("("+data+")");
 				if(datas.success==' true'){
 					$('#'+srcId).val(datas.msg);
