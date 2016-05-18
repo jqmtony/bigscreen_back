@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.gochinatv.accelarator.api.bean.AdInfo;
 import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
+import com.gochinatv.accelarator.api.bean.TextAdInfo;
+import com.gochinatv.accelarator.api.bean.TwoAdInfo;
 import com.gochinatv.accelarator.api.bean.UploadLog;
 
 public interface DeviceDao {
@@ -26,4 +28,12 @@ public interface DeviceDao {
 	
 
 	public List<AdInfo> getAdInfoByCityCode(@Param(value="cityCode")String cityCode, @Param(value="type")int type,  @Param(value="time")String time);
+	
+
+	public List<TextAdInfo> getTextAdInfoByCityCode(@Param(value="cityCode")String cityCode,  @Param(value="time")String time);
+	
+
+	public List<TwoAdInfo> getTwoAdInfoByCityCode(@Param(value="cityCode")String cityCode,  @Param(value="time")String time);
+	
+	
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.gochinatv.accelarator.api.bean.AdInfo;
 import com.gochinatv.accelarator.api.bean.Device;
+import com.gochinatv.accelarator.api.bean.TextAdInfo;
+import com.gochinatv.accelarator.api.bean.TwoAdInfo;
 import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.vo.ResponseDeviceInfo;
 import com.gochinatv.accelarator.api.vo.ResponseImageAdInfo;
@@ -27,5 +29,18 @@ public interface DeviceService {
 	 * @return
 	 */
 	public List<AdInfo> getAdInfo(String mac,String time);
-
+	/**
+	 * 4号位
+	 * @param mac
+	 * @param time
+	 * @return
+	 */
+	public List<TextAdInfo> queryTextAdInfoList(String mac,String time);
+	/**
+	 * 2号位
+	 * @param mac
+	 * @param time
+	 * @return
+	 */
+	public List<TwoAdInfo> queryTwoAdInfoList(String mac,String time);
 }

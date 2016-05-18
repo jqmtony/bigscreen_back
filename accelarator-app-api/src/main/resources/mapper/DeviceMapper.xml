@@ -14,7 +14,6 @@
 		<result property="type" column="type" />
 		<result property="refreshTime" column="refresh_time" />
 		<result property="name" column="name" />
-		
 	</resultMap>
 	
 	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
@@ -97,6 +96,39 @@
 			from play_list p,play_list_detail pl,advertisement ad
 			where  p.id=pl.play_list_id and pl.advertisement_id=ad.id
 		   		 and p.city_code=#{cityCode} and p.type=#{type}   and p.start_time=#{time} order by pl.sort asc
+	</select>
+	
+	
+	<resultMap type="com.gochinatv.accelarator.api.bean.TextAdInfo" id="TextAdInfo">
+		<id property="adTextId" column="adTextId" />
+		<result property="adTextIndex" column="adTextIndex" />
+		<result property="adTextStr" column="adTextStr" />
+		<result property="adTextInterval" column="adTextInterval" />
+	</resultMap>
+	<resultMap type="com.gochinatv.accelarator.api.bean.TwoAdInfo" id="TwoAdInfo">
+		<id property="adImageId" column="adImageId" />
+		<result property="adImageIndex" column="adImageIndex" />
+		<result property="adImageTitle" column="adImageTitle" />
+		<result property="adImageUrl" column="adImageUrl" />
+		<result property="adImageInterval" column="adImageInterval" />
+	</resultMap>
+	
+	<select id="getTextAdInfoByCityCode" resultMap="TextAdInfo" >
+		select tfc.id as adTextId,tfc.sort as adTextIndex,tfc.name as adTextStr,tfc.play_time*1000 as adTextInterval 
+		   from two_four_bm tfb,two_four_content tfc,two_four_bm_area tfba
+		      where tfb.id=tfc.two_four_bm_id and tfb.id=tfba.two_four_bm_id and
+		        tfb.type=2 and tfb.status=1 and tfc.status=1 and  tfba.city_code=#{cityCode}
+		         and tfb.start_time &lt;= #{time} and tfb.end_time &gt;=#{time}
+		        order by tfc.sort desc
+	</select>
+	
+	<select id="getTwoAdInfoByCityCode" resultMap="TwoAdInfo" >
+		select tfc.id as adImageId,tfc.sort as adImageIndex,tfc.name as adImageTitle,tfc.play_time*1000 as adImageInterval,tfc.content as  adImageUrl
+		   from two_four_bm tfb,two_four_content tfc,two_four_bm_area tfba
+		      where tfb.id=tfc.two_four_bm_id and tfb.id=tfba.two_four_bm_id and
+		        tfb.type=1  and tfb.status=1 and tfc.status=1  and  tfba.city_code=#{cityCode}
+		         and tfb.start_time &lt;= #{time} and tfb.end_time &gt;=#{time}
+		        order by tfc.sort desc
 	</select>
 	
 </mapper>

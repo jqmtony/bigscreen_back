@@ -13,6 +13,8 @@ import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.ImageAdInfo;
 import com.gochinatv.accelarator.api.bean.Layout;
 import com.gochinatv.accelarator.api.bean.ScreenShot;
+import com.gochinatv.accelarator.api.bean.TextAdInfo;
+import com.gochinatv.accelarator.api.bean.TwoAdInfo;
 import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
@@ -74,11 +76,11 @@ public class DeviceServiceImpl  implements DeviceService{
 		try {
 			 device = deviceDao.queryDeviceByMac(mac);
 		} catch (Exception e) {
-			logger.error("===mac:"+mac+" queryDeviceByMac error "+e.getMessage());
 			device = deviceDao.queryDeviceByMac(AccelaratorConfig.DEVICE_DEFAULT_MAC);
+			logger.error("===mac:"+mac+" queryDeviceByMac error "+e.getMessage()+",default mac"+AccelaratorConfig.DEVICE_DEFAULT_MAC);
 		}
 		if(device ==null){
-			logger.error("===mac:"+mac+" has no device");
+			logger.error("===mac:"+mac+" has no device,default mac:"+AccelaratorConfig.DEVICE_DEFAULT_MAC);
 			device = deviceDao.queryDeviceByMac(AccelaratorConfig.DEVICE_DEFAULT_MAC);
 		}
 		return device;
@@ -179,4 +181,49 @@ public class DeviceServiceImpl  implements DeviceService{
 		}
 		return layoutList;
 	}
+
+	@Override
+	public List<TextAdInfo> queryTextAdInfoList(String mac,String time) {
+		List<TextAdInfo> adList = new ArrayList<TextAdInfo>();
+		
+
+		Device device = queryDeviceByMac(mac);
+		
+		if(adList==null || adList.size()==0){
+			//根据城市id 查出广告列表
+			adList = deviceDao.getTextAdInfoByCityCode(device.getCityCode(), time);
+			logger.info("===queryTextAdInfoList===mac:"+mac+" adList.size:"+adList.size());
+		}
+		
+		//使用默认广告列表
+		if(adList==null || adList.size()==0){
+			device = deviceDao.queryDeviceByMac(AccelaratorConfig.DEVICE_DEFAULT_MAC);
+			adList = deviceDao.getTextAdInfoByCityCode(device.getCityCode(),AccelaratorConfig.DEVICE_DEFAULT_TIME);
+			logger.info("===queryTextAdInfoList===mac:"+mac+" adList.size:"+adList.size());
+		}
+		return adList;
+	}
+	
+	@Override
+	public List<TwoAdInfo> queryTwoAdInfoList(String mac,String time) {
+		List<TwoAdInfo> adList = new ArrayList<TwoAdInfo>();
+		
+
+		Device device = queryDeviceByMac(mac);
+		
+		if(adList==null || adList.size()==0){
+			//根据城市id 查出广告列表
+			adList = deviceDao.getTwoAdInfoByCityCode(device.getCityCode(), time);
+			logger.info("===queryTwoAdInfoList===mac:"+mac+" adList.size:"+adList.size());
+		}
+		
+		//使用默认广告列表
+		if(adList==null || adList.size()==0){
+			device = deviceDao.queryDeviceByMac(AccelaratorConfig.DEVICE_DEFAULT_MAC);
+			adList = deviceDao.getTwoAdInfoByCityCode(device.getCityCode(),AccelaratorConfig.DEVICE_DEFAULT_TIME);
+			logger.info("===queryTwoAdInfoList===mac:"+mac+" adList.size:"+adList.size());
+		}
+		return adList;
+	}
+	
 }
