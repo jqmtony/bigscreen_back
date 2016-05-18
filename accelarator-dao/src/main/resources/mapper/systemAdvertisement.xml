@@ -25,6 +25,9 @@
 		left join business b on sa.business_id=b.id
 		left join place p on sa.place_id=p.id
 		left join device d on sa.device_id=d.id
+		<if test="businessId != 0">
+			where sa.business_id=#{businessId}
+		</if>
 		order by create_time desc
 	</select>
 	
