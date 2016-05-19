@@ -10,10 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.gochinatv.accelarator.dao.entity.TwoFourBm;
 import com.gochinatv.accelarator.dao.entity.TwoFourContent;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
+import com.gochinatv.accelarator.service.TwoFourBmService;
 import com.gochinatv.accelarator.service.TwoFourContentService;
 
 /**
@@ -30,10 +33,19 @@ public class TwoFourContentController extends BaseController{
 	@Autowired
 	private TwoFourContentService twoFourContentService;
 	
+	@Autowired
+	private TwoFourBmService twoFourBmService;
+	
 	@RequestMapping("/gotoList")
-	public String gotoList(@RequestParam(name="id",defaultValue="0") int id,String name,Model model) throws Exception{
+	public String gotoList(@RequestParam(name="id",defaultValue="0") int id,Model model) throws Exception{
 		model.addAttribute("twoFourBmId", id);
-		model.addAttribute("twoFourBmName", name);
+		model.addAttribute("twoFourBmName", "");
+		model.addAttribute("twoFourBmType", "1");
+		if(id!=0){
+			TwoFourBm bm = twoFourBmService.getEntityById(id);
+			model.addAttribute("twoFourBmName", bm.getName());
+			model.addAttribute("twoFourBmType", bm.getType()+"");
+		}
 		return "two_four_content/list";
 	}
 	

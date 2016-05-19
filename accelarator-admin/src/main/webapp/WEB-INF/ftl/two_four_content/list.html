@@ -24,7 +24,16 @@
 	     height:400
   });
   
-  $("#add_tr_content").hide();//添加页面的隐藏
+  <#if twoFourBmType=="1">
+    $("#add_tr_content").hide();
+    $("#content").textbox("disableValidation");
+  <#else>
+    $('#add_file').textbox('clear');
+	$("#add_file").textbox("disableValidation");
+    $("#add_name").val('');
+    $("#add_tr_name").hide();
+  </#if>
+  
 });
  
 	function uploadPic(form,srcId,fileId,imgId,url){
@@ -38,7 +47,9 @@
 		$('#'+form).form('submit',{
 			url:url,
 			onSubmit: function(){
-				$('#'+form).form('disableValidation');
+				$('#playTime').numberbox('disableValidation');
+				$('#sort').numberbox('disableValidation');
+				$('#twoFourBmName').textbox('disableValidation');
 			},
 			success:function(data){
 				end = data.indexOf("}")+1;
@@ -51,7 +62,9 @@
 				}else{
 			   	    $.messager.alert("提示","上传失败！");
 			   	}
-				$('#'+form).form('enableValidation');
+				$('#playTime').numberbox('enableValidation');
+				$('#sort').numberbox('enableValidation');
+				$('#twoFourBmName').textbox('enableValidation');
 		   }
 		});
 	}

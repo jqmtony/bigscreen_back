@@ -56,11 +56,11 @@
  }
  
  function formatOper(val,row){ 
-	 return '<a href="javascript:void(0);" onclick="createContent('+row.id+',\''+row.name+'\')">子集管理</a>'
+	 return '<a href="javascript:void(0);" onclick="createContent('+row.id+')">子集管理</a>'
  }
  
  function createContent(id,name){
-    var url = '${base}/two_four_content/gotoList?id='+id+'&name='+name;
+    var url = '${base}/two_four_content/gotoList?id='+id;
     var title = '2-4广告内容列表';
     parent.removeTab(title);
     parent.addTab(title, url, 'icon-monitor-list', true);
