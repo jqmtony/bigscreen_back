@@ -19,31 +19,18 @@
 		}
   });
 	
-	 $("#add-window, #modify-window").window({ 
+  $("#add-window, #modify-window").window({ 
 	     width:500,
 	     height:400
-	 });
- });
- 
- function modifyRow(row){
-	modifyWin.window('open');
-	$('#modifyForm').form('clear');
-	$('#modifyForm').form('load',row);
-	if(row.name!=null && row.name!=''){
-		$("#update_image").attr("src",row.name);
-	}
- }
- 
- function openLookUpCallBack(row){
-	$("#twoFourBmId,#u_twoFourBmId").val(row.id);
-	$("#twoFourBmName,#u_twoFourBmName").val(row.name);
-	$("#twoFourBmName,#u_twoFourBmName").validatebox({novalidate: true});
-	lookUpWin.window('close');
- }
+  });
+  
+  $("#add_tr_content").hide();//添加页面的隐藏
+});
  
 	function uploadPic(form,srcId,fileId,imgId,url){
 		var reg = /(jpg|gif|bmp|png)/i;
-		if(!reg.test($('#'+fileId).val())){
+		var val = $('#'+fileId).textbox('getValue');
+		if(!reg.test(val)){
 			$.messager.alert("提示","请选择图片");
 			return ;
 		}
@@ -59,7 +46,8 @@
 				var datas = eval("("+data+")");
 				if(datas.success==' true'){
 					$('#'+srcId).val(datas.msg);
-			   		$('#'+imgId).attr("src",datas.msg).show();
+			   		$('#'+imgId).attr("src",datas.msg);
+			   		$('#'+imgId).show();
 				}else{
 			   	    $.messager.alert("提示","上传失败！");
 			   	}
@@ -75,6 +63,7 @@
 		<thead>
 			<tr>
 			      <th data-options="field:'twoFourBmName',width:100">图集名称</th>
+			      <th data-options="field:'twoFourBmType',width:90,formatter:adsType">图集类型</th>
 			      <th data-options="field:'name',width:90,formatter:formatImage">图片名称</th>
 			      <th data-options="field:'content',width:200">内容</th>
 			      <th data-options="field:'status',width:100,formatter:formatOnlineStatus">状态</th>

@@ -30,6 +30,7 @@ public class TwoFourContent extends BaseVo implements Serializable {
 
     
 	private String twoFourBmName;//图集名称
+	private String twoFourBmType;//图集类型
 
 	public int getId() {
 		return id;
@@ -94,6 +95,14 @@ public class TwoFourContent extends BaseVo implements Serializable {
 
 	public void setTwoFourBmName(String twoFourBmName) {
 		this.twoFourBmName = twoFourBmName;
+	}
+
+	public String getTwoFourBmType() {
+		return twoFourBmType;
+	}
+
+	public void setTwoFourBmType(String twoFourBmType) {
+		this.twoFourBmType = twoFourBmType;
 	}
 
 }

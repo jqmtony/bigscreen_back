@@ -1,33 +1,52 @@
+<script type="text/javascript">
+function openLookUpCallBack(row){
+	$("#twoFourBmId").val(row.id);
+	$("#twoFourBmName").val(row.name);
+	$("#twoFourBmName").validatebox({novalidate: true});
+	if(row.type=='1'){//图片
+		$("#add_tr_name").show();
+		$("#add_file").textbox("enableValidation");
+		
+	    $("#content").val('');
+		$("#add_tr_content").hide();
+		$("#content").textbox("disableValidation");
+	}else{//文字
+		$("#add_tr_name").hide();
+		$('#add_file').textbox('clear');
+		$("#add_file").textbox("disableValidation");
+	    $("#add_name").val('');
+	    $("#add_image").hide();
+	    $("#content").textbox("enableValidation");
+		$("#add_tr_content").show();
+	}
+	lookUpWin.window('close');
+ }
+</script>
+
 <div id="add-window" title="新增2-4号位内容" class="easyui-window">
 	     <form id="addForm" method="post" enctype="multipart/form-data">
 	    	<table cellpadding="5">
 	    	    <tr>
-	    			<td>图集名称：<input type="hidden" name="twoFourBmId" id="u_twoFourBmId" value="${twoFourBmId}"/></td>
+	    			<td>图集名称：<input type="hidden" name="twoFourBmId" id="twoFourBmId" value="${twoFourBmId}"/></td>
 	    			<td>
-	    			    <input class="easyui-validatebox textbox" id="u_twoFourBmName" name="twoFourBmName" value="${twoFourBmName!''}" readonly="readonly" data-options="required:true"/><label style="color: red"> *</label>
+	    			    <input class="easyui-validatebox textbox" id="twoFourBmName" name="twoFourBmName" value="${twoFourBmName!''}" readonly="readonly" data-options="required:true"/><label style="color: red"> *</label>
 	    			    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpCallBack');" >选择</a>
 	    			</td>
 	    		</tr>
-	       	<!-- <tr>
-	    			<td>图片名称：</td>
-	    			<td>
-	    			    <input class="easyui-validatebox textbox" id="name" name="name"/>
-	    			</td>
-	    		</tr>
-	    		 -->
-	    		<tr>
+	     
+	    		<tr id="add_tr_name">
 	    			<td>图片上传：</td>
-	    			<td><input type="file" id="add_file" name="file"  style="width:171px;"/>
-						<input type="button" value="上传" onclick="uploadPic('addForm','add_name','add_file','add_image','${base}/imagecallback/upload');">
+	    			<td><input class="easyui-filebox" id="add_file" name="file"  data-options="required:true,prompt:'请选择图片...'" style="width:171px;"/><label style="color: red"> *</label>
+						<a href="javascript:void(0)" class="easyui-linkbutton" onclick="uploadPic('addForm','add_name','add_file','add_image','${base}/imagecallback/upload');">上传</a>
 						<input type="hidden" id="add_name" name="name"/>
 						<img width=100 height=100 id="add_image" style="display: none;">
 					</td>
 	    		</tr>
 	    		
-	    		<tr>
+	    		<tr id="add_tr_content">
 	    			<td>内容：</td>
 	    			<td>
-	    			    <input class="easyui-textbox" name="content" data-options="multiline:true" style="height:70px;width:171px;"/>
+	    			    <input class="easyui-textbox" id="content" name="content" data-options="required:true,multiline:true" style="height:70px;width:171px;"/><label style="color: red"> *</label>
 	    			</td>
 	    		</tr>
 	    		<tr>
@@ -54,7 +73,7 @@
                </table>
             </form>
             <div style="text-align:center;padding:5px">
-   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+   			   <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
     	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
 	    	</div>
     </div>

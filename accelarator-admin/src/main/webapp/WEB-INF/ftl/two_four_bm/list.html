@@ -22,7 +22,19 @@
 	
 	validateTime("startTime","endTime");
 	validateTime("update_startTime","update_endTime");
+	compareTime("startTime");
+	compareTime("update_startTime");
  });
+ 
+ function compareTime(timeId){
+	 $('#'+timeId).datebox().datebox('calendar').calendar({
+	     validator: function(date){
+	         var now = new Date();
+	         var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	         return d1<=date;
+	     }
+	 });
+ }
  
  function validateTime(start,end){
 	 $("#"+start).datebox({  
@@ -41,14 +53,6 @@
 			    }); 
 		    }
 	 });
- }
- 
- function adsType(val, row){
-	 if (val == 1) {
-		return '图片';
-	 } else {
-		return '文字';
-	 }
  }
  
  function formatOper(val,row){ 

@@ -195,6 +195,13 @@ function formatAdvertisementType(val, row) {
 	}
 }
 
+function adsType(val, row){
+	 if (val == 1) {
+		return '图片';
+	 } else {
+		return '文字';
+	 }
+}
 
 function formatValid(val, row) {
 	if (val == 1) {
@@ -229,5 +236,8 @@ function formatOrderStatus(val,row){
 }
 
 function formatImage(val,row){
-	return '<img src="' + val + '" style="width:80px;height:80px">';
+	if(val!=null && val!=''){
+		return '<img src="' + val + '" style="width:80px;height:80px">';
+	}
+	return '';
 }

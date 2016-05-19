@@ -13,10 +13,11 @@
 	    <result property="createTime" column="create_time" />
 	    
 	    <result property="twoFourBmName" column="two_four_bm_name" />
+	    <result property="twoFourBmType" column="two_four_bm_type" />
 	</resultMap>
 
 	<select id="getListByEntity" resultMap="TwoFourContent" parameterType="TwoFourContent">
-		select tfc.*,tfb.name two_four_bm_name from two_four_content tfc left join two_four_bm tfb on tfc.two_four_bm_id=tfb.id where 1=1 
+		select tfc.*,tfb.name two_four_bm_name,tfb.type two_four_bm_type from two_four_content tfc left join two_four_bm tfb on tfc.two_four_bm_id=tfb.id where 1=1 
 		  <if test="twoFourBmName!=null and twoFourBmName!=''">
 				and tfb.name like CONCAT('%',#{twoFourBmName},'%' )
 		  </if>
@@ -49,7 +50,7 @@
 	</insert>
 	
 	<update id="update" parameterType="TwoFourContent">
-		update two_four_content set two_four_bm_id=#{twoFourBmId},name=#{name},content=#{content},status=#{status},play_time=#{playTime},sort=#{sort},create_time=#{createTime} where id = #{id}
+		update two_four_content set two_four_bm_id=#{twoFourBmId},name=#{name},content=#{content},status=#{status},play_time=#{playTime},sort=#{sort} where id = #{id}
 	</update>
 	
 	<delete id="deleteByEntity" parameterType="TwoFourContent">
