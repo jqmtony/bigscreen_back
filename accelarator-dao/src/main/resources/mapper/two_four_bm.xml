@@ -44,7 +44,7 @@
 	</insert>
 	
 	<update id="update" parameterType="TwoFourBm">
-		update two_four_bm set name=#{name},status=#{status},start_time=#{startTime},end_time=#{endTime},create_time=#{createTime},type=#{type} where id = #{id}
+		update two_four_bm set name=#{name},status=#{status},start_time=#{startTime},end_time=#{endTime},type=#{type} where id = #{id}
 	</update>
 	
 	<delete id="deleteByEntity" parameterType="TwoFourBm">
