@@ -21,9 +21,6 @@
 		  <if test="twoFourBmName!=null and twoFourBmName!=''">
 				and tfb.name like CONCAT('%',#{twoFourBmName},'%' )
 		  </if>
-		  <if test="name!=null and name!=''">
-				and tfc.name like CONCAT('%',#{name},'%' )
-		  </if>
 		  order by tfc.sort desc
 	</select>
 	

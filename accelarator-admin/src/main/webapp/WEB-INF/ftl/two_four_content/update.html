@@ -6,6 +6,7 @@ function modifyRow(row){
 	if(row.twoFourBmType=='1'){//图片
 		$("#update_tr_name").show();
 		$("#update_tr_content").hide();
+		$("#update_content").textbox('setValue','');
 		$("#update_content").textbox("disableValidation");
 		$("#update_image").attr("src",row.name);
 		$("#update_file").textbox("disableValidation");
@@ -31,7 +32,7 @@ function modifyRow(row){
 	    $("#update_name").val('');
 	    $("#update_image").attr("src","");
 	    $("#update_image").hide();
-	    $("#update_content").val('');
+	    $("#update_content").textbox('setValue','');
 		$("#update_tr_content").hide();
 		$("#update_content").textbox("disableValidation");
 	}else{//文字

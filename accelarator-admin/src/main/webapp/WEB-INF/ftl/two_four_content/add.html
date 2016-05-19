@@ -6,8 +6,7 @@ function openLookUpCallBack(row){
 	if(row.type=='1'){//图片
 		$("#add_tr_name").show();
 		$("#add_file").textbox("enableValidation");
-		
-	    $("#content").val('');
+		$("#content").textbox('setValue','');
 		$("#add_tr_content").hide();
 		$("#content").textbox("disableValidation");
 	}else{//文字
