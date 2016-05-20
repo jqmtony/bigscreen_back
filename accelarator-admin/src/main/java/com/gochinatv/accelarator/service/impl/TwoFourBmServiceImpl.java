@@ -1,22 +1,17 @@
 package com.gochinatv.accelarator.service.impl;
 
 
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gochinatv.accelarator.dao.TwoFourBmAreaDao;
 import com.gochinatv.accelarator.dao.TwoFourBmDao;
 import com.gochinatv.accelarator.dao.entity.TwoFourBm;
 import com.gochinatv.accelarator.dao.entity.TwoFourBmArea;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 import com.gochinatv.accelarator.framework.web.base.service.impl.BaseServiceImpl;
-import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.TwoFourBmService;
 
 /**

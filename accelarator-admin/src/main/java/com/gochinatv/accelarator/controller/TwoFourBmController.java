@@ -19,6 +19,7 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.service.TwoFourBmService;
+import com.gochinatv.accelarator.service.TwoFourContentService;
 
 /**
  * 
@@ -33,6 +34,9 @@ public class TwoFourBmController extends BaseController{
     
 	@Autowired
 	private TwoFourBmService twoFourBmService;
+	
+	@Autowired
+	private TwoFourContentService twoFourContentService;
 	
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
@@ -83,6 +87,7 @@ public class TwoFourBmController extends BaseController{
 		Map<String,Object> result = this.success(null);
 		try{
 			twoFourBmService.deleteByEntity(twoFourBm);
+			twoFourContentService.deleteByBmId(twoFourBm.getId());
 		}catch(Exception e){
 			result = this.error(e.getMessage());
 		}

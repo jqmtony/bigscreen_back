@@ -11,5 +11,9 @@ import com.gochinatv.accelarator.framework.web.base.service.BaseService;
  */
 public interface TwoFourContentService extends BaseService<TwoFourContent>{
 
-
+	/**
+     * 根据广告位id删除广告内容
+     * @param twoFourBmId
+     */
+	public void deleteByBmId(int twoFourBmId);
 }

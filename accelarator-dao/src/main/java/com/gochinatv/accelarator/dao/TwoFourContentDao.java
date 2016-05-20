@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gochinatv.accelarator.dao.entity.TwoFourContent;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -12,5 +14,10 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  */
 public interface TwoFourContentDao  extends BaseDao<TwoFourContent>{
 
-
+   /**
+    * 根据广告位id删除广告内容
+    * @param twoFourBmId
+    */
+   public void deleteByBmId(@Param("twoFourBmId") int twoFourBmId);
+   
 }

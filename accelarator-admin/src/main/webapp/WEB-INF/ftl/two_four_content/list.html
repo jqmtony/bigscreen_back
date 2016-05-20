@@ -30,8 +30,9 @@
   <#else>
     $('#add_file').textbox('clear');
 	$("#add_file").textbox("disableValidation");
-    $("#add_name").val('');
-    $("#add_tr_name").hide();
+	$("#add_name").textbox("clear");
+	$("#add_name").textbox("disableValidation");
+    $("#add_tr_name,#add_tr_image").hide();
   </#if>
   
 });
@@ -50,13 +51,15 @@
 				$('#playTime').numberbox('disableValidation');
 				$('#sort').numberbox('disableValidation');
 				$('#twoFourBmName').textbox('disableValidation');
+				$('#add_name').textbox('disableValidation');
+				$('#update_name').textbox('disableValidation');
 			},
 			success:function(data){
 				end = data.indexOf("}")+1;
 				data = data.substring(0,end);
 				var datas = eval("("+data+")");
 				if(datas.success==' true'){
-					$('#'+srcId).val(datas.msg);
+					$('#'+srcId).textbox('setValue',datas.msg);
 			   		$('#'+imgId).attr("src",datas.msg);
 			   		$('#'+imgId).show();
 				}else{
@@ -65,6 +68,8 @@
 				$('#playTime').numberbox('enableValidation');
 				$('#sort').numberbox('enableValidation');
 				$('#twoFourBmName').textbox('enableValidation');
+				$('#add_name').textbox('enableValidation');
+				$('#update_name').textbox('enableValidation');
 		   }
 		});
 	}
@@ -97,7 +102,9 @@
 		<div style="margin:5px">
 		    <a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>
 			<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">编辑</a>
+			<@shiro.hasPermission name="/two_four_content/delete">	
 			<a href="javascript:void(0);" onclick="removeModule();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+		    </@shiro.hasPermission>
 		</div>
 	</div>
 	

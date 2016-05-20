@@ -50,8 +50,17 @@
 		update two_four_content set two_four_bm_id=#{twoFourBmId},name=#{name},content=#{content},status=#{status},play_time=#{playTime},sort=#{sort} where id = #{id}
 	</update>
 	
-	<delete id="deleteByEntity" parameterType="TwoFourContent">
+	<!-- 2016-05-20 16:53  由删除改为修改下线状态 -->
+	<update id="deleteByEntity" parameterType="TwoFourContent">
+		update two_four_content set status=2 where id = #{id}
+	</update>
+	
+	<update id="deleteByBmId" parameterType="int">
+		update two_four_content set status=2 where two_four_bm_id = #{twoFourBmId}
+	</update>
+	
+	<!-- <delete id="deleteByEntity" parameterType="TwoFourContent">
 	  delete from two_four_content where id = #{id}
-	</delete>
+	</delete> -->
 	
 </mapper>

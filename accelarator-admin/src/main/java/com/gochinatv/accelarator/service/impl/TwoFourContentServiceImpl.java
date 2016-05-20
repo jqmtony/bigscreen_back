@@ -26,4 +26,12 @@ public class TwoFourContentServiceImpl extends BaseServiceImpl<TwoFourContent> i
 		return twoFourContentDao;
 	}
     
+	
+  /**
+    * 根据广告位id删除广告内容
+    * @param twoFourBmId
+    */
+    public void deleteByBmId(int twoFourBmId){
+    	twoFourContentDao.deleteByBmId(twoFourBmId);
+    }
 }

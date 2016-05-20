@@ -4,16 +4,18 @@ function openLookUpCallBack(row){
 	$("#twoFourBmName").val(row.name);
 	$("#twoFourBmName").validatebox({novalidate: true});
 	if(row.type=='1'){//图片
-		$("#add_tr_name").show();
+		$("#add_tr_name,#add_tr_image").show();
 		$("#add_file").textbox("enableValidation");
+		$("#add_name").textbox("enableValidation");
 		$("#content").textbox('setValue','');
 		$("#add_tr_content").hide();
 		$("#content").textbox("disableValidation");
 	}else{//文字
-		$("#add_tr_name").hide();
+		$("#add_tr_name,#add_tr_image").hide();
 		$('#add_file').textbox('clear');
 		$("#add_file").textbox("disableValidation");
-	    $("#add_name").val('');
+		$("#add_name").textbox("clear");
+		$("#add_name").textbox("disableValidation");
 	    $("#add_image").hide();
 	    $("#content").textbox("enableValidation");
 		$("#add_tr_content").show();
@@ -37,10 +39,14 @@ function openLookUpCallBack(row){
 	    			<td>图片上传：</td>
 	    			<td><input class="easyui-filebox" id="add_file" name="file"  data-options="required:true,prompt:'请选择图片...'" style="width:171px;"/><label style="color: red"> *</label>
 						<a href="javascript:void(0)" class="easyui-linkbutton" onclick="uploadPic('addForm','add_name','add_file','add_image','${base}/imagecallback/upload');">上传</a>
-						<input type="hidden" id="add_name" name="name"/>
 						<img width=100 height=100 id="add_image" style="display: none;">
 					</td>
-	    		</tr>
+	    		 </tr>
+	    		 
+	    		 <tr id="add_tr_image">
+	    			<td>图片地址：</td>
+	    			<td><input class="easyui-textbox" id="add_name" readonly="readonly" name="name" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		 </tr>
 	    		
 	    		<tr id="add_tr_content">
 	    			<td>内容：</td>

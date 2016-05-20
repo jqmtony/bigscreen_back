@@ -4,15 +4,16 @@ function modifyRow(row){
 	$('#modifyForm').form('clear');
 	$('#modifyForm').form('load',row);
 	if(row.twoFourBmType=='1'){//图片
-		$("#update_tr_name").show();
+		$("#update_tr_name,#update_tr_image").show();
 		$("#update_tr_content").hide();
 		$("#update_content").textbox('setValue','');
 		$("#update_content").textbox("disableValidation");
 		$("#update_image").attr("src",row.name);
 		$("#update_file").textbox("disableValidation");
 	}else{//文字
-		$("#update_tr_name").hide();
+		$("#update_tr_name,#update_tr_image").hide();
 		$("#update_file").textbox("disableValidation");
+		$("#update_name").textbox("disableValidation");
 		$("#update_tr_content").show();
 	}
  }
@@ -22,25 +23,25 @@ function modifyRow(row){
 	$("#u_twoFourBmName").val(row.name);
 	$("#u_twoFourBmName").validatebox({novalidate: true});
 	if(row.type=='1'){//图片
-		$("#update_tr_name").show();
-	    var name_val = $("#update_name").val();
+		$("#update_tr_name,#update_tr_image").show();
+	    var name_val = $("#update_name").textbox('getValue');
 	    if(name_val!=null && name_val!=''){
 	    	$("#update_file").textbox("disableValidation");
 	    }else{
 	    	$("#update_file").textbox("enableValidation");
 	    }
-	    $("#update_name").val('');
+	    $("#update_name").textbox('clear');
 	    $("#update_image").attr("src","");
 	    $("#update_image").hide();
 	    $("#update_content").textbox('setValue','');
 		$("#update_tr_content").hide();
 		$("#update_content").textbox("disableValidation");
 	}else{//文字
-		$("#update_tr_name").hide();
+		$("#update_tr_name,#update_tr_image").hide();
 		$('#update_file').textbox('clear');
 		$("#update_file").textbox("disableValidation");
-	    $("#update_name").val('');
-	    $("#update_name").hide();
+	    $("#update_name").textbox('clear');
+	    $("#update_name").textbox("disableValidation");
 	    $("#update_content").textbox("enableValidation");
 		$("#update_tr_content").show();
 	}
@@ -63,10 +64,14 @@ function modifyRow(row){
 	    			<td>图片上传：</td>
 	    			<td><input class="easyui-filebox" id="update_file" name="file"  data-options="required:true,prompt:'请选择图片...'" style="width:171px;"/><label style="color: red"> *</label>
 						<a href="javascript:void(0)" class="easyui-linkbutton" onclick="uploadPic('modifyForm','update_name','update_file','update_image','${base}/imagecallback/upload');">上传</a>
-						<input type="hidden" id="update_name" name="name"/>
 						<img width=100 height=100 id="update_image">
 					</td>
 	    		</tr>
+	    		
+	    		<tr id="update_tr_image">
+	    			<td>图片地址：</td>
+	    			<td><input class="easyui-textbox" id="update_name" readonly="readonly" name="name" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		 </tr>
 	    		
 	    		<tr id="update_tr_content">
 	    			<td>内容：</td>
