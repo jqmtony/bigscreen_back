@@ -4,8 +4,8 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>商家：</td>
-	    			<td><input id="add_lookUpName" class="easyui-validatebox textbox" onclick="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
-	    			data-options="required:true,editable:false" type="text" name="userName"></input><label style="color: red"> *</label>
+	    			<td><input id="add_lookUpName" class="easyui-validatebox textbox" data-options="required:true" readonly="readonly" onclick="openLookUp('${base}/business/gotoBusinessLookUp?parentMethod=openLookUpCallBack');" 
+	    			type="text" name="userName"></input><label style="color: red"> *</label>
 	    			<input type="hidden" id="add_lookUpId" name="businessId"></input>
 	    			</td>
 	    			<td>类型：</td>

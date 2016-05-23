@@ -5,13 +5,13 @@
 	    			<td>商铺：</td>
 	    			<td>
 		    			<input id="edit_lookUpCname" class="easyui-validatebox textbox" onclick="openPlaceLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openPlaceLookUpCallBack');" 
-		    			data-options="required:true,editable:true" type="text" name="cname"></input><label style="color: red"> *</label>
+		    			data-options="required:true" readonly="readonly" type="text" name="cname"></input><label style="color: red"> *</label>
 		    			<input type="hidden" id="edit_lookUpPlaceId" name="placeId"></input>
 	    			</td>
 	    			<td>设备：</td>
 	    			<td>
 	    				<input id="edit_lookUpCode" class="easyui-validatebox textbox" onclick="openDeviceLookUp('#edit_lookUpPlaceId');" 
-		    			data-options="editable:false" type="text" name="code"></input>
+		    			 readonly="readonly" type="text" name="code"></input>
 		    			<input type="hidden" id="edit_lookUpDeviceId" name="deviceId"></input>
 		    		</td>
 	    		</tr>
