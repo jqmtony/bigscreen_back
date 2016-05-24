@@ -31,24 +31,19 @@ public class UploadController  extends BaseController{
 	
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String uploadImage( @RequestParam("file") MultipartFile file,
+	public Map<String,Object> uploadImage( @RequestParam("file") MultipartFile file,
 			@RequestParam(name="weight",defaultValue="486") int weight,
 			@RequestParam(name="height",defaultValue="648") int height)
 			throws Exception {
-		String result ="";
-		String success="true";
-		//Map<String,Object> result =new HashMap<String, Object>();
+		Map<String,Object> result =new HashMap<String, Object>();
 		String imageUrl = "";
 		try {
 			imageUrl = upload(file,weight,height);
-		/*	result.put("success","true");
-			result.put("msg",imageUrl);*/
-			result = "{\"success\":\" "+success+"\",\"msg\": \""+imageUrl+"\"}";
+			result.put("success","true");
+			result.put("msg",imageUrl);
 		} catch (Exception e) {
-		/*	result.put("success","false");
-			result.put("msg","上传图片失败");*/
-			 success="false";
-			result = "{\"success\":\" "+success+"\",\"msg\": \""+imageUrl+"\"}";
+			result.put("success","false");
+			result.put("msg","上传图片失败");
 		}
 		return result;
 	}
