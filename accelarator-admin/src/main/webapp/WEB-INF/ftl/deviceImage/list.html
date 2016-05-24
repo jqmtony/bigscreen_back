@@ -15,7 +15,7 @@
 			toolbar:'#toolbar',
 			fitColumns:true,
 			columns:[[
-						{field:'placeName',title:'商铺名称',width:180},
+						{field:'placeName',title:'商铺编码',width:180},
 						{field:'deviceName',title:'设备标识',width:180},
 						{field:'mac',title:'设备mac',width:140},
 						{field:'name',title:'广告名称',width:240},
@@ -76,7 +76,7 @@
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm">
 			商铺：<input id="add_lookUpCname" class="easyui-validatebox textbox" onclick="openPlaceLookUp('${base}/place/gotoPlaceLookUp?parentMethod=openPlaceLookUpCallBack');" 
-		    			data-options="editable:false" type="text" name="cname"></input>
+		    			data-options="editable:false" type="text" name="placeName"></input>
 		    			<input type="hidden" id="add_lookUpPlaceId" name="placeId"></input>
 	    	
 	    	设备：<input id="add_lookUpCode" class="easyui-validatebox textbox" onclick="openDeviceLookUp('#add_lookUpPlaceId');" 
