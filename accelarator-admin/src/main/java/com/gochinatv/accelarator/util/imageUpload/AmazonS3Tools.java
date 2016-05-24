@@ -25,9 +25,9 @@ public class AmazonS3Tools {
 
 	  public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
-	public static String uploadFileToAmazon(String suffix,  File file)
+	public static String uploadFileToAmazon(String suffix,  File file,int weight,int height)
 	  {
-		String size ="324X243";
+		String size =weight+"x"+height;
 	    String returnFileName = "http://img.vego.tv/common/default.jpg";
 	    AmazonS3 s3 = new AmazonS3Client(new ClasspathPropertiesFileCredentialsProvider());
 	    Region usWest2 = Region.getRegion(Regions.US_EAST_1);

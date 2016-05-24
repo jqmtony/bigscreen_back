@@ -37,7 +37,9 @@
   
 });
  
-	function uploadPic(form,srcId,fileId,imgId,url){
+ 
+
+	 function uploadPic(form,srcId,fileId,imgId,url){
 		var reg = /(jpg|gif|bmp|png)/i;
 		var val = $('#'+fileId).textbox('getValue');
 		if(!reg.test(val)){
@@ -58,7 +60,7 @@
 				end = data.indexOf("}")+1;
 				data = data.substring(0,end);
 				var datas = eval("("+data+")");
-				if(datas.success==' true'){
+				if(datas.success=='true'){
 					$('#'+srcId).textbox('setValue',datas.msg);
 			   		$('#'+imgId).attr("src",datas.msg);
 			   		$('#'+imgId).show();
@@ -72,7 +74,8 @@
 				$('#update_name').textbox('enableValidation');
 		   }
 		});
-	}
+	} 
+	
 </script>
 </head>
 <body>
