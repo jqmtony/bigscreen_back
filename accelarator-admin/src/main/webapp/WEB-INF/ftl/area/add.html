@@ -8,6 +8,7 @@
 			//XFrameUtils.clearForm('addForm'); 
 			$("#name").val(row.name);
 			$("#addsort").val(1);
+			//$("#addtimeChange").val(0);
 			$("#parentCode").val(row.areaCode);
 			$("#areaCode").val(row.areaCode);
 			$("#addlevel").val(row.level+1);
@@ -55,6 +56,12 @@
 		   <input id="areaCode" class="easyui-validatebox textbox" name="areaCode" data-options="required:true"/><label style="color: red"> *</label>(命名规范4-6-8) 
 		</td>
 	</tr>
+	<!-- <tr>
+		<td>时差：</td>
+		<td>
+		   <input id="addtimeChange" class="easyui-validatebox textbox" name="timeChange" data-options="required:true"/><label style="color: red"> *</label>(以北京为中心) 
+		</td>
+	</tr> -->
 		<tr>
 			<td>排序：</td>
 			<td>

@@ -19,8 +19,15 @@ public class Area implements Serializable {
 	 private boolean hasChildren;
 	 private List<Area> childrenList;
 	 
+	 private int timeChange;//时差
 	 
-	 public String getStatusDesc() {
+	 public int getTimeChange() {
+		return timeChange;
+	}
+	public void setTimeChange(int timeChange) {
+		this.timeChange = timeChange;
+	}
+	public String getStatusDesc() {
 		Status estatus=  AreaConstants.Status.getEnum(status);
 		if(estatus ==null){
 			return "";

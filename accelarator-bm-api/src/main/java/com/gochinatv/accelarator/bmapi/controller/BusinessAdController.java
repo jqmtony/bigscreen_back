@@ -38,7 +38,6 @@ public class BusinessAdController  extends BaseController{
 	
 	private static Logger logger = LoggerFactory.getLogger(BusinessAdController.class);
 	
-	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "上传图片", httpMethod = "GET", notes = "上传图片")
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	public BaseVo uploadImage(

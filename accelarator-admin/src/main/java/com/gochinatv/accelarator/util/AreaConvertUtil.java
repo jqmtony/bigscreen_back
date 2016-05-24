@@ -27,6 +27,7 @@ public class AreaConvertUtil {
 	 	item.put("name", area.getName());
 	 	item.put("areaNameH", "<a oncontextmenu=\"rightMenu(event);return false;\" >"+area.getName()+"</a>");
 	 	item.put("parentCode",area.getParentCode()); 
+	 	item.put("timeChange", area.getTimeChange());
         item.put("sort",area.getSort()); 
         item.put("level",area.getLevel()); 
         item.put("status",area.getStatus()); 
@@ -54,6 +55,7 @@ public class AreaConvertUtil {
 	        item.put("name", area.getName());
 		 	item.put("areaNameH", "<a oncontextmenu=\"rightMenu(event);return false;\" >"+area.getName()+"</a>");
 		 	item.put("parentCode",area.getParentCode()); 
+		 	item.put("timeChange",area.getTimeChange()); 
 	        item.put("sort",area.getSort()); 
 	        item.put("level",area.getLevel()); 
 	        item.put("status",area.getStatus()); 

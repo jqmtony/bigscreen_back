@@ -36,7 +36,7 @@
 	
 		
 	<select id="queryDeviceByMac" resultMap="Device" >
-		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60*1000 as screenShotInterval,p.type as type,d.refresh_time*1000 as refresh_time,d.code as code
+		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60*1000 as screenShotInterval,p.type as type,d.refresh_time*1000 as refresh_time,d.code as code,d.mac as mac
 		
 		from device d,place p
 		

@@ -10,6 +10,7 @@
 		<result property="level" column="level"/>
 		<result property="sort" column="sort"/>
 		<result property="status" column="status"/>
+		<result property="timeChange" column="time_change"/>
 		<result property="createTime" column="create_time"/>
 	</resultMap>
 	
@@ -43,12 +44,12 @@
 	</delete>
 	
 	<insert id="save" parameterType="Area" useGeneratedKeys="true" keyProperty="id">
-		insert into area (id,area_code,name,parent_code,level,sort)
-		 values (#{id},#{areaCode},#{name},#{parentCode},#{level},#{sort})
+		insert into area (id,area_code,name,parent_code,level,sort,time_change)
+		 values (#{id},#{areaCode},#{name},#{parentCode},#{level},#{sort},#{timeChange})
 	</insert>
 	
 	<update id="update" >
-		update area set name = #{name},level = #{level},sort = #{sort} where area_code=#{areaCode}
+		update area set name = #{name},level = #{level},sort = #{sort},time_change=#{timeChange} where area_code=#{areaCode}
 	</update>
 	
 	 <!--可重用的SQL代码段-->  
