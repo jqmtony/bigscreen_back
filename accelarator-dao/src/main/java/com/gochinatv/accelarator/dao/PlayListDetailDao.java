@@ -1,8 +1,6 @@
 package com.gochinatv.accelarator.dao;
 
-import java.util.HashMap;
 import java.util.List;
-
 import com.gochinatv.accelarator.dao.entity.PlayListDetail;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -16,11 +14,12 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
  */
 public interface PlayListDetailDao  extends BaseDao<PlayListDetail>{
    
+	
 	/**
-	 * 根据排播列表中的cityCode、type、startTime、endTime删除
+	 * 根据排播id批量删除排播集合
 	 * @param params
 	 */
-    public void deleteByPlayList(HashMap<String,Object> params);
+    public void deleteAll(List<Long> playListIds);
 
     /**
      * 排播组合列表

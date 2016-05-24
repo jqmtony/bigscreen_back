@@ -37,10 +37,10 @@
 		<where>
 			1=1
 			<if test="userName!=null">
-				and user_name like CONCAT(CONCAT('%',#{userName}),'%')
+				and user_name like CONCAT('%',#{userName},'%')
 			</if>
 			<if test="realName!=null">
-				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
+				and real_name like CONCAT('%',#{realName},'%')
 			</if>
 		</where>
 		order by create_time desc

@@ -22,10 +22,10 @@
 		<where>
 			1=1 and di.mac=d.mac and d.place_id=p.id
 			<if test="mac!=null and mac!=''">
-				and di.mac like CONCAT(CONCAT('%',#{mac}),'%')
+				and di.mac like CONCAT('%',#{mac},'%')
 			</if>
 			<if test="name!=null and name!=''">
-				and di.name like CONCAT(CONCAT('%',#{name}),'%')
+				and di.name like CONCAT('%',#{name},'%')
 			</if>
 			<if test="startTime!=null and startTime!=''">
 				and di.create_time &gt;= #{startTime} 

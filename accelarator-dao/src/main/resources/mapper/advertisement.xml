@@ -35,7 +35,7 @@
 				and atm.type=#{type} 
 			</if>
 			<if test="realName!=null and realName!=''">
-				and at.real_name like CONCAT(CONCAT('%',#{realName}),'%')
+				and at.real_name like CONCAT('%',#{realName},'%')
 			</if>
 		</where>
 		order by id desc

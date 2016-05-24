@@ -25,10 +25,10 @@
 		<where>
 			1=1
 			<if test="userName!=null and userName!=''">
-				and user_name like CONCAT(CONCAT('%',#{userName}),'%')
+				and user_name like CONCAT('%',#{userName},'%')
 			</if>
 			<if test="realName!=null and realName!=''">
-				and real_name like CONCAT(CONCAT('%',#{realName}),'%')
+				and real_name like CONCAT('%',#{realName},'%')
 			</if>
 			<if test="countryCode!=null and countryCode!=''">
 				and country_code = #{countryCode}

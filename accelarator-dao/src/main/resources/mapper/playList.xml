@@ -32,23 +32,35 @@
 		order by p.start_time asc
 	</select>
 	
-	<insert id="save" parameterType="PlayList">
+	<insert id="saveAll" parameterType="java.util.List">
 	   insert into play_list(
 	            id,
 	            city_code,
 	            type,
 	            start_time,
 	            end_time
-	            ) values (
-	            #{id},
-	            #{cityCode},
-	            #{type},
-	            #{startTime},
-	            #{endTime}
-	            )
+	            ) values 
+	    <foreach collection="list" item="item" index="index" separator="," >
+	        (
+	            #{item.id},
+	            #{item.cityCode},
+	            #{item.type},
+	            #{item.startTime},
+	            #{item.endTime}
+	        )
+	    </foreach>
 	</insert>
 	
-	<delete id="deleteByMap" parameterType="map">
-	   delete from play_list where city_code=#{cityCode} and type=#{type} and start_time=#{startTime} and end_time=#{endTime}
+	<select id="getIdByMap" parameterType="map" resultType="long">
+		select id from play_list where city_code=#{cityCode} and type=#{type} and start_time=#{startTime} and end_time=#{endTime}
+	</select>
+	
+	<delete id="deleteAll" parameterType="java.util.List">
+	   delete from play_list where id in 
+	   <foreach collection="list" index="index" item="item" open="(" separator="," close=")"> 
+          #{item} 
+       </foreach>
 	</delete>
+	
+	
 </mapper>

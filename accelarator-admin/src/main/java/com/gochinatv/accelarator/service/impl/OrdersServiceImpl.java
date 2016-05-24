@@ -167,6 +167,10 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				 
 				 logger.info("*********************执行本订单影响的城市和店铺类型OrdersDetail个数为：{}，自有广告个数为：{}",ordersDetails.size(),ownAdvertisementList.size());
 				 
+				 List<Long> playListIds = new ArrayList<Long>();//排播列表id集合，用于批量删除的时候用
+				 List<PlayList> playLists = new ArrayList<PlayList>();//排播列表Entity，用于批量保存的时候用
+				 List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();//排播详情Entity，用户批量保存的时候使用
+				 
 				 long playListId = System.currentTimeMillis();
 				 
 				 for (OrdersDetail detail : ordersDetails) {
@@ -220,7 +224,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						}
 					}
 					
-					//**********2016-05-24 14:28，去除没在此排播的日期，减少循环次数  重要的一段话*******************************
+					//TODO**********2016-05-24 14:28，去除没在此排播的日期，减少循环次数  重要的一段话*******************************
 					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
 					String startTime = orders.getStartTime();//本次排播开始时间
 					Date orderStartTime = DateUtils.SDF_YYYY_MM_DD.parse(startTime);
@@ -241,7 +245,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						dataMap.put(key, adsDataMap.get(key));
 					}
 					adsDataMap.clear();//放入完成清楚adsDataMap
-					//******************************************************************************************
+					//TODO******************************************************************************************
 					
 					//dataMap中放入的以  日期为key，  广告为 value
 					Set<Entry<String, List<Advertisement>>> entrySet = dataMap.entrySet();
@@ -287,9 +291,13 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						params.put("type", detail.getType());
 						params.put("startTime", entry.getKey());
 						params.put("endTime", entry.getKey());
-						playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
-						playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
+						//playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
+						//playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
 						
+						Long id = playListDao.getIdByMap(params);
+						if(id!=null){
+							playListIds.add(id);
+						}
 						
 						savePlayList(entry);
 						
@@ -300,11 +308,11 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	                    playList.setType(detail.getType());
 	                    playList.setStartTime(entry.getKey());
 	                    playList.setEndTime(entry.getKey());
-	                    playListDao.save(playList);
+	                    //playListDao.save(playList);
+	                    playLists.add(playList);
 	                    
 	                    String playStartTime = entry.getKey()+" 10:00:00";
 	                    
-						List<PlayListDetail> detailList = new ArrayList<PlayListDetail>();
 						List<Integer> values = entry.getValue();
 						for(int i=0;i<values.size();i++){
 							PlayListDetail details = new PlayListDetail();
@@ -323,9 +331,36 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 							
 							playStartTime = playEndTime;
 						}
-						playListDetailDao.saveAll(detailList);
+						//playListDetailDao.saveAll(detailList);
 					}
 				} 
+				//TODO**********2016-05-24 16:03 解决单条处理sql的问题，批量处理sql的bug*******************************
+				 
+				 logger.info("*********************正在批量执行  “排播详情删除操作 ” ，共影响{}条**************",playListIds.size());
+				 playListDetailDao.deleteAll(playListIds);
+				 
+				 logger.info("*********************正在批量执行  “排播列表删除操作 ”，共影响{}条 **************",playListIds.size());
+				 playListDao.deleteAll(playListIds);
+				 
+				 logger.info("*********************正在批量保存  “排播保存操作 ”，共影响{}条 **************",playLists.size());
+				 playListDao.saveAll(playLists);
+				 
+				 int size = detailList.size();
+				 logger.info("*********************准备正在批量保存  “排播详情保存操作 ”，本次总共影响{}条 **************",size);
+				 if(size>0){
+					 int page=(size % 2000==0?size/2000:size/2000+1);
+					 int endIndex=0;
+					 for(int i=0;i<page;i++){
+						endIndex = 2000*(i+1);
+						if(i==page-1){
+							endIndex = size ;
+						}
+						List<PlayListDetail> subList = detailList.subList(2000*i, endIndex);
+						logger.info("*********************正在第{}批量保存  “排播详情保存操作 ”，共影响{}条 **************",i+1,subList.size());
+						playListDetailDao.saveAll(subList); 
+					 }
+				 }
+				//TODO**************************************************************************************
 			  }else{
 				  //TODO 结束时间必须大于当天，否则不予处理
 			  }
@@ -335,7 +370,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 		  }
 		  return result;
 	}
-	
 	
 	/**
 	 * 随机从自有广告中取出 fetch个广告

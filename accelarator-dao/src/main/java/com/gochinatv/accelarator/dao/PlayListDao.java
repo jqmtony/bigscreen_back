@@ -17,11 +17,18 @@ import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 public interface PlayListDao  extends BaseDao<PlayList>{
    
 	/**
-	 * 排播列表中的cityCode、type、startTime、endTime删除
+	 * 根据排播id批量删除排播集合
 	 * @param params
 	 */
-    public void deleteByMap(HashMap<String,Object> params);
-
+    public void deleteAll(List<Long> playListIds);
+    
+    
+    /**
+	 * 根据cityCode、type、startTime、endTime 查询PlayList的id
+	 */
+    public Long getIdByMap(HashMap<String,Object> params);
+    
+    
     /**
 	 * 得到设备的在播广告
 	 * @param playList

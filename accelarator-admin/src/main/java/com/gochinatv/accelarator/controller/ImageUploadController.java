@@ -39,6 +39,7 @@ public class ImageUploadController extends BaseController{
 			params.put("source", "");
 			heads.put("Content-Type", "	application/x-www-form-urlencoded; charset=UTF-8");
 			data = HttpClientTools.Upload(url, localFile, heads,params);
+			data = "("+data+")";
 			logger.info(data);
 		} catch (Exception e) {
 			e.printStackTrace();
