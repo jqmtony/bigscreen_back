@@ -82,6 +82,8 @@ public class DeviceController extends BaseController{
 		}
 		return data;
 	}
+	
+	
 	/**
 	 * 检验mac的唯一性
 	 * @author limr
@@ -103,8 +105,7 @@ public class DeviceController extends BaseController{
 	
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public Map<String,Object> queryList( int page, int rows,
-			   Device device) throws Exception{
+	public Map<String,Object> queryList( int page, int rows,Device device) throws Exception{
 		Map<String,Object> data = new HashMap<String,Object>();
 		PageInterceptor.startPage(page, rows);
 		List<Device> list = deviceService.getListByEntity(device);
@@ -114,6 +115,8 @@ public class DeviceController extends BaseController{
 		data.put("total", pageInfo.getTotal());
 		return data;
 	}
+	
+	
 	@RequestMapping("/save")
 	@ResponseBody
 	public Map<String,Object> save(Device device){

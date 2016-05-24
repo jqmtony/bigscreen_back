@@ -52,15 +52,20 @@
 	
 	<select id="getListByEntity" resultMap="Device" parameterType="Device">
 		select d.*, p.cname as cname, p.country_code as country_code, p.area_code as area_code, p.city_code as city_code, b.user_name as user_name from device d 
-		left join place p on d.place_id=p.id
-		left join business b on d.business_id=b.id
+		left join place p on d.place_id=p.id left join business b on d.business_id=b.id
 		<where>
 			1=1
 			<if test="code!=null and code!=''">
-				and d.code like CONCAT(CONCAT('%',#{code}),'%')
+				and d.code like CONCAT('%',#{code},'%')
+			</if>
+			<if test="cname!=null and cname!=''">
+				and p.cname like CONCAT('%',#{cname},'%')
+			</if>
+			<if test="userName!=null and userName!=''">
+				and b.user_name like CONCAT('%',#{userName},'%')
 			</if>
 			<if test="mac!=null and mac!=''">
-				and d.mac like CONCAT(CONCAT('%',#{mac}),'%')
+				and d.mac like CONCAT('%',#{mac},'%')
 			</if>
 			<if test="screenNum!=0">
 				and d.screen_num = #{screenNum}
