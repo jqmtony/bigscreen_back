@@ -14,6 +14,7 @@
 		<result property="type" column="type" />
 		<result property="refreshTime" column="refresh_time" />
 		<result property="name" column="name" />
+		<result property="code" column="code" />
 	</resultMap>
 	
 	<resultMap type="com.gochinatv.accelarator.api.bean.UploadLog" id="UploadLog">
@@ -35,16 +36,18 @@
 	
 		
 	<select id="queryDeviceByMac" resultMap="Device" >
-		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60*1000 as screenShotInterval,p.type as type,d.refresh_time*1000 as refresh_time
+		select d.id,d.place_id,d.city_code,d.screen_num,d.screenShotInterval*60*1000 as screenShotInterval,p.type as type,d.refresh_time*1000 as refresh_time,d.code as code
 		
 		from device d,place p
 		
 		where d.place_id=p.id and d.mac=#{mac} 
 	</select>
 	
+<!-- 	<select id="queryTimeChangeByAreaCode" resultMap="java.lang.String" >
+		select time_change from area where area_code=#{areaCode}
+	</select>
 	
-	
-	
+	 -->
 	
 	
 	
@@ -114,7 +117,7 @@
 	</resultMap>
 	
 	<select id="getTextAdInfoByCityCode" resultMap="TextAdInfo" >
-		select tfc.id as adTextId,tfc.sort as adTextIndex,tfc.name as adTextStr,tfc.play_time*1000 as adTextInterval 
+		select tfc.id as adTextId,tfc.sort as adTextIndex,tfc.content as adTextStr,tfc.play_time*1000 as adTextInterval 
 		   from two_four_bm tfb,two_four_content tfc,two_four_bm_area tfba
 		      where tfb.id=tfc.two_four_bm_id and tfb.id=tfba.two_four_bm_id and
 		        tfb.type=2 and tfb.status=1 and tfc.status=1 and  tfba.city_code=#{cityCode}
@@ -123,7 +126,7 @@
 	</select>
 	
 	<select id="getTwoAdInfoByCityCode" resultMap="TwoAdInfo" >
-		select tfc.id as adImageId,tfc.sort as adImageIndex,tfc.name as adImageTitle,tfc.play_time*1000 as adImageInterval,tfc.content as  adImageUrl
+		select tfc.id as adImageId,tfc.sort as adImageIndex,tfc.name as adImageUrl,tfc.play_time*1000 as adImageInterval,tfc.content as  adImageTitle
 		   from two_four_bm tfb,two_four_content tfc,two_four_bm_area tfba
 		      where tfb.id=tfc.two_four_bm_id and tfb.id=tfba.two_four_bm_id and
 		        tfb.type=1  and tfb.status=1 and tfc.status=1  and  tfba.city_code=#{cityCode}

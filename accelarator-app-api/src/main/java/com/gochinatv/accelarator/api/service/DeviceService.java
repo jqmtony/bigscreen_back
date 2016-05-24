@@ -43,4 +43,13 @@ public interface DeviceService {
 	 * @return
 	 */
 	public List<TwoAdInfo> queryTwoAdInfoList(String mac,String time);
+	
+	/**
+	 * 获取mac对应area的时间
+	 * @param mac
+	 * @return
+	 * @throws Exception
+	 */
+	public String getCurrentTime(String mac)  throws Exception ;
+	
 }

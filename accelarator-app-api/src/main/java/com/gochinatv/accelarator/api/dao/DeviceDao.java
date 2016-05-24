@@ -17,6 +17,8 @@ public interface DeviceDao {
 	
 	public void uploadLog(UploadLog uploadLog);
 	public Device queryDeviceByMac(String mac);
+	/*
+	public String queryTimeChangeByAreaCode(@Param(value="areaCode")String cityCode);*/
 	
 	public List<ImageAdInfo> queryImageAdInfoList(@Param(value="deviceId")long deviceId) ;
 	

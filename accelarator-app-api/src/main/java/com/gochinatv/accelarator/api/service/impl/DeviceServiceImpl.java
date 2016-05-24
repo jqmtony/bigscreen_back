@@ -1,8 +1,10 @@
 package com.gochinatv.accelarator.api.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 import com.gochinatv.accelarator.api.util.AccelaratorConfig;
+import com.gochinatv.accelarator.api.util.DateUtils;
 import com.gochinatv.accelarator.api.vo.ResponseDeviceInfo;
 import com.gochinatv.accelarator.api.vo.ResponseImageAdInfo;
 
@@ -57,6 +60,12 @@ public class DeviceServiceImpl  implements DeviceService{
 		ResponseDeviceInfo responseDeviceInfo = new ResponseDeviceInfo();
 		
 		Device device = queryDeviceByMac(mac);
+		
+		if( StringUtils.equals(device.getMac(),AccelaratorConfig.DEVICE_DEFAULT_MAC ) ){
+			responseDeviceInfo.setCode("");
+		}else{
+			responseDeviceInfo.setCode(device.getCode());
+		}
 		
 		responseDeviceInfo.setAdStruct(device.getScreenNum());
 		responseDeviceInfo.setPollInterval(AccelaratorConfig.DEVICE_DEFAULT_PLLLINTERVAL);
@@ -224,6 +233,26 @@ public class DeviceServiceImpl  implements DeviceService{
 			logger.info("===queryTwoAdInfoList===mac:"+mac+" adList.size:"+adList.size());
 		}
 		return adList;
+	}
+
+	@Override
+	public String getCurrentTime(String mac) throws Exception {
+		String time= DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
+		/*try {
+			Device device = deviceDao.queryDeviceByMac(mac);
+			if(device !=null){
+				String timeChange = deviceDao.queryTimeChangeByAreaCode(device.getCityCode());
+				if(StringUtils.isBlank(timeChange) || StringUtils.equals(timeChange, "0")){
+					time = DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
+				}else{
+					int tt = Integer.parseInt(timeChange);
+					time = DateUtils.getTimeChangeDay(tt);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("===mac:"+mac+" queryDeviceByMac error "+e.getMessage()+",default mac"+AccelaratorConfig.DEVICE_DEFAULT_MAC);
+		}*/
+		return time;
 	}
 	
 }

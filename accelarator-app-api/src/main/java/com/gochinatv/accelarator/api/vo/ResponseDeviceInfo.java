@@ -20,13 +20,23 @@ public class ResponseDeviceInfo  extends BaseVo implements Serializable {
 	@ApiModelProperty(value = "接口轮询时间,单位毫秒", required = true)
 	private int pollInterval;
 	
+	@ApiModelProperty(value = "设备编号", required = true)
+	private String code;
+	
 	@ApiModelProperty(value = "截屏参数对象")
 	private ScreenShot screenShot;
 	
 	@ApiModelProperty(value = "布局结构对象")
 	private List<Layout> layout;
 	
-	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public int getPollInterval() {
 		return pollInterval;
 	}

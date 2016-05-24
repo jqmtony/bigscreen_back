@@ -68,6 +68,19 @@ public class DateUtils {
 		return null;
 	}
 
+	/**
+	 * 获取时差 日期
+	 * @return
+	 */
+	public static String getTimeChangeDay(int timeChange) {
+		  Date d=new Date();   
+		 SimpleDateFormat df=new SimpleDateFormat(DATE_FORMAT);   
+		 return  df.format(new Date(d.getTime() +( timeChange * 60 * 60 * 1000) ));  
+	}
+	public static void main(String[] args) {
+		for(int i=-24;i<24;i++)
+		System.out.println("i:"+i+",time:"+getTimeChangeDay(i));
+	}
 	public static String convert(Date date) {
 		return convert(date, DATE_TIME_FORMAT);
 	}
@@ -89,23 +102,6 @@ public class DateUtils {
 		return new SimpleDateFormat(DATE_TIME_FORMAT).format(date);
 	}
 
-	public static Date getYesterdayStart() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - 1);
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		return calendar.getTime();
-	}
-
-	public static Date getYesterdayEnd() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE));
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		return calendar.getTime();
-	}
 	/**
 	 * 返回一个指定日期的下一天
 	 * 
@@ -119,8 +115,5 @@ public class DateUtils {
 		calendar.add(Calendar.DAY_OF_MONTH, 1);
 		return calendar.getTime();
 	}
-	public static void main(String[] args) {
-		String now = DateUtils.convert(getNextDate(new Date()), DateUtils.DATE_FORMAT);
-		System.out.println(getNextDate(new Date()));
-	}
+
 }
