@@ -43,5 +43,13 @@ public class PlaceServiceImpl extends BaseServiceImpl<Place> implements PlaceSer
 		}
 	
 	}
+
+	@Override
+	public Place getPlaceByCname(int id, String cname) {
+		Place place = new Place();
+		place.setId(id);
+		place.setCname(cname);
+		return placeDao.getPlaceByCname(place);
+	}
 	
 }

@@ -257,7 +257,7 @@ public class AreaServiceImpl  extends BaseServiceImpl<Area> implements  AreaServ
 		
 		buffer.append("var _xzqh=" + xzqh.toJSONString()+"\n\n");
 		
-		String[] shopType = new String[]{"餐厅","大使馆","商场","美甲区","其它"};
+		String[] shopType = new String[]{"非清真餐厅","大使馆","商场","美甲区","其它","清真餐厅"};
 		JSONArray shopTypeArray = new JSONArray();
 		for(int i=0;i<shopType.length;i++){
 			JSONObject object = new JSONObject();

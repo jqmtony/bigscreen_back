@@ -21,6 +21,20 @@
 		<result property="realName" column="real_name" />
 	</resultMap>
 	
+	<select id="getPlaceByCname" resultMap="Place" parameterType="Place">
+		select * from place 
+		<where>
+			1=1
+			<if test="cname != null and cname != ''">
+				and cname=#{cname}
+			</if>
+			<if test="id!=0">
+				and id!=#{id}
+			</if>
+		</where>
+			
+	</select>
+	
 	<select id="getBusinessIdById" resultType="Integer" parameterType="Integer">
 		select business_id from place where id=#{id}
 	</select>

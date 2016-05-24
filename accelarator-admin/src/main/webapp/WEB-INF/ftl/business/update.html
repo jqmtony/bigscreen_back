@@ -4,7 +4,7 @@
 	    		<tr>
 	    			<td width="12%">用户名：</td>
 	    			<td width="38%"><input type="hidden" id="id" name="id"></input>
-	    			    <input id="edit_userName" class="easyui-validatebox textbox" type="text" name="userName" onblur="checkUpdateUserName(this.id,this.value,'${base}/business/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
+	    			    <input id="update_check" class="easyui-validatebox textbox" type="text" name="userName" onblur="checkUpdateUserName(this.id,this.value,'${base}/business/checkUserName');" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    			<td width="12%">商家：</td>
 	    			<td width="38%"><input id="_realName_" class="easyui-validatebox textbox" type="text" name="realName" data-options="required:true"></input><label style="color: red"> *</label></td>
 	    		</tr>
@@ -51,7 +51,7 @@
                </table>
             </form>
             <div style="text-align:center;padding:5px">
-		    	<a id="update_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+		    	<a id="update_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="modifyCheckSave('update');">保存</a>
 		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
 		    </div>
     </div>

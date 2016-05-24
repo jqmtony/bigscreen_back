@@ -15,4 +15,14 @@ public interface PlaceService extends BaseService<Place>{
 
 	int getBusinessIdById(Integer placeId);
 
+	/**
+	 * 检验商铺编码的唯一性
+	 * @author limr
+	 * @param id
+	 * @param cname
+	 * @return
+	 * @throws Exception
+	 */
+	Place getPlaceByCname(int id, String cname);
+
 }

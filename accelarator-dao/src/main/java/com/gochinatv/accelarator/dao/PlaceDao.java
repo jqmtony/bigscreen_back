@@ -15,4 +15,13 @@ public interface PlaceDao extends BaseDao<Place>{
 
 	int getBusinessIdById(Integer id);
 
+	/**
+	 * 检验商铺编码的唯一性
+	 * @author limr
+	 * @param place
+	 * @return
+	 * @throws Exception
+	 */
+	Place getPlaceByCname(Place place);
+
 }
