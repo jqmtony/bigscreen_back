@@ -149,16 +149,20 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	   */
 	public boolean createPlayList(Orders orders,String type) throws Exception{
 		  boolean result = true;
-	      logger.info("*********************执行创建排播组合Orders（endTime={},id={}）",orders.getEndTime(),orders.getId());
+	      logger.info("*********************执行创建排播组合Orders（endTime={},订单 id={}）",orders.getEndTime(),orders.getId());
 		  try{
 			  String endTime = orders.getEndTime();
 			  Date end = DateUtils.SDF_YYYY_MM_DD.parse(endTime);
 			  Date now = new Date();
 			  if(now.before(end)){//表示结束日期大于今天，才可进入排播
 				 
-				  //SELECT * from orders_detail where orders_id=orders.getId()
+				 //SELECT * from orders_detail where orders_id=orders.getId()
 				 List<OrdersDetail> ordersDetails = ordersDetailDao.getOrdersDetailByOrdersId(orders.getId());//查询此订单影响到哪些城市和店铺类型
+				 
+				 //SELECT * FROM advertisement WHERE source =1 order by id desc limit 0,10
 				 List<Advertisement> ownAdvertisementList = advertisementDao.getOwnAdvertisement();//从自有广告中取出10个广告
+				 
+				 //SELECT id,duration FROM advertisement 
 				 HashMap<Integer, Integer> durationMap = getDurationList();
 				 
 				 logger.info("*********************执行本订单影响的城市和店铺类型OrdersDetail个数为：{}，自有广告个数为：{}",ordersDetails.size(),ownAdvertisementList.size());
@@ -170,23 +174,31 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 					data.put("type", detail.getType());
 					data.put("cityCode", detail.getCityCode());
 	                
-					//cityCode、type 且结束时间大于当天投放的视频信息
+					/**
+					 * cityCode、type 且结束时间大于当天投放的视频信息
+					 * SELECT adm.duration,o.advertisement_id,o.start_time,o.end_time FROM orders_detail od <br>
+                     * LEFT JOIN orders o  ON od.orders_id=o.id LEFT JOIN advertisement adm  ON adm.id=o.advertisement_id <br>
+                     * WHERE od.type=#{type} AND city_code=#{cityCode} AND o.status=2 <br>
+                     * AND o.end_time>now() <br>
+                     * 查询结果表示在重叠的时间段内排播
+					 */
 					List<Orders> ordersPlayList = this.getOrdersPlayList(data);//duration,advertisement_id,start_time,end_time
 					
 					logger.info("*********************正在执行 type为：{}，cityCode为：{}，排播个数为：{}",detail.getType(),detail.getCityCode(),ordersPlayList.size());
 
-					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
+					Map<String, List<Advertisement>> adsDataMap = new HashMap<String, List<Advertisement>>();
 					for (int i = 0; i < ordersPlayList.size(); i++) {
 						Orders order = (Orders) ordersPlayList.get(i);
 						String start_time = "";
-						if(type.equals("SX")){
+						if(type.equals("SX")){//审核上线
 							start_time = order.getStartTime();
 						}else if(type.equals("XX")){
-							start_time= DateUtils.addDay(1);//取得明天的日期，下线的开始日期必须从明天开始
+							start_time= DateUtils.addDay(1);//提前下线，取得明天的日期，下线的开始日期必须从明天开始
 						}
 						String end_time = order.getEndTime();
 
 						long between = DateUtils.getBetweenDays(start_time, end_time);// 取得两个日期之间的天数
+						logger.info("*********************order advertisement_id：{}，时间间隔天数为：{}",order.getAdvertisementId(),between);
 
 						Calendar instance = Calendar.getInstance();
 						instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(start_time));
@@ -194,7 +206,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 							instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
 							String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
 							if(now.before(instance.getTime())){//表示只能对订单中的大于今天的日期进行排播，如果小于等于当天不能进行其排播
-								List<Advertisement> values = dataMap.get(date);
+								List<Advertisement> values = adsDataMap.get(date);
 								if (values == null) {
 									values = new ArrayList<Advertisement>();
 								}
@@ -203,10 +215,33 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 								adm.setDuration(order.getDuration());
 								
 								values.add(adm);
-								dataMap.put(date, values);
+								adsDataMap.put(date, values);
 							}
 						}
 					}
+					
+					//**********2016-05-24 14:28，去除没在此排播的日期，减少循环次数  重要的一段话*******************************
+					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
+					String startTime = orders.getStartTime();//本次排播开始时间
+					Date orderStartTime = DateUtils.SDF_YYYY_MM_DD.parse(startTime);
+					if(orderStartTime.before(now)){//此次排播的开始时间小于现在时间，那么排播的开始时间至为现在的下一天
+						startTime= DateUtils.addDay(1);//开始时间在明天
+					}
+					List<String> distinct = new ArrayList<String>();
+					long between = DateUtils.getBetweenDays(startTime, endTime);// 取得两个日期之间的天数
+					Calendar instance = Calendar.getInstance();
+					instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(startTime));
+					for (int j = 0; j <= between; j++) {
+						instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
+						String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
+						distinct.add(date);
+					}
+					
+					for (String key : distinct) {
+						dataMap.put(key, adsDataMap.get(key));
+					}
+					adsDataMap.clear();//放入完成清楚adsDataMap
+					//******************************************************************************************
 					
 					//dataMap中放入的以  日期为key，  广告为 value
 					Set<Entry<String, List<Advertisement>>> entrySet = dataMap.entrySet();
