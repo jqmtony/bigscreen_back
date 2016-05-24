@@ -2,6 +2,7 @@
 <html>
 <head>
 <#include "/frame/pageInclude.html">
+
 <script type="text/javascript">
  $(function() {
 	grid = $('#tab').datagrid({	
@@ -37,7 +38,7 @@
   
 });
  
-	function uploadPic(form,srcId,fileId,imgId,url){
+	 function uploadPic(form,srcId,fileId,imgId,url){
 		var reg = /(jpg|gif|bmp|png)/i;
 		var val = $('#'+fileId).textbox('getValue');
 		if(!reg.test(val)){
@@ -55,16 +56,13 @@
 				$('#update_name').textbox('disableValidation');
 			},
 			success:function(data){
-				end = data.indexOf("}")+1;
-				data = data.substring(0,end);
-				var datas = eval("("+data+")");
-				if(datas.success==' true'){
-					$('#'+srcId).textbox('setValue',datas.msg);
-			   		$('#'+imgId).attr("src",datas.msg);
+				
+				start = data.indexOf("http://img");
+				end =  data.indexOf("486x648.");
+				data = data.substring(start,end+11);
+					$('#'+srcId).textbox('setValue',data);
+			   		$('#'+imgId).attr("src",data);
 			   		$('#'+imgId).show();
-				}else{
-			   	    $.messager.alert("提示","上传失败！");
-			   	}
 				$('#playTime').numberbox('enableValidation');
 				$('#sort').numberbox('enableValidation');
 				$('#twoFourBmName').textbox('enableValidation');
@@ -72,7 +70,47 @@
 				$('#update_name').textbox('enableValidation');
 		   }
 		});
-	}
+	}  
+	/*  function uploadPic(form,srcId,fileId,imgId,url){
+			var reg = /(jpg|gif|bmp|png)/i;
+			var val = $('#'+fileId).textbox('getValue');
+			if(!reg.test(val)){
+				$.messager.alert("提示","请选择图片");
+				return ;
+			}
+			
+			$('#'+form).form('submit',{
+				url:url,
+				onSubmit: function(){
+					$('#playTime').numberbox('disableValidation');
+					$('#sort').numberbox('disableValidation');
+					$('#twoFourBmName').textbox('disableValidation');
+					$('#add_name').textbox('disableValidation');
+					$('#update_name').textbox('disableValidation');
+				},
+				success:function(data){
+					end = data.indexOf("}")+1;
+					data = data.substring(0,end);
+					var datas = eval("("+data+")");
+					if(datas.success==' true'){
+						$('#'+srcId).textbox('setValue',datas.msg);
+				   		$('#'+imgId).attr("src",datas.msg);
+				   		$('#'+imgId).show();
+					}else if(datas.success=='true'){
+						$('#'+srcId).textbox('setValue',datas.msg);
+				   		$('#'+imgId).attr("src",datas.msg);
+				   		$('#'+imgId).show();
+					}else{
+				   	    $.messager.alert("提示","上传失败！");
+				   	}
+					$('#playTime').numberbox('enableValidation');
+					$('#sort').numberbox('enableValidation');
+					$('#twoFourBmName').textbox('enableValidation');
+					$('#add_name').textbox('enableValidation');
+					$('#update_name').textbox('enableValidation');
+			   }
+			});
+		}   */
 </script>
 </head>
 <body>

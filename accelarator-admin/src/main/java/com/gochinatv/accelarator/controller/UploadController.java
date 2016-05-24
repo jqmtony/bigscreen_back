@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
@@ -28,20 +30,25 @@ public class UploadController  extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(UploadController.class);
 	
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
-	public Map<String,Object>  uploadImage( @RequestParam("file") MultipartFile file)
+	@ResponseBody
+	public Map<String,Object> uploadImage( @RequestParam("file") MultipartFile file,
+			@RequestParam(name="weight",defaultValue="486") int weight,
+			@RequestParam(name="height",defaultValue="648") int height)
 			throws Exception {
-		Map<String,Object> result = this.success(null);
+		Map<String,Object> result =new HashMap<String, Object>();
 		String imageUrl = "";
 		try {
-			imageUrl = upload(file);
-			result = this.success(imageUrl);
+			imageUrl = upload(file,weight,height);
+			result.put("success","true");
+			result.put("msg",imageUrl);
 		} catch (Exception e) {
-			result = this.error(e.getMessage());
+			result.put("success","false");
+			result.put("msg","上传图片失败");
 		}
 		return result;
 	}
 
-	private String upload(MultipartFile file) {
+	private String upload(MultipartFile file,int weight,int height) {
 		String result="";
 		FileChangeLocal fcl = new FileChangeLocal();
 		File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
@@ -51,8 +58,8 @@ public class UploadController  extends BaseController{
 		logger.info("fileName======"+fileName+",suffix==="+suffix);
 		File reproduceFile;
 		try {
-			reproduceFile = it.createThumbnailNew(localFile, suffix, 324, 243);
-			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile);
+			reproduceFile = it.createThumbnailNew(localFile, suffix, weight, height);
+			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile, weight, height);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

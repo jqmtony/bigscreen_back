@@ -20,6 +20,34 @@
 			} 
 		});
 	});
+	//保证商铺编码的唯一性
+	function checkCname(id, placeId, cname, url){
+		if(cname != null && cname != ""){
+			$.ajax({  
+				    url:url,   
+				    data:{  
+				    	id : placeId,
+				    	cname : cname
+				    },  
+				    type:'post',  
+				    dataType:'json',  
+				    success:function(data) { 
+				        if(!data){
+				        	alert("编码已存在，请重新输入！");
+				            $("#"+id).val(''); 
+				            $("#"+id).focus();
+				        } 
+				     },  
+				     error : function() {  
+				          alert("异常！");  
+				     }  
+				});
+		}
+	}
+	function resetForm(){
+		resetQueryForm();
+		$('#type').combobox('setValue','0');
+	}
 </script>
 </head>
 <body>
@@ -27,8 +55,8 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-			    <th data-options="field:'ename',width:80">商铺编码</th>
-				<th data-options="field:'cname',width:80">商铺名称</th>
+			    <th data-options="field:'cname',width:80">商铺编号</th>
+				<th data-options="field:'ename',width:80">商铺名称</th>
 				<th data-options="field:'userName',width:50">商家用户名</th>
 				<th data-options="field:'realName',width:50">商家姓名</th>
 				<th data-options="field:'type',width:50,formatter:formatPlaceType">店铺类型</th>
@@ -46,8 +74,8 @@
     			 	 <input type="hidden" id="queryCountryCode" name="countryCode"></input> 
     			 	 <input type="hidden" id="queryAreaCode" name="areaCode"></input> 
     			 	 <input type="hidden" id="queryCityCode" name="cityCode"></input> 
-		            商铺名称： <input type="text" class="easyui-validatebox textbox" id="cname" name="cname" style="width:120px"></input>
-		            商铺编码： <input type="text" class="easyui-validatebox textbox" id="ename" name="ename" style="width:120px"></input>
+		           商铺名称： <input type="text" class="easyui-validatebox textbox" id="ename" name="ename" style="width:120px"></input>
+		    商铺编号： <input type="text" class="easyui-validatebox textbox" id="cname" name="cname" style="width:120px"></input>
 			类型：
 			<select id="type" name="type"  class="easyui-combobox" style="width:100px;">
 			  <option value="0" selected="selected">全部</option>
@@ -59,7 +87,7 @@
 			  <option value="5">其它</option>
 			</select>
 			<a href="javascript:void(0);" onclick="queryWithCode()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
-							<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
+							<a href="javascript:void(0);" onclick="resetForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 		</form>	
 		<div style="margin:5px">
 			<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>

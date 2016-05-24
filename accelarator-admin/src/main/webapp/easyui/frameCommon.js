@@ -174,7 +174,28 @@ function queryWithCode(){
 function query(){
 	grid.datagrid('reload',$("#queryForm").serializeObject());	
 }
+//带有校验唯一性的保存
+function addCheckSave(url){
+	if(addForm.form('validate')){
+		$("#add_save").linkbutton("disable");
+		$.post( url,$("#addForm").serializeObject(),addCheckCallback,'json');		
+	}
+}
 
+function addCheckCallback(data){
+	if(!data.status){
+		var mes = data.msg;
+		if(mes == "exist"){//数据库已存在，值为空，不能保存
+			$("#add_check").val(''); //add_check校验唯一性的字段id
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
+		}
+	}else{
+		addWin.window('close');
+		grid.datagrid('reload',$("#queryForm").serializeObject());
+	}
+	$("#add_save").linkbutton("enable");
+}
 
 function addCallback(data){
 	if(!data.status){
@@ -217,7 +238,28 @@ function modifyCallback(data){
 		$("#update_save").linkbutton("enable");
 	}
 }
-
+//带有校验唯一性的保存
+function modifyCheckSave(url){
+	if(modifyForm.form('validate')){
+		$("#update_save").linkbutton("disable");
+		$.post(url,$("#modifyForm").serializeObject(),modifyCheckCallback,'json');		
+	}
+}
+	
+function modifyCheckCallback(data){
+	if(!data.status){
+		var mes = data.msg;
+		if(mes == "exist"){//数据库已存在，值为空，不能保存
+			$("#update_check").val(''); //update_check校验唯一性的字段id
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
+		}
+	}else{
+		modifyWin.window('close');
+		grid.datagrid('reload',$("#queryForm").serializeObject());	
+		$("#update_save").linkbutton("enable");
+	}
+}
 function winClose(){
 	modifyWin.window('close');
 }
