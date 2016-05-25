@@ -65,5 +65,8 @@ public class UploadController  extends BaseController{
 		}
 		return result;
 	}
+	public static void main(String[] args) {
+		System.out.println("==this is master========");
+	}
 
 }
