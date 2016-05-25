@@ -113,7 +113,7 @@
 				             success: function(data){
 				                 if(data.status){
 				                	 if(data.data != null){
-				                		 alert("所选区域时间有冲突");
+				                		 $.messager.alert('提示','所选区域时间有冲突，请重新选择!','warning');
 					                	 $('#delivery_tree').tree(checked, 'uncheck');
 				                	 }
 				                 }
