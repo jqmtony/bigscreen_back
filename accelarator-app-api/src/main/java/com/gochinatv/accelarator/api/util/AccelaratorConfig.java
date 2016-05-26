@@ -50,5 +50,11 @@ public final class AccelaratorConfig {
 	public static final String DEVICE_SCREEN4_ADTOP= PropertiesUtil.getInstance().getProperty("device.layout.screen4.adTop");
 	public static final String DEVICE_SCREEN4_ADLEFT= PropertiesUtil.getInstance().getProperty("device.layout.screen4.adLeft");
 
+	public static final int DEVICE_SCREEN5_ADTYPE= Integer.parseInt(PropertiesUtil.getInstance().getProperty("device.layout.screen5.adType"));
+	public static final String DEVICE_SCREEN5_ADWIDTH= PropertiesUtil.getInstance().getProperty("device.layout.screen5.adWidth");
+	public static final String DEVICE_SCREEN5_ADHEIGHT = PropertiesUtil.getInstance().getProperty("device.layout.screen5.adHeight");
+	public static final String DEVICE_SCREEN5_ADTOP= PropertiesUtil.getInstance().getProperty("device.layout.screen5.adTop");
+	public static final String DEVICE_SCREEN5_ADLEFT= PropertiesUtil.getInstance().getProperty("device.layout.screen5.adLeft");
+
 
 }

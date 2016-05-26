@@ -187,6 +187,14 @@ public class DeviceServiceImpl  implements DeviceService{
 			layout4.setAdTop(AccelaratorConfig.DEVICE_SCREEN4_ADTOP);
 			layout4.setAdWidth(AccelaratorConfig.DEVICE_SCREEN4_ADWIDTH);
 			layoutList.add(layout4);
+			
+			Layout layout5 = new Layout();
+			layout5.setAdType(AccelaratorConfig.DEVICE_SCREEN5_ADTYPE);
+			layout5.setAdHeight(AccelaratorConfig.DEVICE_SCREEN5_ADHEIGHT);
+			layout5.setAdLeft(AccelaratorConfig.DEVICE_SCREEN5_ADLEFT);
+			layout5.setAdTop(AccelaratorConfig.DEVICE_SCREEN5_ADTOP);
+			layout5.setAdWidth(AccelaratorConfig.DEVICE_SCREEN5_ADWIDTH);
+			layoutList.add(layout5);
 		}
 		return layoutList;
 	}
