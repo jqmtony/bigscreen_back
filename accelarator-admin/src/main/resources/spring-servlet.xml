@@ -39,7 +39,7 @@
 	<!-- 上传文件拦截，设置最大上传文件大小   10M=10*1024*1024(B)=10485760 bytes -->  
 	<!-- 文件上传 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="5242880"/>
+		<property name="maxUploadSize" value="20971520"/>
 	</bean>
 	
 </beans>

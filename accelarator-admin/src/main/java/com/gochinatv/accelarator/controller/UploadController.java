@@ -61,9 +61,12 @@ public class UploadController  extends BaseController{
 			reproduceFile = it.createThumbnailNew(localFile, suffix, weight, height);
 			result = AmazonS3Tools.uploadFileToAmazon(suffix, reproduceFile, weight, height);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info(e.getMessage());
 		}
 		return result;
+	}
+	public static void main(String[] args) {
+		System.out.println("====this is develop====");
 	}
 
 }
