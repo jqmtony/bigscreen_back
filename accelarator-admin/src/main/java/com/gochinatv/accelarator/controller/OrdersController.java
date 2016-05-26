@@ -172,18 +172,17 @@ public class OrdersController extends BaseController{
 	public Map<String,Object> checkOnline(Orders orders){
 		Map<String,Object> result = this.success(null);
 		try{
-			orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
-			orders.setAuditTime(new Date());
-			orders.setStatus(2);
+			orders.setAuditor(0);
+			orders.setAuditTime(null);
+			orders.setStatus(1);
 			ordersService.updateAuditOrders(orders);
 			
 			boolean op = ordersService.createPlayList(orders, "SX");
-			if(!op){
-				orders.setAuditor(0);
-				orders.setAuditTime(null);
-				orders.setStatus(1);
+			if(op){
+				orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
+				orders.setAuditTime(new Date());
+				orders.setStatus(2);
 				ordersService.updateAuditOrders(orders);
-				result = error("查看系统日志");
 			}
 		}catch(Exception e){
 			e.printStackTrace();

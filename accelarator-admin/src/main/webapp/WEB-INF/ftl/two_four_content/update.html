@@ -20,7 +20,7 @@ function modifyRow(row){
  
  function openLookUpEditCallBack(row){
 	$("#u_twoFourBmId").val(row.id);
-	$("#u_twoFourBmName").val(row.name);
+	$("#u_twoFourBmName").textbox('setValue',row.name);
 	$("#u_twoFourBmName").validatebox({novalidate: true});
 	if(row.type=='1'){//图片
 		$("#update_tr_name,#update_tr_image").show();
@@ -56,7 +56,7 @@ function modifyRow(row){
 	    			<td>图集名称：<input type="hidden" name="twoFourBmId" id="u_twoFourBmId"/></td>
 	    			<td>
 	    			    <input class="easyui-textbox" id="u_twoFourBmName" name="twoFourBmName" readonly="readonly" data-options="required:true"/><label style="color: red"> *</label>
-	    			    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpEditCallBack');" >选择</a>
+	    			    <!-- <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpEditCallBack');" >选择</a> -->
 	    			</td>
 	    		</tr>
 	    		

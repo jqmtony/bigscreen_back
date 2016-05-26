@@ -1,7 +1,7 @@
 <script type="text/javascript">
 function openLookUpCallBack(row){
 	$("#twoFourBmId").val(row.id);
-	$("#twoFourBmName").val(row.name);
+	$("#twoFourBmName").textbox('setValue',row.name);
 	$("#twoFourBmName").validatebox({novalidate: true});
 	if(row.type=='1'){//图片
 		$("#add_tr_name,#add_tr_image").show();
@@ -31,7 +31,9 @@ function openLookUpCallBack(row){
 	    			<td>图集名称：<input type="hidden" name="twoFourBmId" id="twoFourBmId" value="${twoFourBmId}"/></td>
 	    			<td>
 	    			    <input class="easyui-textbox" id="twoFourBmName" name="twoFourBmName" value="${twoFourBmName!''}" readonly="readonly" data-options="required:true"/><label style="color: red"> *</label>
+	    			    <#if twoFourBmId==0>
 	    			    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="openLookUp('${base}/two_four_bm/gotoTwoFourBmLookUp?parentMethod=openLookUpCallBack');" >选择</a>
+	    			    </#if>
 	    			</td>
 	    		</tr>
 	     

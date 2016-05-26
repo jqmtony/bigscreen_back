@@ -226,25 +226,29 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 					
 					//TODO**********2016-05-24 14:28，去除没在此排播的日期，减少循环次数  重要的一段话*******************************
 					Map<String, List<Advertisement>> dataMap = new HashMap<String, List<Advertisement>>();
-					String startTime = orders.getStartTime();//本次排播开始时间
-					Date orderStartTime = DateUtils.SDF_YYYY_MM_DD.parse(startTime);
-					if(orderStartTime.before(now)){//此次排播的开始时间小于现在时间，那么排播的开始时间至为现在的下一天
-						startTime= DateUtils.addDay(1);//开始时间在明天
+					if(type.equals("SX")){
+						String startTime = orders.getStartTime();//本次排播开始时间
+						Date orderStartTime = DateUtils.SDF_YYYY_MM_DD.parse(startTime);
+						if(orderStartTime.before(now)){//此次排播的开始时间小于现在时间，那么排播的开始时间至为现在的下一天
+							startTime= DateUtils.addDay(1);//开始时间在明天
+						}
+						List<String> distinct = new ArrayList<String>();
+						long between = DateUtils.getBetweenDays(startTime, endTime);// 取得两个日期之间的天数
+						Calendar instance = Calendar.getInstance();
+						instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(startTime));
+						for (int j = 0; j <= between; j++) {
+							instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
+							String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
+							distinct.add(date);
+						}
+						
+						for (String key : distinct) {
+							dataMap.put(key, adsDataMap.get(key));
+						}
+						adsDataMap.clear();//放入完成清楚adsDataMap
+					}else{
+						dataMap = adsDataMap;
 					}
-					List<String> distinct = new ArrayList<String>();
-					long between = DateUtils.getBetweenDays(startTime, endTime);// 取得两个日期之间的天数
-					Calendar instance = Calendar.getInstance();
-					instance.setTime(DateUtils.SDF_YYYY_MM_DD.parse(startTime));
-					for (int j = 0; j <= between; j++) {
-						instance.add(Calendar.DAY_OF_YEAR, j == 0 ? j : 1);
-						String date = DateUtils.SDF_YYYY_MM_DD.format(instance.getTime());
-						distinct.add(date);
-					}
-					
-					for (String key : distinct) {
-						dataMap.put(key, adsDataMap.get(key));
-					}
-					adsDataMap.clear();//放入完成清楚adsDataMap
 					//TODO******************************************************************************************
 					
 					//dataMap中放入的以  日期为key，  广告为 value
@@ -294,6 +298,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						//playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
 						//playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
 						
+						//TODO 在这里可以使用redis保存起来，不用每次都从数据库中取数据，减少访问数据库频率，查询时间大于当前日期
 						Long id = playListDao.getIdByMap(params);
 						if(id!=null){
 							playListIds.add(id);
@@ -336,11 +341,13 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 				} 
 				//TODO**********2016-05-24 16:03 解决单条处理sql的问题，批量处理sql的bug*******************************
 				 
-				 logger.info("*********************正在批量执行  “排播详情删除操作 ” ，共影响{}条**************",playListIds.size());
-				 playListDetailDao.deleteAll(playListIds);
-				 
-				 logger.info("*********************正在批量执行  “排播列表删除操作 ”，共影响{}条 **************",playListIds.size());
-				 playListDao.deleteAll(playListIds);
+				 if(playListIds.size()>0){
+					 logger.info("*********************正在批量执行  “排播详情删除操作 ” ，共影响{}条**************",playListIds.size());
+					 playListDetailDao.deleteAll(playListIds);
+					 
+					 logger.info("*********************正在批量执行  “排播列表删除操作 ”，共影响{}条 **************",playListIds.size());
+					 playListDao.deleteAll(playListIds);
+				 }
 				 
 				 logger.info("*********************正在批量保存  “排播保存操作 ”，共影响{}条 **************",playLists.size());
 				 playListDao.saveAll(playLists);

@@ -18,6 +18,9 @@
 
 	<select id="getListByEntity" resultMap="TwoFourContent" parameterType="TwoFourContent">
 		select tfc.*,tfb.name two_four_bm_name,tfb.type two_four_bm_type from two_four_content tfc left join two_four_bm tfb on tfc.two_four_bm_id=tfb.id where 1=1 
+		  <if test="twoFourBmId!=0">
+				and tfb.id = #{twoFourBmId}
+		  </if>
 		  <if test="twoFourBmName!=null and twoFourBmName!=''">
 				and tfb.name like CONCAT('%',#{twoFourBmName},'%' )
 		  </if>
