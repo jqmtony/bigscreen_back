@@ -169,25 +169,29 @@ public class OrdersController extends BaseController{
 	 */
 	@RequestMapping("/checkOnline")
 	@ResponseBody
-	public Map<String,Object> checkOnline(Orders orders){
+	public Map<String,Object> checkOnline(Orders orders) throws Exception{
 		Map<String,Object> result = this.success(null);
 		try{
-			orders.setAuditor(0);
-			orders.setAuditTime(null);
-			orders.setStatus(1);
+			orders.setStatus(2);
 			ordersService.updateAuditOrders(orders);
 			
 			boolean op = ordersService.createPlayList(orders, "SX");
 			if(op){
 				orders.setAuditor(SessionUtils.getLoginUser(getRequest()).getId());
 				orders.setAuditTime(new Date());
-				orders.setStatus(2);
-				ordersService.updateAuditOrders(orders);
+			}else{
+				orders.setAuditor(0);
+				orders.setAuditTime(null);
+				orders.setStatus(1);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 			result = error(e.getMessage());
+			orders.setAuditor(0);
+			orders.setAuditTime(null);
+			orders.setStatus(1);
 		}
+		ordersService.updateAuditOrders(orders);
 		return result;
 	}
 	

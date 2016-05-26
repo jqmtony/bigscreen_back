@@ -295,8 +295,6 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 						params.put("type", detail.getType());
 						params.put("startTime", entry.getKey());
 						params.put("endTime", entry.getKey());
-						//playListDetailDao.deleteByPlayList(params);//保存之前先删除保存的排播详情
-						//playListDao.deleteByMap(params);//保存之前先删除保存的排播列表
 						
 						//TODO 在这里可以使用redis保存起来，不用每次都从数据库中取数据，减少访问数据库频率，查询时间大于当前日期
 						Long id = playListDao.getIdByMap(params);
@@ -313,7 +311,7 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders> implements Orders
 	                    playList.setType(detail.getType());
 	                    playList.setStartTime(entry.getKey());
 	                    playList.setEndTime(entry.getKey());
-	                    //playListDao.save(playList);
+	                   
 	                    playLists.add(playList);
 	                    
 	                    String playStartTime = entry.getKey()+" 10:00:00";
