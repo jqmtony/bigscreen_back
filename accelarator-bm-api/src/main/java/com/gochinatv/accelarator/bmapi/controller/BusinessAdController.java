@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.bmapi.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +76,22 @@ public class BusinessAdController  extends BaseController{
 		}
 		return result;
 	}
+	@CheckLoginInterceptorAnnotation
+	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
+	@RequestMapping(value = "/queryNewList", produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String, Object>  queryNewList(
+			BusinessAd businessAd) throws Exception{
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			List<BusinessAd> list = businessAdService.queryList(businessAd);
+			result = this.success(list);
+		} catch (Exception e) {
+			result = this.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	@CheckLoginInterceptorAnnotation
 	@ApiOperation(value = "查询商家图片列表", httpMethod = "GET", notes = "查询商家图片列表")
 	@RequestMapping(value = "/queryList", produces = "application/json;charset=utf-8")
