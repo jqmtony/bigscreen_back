@@ -13,10 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileChangeLocal {
 	
 	public File uploadFileLocal(MultipartFile upFile,String filename) { 
+		File file = null;
+		try {
 		long fileSize = upFile.getSize(); 
-		if(fileSize > 10 * 1024 * 1024){ 
+		/*if(fileSize > 10 * 1024 * 1024){ 
 			return null; 
-		} 
+		} */
 		String suffix = "";
 		if (filename != null && !filename.equals("")) {
 			suffix = filename.substring(
@@ -28,13 +30,13 @@ public class FileChangeLocal {
 		String newFileName = getUUID()+"_default."+suffix; 
 		//
 		
-		File file = new File(PropertiesUtil.getInstance().getProperty("tennis.file.temp.path") + newFileName); 
-		try {
+		 file = new File(PropertiesUtil.getInstance().getProperty("tennis.file.temp.path") + newFileName); 
+		
 			upFile.transferTo(file);
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			System.out.println("======error333:"+e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("======error444:"+e.getMessage());
 		}
 		/*byte[] buffer = new byte[1024]; 
 		int n = 0; 
