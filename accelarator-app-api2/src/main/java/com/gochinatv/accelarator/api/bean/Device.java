@@ -8,6 +8,7 @@ public class Device  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private long id;
+	private String code;//编码
 	private String mac;//mac地址
 	private String imageUrl;//截图 图片URL
 	private int placeId;//商铺id
@@ -28,6 +29,14 @@ public class Device  implements Serializable {
 	private String name;
 	
 	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public int getStatus() {
 		return status;
 	}

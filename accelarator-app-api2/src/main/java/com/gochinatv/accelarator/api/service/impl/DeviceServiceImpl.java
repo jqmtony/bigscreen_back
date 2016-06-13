@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gochinatv.accelarator.api.bean.Device;
+import com.gochinatv.accelarator.api.bean.DeviceBootLog;
 import com.gochinatv.accelarator.api.bean.UploadLog;
+import com.gochinatv.accelarator.api.dao.DeviceBootLogDao;
 import com.gochinatv.accelarator.api.dao.DeviceDao;
 import com.gochinatv.accelarator.api.service.DeviceService;
 
@@ -20,6 +22,10 @@ public class DeviceServiceImpl implements DeviceService{
 	
 	@Autowired
 	private DeviceDao deviceDao;
+	
+	@Autowired
+	private DeviceBootLogDao deviceBootLogDao;
+	
 	@Override
 	public void saveDeviceImage(Device device) {
 		deviceDao.saveDeviceImage(device);		
@@ -35,6 +41,7 @@ public class DeviceServiceImpl implements DeviceService{
 	}
 
 	public void saveOrUpdateDevice(String mac, String versionNum, String versionName){
+		logger.info("=====start====mac==="+mac);
 		Device device = deviceDao.getEntityByMac(mac);
 		if(device != null){
 			device.setVersionNum(versionNum);
@@ -51,5 +58,11 @@ public class DeviceServiceImpl implements DeviceService{
 			device.setCreateTime(new Date());
 			deviceDao.save(device);
 		}
+		DeviceBootLog deviceBootLog = new DeviceBootLog();
+		deviceBootLog.setCode(device.getCode());
+		deviceBootLog.setDeviceId(device.getId());
+		deviceBootLog.setBootTime(device.getBootTime());
+		deviceBootLogDao.save(deviceBootLog);
+		
 	}
 }

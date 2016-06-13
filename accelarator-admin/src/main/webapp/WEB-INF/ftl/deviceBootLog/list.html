@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "/frame/pageInclude.html">
+<script type="text/javascript">
+	$(document).ready(function() {
+		grid = $('#tab').datagrid( {
+			//title : '用户列表',			
+			url :'${base}/deviceBootLog/queryList',
+			queryParams:$("#queryForm").serializeObject(),
+			pagination : true,
+			rownumbers : true,
+			pageSize: 50,
+			pageList : [50,100,150,200],
+			singleSelect : true,
+			striped:true,
+			fit:true,
+			toolbar:'#toolbar',
+			fitColumns:true,
+			onDblClickRow:function(index,row){
+				modifyRow(row);
+			} 
+		});
+		
+		$("#startTime").datebox({  
+		    onChange:function(startTime){
+		    	var endTime = $("#endTime").datebox('getValue');
+				if(endTime != null && startTime>endTime){
+					$("#endTime").datebox('setValue','');
+				}
+		    	$('#endTime').datebox().datebox('calendar').calendar({
+			        validator: function(date){
+			        	var startTimeStr = $("#startTime").datebox('getValue');
+				            var startTime = new Date(startTimeStr);
+				            var startDate = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
+				            return  date>=startDate;
+			        	}
+			    }); 
+				
+		    }
+		});
+	});
+	
+	function exportBySearch(){
+		$("#queryForm").attr("action","${base}/deviceBootLog/excel/export");
+		$("#queryForm")[0].submit();
+	}
+</script>
+</head>
+<body>
+
+   <table class="easyui-datagrid" id="tab">
+		<thead>
+			<tr>
+				<th data-options="field:'code',width:60">设备编码</th>
+				<th data-options="field:'mac',width:80">设备mac</th>
+				<th data-options="field:'versionNum',width:80">版本号</th>
+				<th data-options="field:'versionName',width:80">版本名</th>
+				<th data-options="field:'bootTime',width:80,formatter:formatYYYYMMDDHHMMSS">开机时间</th>
+				<th data-options="field:'cname',width:80">商铺编号</th>
+				<th data-options="field:'countryCode',width:50,formatter:formatCountry">国家</th>
+				<th data-options="field:'areaCode',width:50,formatter:formatArea">地区</th>
+				<th data-options="field:'cityCode',width:50,formatter:formatCity">城市</th>
+				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
+				
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar" style="padding:2px 5px;">
+	
+		<form id="queryForm" method="post">
+		           开机时间： <input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="editable:false"/>
+					- <input id="endTime" class="easyui-datebox" type="text" name="endTime" data-options="editable:false"/>
+		           设备编码： <input type="text" class="easyui-validatebox textbox" id="code" name="code" style="width:140px"></input>
+			<a href="javascript:void(0);" onclick="query()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
+		</form>	
+		<div style="margin:5px">
+			<a href="javascript:void(0);" onclick="exportBySearch();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">导出</a>
+		</div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.DeviceBootLogDao">
+
+
+	<resultMap type="com.gochinatv.accelarator.dao.entity.DeviceBootLog" id="DeviceBootLog">
+		<id property="id" column="id" />
+		<result property="deviceId" column="device_id" />
+		<result property="code" column="code" />
+		<result property="bootTime" column="boot_time" />
+		
+		<result property="mac" column="mac" />
+		<result property="cname" column="cname" />
+		<result property="countryCode" column="country_code" />
+		<result property="areaCode" column="area_code" />
+		<result property="cityCode" column="city_code" />
+		<result property="createTime" column="create_time" />
+		<result property="versionNum" column="version_num" />
+		<result property="versionName" column="version_name" />
+		<result property="startTime" column="start_time" />
+		<result property="endTime" column="end_time" />
+	</resultMap>
+	
+	<select id="getEntityById" resultMap="DeviceBootLog" parameterType="int">
+		select * from device_boot_log
+		where id = #{id}
+	</select>
+	
+	<select id="getListByEntity" resultMap="DeviceBootLog" parameterType="com.gochinatv.accelarator.dao.entity.DeviceBootLog">
+		select dbl.boot_time, d.mac as mac, d.code as code, p.cname as cname, p.country_code as country_code,
+		p.area_code as area_code, p.city_code as city_code, d.create_time as create_time,
+		d.version_num as version_num, d.version_name  as version_name from device_boot_log dbl
+		left join device d on dbl.device_id=d.id
+		left join place p on d.business_id=p.id
+		<where>
+			1=1
+			<if test="code!=null and code!=''">
+				and dbl.code like CONCAT('%',#{code},'%')
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and DATE_FORMAT(dbl.boot_time,'%Y-%m-%d') &gt;= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and DATE_FORMAT(dbl.boot_time,'%Y-%m-%d') &lt;= #{endTime}
+			</if>
+		</where>
+		order by create_time desc
+	</select>
+	
+	<update id="update" parameterType="com.gochinatv.accelarator.dao.entity.DeviceBootLog">
+		update device_boot_log
+		<set>
+			<if test="code!=null">
+				code=#{code},
+			</if>
+			<if test="deviceId!=null">
+				device_id=#{deviceId},
+			</if>
+			<if test="bootTime!=null">
+				boot_time=#{bootTime}
+			</if>
+			
+		</set>
+		where id = #{id}
+	</update>
+</mapper>

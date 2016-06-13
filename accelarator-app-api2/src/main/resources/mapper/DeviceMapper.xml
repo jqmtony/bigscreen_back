@@ -6,6 +6,7 @@
 	<resultMap type="com.gochinatv.accelarator.api.bean.Device" id="Device">
 		<id property="id" column="id" />
 		<result property="mac" column="mac" />
+		<result property="code" column="code" />
 		<result property="imageUrl" column="image_url" />
 		<result property="placeId" column="place_id" />
 		<result property="cityCode" column="city_code" />
@@ -42,7 +43,7 @@
 		select * from device
 		where mac = #{mac}
 	</select>
-	<insert id="save" parameterType="com.gochinatv.accelarator.api.bean.Device">
+	<insert id="save" parameterType="com.gochinatv.accelarator.api.bean.Device" keyProperty="id" useGeneratedKeys="true">
 	   insert into device(
 	            mac,
 	            version_num,

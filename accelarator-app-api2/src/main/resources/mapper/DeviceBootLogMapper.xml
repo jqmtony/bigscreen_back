@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.api.dao.DeviceBootLogDao">
+
+	<resultMap type="com.gochinatv.accelarator.api.bean.DeviceBootLog" id="DeviceBootLog">
+		<id property="id" column="id" />
+		<result property="deviceId" column="device_id" />
+		<result property="code" column="code" />
+		<result property="bootTime" column="boot_time" />
+	</resultMap>
+	<insert id="save" parameterType="com.gochinatv.accelarator.api.bean.DeviceBootLog">
+	   insert into device_boot_log(
+	            code,
+	            device_id,
+	            boot_time
+	            ) values (
+	            #{code},
+	            #{deviceId},
+	            #{bootTime}
+	            )
+	</insert>
+	
+</mapper>
