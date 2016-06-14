@@ -1,0 +1,45 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		grid = $('#tab2').datagrid( {
+			//title : '用户列表',			
+			url :'${base}/deviceBootLog/queryList',
+			queryParams:$("#queryForm").serializeObject(),
+			pagination : true,
+			rownumbers : true,
+			singleSelect : true,
+			striped:true,
+			fit:true,
+			fitColumns:true,
+		});
+	});
+</script>
+
+<div id="modify-window" title="查看详情" class="easyui-window" style="width: 600px; height: 600px;">
+	     <form id="modifyForm" method="post" >
+	    	<table cellpadding="5">
+				<tr>
+	    			<td>视频名：</td>
+	    			<td>
+	    				<input id="code" name="code" style="border: 0" readonly="readonly"></input>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>时间：</td>
+	    			<td><input id="mac" name="mac" style="border: 0" readonly="readonly"></input></td>
+	    		</tr>
+	    		<tr>
+		    		<table class="easyui-datagrid" id="tab2">
+						<thead>
+							<tr>
+								<th data-options="field:'code',width:60">视频id</th>
+								<th data-options="field:'mac',width:80">视频名称</th>
+							</tr>
+						</thead>
+					</table>
+				</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+		    </div>
+    </div>

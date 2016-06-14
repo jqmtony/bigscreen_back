@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.DeviceBootLog;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
@@ -36,9 +39,15 @@ public class DeviceBootLogController extends BaseController{
 	private AreaService areaService;
 	
 	@RequestMapping("/gotoList")
-	public String gotoControlList(Model model) throws Exception{
+	public String gotoList(Model model) throws Exception{
 		return "deviceBootLog/list";
 	}
+	//统计
+	@RequestMapping("/gotoStatList")
+	public String gotoStatList(Model model) throws Exception{
+		return "deviceBootLog/statList";
+	}
+	
 	@RequestMapping("/queryList")
 	@ResponseBody
 	public Map<String,Object> queryList( int page, int rows, DeviceBootLog deviceBootLog) throws Exception{
