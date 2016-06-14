@@ -63,7 +63,7 @@ public class DeviceBootLogController extends BaseController{
 			if(innerDeviceBootLog.getBootTime() != null){
 				bootTime = DateUtils.formatDateString(innerDeviceBootLog.getBootTime());
 			}
-			Object[] objects = new Object[16];
+			Object[] objects = new Object[10];
 			objects[0]=innerDeviceBootLog.getCode();
 			objects[1]=innerDeviceBootLog.getMac();
 			objects[2]=innerDeviceBootLog.getVersionNum();
