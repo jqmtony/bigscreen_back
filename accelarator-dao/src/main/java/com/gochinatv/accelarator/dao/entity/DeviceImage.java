@@ -1,5 +1,7 @@
 package com.gochinatv.accelarator.dao.entity;
 
+import java.util.Date;
+
 public class DeviceImage {
 
 	private long id;
@@ -10,11 +12,39 @@ public class DeviceImage {
 	
 	private String startTime;
 	private String endTime;
-	private String placeName;
-	private String deviceName;
+	private String placeName;//商铺编号
+	private String deviceName;//设备编号
 	private String name;
 	
-	
+	private String countryCode;//国家code
+	private String areaCode;//地区code
+	private String cityCode;//城市code
+	private String duration;
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
+	public String getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+	public String getCityCode() {
+		return cityCode;
+	}
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+	public String getDuration() {
+		return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
 	public String getName() {
 		return name;
 	}

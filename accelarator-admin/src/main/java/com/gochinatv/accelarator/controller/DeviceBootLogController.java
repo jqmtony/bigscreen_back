@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gochinatv.accelarator.dao.entity.DeviceBootLog;
+import com.gochinatv.accelarator.dao.entity.DeviceImage;
 import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 import com.gochinatv.accelarator.service.AreaService;
 import com.gochinatv.accelarator.service.DeviceBootLogService;
+import com.gochinatv.accelarator.service.DeviceImageService;
 import com.gochinatv.accelarator.util.ExcelUtils;
 
 /**
@@ -38,6 +40,9 @@ public class DeviceBootLogController extends BaseController{
 	@Autowired
 	private AreaService areaService;
 	
+	@Autowired
+	private DeviceImageService deviceImageService;
+	
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
 		return "deviceBootLog/list";
@@ -47,6 +52,19 @@ public class DeviceBootLogController extends BaseController{
 	public String gotoStatList(Model model) throws Exception{
 		return "deviceBootLog/statList";
 	}
+	@RequestMapping("/queryStatList")
+	@ResponseBody
+	public Map<String,Object> queryStatList( int page, int rows, DeviceImage deviceImage) throws Exception{
+		Map<String,Object> data = new HashMap<String,Object>();
+		PageInterceptor.startPage(page, rows);
+		List<DeviceImage> list = deviceImageService.getListByStatEntity(deviceImage);
+		PageInfo<DeviceImage> pageInfo = new PageInfo<DeviceImage>(list);
+		data.put("rows", pageInfo.getList());
+		data.put("pageSize", pageInfo.getPageSize());
+		data.put("total", pageInfo.getTotal());
+		return data;
+	}
+	
 	
 	@RequestMapping("/queryList")
 	@ResponseBody

@@ -1,6 +1,8 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,11 @@ public class DeviceImageServiceImpl extends BaseServiceImpl<DeviceImage> impleme
 	@Override
 	protected BaseDao<DeviceImage> getDao() {
 		return deviceImageDao;
+	}
+
+	@Override
+	public List<DeviceImage> getListByStatEntity(DeviceImage deviceImage) {
+		return deviceImageDao.getListByStatEntity(deviceImage);
 	}
 	
 	
