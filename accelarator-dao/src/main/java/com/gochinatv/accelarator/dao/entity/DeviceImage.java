@@ -19,7 +19,21 @@ public class DeviceImage {
 	private String countryCode;//国家code
 	private String areaCode;//地区code
 	private String cityCode;//城市code
-	private String duration;
+	private int duration;
+	private String videoPath;
+	
+	public String getVideoPath() {
+		return videoPath;
+	}
+	public void setVideoPath(String videoPath) {
+		this.videoPath = videoPath;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 
 	public String getCountryCode() {
 		return countryCode;
@@ -38,12 +52,6 @@ public class DeviceImage {
 	}
 	public void setCityCode(String cityCode) {
 		this.cityCode = cityCode;
-	}
-	public String getDuration() {
-		return duration;
-	}
-	public void setDuration(String duration) {
-		this.duration = duration;
 	}
 	public String getName() {
 		return name;

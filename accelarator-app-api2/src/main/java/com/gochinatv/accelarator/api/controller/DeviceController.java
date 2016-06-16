@@ -38,6 +38,14 @@ public class DeviceController extends BaseController {
 	@Autowired
 	private DeviceService deviceService;
 
+	/**
+	 * 
+	 * @param mac
+	 * @param name 暂为视频id 唯一
+	 * @param duration
+	 * @return
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "上传图片", httpMethod = "GET", notes = "上传图片")
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	public BaseVo uploadImage(

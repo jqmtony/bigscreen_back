@@ -48,6 +48,7 @@ public class BusinessAdController  extends BaseController{
 
 		String imageUrl = "";
 		try {
+			logger.info("=========file.info:"+file.getBytes()+",name:"+file.getName()+",file"+file.getOriginalFilename());
 			imageUrl = upload(file);
 			baseVo.setMessage(imageUrl);
 		} catch (Exception e) {
@@ -63,6 +64,7 @@ public class BusinessAdController  extends BaseController{
 		String result="";
 		FileChangeLocal fcl = new FileChangeLocal();
 		File localFile = fcl.uploadFileLocal(file, file.getOriginalFilename());
+		logger.info("fileName=====11=="+localFile);
 		ImageTool it = new ImageTool();
 		String fileName = localFile.getName();
 		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);

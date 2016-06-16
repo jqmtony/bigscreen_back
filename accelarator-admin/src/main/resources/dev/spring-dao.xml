@@ -14,7 +14,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:6033/accelarator?useUnicode=true&amp;characterEncoding=UTF-8" />
 		<property name="username" value="accelarator" />
-		<property name="password" value="accelarator@gochinatv#2016" />
+		<property name="password" value="ACCELARATOR@gochinatv#2016" />
 		 <property name="initialSize" value="10"/>
         <property name="maxActive" value="25"/>
         <property name="minIdle" value="1"/>
