@@ -18,6 +18,7 @@
 		<result property="areaCode" column="area_code" />
 		<result property="cityCode" column="city_code" />
 		<result property="duration" column="duration" />
+		<result property="videoPath" column="videoPath" />
 	</resultMap>
 	
 	<select id="getListByStatEntity" resultMap="DeviceImage" parameterType="DeviceImage">
@@ -46,10 +47,10 @@
 		</where>
 	</select>
 	<select id="getListByEntity" resultMap="DeviceImage" parameterType="DeviceImage">
-		select di.id as id,di.mac as mac,di.name as name,di.image_url,d.code as deviceName,p.cname as placeName,di.create_time
-		 from device_image di,device d,place p
+		select di.id as id,di.mac as mac,a.title as name,a.video_path as videoPath,di.duration as duration,di.image_url,d.code as deviceName,p.cname as placeName,di.create_time
+		 from device_image di,device d,place p,advertisement a
 		<where>
-			1=1 and di.mac=d.mac and d.place_id=p.id
+			1=1 and di.mac=d.mac and d.place_id=p.id and di.name=a.id
 			<if test="placeName!=null and placeName!=''">
 				and p.cname like CONCAT(CONCAT('%',#{placeName}),'%')
 			</if>
@@ -57,7 +58,7 @@
 				and di.mac like CONCAT(CONCAT('%',#{mac}),'%')
 			</if>
 			<if test="name!=null and name!=''">
-				and di.name like CONCAT(CONCAT('%',#{name}),'%')
+				and a.title like CONCAT(CONCAT('%',#{name}),'%')
 			</if>
 			<if test="startTime!=null and startTime!=''">
 				and di.create_time &gt;= #{startTime} 
