@@ -1,6 +1,7 @@
 package com.gochinatv.accelarator.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,8 @@ public class DeviceBootLogController extends BaseController{
 	// 统计
 	@RequestMapping("/gotoPlayCountList")
 	public String gotoPlayCountList(Model model) throws Exception {
+		model.addAttribute("startTime", DateUtils.addDay(-6));
+		model.addAttribute("endTime", DateUtils.formatDateStringWithOutHMS(new Date()));
 		return "deviceBootLog/playCount";
 	}
 
@@ -139,8 +142,11 @@ public class DeviceBootLogController extends BaseController{
 	
 	@RequestMapping("/queryPlayCountDetail")
 	@ResponseBody
-	public List<DacDeviceVideo> queryPlayCountDetail(int videoId) throws Exception {
-		return dacDeviceVideoService.getPlayCountDetail(videoId);
+	public Map<String,List<DacDeviceVideo>> queryPlayCountDetail(DacDeviceVideo dacDeviceVideo) throws Exception {
+		Map<String, List<DacDeviceVideo>> dataMap = new HashMap<String, List<DacDeviceVideo>>();
+		dacDeviceVideo.setType(DacDeviceVideo.BFCS);//设置播放次数
+		dataMap.put("rows", dacDeviceVideoService.getPlayCountDetail(dacDeviceVideo));
+		return dataMap;
 	}
 	
 }

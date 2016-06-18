@@ -40,11 +40,20 @@
 	});
 	
 	function formatOperation(val, row) {
-		return '<a href="javascript:void(0);" onclick="view('+row.videoId+')">查看</a>'; 
+        return '<a href="javascript:void(0);" onclick="view('+row.videoId+',\''+row.videoName+'\')">查看详情</a>&nbsp;';
 	}
 	
-	function view(row){
-		modifyWin.window('open');
+	function view(videoId,videoName){
+		$('#lookup-playcount-window').window({'title':videoName});
+		$('#tab_playcount').datagrid( {
+			url :'${base}/deviceBootLog/queryPlayCountDetail?videoId='+videoId,
+			queryParams:$("#queryForm").serializeObject(),
+			rownumbers : true,
+			singleSelect : true,
+			striped:true,
+			fit:true,
+		})
+		$('#lookup-playcount-window').window('open');
 	}
 </script>
 </head>
@@ -55,27 +64,39 @@
 			<tr>
 				<th data-options="field:'videoId',width:60">视频ID</th>
 				<th data-options="field:'videoName',width:80">视频名称</th>
-				<th data-options="field:'cname',width:80">广告主</th>
+				<th data-options="field:'userName',width:80">广告主</th>
 				<th data-options="field:'total',width:50">播放次数</th>
-				<th data-options="field:'areaCode',width:50,formatter:formatOperation">详情</th>
+				<th data-options="field:'_operate',width:50,formatter:formatOperation">详情</th>
 			</tr>
 		</thead>
 	</table>
-	<div id="toolbar" style="padding:2px 5px;">
 	
+	
+	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm" method="post">
-		           设备编码： <input type="text" class="easyui-validatebox textbox" id="code" name="code" style="width:120px"></input>
-		           设备mac： <input type="text" class="easyui-validatebox textbox" id="mac" name="mac" style="width:120px"></input>       
-		           商铺编号： <input type="text" class="easyui-validatebox textbox" id="cname" name="cname" style="width:120px"></input>
-		           开始时间： <input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="editable:false"/>
-			结束时间：<input id="endTime" class="easyui-datebox" type="text" name="endTime" data-options="editable:false"/>
+		            商铺编号： <input type="text" class="easyui-validatebox textbox" id="cname" name="cname" style="width:120px"/>
+		           设备编码： <input type="text" class="easyui-validatebox textbox" id="code" name="code" style="width:120px"/>
+		           设备mac： <input type="text" class="easyui-validatebox textbox" id="mac" name="mac" style="width:120px"/>       
+		           开始时间： <input id="startTime" class="easyui-datebox" type="text" name="startTime" value="${startTime}" data-options="editable:false" style="width:120px"/>
+			结束时间：<input id="endTime" class="easyui-datebox" type="text" name="endTime" value="${endTime}" data-options="editable:false" style="width:120px"/>
 			<a href="javascript:void(0);" onclick="query()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 		</form>	
-		<div style="margin:5px">
-			<a href="javascript:void(0);" onclick="exportBySearch();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">导出</a>
-		</div>
 	</div>
-	<#include "./view.html">
+	
+	<div id="lookup-playcount-window" class="easyui-window" title="播放详情" data-options="modal:true,closed:true,collapsible:false,minimizable:false,maximizable:false" style="width:450px;height:470px;padding:2px;">
+		<div class="easyui-layout" data-options="fit:true">
+              <table id="tab_playcount" class="easyui-datagrid" style="width:432px;height:430px">
+				<thead>
+					<tr>
+						<th data-options="field:'mac',width:160">MAC</th>
+						<th data-options="field:'code',width:120">设备编号</th>
+						<th data-options="field:'total',width:100">播放次数</th>
+					</tr>
+				</thead>
+			</table>
+        </div>
+    </div>
+   
 </body>
 </html>

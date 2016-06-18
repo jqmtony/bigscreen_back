@@ -82,6 +82,7 @@ public class DateUtils {
 		SimpleDateFormat dateFormater = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS);
 		return dateFormater.format(date);
 	}
+	
 	/**
 	 * 格式化日期时间格式为：yyyy-MM-dd
 	 * @param date

@@ -26,8 +26,8 @@ public class DacDeviceVideoServiceImpl extends BaseServiceImpl<DacDeviceVideo> i
 
 	
 	@Override
-	public List<DacDeviceVideo> getPlayCountDetail(int videoId) {
-		return dacDeviceVideoDao.getPlayCountDetail(videoId);
+	public List<DacDeviceVideo> getPlayCountDetail(DacDeviceVideo dacDeviceVideo) {
+		return dacDeviceVideoDao.getPlayCountDetail(dacDeviceVideo);
 	}
 
 }

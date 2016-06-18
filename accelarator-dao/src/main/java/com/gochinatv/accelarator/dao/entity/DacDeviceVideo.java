@@ -37,7 +37,13 @@ public class DacDeviceVideo extends BaseVo implements Serializable {
 	private String businessTime;
 	
 	
-	private int total;//视频播放次数
+	
+	//临时
+	private String startTime;//统计开始时间
+	private String endTime;//统计结束时间
+	private int total;//统计视频播放次数
+	private String userName;//广告主账号
+	private String cname;//商铺编号
 
 	public int getId() {
 		return id;
@@ -135,12 +141,44 @@ public class DacDeviceVideo extends BaseVo implements Serializable {
 		this.businessTime = businessTime;
 	}
 
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
 	public int getTotal() {
 		return total;
 	}
 
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 	
 }

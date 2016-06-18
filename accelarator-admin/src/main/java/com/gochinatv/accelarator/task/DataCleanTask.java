@@ -13,6 +13,7 @@ import com.gochinatv.accelarator.dao.DacDeviceVideoDao;
 import com.gochinatv.accelarator.dao.DeviceLogDao;
 import com.gochinatv.accelarator.dao.entity.DacDeviceVideo;
 import com.gochinatv.accelarator.dao.entity.DeviceLog;
+import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
 
 
 @SuppressWarnings("all")
@@ -41,7 +42,7 @@ public class DataCleanTask {
 			
 			String msg = log.getMsg();
 			int type = log.getType();
-			Date createTime = log.getCreateTime();
+			String createTime = DateUtils.formatDateString(log.getCreateTime());
 			String mac = log.getMac();
 			
 			JSONObject object = JSONObject.parseObject(msg);
@@ -52,7 +53,7 @@ public class DataCleanTask {
 				
 				DacDeviceVideo ddv = new DacDeviceVideo();
 				ddv.setMac(mac);
-				ddv.setCreateTime(createTime.toLocaleString());
+				ddv.setCreateTime(createTime);
 				ddv.setType(type);
 				ddv.setBusinessTime(businessTime);
 				ddvList.add(ddv);
@@ -64,7 +65,7 @@ public class DataCleanTask {
 		        
 		        DacDeviceVideo ddv = new DacDeviceVideo();
 				ddv.setMac(mac);
-				ddv.setCreateTime(createTime.toLocaleString());
+				ddv.setCreateTime(createTime);
 				ddv.setType(type);
 				ddv.setVideoId(videoId);
 				ddv.setVideoName(videoName);
@@ -77,7 +78,7 @@ public class DataCleanTask {
 		    	
 		    	DacDeviceVideo ddv = new DacDeviceVideo();
 				ddv.setMac(mac);
-				ddv.setCreateTime(createTime.toLocaleString());
+				ddv.setCreateTime(createTime);
 				ddv.setType(type);
 				ddv.setVideoId(videoId);
 				ddv.setVideoName(videoName);
@@ -92,7 +93,7 @@ public class DataCleanTask {
 			    	
 			    	DacDeviceVideo ddv = new DacDeviceVideo();
 					ddv.setMac(mac);
-					ddv.setCreateTime(createTime.toLocaleString());
+					ddv.setCreateTime(createTime);
 					ddv.setType(type);
 					ddv.setVideoId(videoId);
 					ddv.setVideoName(videoName);

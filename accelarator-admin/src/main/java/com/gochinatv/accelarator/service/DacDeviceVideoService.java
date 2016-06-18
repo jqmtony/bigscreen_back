@@ -11,8 +11,8 @@ public interface DacDeviceVideoService extends BaseService<DacDeviceVideo>{
 	  
 	  /**
 	   * 根据视频id取得视频播放次数的详情
-	   * @param videoId
+	   * @param dacDeviceVideo
 	   * @return
 	   */
-	  public List<DacDeviceVideo> getPlayCountDetail(int videoId);
+	  public List<DacDeviceVideo> getPlayCountDetail(DacDeviceVideo dacDeviceVideo);
 }

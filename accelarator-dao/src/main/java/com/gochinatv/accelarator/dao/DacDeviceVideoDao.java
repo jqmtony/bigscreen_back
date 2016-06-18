@@ -2,7 +2,6 @@ package com.gochinatv.accelarator.dao;
 
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.gochinatv.accelarator.dao.entity.DacDeviceVideo;
 import com.gochinatv.accelarator.framework.web.base.dao.BaseDao;
 
@@ -34,6 +33,6 @@ public interface DacDeviceVideoDao  extends BaseDao<DacDeviceVideo>{
 	   * @param videoId
 	   * @return
 	   */
-	  public List<DacDeviceVideo> getPlayCountDetail(@Param(value="videoId") int videoId);
+	  public List<DacDeviceVideo> getPlayCountDetail(DacDeviceVideo dacDeviceVideo);
 
 }
