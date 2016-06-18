@@ -2,12 +2,9 @@ package com.gochinatv.accelarator.api.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.gochinatv.accelarator.api.bean.Device;
 import com.gochinatv.accelarator.api.bean.UploadLog;
 import com.gochinatv.accelarator.api.service.DeviceService;
@@ -27,7 +23,6 @@ import com.gochinatv.accelarator.api.util.PropertiesUtil;
 import com.gochinatv.accelarator.api.vo.BaseVo;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
-
 import net.sf.json.JSONObject;
 
 @Controller
@@ -38,6 +33,14 @@ public class DeviceController extends BaseController {
 	@Autowired
 	private DeviceService deviceService;
 
+	/**
+	 * 
+	 * @param mac
+	 * @param name 暂为视频id 唯一
+	 * @param duration
+	 * @return
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "上传图片", httpMethod = "GET", notes = "上传图片")
 	@RequestMapping(value = "uploadImage", produces = "application/json;charset=utf-8")
 	public BaseVo uploadImage(
@@ -71,6 +74,7 @@ public class DeviceController extends BaseController {
 		return baseVo;
 	}
 
+	@SuppressWarnings("all")
 	private String uploadImage(MultipartFile file) {
 		String result;
 		FileChangeLocal fcl = new FileChangeLocal();
@@ -91,10 +95,29 @@ public class DeviceController extends BaseController {
 	}
 	
 	
+	/**
+	 * 
+	 * @param request
+	 * @param mac        mac，create_time
+	 * @param msg
+	 * @param type
+	 * 0
+	 * 1   
+	 * 6          错误日志上报   {"errorMsg":"xxx","mac":"58:63:56:40:db:fd","versionName":"2.1.1","versionCode":12,"sdk":19}
+	 * 101    开机时间           {"time":}
+	 * 102    文件下载时长   {"videoName":"xxx","videoId":1,"downloadTime":8}  downloadTime：单位秒
+	 * 103    视频播放次数   {"videoName":"xxx","videoId":1}
+	 * 104    视频删除反馈   {"deleteData":[{"videoName":"xxx","videoId":1},
+	 *                              {"videoName":"xxx","videoId":2},
+	 *                              {"videoName":"xxx","videoId":3}]
+	 *              }
+	 * @return
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "上传日志", httpMethod = "GET", notes = "上传日志")
 	@RequestMapping(value = "uploadLog", produces = "application/json;charset=utf-8")
 	public BaseVo uploadLog(
-			HttpServletRequest request,
+			   HttpServletRequest request,
 			   @RequestParam(required = true, defaultValue = "gochinatv")
 	           @ApiParam(value = "设备MAC地址", required = true) String mac,
 	           @RequestParam(required = true, defaultValue = "msg")
@@ -116,8 +139,7 @@ public class DeviceController extends BaseController {
 			logger.error("====mac:" + mac + "==msg:" + msg);
 			deviceService.uploadLog(uploadLog);
 		} catch (Exception e) {
-			logger.info("=====mac:" + mac + "===upload.error:"
-					+ e.getMessage());
+			logger.info("=====mac:" + mac + "===upload.error:" + e.getMessage());
 			baseVo.setStatus(1);
 			baseVo.setMessage("上传日志失败");
 		}

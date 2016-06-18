@@ -2,9 +2,9 @@
 	$(document).ready(function() {
 		grid = $('#tab2').datagrid( {
 			//title : '用户列表',			
-			url :'${base}/deviceBootLog/queryList',
+			url :'${base}/deviceBootLog/queryPlayCountDetail',
 			queryParams:$("#queryForm").serializeObject(),
-			pagination : true,
+			//pagination : true,
 			rownumbers : true,
 			singleSelect : true,
 			striped:true,
@@ -31,8 +31,8 @@
 		    		<table class="easyui-datagrid" id="tab2">
 						<thead>
 							<tr>
-								<th data-options="field:'code',width:60">视频id</th>
-								<th data-options="field:'mac',width:80">视频名称</th>
+								<th data-options="field:'code',width:60">设备名</th>
+								<th data-options="field:'mac',width:80">播放次数</th>
 							</tr>
 						</thead>
 					</table>

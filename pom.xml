@@ -105,5 +105,6 @@
     <module>accelarator-app-api</module>
 	  <module>accelarator-app-api2</module>
     <module>accelarator-bm-api</module>
+    <module>accelarator-dac</module>
   </modules>
 </project>

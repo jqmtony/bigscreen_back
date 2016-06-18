@@ -5,8 +5,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		grid = $('#tab').datagrid( {
-			//title : '用户列表',			
-			url :'${base}/deviceBootLog/queryList',
+			url :'${base}/deviceBootLog/queryPlayCountList',
 			queryParams:$("#queryForm").serializeObject(),
 			pagination : true,
 			rownumbers : true,
@@ -36,19 +35,16 @@
 				            return  date>=startDate;
 			        	}
 			    }); 
-				
 		    }
 		});
 	});
+	
 	function formatOperation(val, row) {
-		return 	"<a href=\"javascript:void(0);\" onclick=\"view("+row.id+")\">查看详情</a>"; 
+		return '<a href="javascript:void(0);" onclick="view('+row.videoId+')">查看</a>'; 
 	}
+	
 	function view(row){
 		modifyWin.window('open');
-	}
-	function exportBySearch(){
-		$("#queryForm").attr("action","${base}/deviceBootLog/excel/export");
-		$("#queryForm")[0].submit();
 	}
 </script>
 </head>
@@ -57,11 +53,11 @@
    <table class="easyui-datagrid" id="tab">
 		<thead>
 			<tr>
-				<th data-options="field:'code',width:60">视频id</th>
-				<th data-options="field:'mac',width:80">视频名称</th>
+				<th data-options="field:'videoId',width:60">视频ID</th>
+				<th data-options="field:'videoName',width:80">视频名称</th>
 				<th data-options="field:'cname',width:80">广告主</th>
-				<th data-options="field:'countryCode',width:50">播放次数</th>
-				<th data-options="field:'areaCode',width:50,formatter:formatOperation">操作</th>
+				<th data-options="field:'total',width:50">播放次数</th>
+				<th data-options="field:'areaCode',width:50,formatter:formatOperation">详情</th>
 			</tr>
 		</thead>
 	</table>

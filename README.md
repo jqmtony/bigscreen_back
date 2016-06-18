@@ -67,11 +67,20 @@ INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES 
 
 INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES (6,'监控管理',NULL,'监控管理',-1,1,'icon-application-monitor',6);
  INSERT INTO resource(id,TEXT,url,remark,parent_id,is_menu,menu_cls,sort) VALUES (22,'设备实时监控','/deviceImage/gotoList','设备实时监控',6,1,'icon-monitor-list',22);
+
+
+INSERT INTO `resource` (`text`, `url`, `remark`, `parent_id`, `is_menu`, `menu_cls`, `sort`, `is_virtual`) 
+ VALUES('开机时间统计','/deviceBootLog/gotoList','设备实时监控','6','1','icon-application-play','203','2');
  
+ INSERT INTO `resource` (`text`, `url`, `remark`, `parent_id`, `is_menu`, `menu_cls`, `sort`, `is_virtual`) 
+ VALUES('开机时长统计','/deviceBootLog/gotoStatList','开机时长统计','6','1','icon-application-play','204','2');
+ 
+  INSERT INTO `resource` (`text`, `url`, `remark`, `parent_id`, `is_menu`, `menu_cls`, `sort`, `is_virtual`) 
+ VALUES('播放次数统计','/deviceBootLog/gotoPlayCountList','播放次数统计','6','1','icon-application-play','205','2');
  
 //2016-05-13
 
-ALTER TABLE `resource` ADD COLUMN is_virtual INT;
-UPDATE `resource` SET is_virtual=2;
+
+ALTER TABLE `device_log` ADD COLUMN is_sync INT DEFAULT 0;
  
 

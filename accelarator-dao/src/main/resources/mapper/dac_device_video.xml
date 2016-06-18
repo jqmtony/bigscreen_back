@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gochinatv.accelarator.dao.DacDeviceVideoDao">
+
+<resultMap type="DacDeviceVideo" id="DacDeviceVideo">
+		<id property="id" column="id"/>
+		<result property="mac" column="mac"/>
+		<result property="code" column="code"/>
+		<result property="videoId" column="video_id"/>
+		<result property="videoName" column="video_name"/>
+		<result property="placeId" column="place_id"/>
+		<result property="businessId" column="business_id"/>
+		<result property="cityCode" column="city_code"/>
+		<result property="advertiserId" column="advertiser_id"/>
+		<result property="type" column="type"/>
+		<result property="createTime" column="create_time"/>
+		<result property="businessTime" column="business_time"/>
+		
+		<!-- 临时新加 -->
+		<result property="total" column="total"/>
+	</resultMap>
+
+
+	<select id="getListByEntity" resultMap="DacDeviceVideo">
+		SELECT ddv.video_id,ddv.video_name,adv.user_name,COUNT(1) as total 
+		FROM dac_device_video ddv LEFT JOIN advertiser adv ON ddv.advertiser_id=adv.id where 1=1
+		<if test="type!=0">
+			and type = #{type} 
+		</if>
+		GROUP BY video_id 
+	</select>
+	
+	<select id="getPlayCountDetail" resultMap="DacDeviceVideo">
+		SELECT mac,code,COUNT(1) total FROM dac_device_video WHERE 1=1 and video_id=#{videoId} AND TYPE = 103 GROUP BY mac
+	</select>
+	
+	<insert id="saveAll" parameterType="java.util.List">
+	   insert into dac_device_video(
+	            mac,
+	            video_id,
+	            video_name,
+	            type,
+	            create_time,
+	            business_time
+	            ) values 
+	    <foreach collection="list" item="item" index="index" separator="," >
+	        (
+	            #{item.mac},
+	            #{item.videoId},
+	            #{item.videoName},
+	            #{item.type},
+	            #{item.createTime},
+	            #{item.businessTime}
+	        )
+	    </foreach>
+	</insert>
+    
+    <update id="updateDevice">
+		UPDATE dac_device_video ddv INNER JOIN device d ON ddv.mac=d.mac SET 
+		ddv.code=d.code,ddv.place_id=d.place_id,ddv.business_id=d.business_id,ddv.city_code=d.city_code 
+		WHERE ddv.code IS NULL 
+	</update>
+	
+	<update id="updateAdvertiser">
+		UPDATE dac_device_video ddv INNER JOIN advertisement adm ON ddv.video_id=adm.id SET 
+		ddv.advertiser_id=adm.advertiser_id WHERE ddv.advertiser_id IS NULL
+	</update>
+</mapper>
