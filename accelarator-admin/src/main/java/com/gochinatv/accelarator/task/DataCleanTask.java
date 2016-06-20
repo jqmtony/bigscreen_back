@@ -49,8 +49,8 @@ public class DataCleanTask {
 			String businessTime = "",videoName="";
 			int videoId = 0;
 			if(type==101){
-				businessTime = object.getString("time");
-				
+				//businessTime = object.getString("time");//保存的时候暂时为空，使用创建时间来替代
+				businessTime = createTime;
 				DacDeviceVideo ddv = new DacDeviceVideo();
 				ddv.setMac(mac);
 				ddv.setCreateTime(createTime);
