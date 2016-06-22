@@ -60,7 +60,7 @@ public class DeviceImageController extends BaseController{
 					jpg =""+duration;
 				}
 				String imageUrl=videoPath.substring(0,videoPath.lastIndexOf("/"))+"/"+jpg+".jpg";
-				deviceImage2.setImageUrl("http://video.ottcloud.tv/"+imageUrl);
+				deviceImage2.setImageUrl("http://video.ottcloud.tv"+imageUrl);
 			}
 			
 		}
