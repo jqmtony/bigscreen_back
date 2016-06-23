@@ -12,7 +12,7 @@
 	</resultMap>
 	
 	<select id="getList" resultMap="DeviceLog">
-		select * from device_log where type in (101,102,103,104) and is_sync = 0
+		select * from device_log where type in (102,103,104) and is_sync = 0
 	</select>
 	
 	<update id="updateAll" parameterType="java.util.List">

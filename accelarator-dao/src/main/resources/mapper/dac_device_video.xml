@@ -41,7 +41,7 @@
 		<if test="startTime!='' and endTime!=''">
 			and ddv.create_time &gt;= #{startTime} and DATE_FORMAT(ddv.create_time,'%Y-%m-%d')&lt;= #{endTime}
 		</if>
-		GROUP BY video_id 
+		GROUP BY ddv.video_id,ddv.video_name,adv.user_name
 	</select>
 	
 	<select id="getPlayCountDetail" resultMap="DacDeviceVideo" parameterType="DacDeviceVideo">
@@ -49,7 +49,7 @@
 		<if test="startTime!='' and endTime!=''">
 			and create_time &gt;= #{startTime} and DATE_FORMAT(create_time,'%Y-%m-%d')&lt;= #{endTime}
 		</if>
-		GROUP BY mac
+		GROUP BY mac,code
 	</select>
 	
 	<insert id="saveAll" parameterType="java.util.List">

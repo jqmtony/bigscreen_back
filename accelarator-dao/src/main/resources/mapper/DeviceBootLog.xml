@@ -44,7 +44,7 @@
 				and DATE_FORMAT(dbl.boot_time,'%Y-%m-%d') &lt;= #{endTime}
 			</if>
 		</where>
-		order by create_time desc
+		order by dbl.boot_time desc
 	</select>
 	
 	<update id="update" parameterType="com.gochinatv.accelarator.dao.entity.DeviceBootLog">

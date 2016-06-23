@@ -35,61 +35,47 @@ public class DataCleanTask {
 	 * @throws Exception 
 	 */
 	public void logDataClean() throws Exception{
-		LOGGER.info("======================开始数据清洗========================");
-		List<DeviceLog> list = deviceLogDao.getList();
-		List<DacDeviceVideo> ddvList = new ArrayList<DacDeviceVideo>(); 
-		for (DeviceLog log : list) {
-			
-			String msg = log.getMsg();
-			int type = log.getType();
-			String createTime = DateUtils.formatDateString(log.getCreateTime());
-			String mac = log.getMac();
-			
-			JSONObject object = JSONObject.parseObject(msg);
-			String businessTime = "",videoName="";
-			int videoId = 0;
-			if(type==101){
-				//businessTime = object.getString("time");//保存的时候暂时为空，使用创建时间来替代
-				businessTime = createTime;
-				DacDeviceVideo ddv = new DacDeviceVideo();
-				ddv.setMac(mac);
-				ddv.setCreateTime(createTime);
-				ddv.setType(type);
-				ddv.setBusinessTime(businessTime);
-				ddvList.add(ddv);
+		try{
+			List<DeviceLog> list = deviceLogDao.getList();
+			LOGGER.info("======================开始数据清洗一共{}条",list.size());
+			List<DacDeviceVideo> ddvList = new ArrayList<DacDeviceVideo>(); 
+			for (DeviceLog log : list) {
 				
-			}else if(type==102){
-			    videoId = object.getIntValue("videoId");
-		        videoName = object.getString("videoName");
-		        businessTime = object.getString("downloadTime");
-		        
-		        DacDeviceVideo ddv = new DacDeviceVideo();
-				ddv.setMac(mac);
-				ddv.setCreateTime(createTime);
-				ddv.setType(type);
-				ddv.setVideoId(videoId);
-				ddv.setVideoName(videoName);
-				ddv.setBusinessTime(businessTime);
-				ddvList.add(ddv);
+				String msg = log.getMsg();
+				int type = log.getType();
+				String createTime = DateUtils.formatDateString(log.getCreateTime());
+				String mac = log.getMac();
 				
-			}else if(type==103){
-			    videoId = object.getIntValue("videoId");
-		    	videoName = object.getString("videoName");
-		    	
-		    	DacDeviceVideo ddv = new DacDeviceVideo();
-				ddv.setMac(mac);
-				ddv.setCreateTime(createTime);
-				ddv.setType(type);
-				ddv.setVideoId(videoId);
-				ddv.setVideoName(videoName);
-				ddvList.add(ddv);
-				
-			}else if(type==104){
-				JSONArray data = object.getJSONArray("deleteData");
-				for (Object obj : data) {
-					JSONObject delJson = (JSONObject)obj;
-				    videoId = delJson.getIntValue("videoId");
-			    	videoName = delJson.getString("videoName");
+				JSONObject object = JSONObject.parseObject(msg);
+				String businessTime = "",videoName="";
+				int videoId = 0;
+				if(type==101){
+					//businessTime = object.getString("time");//保存的时候暂时为空，使用创建时间来替代
+					businessTime = createTime;
+					DacDeviceVideo ddv = new DacDeviceVideo();
+					ddv.setMac(mac);
+					ddv.setCreateTime(createTime);
+					ddv.setType(type);
+					ddv.setBusinessTime(businessTime);
+					ddvList.add(ddv);
+					
+				}else if(type==102){
+				    videoId = object.getIntValue("videoId");
+			        videoName = object.getString("videoName");
+			        businessTime = object.getString("downloadTime");
+			        
+			        DacDeviceVideo ddv = new DacDeviceVideo();
+					ddv.setMac(mac);
+					ddv.setCreateTime(createTime);
+					ddv.setType(type);
+					ddv.setVideoId(videoId);
+					ddv.setVideoName(videoName);
+					ddv.setBusinessTime(businessTime);
+					ddvList.add(ddv);
+					
+				}else if(type==103){
+				    videoId = object.getIntValue("videoId");
+			    	videoName = object.getString("videoName");
 			    	
 			    	DacDeviceVideo ddv = new DacDeviceVideo();
 					ddv.setMac(mac);
@@ -98,14 +84,33 @@ public class DataCleanTask {
 					ddv.setVideoId(videoId);
 					ddv.setVideoName(videoName);
 					ddvList.add(ddv);
+					
+				}else if(type==104){
+					JSONArray data = object.getJSONArray("deleteData");
+					for (Object obj : data) {
+						JSONObject delJson = (JSONObject)obj;
+					    videoId = delJson.getIntValue("videoId");
+				    	videoName = delJson.getString("videoName");
+				    	
+				    	DacDeviceVideo ddv = new DacDeviceVideo();
+						ddv.setMac(mac);
+						ddv.setCreateTime(createTime);
+						ddv.setType(type);
+						ddv.setVideoId(videoId);
+						ddv.setVideoName(videoName);
+						ddvList.add(ddv);
+					}
 				}
 			}
+			dacDeviceVideoDao.saveAll(ddvList);
+			deviceLogDao.updateAll(list);
+			dacDeviceVideoDao.updateDevice();
+			dacDeviceVideoDao.updateAdvertiser();
+			LOGGER.info("======================数据清洗成功!");
+		}catch(Exception e){
+			LOGGER.error("======================数据清洗失败：",e.getMessage());
+			e.printStackTrace();
 		}
-		dacDeviceVideoDao.saveAll(ddvList);
-		deviceLogDao.updateAll(list);
-		dacDeviceVideoDao.updateDevice();
-		dacDeviceVideoDao.updateAdvertiser();
-		LOGGER.info("======================结束数据清洗========================");
 	}
 	
 }
