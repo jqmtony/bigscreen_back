@@ -24,6 +24,6 @@
 
 	<logger name="org.springframework" level="ERROR" />
 	<logger name="org.apache" level="ERROR" />
-	<logger name="com.gochinatv.accelarator.service.impl.OrdersServiceImpl" level="INFO" />
+	<logger name="com.gochinatv.accelarator" level="INFO" />
 
 </configuration>
