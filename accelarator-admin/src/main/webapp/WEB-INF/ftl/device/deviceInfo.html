@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <#include "/frame/pageInclude.html">
+<script>
+  function doSearch(value){
+	  if(value.trim()!=null && value.trim()!='')
+	  $.ajax({  
+		    url:'doDeviceInfo',   
+		    data:{  
+		    	code : value
+		    },  
+		    type:'post',  
+		    dataType:'json',  
+		    success:function(datas) {
+		    	var code = datas.code;
+		    	var data = datas.data;
+		        if(code=='200'){
+		           $("#code").text(data.code);
+		           $("#mac").text(data.mac);
+		           $("#versionName").text(data.versionName);
+		           $("#versionNum").text(data.versionNum);
+		           if(data.status=='1'){
+		        	   $("#status").text('启用');
+		           }else{
+		        	   $("#status").text('禁用');
+		           }
+		        }else{
+		        	alert('没有查到此编码相关信息！');
+		        } 
+		     }
+		});
+  }
+</script>
+</head>
+<body>
+<input class="easyui-searchbox" data-options="prompt:'设备编码',searcher:doSearch" style="width:400px"/>
+ <div style="margin:10px 0;"/>   
+<div id="modify-panel" title="搜索结果" class="easyui-panel" data-options="width:400,height:200,fit:false">
+	     <form id="modifyForm" method="post" >
+	    	<table>
+	    		<tr>
+	    			<td width="20%">设备编码：</td>
+	    			<td id="code"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>设备MAC：</td>
+	    			<td id="mac"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>版本名：</td>
+	    			<td id="versionName"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>版本号：</td>
+	    			<td id="versionNum"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>状态：</td>
+	    			<td id="status"></td>
+	    		</tr>
+               </table>
+            </form>
+    </div>
+ </body>
+ </html>

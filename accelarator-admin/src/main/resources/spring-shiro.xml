@@ -26,6 +26,7 @@
 				/easyui/** = anon
 				/css/** = anon
 				/download/* = anon
+				/nologin/* = anon
 				
 				/home = anon
 				/logout = logout

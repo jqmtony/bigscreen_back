@@ -45,9 +45,9 @@
 	</bean>
 	
 	
-	<task:scheduled-tasks>
-	   <task:scheduled ref="dataCleanTask" method="logDataClean" cron="0 0/30 * * * ?" />  <!-- 30分钟触发执行  -->
-    </task:scheduled-tasks>
+	<!-- <task:scheduled-tasks>
+	   <task:scheduled ref="dataCleanTask" method="logDataClean" cron="0 0/30 * * * ?" />
+    </task:scheduled-tasks> -->
 	
 	
 </beans>
