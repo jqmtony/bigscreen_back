@@ -19,6 +19,10 @@
 		<include refid="queryWhere"/>
 	</select>
 	
+	<select id="getList" resultMap="AreaResultMap">
+		select * from area where 1=1
+	</select>
+	
 	<select id="isHasChildren" resultType="int">
 		SELECT count(*) FROM area A WHERE A.parent_code=#{areaCode}
 	</select>

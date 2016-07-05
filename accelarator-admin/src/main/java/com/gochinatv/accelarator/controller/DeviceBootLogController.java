@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gochinatv.accelarator.dao.entity.DacDeviceVideo;
 import com.gochinatv.accelarator.dao.entity.DeviceBootLog;
 import com.gochinatv.accelarator.dao.entity.DeviceImage;
@@ -20,11 +19,12 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
-import com.gochinatv.accelarator.service.AreaService;
 import com.gochinatv.accelarator.service.DacDeviceVideoService;
 import com.gochinatv.accelarator.service.DeviceBootLogService;
 import com.gochinatv.accelarator.service.DeviceImageService;
 import com.gochinatv.accelarator.util.ExcelUtils;
+import com.gochinatv.accelarator.util.GlobalUtils;
+import com.gochinatv.accelarator.util.PO2ArrayUtils;
 
 
 /**
@@ -37,9 +37,6 @@ public class DeviceBootLogController extends BaseController{
     
 	@Autowired
 	private DeviceBootLogService deviceBootLogService;
-	
-	@Autowired
-	private AreaService areaService;
 	
 	@Autowired
 	private DeviceImageService deviceImageService;
@@ -85,14 +82,17 @@ public class DeviceBootLogController extends BaseController{
 			objects[3]=innerDeviceBootLog.getVersionName();
 			objects[4]=bootTime;
 			objects[5]=innerDeviceBootLog.getCname();
-			objects[6]=areaService.getNameByCode(innerDeviceBootLog.getCountryCode());
+			/*objects[6]=areaService.getNameByCode(innerDeviceBootLog.getCountryCode());
 			objects[7]=areaService.getNameByCode(innerDeviceBootLog.getAreaCode());
-			objects[8]=areaService.getNameByCode(innerDeviceBootLog.getCityCode());
+			objects[8]=areaService.getNameByCode(innerDeviceBootLog.getCityCode());*/
+			objects[6]=GlobalUtils.AREA_CODE_NAME.get(innerDeviceBootLog.getCountryCode());
+			objects[7]=GlobalUtils.AREA_CODE_NAME.get(innerDeviceBootLog.getAreaCode());
+			objects[8]=GlobalUtils.AREA_CODE_NAME.get(innerDeviceBootLog.getCityCode());
+			
 			objects[9]=DateUtils.formatDateString(innerDeviceBootLog.getCreateTime());
 			data.add(objects);
 		}
-		String[] columns = {"编号","设备编码","设备mac","版本号","版本名","开机时间","商铺编码"
-				,"国家","地区","城市","创建日期"};
+		String[] columns = {"编号","设备编码","设备mac","版本号","版本名","开机时间","商铺编码","国家","地区","城市","创建日期"};
 		ExcelUtils.getExcel(data, columns, response,"设备开机监控");
    } 
 	
@@ -117,7 +117,22 @@ public class DeviceBootLogController extends BaseController{
 		return data;
 	}
 	
-	
+	@RequestMapping(value = "/exportStat")
+	public void exportStat(DeviceImage deviceImage,HttpServletResponse response) throws Exception {
+		List<DeviceImage> list = deviceImageService.getListByStatEntity(deviceImage);
+		
+		for (DeviceImage di : list) {
+			di.setCountryCode(GlobalUtils.AREA_CODE_NAME.get(di.getCountryCode()));
+			di.setCityCode(GlobalUtils.AREA_CODE_NAME.get(di.getCityCode()));
+			di.setAreaCode(GlobalUtils.AREA_CODE_NAME.get(di.getAreaCode()));
+		}
+		
+		List<Object[]> data = 
+				PO2ArrayUtils.po2Array(list, new String[]{"deviceName","mac","duration","placeName","countryCode","areaCode","cityCode"});
+		
+		String[] columns = { "编号", "设备编码", "设备mac", "开机时长（分）", "商铺编号", "国家", "地区", "城市"};
+		ExcelUtils.getExcel(data, columns, response,"开机时长统计");
+	}
 	
 	/********************************************************视频播放次数统计*****************************************************/
 	// 统计
@@ -137,6 +152,24 @@ public class DeviceBootLogController extends BaseController{
 		List<DacDeviceVideo> list = dacDeviceVideoService.getListByEntity(dacDeviceVideo);
 		PageInfo<DacDeviceVideo> pageInfo = new PageInfo<DacDeviceVideo>(list);
 		return pageInfo;
+	}
+	
+	/**
+	 * 播放次数统计导出excel
+	 * @param dacDeviceVideo
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/exportPlayCount")
+	public void exportPlayCount(DacDeviceVideo dacDeviceVideo,HttpServletResponse response) throws Exception {
+		dacDeviceVideo.setType(DacDeviceVideo.BFCS);//设置播放次数
+		List<DacDeviceVideo> list = dacDeviceVideoService.getListByEntity(dacDeviceVideo);
+		
+		List<Object[]> data = 
+				PO2ArrayUtils.po2Array(list, new String[]{"videoId","videoName","userName","total"});
+		
+		String[] columns = { "编号", "视频ID", "视频名称", "广告主", "播放次数"};
+		ExcelUtils.getExcel(data, columns, response,"播放次数统计");
 	}
 	
 	

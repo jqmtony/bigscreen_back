@@ -25,7 +25,7 @@
 	<select id="getListByEntity" resultMap="DacDeviceVideo" parameterType="DacDeviceVideo">
 		SELECT ddv.video_id,ddv.video_name,adv.user_name,COUNT(1) as total 
 		FROM dac_device_video ddv LEFT JOIN advertiser adv ON ddv.advertiser_id=adv.id 
-		LEFT JOIN place p ON p.id=ddv.place_id where 1=1
+		LEFT JOIN place p ON p.id=ddv.place_id where 1=1 and ddv.video_id>0
 		<if test="type!=0">
 			and ddv.type = #{type} 
 		</if>
@@ -37,6 +37,9 @@
 		</if>
 		<if test="cname!=''">
 			and p.cname=#{cname}
+		</if>
+		<if test="videoName!=''">
+			and ddv.video_name like CONCAT('%',#{videoName},'%')
 		</if>
 		<if test="startTime!='' and endTime!=''">
 			and ddv.create_time &gt;= #{startTime} and DATE_FORMAT(ddv.create_time,'%Y-%m-%d')&lt;= #{endTime}
