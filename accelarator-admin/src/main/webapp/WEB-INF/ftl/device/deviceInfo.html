@@ -6,7 +6,7 @@
   function doSearch(value){
 	  if(value.trim()!=null && value.trim()!='')
 	  $.ajax({  
-		    url:'doDeviceInfo',   
+		    url:'${base}/nologin/doDeviceInfo',   
 		    data:{  
 		    	code : value
 		    },  
