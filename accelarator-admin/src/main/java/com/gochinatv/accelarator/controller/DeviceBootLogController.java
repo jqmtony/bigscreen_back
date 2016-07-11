@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.controller;
 
+import java.nio.channels.ServerSocketChannel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -117,6 +118,25 @@ public class DeviceBootLogController extends BaseController{
 		return data;
 	}
 	
+	/**
+	 * 开机时长统计图片
+	 * @param deviceImage
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryStatPic")
+	@ResponseBody
+	public Map<String, Object> queryStatPic(DeviceImage deviceImage) throws Exception {
+		/*SELECT d.code AS deviceName,COUNT(*)*15 AS duration,DATE_FORMAT(di.create_time,'%Y-%m-%d') FROM device_image di,
+		device d, place p WHERE 1=1 AND di.mac=d.mac AND d.place_id=p.id 
+		 AND d.mac IN (
+		    SELECT mac FROM (SELECT mac FROM device_image GROUP BY mac ORDER BY COUNT(1) DESC LIMIT 0,10) AS t
+		 ) 
+		GROUP BY d.code,DATE_FORMAT(di.create_time,'%Y-%m-%d')*/
+		return null;
+	}
+	
+	
 	@RequestMapping(value = "/exportStat")
 	public void exportStat(DeviceImage deviceImage,HttpServletResponse response) throws Exception {
 		List<DeviceImage> list = deviceImageService.getListByStatEntity(deviceImage);
@@ -182,4 +202,9 @@ public class DeviceBootLogController extends BaseController{
 		return dataMap;
 	}
 	
+	
+	public static void main(String[] args) {
+		ServerSocketChannel channel;
+		
+	}
 }
