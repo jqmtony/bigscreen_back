@@ -67,8 +67,24 @@ function formatCity(val, row) {
  */
 function formatStatus(val, row) {
 	if (val == 1) {
-		return '已启用';
-	} else {
+		return '正常使用';
+	}else if (val == 2) {
+		return '已禁用';
+	}else if (val == 3) {
+		return '待分配';
+	}else if (val == 4) {
+		return '邮寄中';
+	}else if (val == 5) {
+		return '待收回';
+	}else if (val == 6) {
+		return '待维修';
+	}else if (val == 7) {
+		return '待启用';
+	}else if (val == 8) {
+		return '丢失';
+	}else if (val == 9) {
+		return '作废';
+	}else {
 		return '已禁用';
 	}
 }
