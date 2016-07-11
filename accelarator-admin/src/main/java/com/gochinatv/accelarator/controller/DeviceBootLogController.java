@@ -1,6 +1,5 @@
 package com.gochinatv.accelarator.controller;
 
-import java.nio.channels.ServerSocketChannel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -202,9 +201,4 @@ public class DeviceBootLogController extends BaseController{
 		return dataMap;
 	}
 	
-	
-	public static void main(String[] args) {
-		ServerSocketChannel channel;
-		
-	}
 }
