@@ -63,7 +63,19 @@ public class DeviceController extends BaseController{
 		model.addAttribute("placeId", placeId);
 		return "device/lookUpForSysAdvertisement";
     }
-	
+	/**
+	 * 
+	 * @param parentMethod
+	 * @return
+	 */
+	@RequestMapping(value = "/gotoDevicelookUpForStatic")
+    public String gotoDevicelookUpForStatic(Model model,
+    							   @RequestParam(value = "parentMethod") String parentMethod,
+    							   @RequestParam(value = "placeId", required = false, defaultValue = "0") int placeId){
+		model.addAttribute("parentMethod", parentMethod);
+		model.addAttribute("placeId", placeId);
+		return "device/lookUpForStatic";
+    }
 	/**
 	 * 检验用编码的唯一性
 	 * @author limr

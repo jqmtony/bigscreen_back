@@ -84,6 +84,8 @@ function formatStatus(val, row) {
 		return '丢失';
 	}else if (val == 9) {
 		return '作废';
+	}else if (val == 10) {
+		return 'offline';
 	}else {
 		return '已禁用';
 	}
