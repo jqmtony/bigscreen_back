@@ -1,8 +1,10 @@
 package com.gochinatv.accelarator.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,15 @@ public class DeviceImageServiceImpl extends BaseServiceImpl<DeviceImage> impleme
 
 	@Override
 	public List<DeviceImage> getListByStatEntity(DeviceImage deviceImage) {
+		List<String> codeList = null;
+		if(StringUtils.isNotBlank(deviceImage.getDeviceName())){
+			codeList = new ArrayList<String>();
+			String[] codes = deviceImage.getDeviceName().split(",");
+			for(String code : codes){
+				codeList.add(code);
+			}
+		}
+		deviceImage.setCodeList(codeList);
 		return deviceImageDao.getListByStatEntity(deviceImage);
 	}
 	

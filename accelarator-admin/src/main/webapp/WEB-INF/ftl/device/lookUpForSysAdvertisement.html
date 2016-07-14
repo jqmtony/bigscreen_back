@@ -10,49 +10,217 @@
 			queryParams:$("#queryForm").serializeObject(),
 			pagination : true,
 			rownumbers : true,
+			pageSize : 10,
+			pageList : [10, 30, 50, 100,200 ],	
 			striped:true,
 			fit:true,
-			toolbar:'#toolbar',
+			toolbar:'#toolbar2',
 			singSelect: true,
 			//checkbox : true,
 			fitColumns:true,
+			toolbar : [ 
+						{
+							text : '查看',
+							iconCls : 'icon-add',
+							handler : bind
+						} ],
 			onDblClickRow:function(index,row){
-				getChecked(row);
+				//getChecked(row);
 			} 
 		});
 	});
 	
-	
-	function getChecked(row){
-		parent.${parentMethod}(row);
-
+	function bind(){
+	 	  var row = grid.datagrid('getSelected');
+	  	 if (row){
+				var deviceCodeList = getChecked();
+				parent.${parentMethod}(deviceCodeList);
+   				
+		} else {
+			$.messager.show({
+				title:'警告', 
+				msg:'请先选择数据。'
+			});
+		}
 	}
 	
+ 	function getChecked(){   
+ 		 var list = new Array();
+        for(var i=0; i<host.length; i++){   
+           list.push(host[i].code);   
+        }   
+        return list; 
+   }   
 	
+ 	
+ 	
 </script>
+
+
+<script type="text/javascript">	
+  var host=[];
+   $(function(){
+      $('#ttttt').html('');    
+        var name='';
+        for(var j=0;j<host.length;j++){       
+            var obj=host[j];
+             name+=obj.code+',';       
+        }      
+     $('#ttttt').html(name);
+   });
+ 
+$(function(){   
+  $('#tab').datagrid({ 
+        onLoadSuccess:function(){ 
+        var rows=$('#tab').datagrid('getRows'); 
+        for(var i=0;i<rows.length;i++){
+         if(isCheck(rows[i].code)){
+            $("input[type='checkbox']")[i+1].checked= true;
+            }
+        }
+     }     
+  });
+});
+ function isCheck(code){
+   for(var j=0;j<host.length;j++){
+        var obj=host[j];
+       
+       if(obj.code==code){   
+      		 return true;
+       }
+   }
+   return false;
+ }
+    
+    
+
+  $(function(){  
+   //勾选一个触发
+  $('#tab').datagrid({ 
+     onCheck:function(){
+         $('#ttttt').html('');
+       var rows=$('#tab').datagrid('getChecked');
+        var code='';
+        host=mergeArray(host,rows);
+        for(var j=0;j<host.length;j++){       
+            var obj=host[j];
+            code+=obj.code+',';       
+        }      
+     $('#ttttt').html(code);
+    }
+  });
+    //选择所有的时候触发
+  $('#tab').datagrid({
+     onCheckAll:function(rows){
+     $('#ttttt').html('');
+       var code='';
+      host=mergeArray(host,rows);
+          for(var j=0;j<host.length;j++){       
+            var obj=host[j];
+            code+=obj.code+',';         
+        }      
+     $('#ttttt').html(code);
+     }
+  });
+ //取消单个勾选时候触发
+  $('#tab').datagrid({
+    onUncheck:function(rowIndex,rowData){
+    $('#ttttt').html('');
+       var code='';
+     host=removeArray(host, rowData);
+       for(var j=0;j<host.length;j++){       
+            var obj=host[j];
+            code+=obj.code+',';         
+        }      
+     $('#ttttt').html(code);
+     }
+  });
+  //取消所有勾选的时候触发
+   $('#tab').datagrid({
+    onUncheckAll:function(rows){
+     $('#ttttt').html('');
+      var code='';
+     host=removeAll(host,rows);
+      for(var j=0;j<host.length;j++){       
+            var obj=host[j];
+            code+=obj.code+',';         
+        }      
+     $('#ttttt').html(code);
+     }
+  });
+  });
+  //两个数组合并去从复
+  function mergeArray(host,rows){
+    var _arr=[];
+    for(var i=0;i<host.length;i++){
+       _arr.push(host[i]);
+       }
+       var _dup;
+        for(var i=0;i<rows.length;i++){
+           _dup=false;
+            for(var j=0;j<host.length;j++){
+                 var obj=host[j];
+                if(obj.code==rows[i].code){
+                     _dup=true;
+                      break;
+                 }
+              }
+           if(!_dup){
+               var json={};
+               json.code=rows[i].code;
+              _arr.push(json);
+               }
+           }
+      
+    return _arr;
+  }
+  //取消勾选一个，去掉取消勾选的项
+  function removeArray(host,rowData){
+  var _str=[];
+  var _dup;
+  for(var i=0;i<host.length;i++){
+      _dup=true;
+      var obj=host[i];
+         if(obj.code==rowData.code){     
+              _dup=false;
+             }
+      if(_dup){
+               var json={};
+               json.code=obj.code;
+              _str.push(json);
+      }
+    }
+    return _str;
+  }
+  //取消勾选所有，去掉取消勾选的所有项
+  function removeAll(host,rows){
+   var _arr=[];
+   var _stop;
+   for(var i=0;i<host.length;i++){
+      _stop=true;
+      var obj=host[i];
+      for(var j=0;j<rows.length;j++){
+         if(obj.code==rows[j].code){
+             _stop=false;
+             break;
+         }
+      }
+      if(_stop){
+              var json={};
+               json.code=obj.code;
+              _arr.push(json);
+      }
+   }
+   return _arr;
+  }
+
+ 
+ </script>
+ 
 </head>
 <body>
 
-   <table class="easyui-datagrid" id="tab">
-		<thead>
-			<tr>
-				<th data-options="field:'placeId',width:50">商铺id</th>
-				<th data-options="field:'code',width:100">设备编码</th>
-				<th data-options="field:'brand',width:80">设备品牌</th>
-				<th data-options="field:'model',width:100">设备型号</th>
-				<th data-options="field:'mac',width:80">设备mac</th>
-				<th data-options="field:'userName',width:50">商家负责人</th>
-				<th data-options="field:'cname',width:80">商铺名称</th>
-				<th data-options="field:'countryCode',width:50,formatter:formatCountry">国家</th>
-				<th data-options="field:'areaCode',width:50,formatter:formatArea">地区</th>
-				<th data-options="field:'cityCode',width:50,formatter:formatCity">城市</th>
-				<th data-options="field:'screenNum',width:50,formatter:formatScreenNum">分屏数量</th>
-				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
-				<th data-options="field:'status',width:50,formatter:formatStatus">状态</th>
-			</tr>
-		</thead>
-	</table>
-	<div id="toolbar" style="padding:2px 5px;">
+<div id="toolbar2" style="padding:2px 5px;">
 		<form id="queryForm">
 			<input type="hidden" id="lookup_placeId" name="placeId"></input>
 			<input type="hidden" name="status" value="1"/>
@@ -70,6 +238,27 @@
 			<a href="javascript:void(0);" onclick="queryWithCode()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</form>
 	</div>
+	    <div id="ttttt" style="background-color:#CCCCFF">
+        
+        </div> 
+   <table class="easyui-datagrid" id="tab">
+		<thead>
+			<tr><th field="ck" checkbox="true"></th>
+				<th data-options="field:'placeId',width:50">商铺id33333</th>
+				<th data-options="field:'code',width:100">设备编码</th>
+				<th data-options="field:'mac',width:80">设备mac</th>
+				<th data-options="field:'userName',width:50">商家负责人</th>
+				<th data-options="field:'cname',width:80">商铺名称</th>
+				<th data-options="field:'countryCode',width:50,formatter:formatCountry">国家</th>
+				<th data-options="field:'areaCode',width:50,formatter:formatArea">地区</th>
+				<th data-options="field:'cityCode',width:50,formatter:formatCity">城市</th>
+				<th data-options="field:'screenNum',width:50,formatter:formatScreenNum">分屏数量</th>
+				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
+				<th data-options="field:'status',width:50,formatter:formatStatus">状态</th>
+			</tr>
+		</thead>
+	</table>
+	
 	
 </body>
 </html>

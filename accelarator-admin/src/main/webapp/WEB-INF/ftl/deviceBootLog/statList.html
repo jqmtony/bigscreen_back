@@ -40,61 +40,115 @@
 				
 		    }
 		});
-		
-		 $('#container').highcharts({
-		        title: {
-		            text: '开机时长统计图表',
-		            x: -20 //center
-		        },
-		        xAxis: {
-		            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-		        },
-		        yAxis: {
-		            title: {
-		                text: '开机时长(分)'
-		            },
-		            plotLines: [{
-		                value: 0,
-		                width: 1,
-		                color: '#808080'
-		            }]
-		        },
-		        tooltip: {
-		            valueSuffix: '°C'
-		        },
-		        legend: {
-		            layout: 'vertical',
-		            align: 'right',
-		            verticalAlign: 'middle',
-		            borderWidth: 0
-		        },
-		        series: [{
-		            name: 'Tokyo',
-		            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-		        }, {
-		            name: 'New York',
-		            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-		        }, {
-		            name: 'Berlin',
-		            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-		        }, {
-		            name: 'London',
-		            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-		        }]
-		    });
+		chart();
 		   
   });
+	
+	var endtime = $("#endTime").datebox('getValue');
+	var starttime = $("#startTime").datebox('getValue');
 	
 	function exp(){
 		$("#queryForm").attr("action","${base}/deviceBootLog/exportStat");
 		$("#queryForm")[0].submit();
 	}
+	
+	function chart(){  
+        //声明报表对象  
+		var chart = new Highcharts.Chart({  
+		   chart: {  
+		       //将报表对象渲染到层上  
+		  		 renderTo: 'container'  
+			},  
+		
+			 title: {
+	            text: '开机时长统计图表1',
+	            x: -20 //center
+	        },
+	        xAxis: {
+	        	 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	        },
+	        yAxis: {
+	            title: {
+	                text: '开机时长(分)'
+	            },
+	            plotLines: [{
+	                value: 0,
+	                width: 1,
+	                color: '#808080'
+	            }]
+	        },
+	        tooltip: {
+	            valueSuffix: '分钟'
+	        },
+	        legend: {
+	            layout: 'vertical',
+	            align: 'right',
+	            verticalAlign: 'middle',
+	            borderWidth: 0
+	        },
+	        
+	        //设定报表对象的初始数据  
+	        series: []
+		});  				
+
+		
+		 $.ajax({
+		        type:'get',
+		        url:'${base}/deviceBootLog/queryStatPic?startTime='+$("#startTime").datebox('getValue')+'&endTime='+$("#endTime").datebox('getValue')+'&code='+$('#deviceCodeList').val(),//请求数据的地址
+		        success:function(data){
+		        	 var xatrnames = [];
+		        	// alert("feng:"+data[0].dateList.length);
+		        	// alert("zw:"+data[0].dateList[2]);
+		        	 for (var i = 0; i < data[0].dateList.length; i++) {
+		        		 xatrnames.push([data[0].dateList[i]]);
+		        	 }
+		        	chart.xAxis[0].setCategories(xatrnames); 
+		        	  for (var i = 0; i <10; i++) {
+		        	    //  alert( data[i].deviceCode);
+		        	     // chart.series[i].setData(data[i].duration);
+		        	      
+		        	      chart.addSeries({
+		        	    	  name:data[i].deviceCode,
+		                      data:data[i].duration
+		                  });
+		        	      
+		        	 }; 
+		        },
+		        error:function(e){
+		        } 
+		    }); 
+
+
+		}
+	function query(){
+		grid.datagrid('reload',$("#queryForm").serializeObject());	
+		chart();
+	}
+	
+	function openDeviceLookUp(){
+		openCheckBoxLookUp('${base}/device/gotoDeviceLookUp?parentMethod=openCheckBoxLookUpCallBack');
+	}
+	
+	function openCheckBoxLookUp(url) {
+		$("#device-lookUpSelect-window").dialogFrameWindow(900,320).dialogFrameHtml(url);
+	}
+	
+	function openCheckBoxLookUpCallBack(deviceCodeList){
+		$('#deviceCodeList').val(deviceCodeList);
+		$('#deviceName').val(deviceCodeList);
+		
+		$("#device-lookUpSelect-window").dialogFrameWindow().window('close');
+	} 
+	
+
+	function resetQueryForm(){
+		   $('#queryForm').form('reset');
+		   $(':input').val('');
+		   $('#deviceCodeList').val('');
+			$('#deviceName').val('');
+	}
 </script>
 </head>
-<body>
-   <div class="easyui-tabs" data-options="fit:true,border:true,plain:true,pill:true">
-                <div title="图表查看" id="container" style="min-width:310px; height:400px; margin:0 auto;padding:1px"></div>
-                <div title="表格查看" style="padding:1px">
 					<table class="easyui-datagrid" id="tab">
 						<thead>
 							<tr>
@@ -109,23 +163,23 @@
 							</tr>
 						</thead>
 					</table>
-		       </div>
-            </div>
 	<div id="toolbar" style="padding:2px 5px;">
 		<form id="queryForm" method="post">
-		           设备编码： <input type="text" class="easyui-validatebox textbox" id="deviceName" name="deviceName" style="width:120px"></input>
+			<input type="hidden" id="deviceCodeList" name="deviceCodeList"></input>
+		           设备编码： <input type="text" class="easyui-validatebox textbox" id="deviceName" name="deviceName"  onclick="openDeviceLookUp('#add_lookUpPlaceId');" style="width:120px"></input>
 		           设备mac： <input type="text" class="easyui-validatebox textbox" id="mac" name="mac" style="width:120px"></input>       
 		           商铺编号： <input type="text" class="easyui-validatebox textbox" id="placeName" name="placeName" style="width:120px"></input>
-		           开始时间： <input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="editable:false"/>
-			结束时间：<input id="endTime" class="easyui-datebox" type="text" name="endTime" data-options="editable:false"/>
+		           开始时间： <input id="startTime" class="easyui-datebox" type="text" name="startTime" data-options="editable:false" value="${startTime}"/>
+			结束时间：<input id="endTime" class="easyui-datebox" type="text" name="endTime" data-options="editable:false"  value="${endTime}"/>
 			<a href="javascript:void(0);" onclick="query()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 			<a href="javascript:void(0);" onclick="resetQueryForm();" class="easyui-linkbutton" iconCls="icon-remove">清空</a>
 		</form>	
 		<div style="margin:5px">
 			<a href="javascript:void(0);" onclick="exp();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">导出</a>
 		</div>
+		 <div title="图表查看" id="container" style="min-width:310px; height:200px; margin:0 auto;padding:1px" ></div>
 	</div>
-	
+	 <div id="device-lookUpSelect-window" title="设备列表"></div> 
 </body>
 <script type="text/javascript" src="${base}/js/highcharts.js"></script>
 </html>

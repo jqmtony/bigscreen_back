@@ -19,6 +19,8 @@
 		<result property="versionName" column="version_name" />
 		<result property="startTime" column="start_time" />
 		<result property="endTime" column="end_time" />
+		<result property="duration" column="duration" />
+		
 	</resultMap>
 	
 	<select id="getEntityById" resultMap="DeviceBootLog" parameterType="int">
@@ -63,4 +65,21 @@
 		</set>
 		where id = #{id}
 	</update>
+	
+	<select id="queryStatPic" resultMap="DeviceBootLog">
+		SELECT d.code as code,COUNT(*)*15 as duration,DATE_FORMAT(di.create_time,'%Y-%m-%d') as startTime 
+		FROM device_image di,device d, place p
+			 WHERE 1=1 AND di.mac=d.mac AND d.place_id=p.id 
+			 <if test="codeList!=null">
+			 	 AND d.code in 
+				<foreach collection="codeList" index="index" item="item" open="(" separator="," close=")"> 
+		          #{item} 
+		       </foreach>
+       		</if>
+        and d.mac IN (
+		    SELECT mac FROM (SELECT mac FROM device_image where create_time &gt;=#{startTime}   and create_time &lt;= #{endTime} GROUP BY mac ORDER BY COUNT(1) DESC LIMIT 0,10 ) AS t
+		 ) and  di.create_time&gt;=#{startTime}  and di.create_time &lt;= #{endTime}
+        GROUP BY d.code,DATE_FORMAT(di.create_time,'%Y-%m-%d')
+	
+	</select>
 </mapper>

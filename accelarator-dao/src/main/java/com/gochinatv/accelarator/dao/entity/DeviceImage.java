@@ -1,5 +1,6 @@
 package com.gochinatv.accelarator.dao.entity;
 
+import java.util.List;
 
 public class DeviceImage {
 
@@ -20,6 +21,15 @@ public class DeviceImage {
 	private String cityCode;//城市code
 	private int duration;
 	private String videoPath;
+	
+	private List<String> codeList;
+	
+	public List<String> getCodeList() {
+		return codeList;
+	}
+	public void setCodeList(List<String> codeList) {
+		this.codeList = codeList;
+	}
 	
 	public String getVideoPath() {
 		return videoPath;

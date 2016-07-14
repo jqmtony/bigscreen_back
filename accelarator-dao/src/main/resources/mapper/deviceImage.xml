@@ -32,9 +32,15 @@
 			<if test="mac!=null and mac!=''">
 				and di.mac like CONCAT('%',#{mac},'%')
 			</if>
-			<if test="deviceName!=null and deviceName!=''">
+		<!-- 	<if test="deviceName!=null and deviceName!=''">
 				and d.code like CONCAT('%',#{deviceName},'%')
-			</if>
+			</if> -->
+			 <if test="codeList!=null">
+			 	 AND d.code in 
+				<foreach collection="codeList" index="index" item="item" open="(" separator="," close=")"> 
+		          #{item} 
+		       </foreach>
+       		</if>
 			<if test="startTime!=null and startTime!=''">
 				and di.create_time &gt;= #{startTime} 
 			</if>
@@ -42,6 +48,7 @@
 				 and  DATE_FORMAT(di.create_time,'%Y-%m-%d') &lt;= #{endTime}
 			</if>
 			GROUP BY di.mac,p.country_code,p.area_code, p.city_code,d.code,p.cname
+			order by COUNT(*) desc 
 		</where>
 	</select>
 	

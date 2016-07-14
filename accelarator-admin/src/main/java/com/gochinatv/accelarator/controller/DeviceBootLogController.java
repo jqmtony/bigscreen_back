@@ -5,13 +5,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.gochinatv.accelarator.dao.entity.DacDeviceVideo;
 import com.gochinatv.accelarator.dao.entity.DeviceBootLog;
 import com.gochinatv.accelarator.dao.entity.DeviceImage;
@@ -19,6 +22,7 @@ import com.gochinatv.accelarator.framework.web.base.controller.BaseController;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInfo;
 import com.gochinatv.accelarator.framework.web.base.pagination.PageInterceptor;
 import com.gochinatv.accelarator.framework.web.base.utils.DateUtils;
+import com.gochinatv.accelarator.response.DeviceBootLogStatics;
 import com.gochinatv.accelarator.service.DacDeviceVideoService;
 import com.gochinatv.accelarator.service.DeviceBootLogService;
 import com.gochinatv.accelarator.service.DeviceImageService;
@@ -101,6 +105,13 @@ public class DeviceBootLogController extends BaseController{
 	//统计
 	@RequestMapping("/gotoStatList")
 	public String gotoStatList(Model model) throws Exception {
+		String startTime = "";
+		String endTime="";
+		endTime = com.gochinatv.accelarator.util.DateUtils.convert(new Date(), com.gochinatv.accelarator.util.DateUtils.DATE_FORMAT);
+		startTime= com.gochinatv.accelarator.util.DateUtils.convert( com.gochinatv.accelarator.util.DateUtils.getNextNextDate(new Date(),-7), com.gochinatv.accelarator.util.DateUtils.DATE_FORMAT);
+		
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
 		return "deviceBootLog/statList";
 	}
 
@@ -125,14 +136,9 @@ public class DeviceBootLogController extends BaseController{
 	 */
 	@RequestMapping("/queryStatPic")
 	@ResponseBody
-	public Map<String, Object> queryStatPic(DeviceImage deviceImage) throws Exception {
-		/*SELECT d.code AS deviceName,COUNT(*)*15 AS duration,DATE_FORMAT(di.create_time,'%Y-%m-%d') FROM device_image di,
-		device d, place p WHERE 1=1 AND di.mac=d.mac AND d.place_id=p.id 
-		 AND d.mac IN (
-		    SELECT mac FROM (SELECT mac FROM device_image GROUP BY mac ORDER BY COUNT(1) DESC LIMIT 0,10) AS t
-		 ) 
-		GROUP BY d.code,DATE_FORMAT(di.create_time,'%Y-%m-%d')*/
-		return null;
+	public List<DeviceBootLogStatics> queryStatPic(DeviceBootLog deviceBootLog) throws Exception {
+		List<DeviceBootLogStatics> list = deviceBootLogService.queryStatPic(deviceBootLog);
+		return list;
 	}
 	
 	

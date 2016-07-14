@@ -2,6 +2,7 @@ package com.gochinatv.accelarator.dao.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class DeviceBootLog  implements Serializable {
 	
@@ -23,6 +24,24 @@ public class DeviceBootLog  implements Serializable {
 	private String versionNum;// 版本号
 	private String versionName;// 版本名
 	
+	private int duration;
+	private List<String> codeList;
+	
+	public List<String> getCodeList() {
+		return codeList;
+	}
+	public void setCodeList(List<String> codeList) {
+		this.codeList = codeList;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public String getStartTime() {
 		return startTime;
 	}

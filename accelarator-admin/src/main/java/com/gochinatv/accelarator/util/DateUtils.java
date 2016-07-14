@@ -1,13 +1,18 @@
 package com.gochinatv.accelarator.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import com.mysql.fabric.xmlrpc.base.Data;
 
 /**
  * 
@@ -120,4 +125,48 @@ public class DateUtils {
 		return calendar.getTime();
 	}
 	
+	/**
+	 * 返回一个指定日期的下一天
+	 * 
+	 * @param date
+	 *            初始日期
+	 * @return 初始日期加一天后的日期
+	 */
+	public static Date getNextNextDate(Date date,int next) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, next);
+		return calendar.getTime();
+	}
+	static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	 
+	public static List<String> queryDateList(String startTime,String endTime){
+		 List<String> list = new ArrayList<String>();
+		 
+    	Date startdate   = convert(startTime,DATE_FORMAT);
+        Calendar start = Calendar.getInstance();
+    	start.setTime(startdate);
+        
+    	Date endDate   = convert(endTime,DATE_FORMAT);
+        Calendar end = Calendar.getInstance();
+        end.setTime(endDate);
+        end.add(Calendar.DAY_OF_YEAR, 1);
+        
+        Calendar temp = Calendar.getInstance();
+        temp.setTime(startdate);
+        
+        while (temp.before(end)) {
+        	list.add(sdf.format(temp.getTime()));
+            temp.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        
+        return list;
+     }
+	
+	public static void main(String[] args) {
+	String	startTime = DateUtils.convert(new Date(), DateUtils.DATE_FORMAT);
+	String	endTime= DateUtils.convert( DateUtils.getNextNextDate(new Date(),7), DateUtils.DATE_FORMAT);
+	System.out.println(startTime);
+	System.out.println(endTime);
+	}
 }
