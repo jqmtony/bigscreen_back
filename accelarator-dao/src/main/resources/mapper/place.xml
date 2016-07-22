@@ -46,6 +46,9 @@
 			<if test="cname!=null">
 				and p.cname like CONCAT('%',#{cname},'%')
 			</if>
+			<if test="userName!=null and userName!=''">
+				and b.user_name like CONCAT('%',#{userName},'%')
+			</if>
 			<if test="ename!=null">
 				and p.ename like CONCAT('%',#{ename},'%')
 			</if>

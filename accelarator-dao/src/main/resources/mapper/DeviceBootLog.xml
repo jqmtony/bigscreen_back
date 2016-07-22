@@ -77,8 +77,18 @@
 		       </foreach>
        		</if>
         and d.mac IN (
-		    SELECT mac FROM (SELECT mac FROM device_image where create_time &gt;=#{startTime}   and create_time &lt;= #{endTime} GROUP BY mac ORDER BY COUNT(1) DESC LIMIT 0,10 ) AS t
-		 ) and  di.create_time&gt;=#{startTime}  and di.create_time &lt;= #{endTime}
+         SELECT mac FROM (
+		  SELECT dii.mac FROM device_image dii,device dd where dii.mac=dd.mac 
+		   
+		    <if test="codeList!=null">
+			 	 AND dd.code in 
+				<foreach collection="codeList" index="index" item="item" open="(" separator="," close=")"> 
+		          #{item} 
+		       </foreach>
+       		</if>
+       		
+		   and dii.create_time &gt;=#{startTime}   and dii.create_time &lt;= #{endTime} GROUP BY dii.mac ORDER BY COUNT(1) DESC LIMIT 0,10 ) AS t
+		 ) and  di.create_time &gt;=#{startTime}  and di.create_time &lt;= #{endTime}
         GROUP BY d.code,DATE_FORMAT(di.create_time,'%Y-%m-%d')
 	
 	</select>
