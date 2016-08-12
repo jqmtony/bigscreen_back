@@ -49,14 +49,15 @@
 		parent.addTab('订单下线',url,'icon-play-order-offline',true);
 	}
 	
+	
 	function formatOper(val,row,index){ 
 		var operateStr = "";
 		var status = row.status;
 		if(status == 0){
 			operateStr = '已取消'
 		}else if(status == 1){
-			operateStr = '<a href="javascript:void(0);" onclick="checkOrderTab('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-ok">审核</a>&nbsp;'+
-	           '<a href="javascript:void(0);" onclick="cancleOrder('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-cancel">取消</a>&nbsp;'
+			operateStr = '<@shiro.hasPermission name="/orders/checkOrder"> <a href="javascript:void(0);" onclick="checkOrderTab('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-ok">审核</a>&nbsp;'+
+	           '<a href="javascript:void(0);" onclick="cancleOrder('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-cancel">取消</a>&nbsp;</@shiro.hasPermission>'
 		}else if(status == 2){
 			operateStr = '<a href="javascript:void(0);" onclick="viewOrderTab('+row.id+')" class="easyui-linkbutton" iconCls="icon-audit-ok">查看</a>&nbsp;'+
 	           '<a href="javascript:void(0);" onclick="aheadOffline('+row.id+')" class="easyui-linkbutton" iconCls="icon-offline">下线</a>'

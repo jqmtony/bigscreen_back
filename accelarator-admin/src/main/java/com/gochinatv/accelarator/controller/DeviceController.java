@@ -202,7 +202,6 @@ public class DeviceController extends BaseController{
 		return result;
 	}
 	
-	
 	@RequestMapping(value = "/excel/export")    
     public void exportExcel(HttpServletRequest request, HttpServletResponse response)     
     throws Exception {
@@ -216,7 +215,25 @@ public class DeviceController extends BaseController{
 			int status = device.getStatus();
 			String statusString = "";
 			if(status == 1){
-				statusString = "已启用";
+				statusString = "正常使用";
+			}else if(status == 2){
+				statusString = "已禁用";
+			}else if(status == 3){
+				statusString = "待分配";
+			}else if(status == 4){
+				statusString = "邮寄中";
+			}else if(status == 5){
+				statusString = "待收回";
+			}else if(status == 6){
+				statusString = "待维修";
+			}else if(status == 7){
+				statusString = "待启用";
+			}else if(status == 8){
+				statusString = "丢失";
+			}else if(status == 9){
+				statusString = "作废";
+			}else if(status == 10){
+				statusString = "offline";
 			}else{
 				statusString = "已禁用";
 			}
