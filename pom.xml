@@ -10,7 +10,7 @@
   <name>accelarator</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
+  	<properties>
 		<spring.version>4.2.0.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -97,7 +97,7 @@
 			<version>3.0.1</version>
 		</dependency>
 	</dependencies>
-  
+
   <modules>
   	<module>accelarator-framework</module>
   	<module>accelarator-admin</module>
