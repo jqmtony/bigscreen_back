@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="accelarator-admin:war">
+    <output-path>$PROJECT_DIR$/accelarator-admin/target</output-path>
+    <root id="archive" name="accelarator.war">
+      <element id="artifact" artifact-name="accelarator-admin:war exploded" />
+    </root>
+  </artifact>
+</component>

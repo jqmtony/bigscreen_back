@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-app-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-app-api2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-bm-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/accelarator-framework" charset="UTF-8" />
+  </component>
+</project>

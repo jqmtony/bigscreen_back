@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/accelarator.iml" filepath="$PROJECT_DIR$/accelarator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-admin/accelarator-admin.iml" filepath="$PROJECT_DIR$/accelarator-admin/accelarator-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-app-api/accelarator-app-api.iml" filepath="$PROJECT_DIR$/accelarator-app-api/accelarator-app-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-app-api2/accelarator-app-api2.iml" filepath="$PROJECT_DIR$/accelarator-app-api2/accelarator-app-api2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-bm-api/accelarator-bm-api.iml" filepath="$PROJECT_DIR$/accelarator-bm-api/accelarator-bm-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-dao/accelarator-dao.iml" filepath="$PROJECT_DIR$/accelarator-dao/accelarator-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accelarator-framework/accelarator-framework.iml" filepath="$PROJECT_DIR$/accelarator-framework/accelarator-framework.iml" />
+    </modules>
+  </component>
+</project>

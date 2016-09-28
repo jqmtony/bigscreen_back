@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 accelarator
 ===============
 
@@ -84,3 +85,7 @@ INSERT INTO `resource` (`text`, `url`, `remark`, `parent_id`, `is_menu`, `menu_c
 ALTER TABLE `device_log` ADD COLUMN is_sync INT DEFAULT 0;
  
 
+=======
+# bigscreen_back
+广告展示的测试小系统
+>>>>>>> c22c116b1d330aad8b25688d43554fa86234bb71
